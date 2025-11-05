@@ -197,22 +197,6 @@ export const pt = {
   "stake.table.shutdown.desc": "O sistema pode ser interrompido via cage()",
   "stake.note": "Este mecanismo é central para o USR do OGUSD, permitindo que os detentores se beneficiem de juros programáveis preservando controle e segurança dos fundos depositados.",
 
-  // Stake
-  "stake.title": "Taxa de Poupança OGUSD",
-  "stake.subtitle": "Ganhe rendimento ao depositar seus OGUSD no mecanismo de poupança.",
-  "stake.balance": "Seu Saldo na Poupança",
-  "stake.rate": "Taxa de Poupança",
-  "stake.wallet": "Saldo da Carteira",
-  "stake.deposit": "Depositar OGUSD",
-  "stake.withdraw": "Sacar OGUSD",
-  "stake.amount": "Valor (OGUSD)",
-  "stake.approve": "Aprovar",
-  "stake.join": "Converter OGUSD em dai interno",
-  "stake.authorize": "Autorizar Pot",
-  "stake.deposit.now": "Depositar",
-  "stake.update": "Atualizar Juros (drip)",
-  "stake.exec.steps": "Execute cada passo para depositar com segurança",
-
   // Risk Disclaimer
   "risk.title": "AVISO IMPORTANTE",
   "risk.env": "AMBIENTE DE TESTE",
