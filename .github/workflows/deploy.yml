@@ -33,7 +33,7 @@ jobs:
         uses: actions/configure-pages@v4
         
       - name: Install frontend dependencies
-        run: npm ci
+        run: npm ci --legacy-peer-deps
         working-directory: ./frontendnew
         
       - name: Build Next.js application
