@@ -8,8 +8,8 @@ const nextConfig: NextConfig = {
   output: process.env.NODE_ENV === 'production' ? 'export' : undefined,
   // Safer for static hosts (S3, CF Pages, etc.)
   trailingSlash: true,
-  // No basePath needed for custom domain deployment
-  basePath: '',
+  // Base path for GitHub Pages deployment at /Mutiraon/
+  basePath: process.env.NODE_ENV === 'production' ? '/Mutiraon' : '',
 
   images: {
     // next/image optimization is not available on static export
