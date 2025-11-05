@@ -2,7 +2,6 @@ import HeroSection from "@/components/sections/hero-section";
 import CollateralSelection from "@/components/sections/collateral-selection";
 import WalletConnection from "@/components/sections/wallet-connection";
 import DecorativeElements from "@/components/sections/decorative-elements";
-import DirectorySection from "@/components/sections/directory-section";
 
 export default function HomePage() {
   return (

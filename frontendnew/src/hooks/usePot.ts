@@ -161,11 +161,11 @@ export function usePot() {
     });
   };
 
-  // Deposit USDog to savings (join)
+  // Deposit OGUSD to savings (join)
   const depositSavings = async (amount: string) => {
     if (!address) return Promise.reject("No address");
 
-    console.log("💰 Starting deposit process for:", amount, "USDog");
+    console.log("💰 Starting deposit process for:", amount, "OGUSD");
 
     const wad = parseEther(amount);
 
@@ -253,11 +253,11 @@ export function usePot() {
     return result;
   };
 
-  // Withdraw USDog from savings (exit)
+  // Withdraw OGUSD from savings (exit)
   const withdrawSavings = async (amount: string) => {
     if (!address) return Promise.reject("No address");
 
-    console.log("💸 Starting withdrawal process for:", amount, "USDog");
+    console.log("💸 Starting withdrawal process for:", amount, "OGUSD");
 
     const wad = parseEther(amount);
 
@@ -280,7 +280,7 @@ export function usePot() {
     const tolerance = 0.000001;
     if (requestedAmount > availableBalance + tolerance) {
       throw new Error(
-        `Insufficient balance. Available: ${availableBalance.toFixed(4)} USDog, Requested: ${amount} USDog`,
+        `Insufficient balance. Available: ${availableBalance.toFixed(4)} OGUSD, Requested: ${amount} OGUSD`,
       );
     }
 
@@ -358,7 +358,7 @@ export function usePot() {
     userBalance, // Savings balance (pie * chi)
     walletBalance: walletBalance
       ? formatEther(BigInt(walletBalance.toString()))
-      : "0", // Wallet USDog balance
+      : "0", // Wallet OGUSD balance
     savingsRate,
     totalPie: totalPie ? formatEther(BigInt(totalPie.toString())) : "0",
     // Individual step functions

@@ -128,7 +128,7 @@ export function useStablecoin(selectedCollateral: 'AMZN' | 'BIO' | 'REN' | 'AGRI
     args: address ? [address as `0x${string}`, addresses.daiJoin as `0x${string}`] : undefined,
   });
 
-  // 3) DaiJoin authorized to mint USDog? wards[daiJoin] == 1 on StableCoin
+  // 3) DaiJoin authorized to mint OGUSD? wards[daiJoin] == 1 on StableCoin
   const { data: wardsDaiJoin } = useReadContract({
     address: addresses.stablecoin as `0x${string}`,
     abi: [
@@ -217,11 +217,11 @@ export function useStablecoin(selectedCollateral: 'AMZN' | 'BIO' | 'REN' | 'AGRI
     });
   };
 
-  // Authorize DaiJoin contract to manage USDog in Vat (required for minting)
+  // Authorize DaiJoin contract to manage OGUSD in Vat (required for minting)
   const authorizeVat = () => {
     if (!address) return Promise.reject('No address');
     
-    console.log('🔑 Authorizing DaiJoin to manage USDog in Vat...');
+    console.log('🔑 Authorizing DaiJoin to manage OGUSD in Vat...');
     console.log('📋 DaiJoin address:', addresses.daiJoin);
     
     return writeContract({
@@ -267,15 +267,15 @@ export function useStablecoin(selectedCollateral: 'AMZN' | 'BIO' | 'REN' | 'AGRI
     });
   };
 
-  // Generate (mint) USDog - ONLY mints debt in Vat (no auto-withdrawal)
+  // Generate (mint) OGUSD - ONLY mints debt in Vat (no auto-withdrawal)
   const generateStablecoin = async (amount: string, ilk: string) => {
     if (!address) return;
     
-    console.log('🏦 Minting USDog debt in Vat...');
-    console.log('📊 Amount:', amount, 'USDog');
+    console.log('🏦 Minting OGUSD debt in Vat...');
+    console.log('📊 Amount:', amount, 'OGUSD');
     console.log('🔑 ILK:', ilk);
     
-    // Only mint USDog debt in Vat - user can manually withdraw later if needed
+    // Only mint OGUSD debt in Vat - user can manually withdraw later if needed
     return writeContract({
       address: addresses.vat as `0x${string}`,
       abi: [
@@ -299,7 +299,7 @@ export function useStablecoin(selectedCollateral: 'AMZN' | 'BIO' | 'REN' | 'AGRI
     });
   };
 
-  // Generate and immediately send USDog to a recipient (e.g. minter wallet)
+  // Generate and immediately send OGUSD to a recipient (e.g. minter wallet)
   // This performs: frob (mint internal) -> bounded wait -> ensure hope -> DaiJoin.exit(recipient)
   const generateAndSendStablecoin = async (amount: string, ilk: string, recipient: string) => {
     if (!address) return;
@@ -311,7 +311,7 @@ export function useStablecoin(selectedCollateral: 'AMZN' | 'BIO' | 'REN' | 'AGRI
       await new Promise((resolve) => setTimeout(resolve, ms));
     };
 
-    // 1) Generate internal USDog in Vat for the connected wallet (msg.sender)
+    // 1) Generate internal OGUSD in Vat for the connected wallet (msg.sender)
     const frobHash = await writeContract({
       address: addresses.vat as `0x${string}`,
       abi: [
@@ -364,7 +364,7 @@ export function useStablecoin(selectedCollateral: 'AMZN' | 'BIO' | 'REN' | 'AGRI
       console.log('ℹ️ Vat.can(user, DaiJoin) already set');
     }
 
-    // 3) Exit directly to the recipient (mints USDog to recipient)
+    // 3) Exit directly to the recipient (mints OGUSD to recipient)
     await writeContract({
       address: addresses.daiJoin as `0x${string}`,
       abi: [
@@ -381,7 +381,7 @@ export function useStablecoin(selectedCollateral: 'AMZN' | 'BIO' | 'REN' | 'AGRI
     });
   };
 
-  // Withdraw USDog
+  // Withdraw OGUSD
   const withdrawStablecoin = async (amount: string) => {
     if (!address) return;
 
@@ -402,14 +402,14 @@ export function useStablecoin(selectedCollateral: 'AMZN' | 'BIO' | 'REN' | 'AGRI
     console.log('- can[user][daiJoin]:', can.toString());
     console.log('- wards[daiJoin] on StableCoin:', wards.toString());
 
-    // Check sufficient internal USDog in Vat
+    // Check sufficient internal OGUSD in Vat
     if (daiWad < amountWad) {
-      throw new Error('Insufficient internal USDog balance in Vat. Mint (generate) more before withdrawing.');
+      throw new Error('Insufficient internal OGUSD balance in Vat. Mint (generate) more before withdrawing.');
     }
 
-    // Ensure DaiJoin is authorized to mint USDog
+    // Ensure DaiJoin is authorized to mint OGUSD
     if (wards !== BigInt(1)) {
-      throw new Error('DaiJoin is not authorized to mint USDog. Governance must call StableCoin.rely(DaiJoin).');
+      throw new Error('DaiJoin is not authorized to mint OGUSD. Governance must call StableCoin.rely(DaiJoin).');
     }
 
     // Ensure DaiJoin is approved to move your Vat dai balance (set once)
@@ -433,7 +433,7 @@ export function useStablecoin(selectedCollateral: 'AMZN' | 'BIO' | 'REN' | 'AGRI
       console.log('ℹ️ Vat.can(user, DaiJoin) already granted');
     }
 
-    // Call DaiJoin.exit which will internally move rad and mint USDog
+    // Call DaiJoin.exit which will internally move rad and mint OGUSD
     await writeContract({
       address: addresses.daiJoin as `0x${string}`,
       abi: [
@@ -450,11 +450,11 @@ export function useStablecoin(selectedCollateral: 'AMZN' | 'BIO' | 'REN' | 'AGRI
     });
   };
 
-  // Repay USDog - robust path that derives safe repay from actual internal dai to avoid under/overflow
+  // Repay OGUSD - robust path that derives safe repay from actual internal dai to avoid under/overflow
   const repayStablecoin = async (amount: string, ilk: string) => {
     if (!address) return Promise.reject('No address');
 
-    console.log('🔄 Repaying debt (join USDog then frob dart<0)...');
+    console.log('🔄 Repaying debt (join OGUSD then frob dart<0)...');
     console.log('Requested repay (wad):', amount);
     console.log('UI-reported current debt (art):', art);
 
@@ -495,9 +495,9 @@ export function useStablecoin(selectedCollateral: 'AMZN' | 'BIO' | 'REN' | 'AGRI
     console.log('Target repayWad:', targetRepayWad.toString());
     console.log('Planned joinWad (buffered):', joinWad.toString());
 
-    // 1) Approve USDog spending to DaiJoin
+    // 1) Approve OGUSD spending to DaiJoin
     try {
-      console.log('🔑 Approving USDog -> DaiJoin for repay...');
+      console.log('🔑 Approving OGUSD -> DaiJoin for repay...');
       await writeContract({
         address: addresses.stablecoin as `0x${string}`,
         abi: [
@@ -517,8 +517,8 @@ export function useStablecoin(selectedCollateral: 'AMZN' | 'BIO' | 'REN' | 'AGRI
       console.log('ℹ️ Approve step skipped or not required:', (e as any)?.message || e);
     }
 
-    // 2) DaiJoin.join to convert wallet USDog -> internal dai
-    console.log('🏦 DaiJoin.join (convert wallet USDog -> internal dai)...');
+    // 2) DaiJoin.join to convert wallet OGUSD -> internal dai
+    console.log('🏦 DaiJoin.join (convert wallet OGUSD -> internal dai)...');
     await writeContract({
       address: addresses.daiJoin as `0x${string}`,
       abi: [
@@ -553,7 +553,7 @@ export function useStablecoin(selectedCollateral: 'AMZN' | 'BIO' | 'REN' | 'AGRI
       repayWad = maxByDaiArtWad;
     }
     if (repayWad <= 0n) {
-      throw new Error('Insufficient internal USDog (dai) to repay. Increase amount joined or reduce repay amount.');
+      throw new Error('Insufficient internal OGUSD (dai) to repay. Increase amount joined or reduce repay amount.');
     }
 
     // Re-check dust rule with the final repay

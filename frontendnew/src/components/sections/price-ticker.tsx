@@ -3,22 +3,14 @@
 import React from 'react';
 
 const tickers = [
-  { name: 'USDOG', price: '$1.00' },
-  { name: 'SHIB', price: '$0.00002513' },
-  { name: 'DOGE', price: '$0.1588' },
-  { name: 'WETH', price: '$4,141.53' },
-  { name: 'WSTETH', price: '$5,023.87' },
-  { name: 'OP', price: '$0.69' },
-  { name: 'TBTC', price: '$112,209.37' },
-  { name: 'RETH', price: '$4,733.04' },
-  { name: 'VELO', price: '$0.05' },
-  { name: 'haiVELO v1', price: '$0.05' },
-  { name: 'haiVELO v2', price: '$0.05' },
-  { name: 'APXETH', price: '$4,506.58' },
-  { name: 'ALETH', price: '$4,052.23' },
-  { name: 'MSETH', price: '$4,150.50' },
-  { name: 'YV-VELO-ALETH-WETH', price: '$9,577.55' },
-  { name: 'YV-VELO-MSETH-WETH', price: '$12,620.75' },
+  { name: 'OGUSD', price: '$1.00' },
+  { name: 'AMZN', price: '$3.21' },
+  { name: 'BIO', price: '$0.42' },
+  { name: 'REN', price: '$1.87' },
+  { name: 'AGRI', price: '$0.73' },
+  { name: 'AQUA', price: '$0.64' },
+  { name: 'NIL', price: '$2.10' },
+  { name: 'ECO', price: '$0.95' },
 ];
 
 const PriceTicker = () => {

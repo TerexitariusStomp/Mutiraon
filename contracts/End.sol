@@ -149,8 +149,8 @@ contract End {
         live = 0;
         when = block.timestamp;
         vat.cage();
-        dog.cage("DOGE-A");
-        dog.cage("SHIB-A"); 
+        dog.cage("ECO-A");
+        dog.cage("BIO-A"); 
         vow.cage();
         jug.cage();
         pot.cage();

@@ -104,7 +104,7 @@ export default function StakePage() {
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">
-                  {parseFloat(userBalance).toFixed(4)} USDog
+                  {parseFloat(userBalance).toFixed(4)} OGUSD
                 </div>
               </CardContent>
             </Card>
@@ -130,7 +130,7 @@ export default function StakePage() {
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">
-                  {parseFloat(walletBalance).toFixed(4)} USDog
+                  {parseFloat(walletBalance).toFixed(4)} OGUSD
                 </div>
               </CardContent>
             </Card>
@@ -142,17 +142,17 @@ export default function StakePage() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  Deposit USDog
+                  Deposit OGUSD
                   <Badge variant="secondary">Earn {savingsRate}% APY</Badge>
                 </CardTitle>
                 <CardDescription>
-                  Use the step-by-step process below to deposit your USDog and
+                  Use the step-by-step process below to deposit your OGUSD and
                   start earning yield
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
-                  <label className="text-sm font-medium">Amount (USDog)</label>
+                  <label className="text-sm font-medium">Amount (OGUSD)</label>
                   <Input
                     type="number"
                     placeholder="0.00"
@@ -161,7 +161,7 @@ export default function StakePage() {
                     className="mt-1"
                   />
                   <p className="text-xs text-muted-foreground mt-1">
-                    Available: {parseFloat(walletBalance).toFixed(4)} USDog
+                    Available: {parseFloat(walletBalance).toFixed(4)} OGUSD
                   </p>
                 </div>
                 <div className="text-sm text-muted-foreground">
@@ -173,14 +173,14 @@ export default function StakePage() {
             {/* Withdraw Card */}
             <Card>
               <CardHeader>
-                <CardTitle>Withdraw USDog</CardTitle>
+                <CardTitle>Withdraw OGUSD</CardTitle>
                 <CardDescription>
-                  Withdraw your USDog plus accrued interest
+                  Withdraw your OGUSD plus accrued interest
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
-                  <label className="text-sm font-medium">Amount (USDog)</label>
+                  <label className="text-sm font-medium">Amount (OGUSD)</label>
                   <Input
                     type="number"
                     placeholder="0.00"
@@ -189,7 +189,7 @@ export default function StakePage() {
                     className="mt-1"
                   />
                   <p className="text-xs text-muted-foreground mt-1">
-                    Available: {parseFloat(userBalance).toFixed(4)} USDog
+                    Available: {parseFloat(userBalance).toFixed(4)} OGUSD
                   </p>
                 </div>
                 <Button
@@ -212,7 +212,7 @@ export default function StakePage() {
                 <Badge variant="outline">Manual Mode</Badge>
               </CardTitle>
               <CardDescription>
-                Execute each step individually to deposit USDog safely
+                Execute each step individually to deposit OGUSD safely
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -228,16 +228,16 @@ export default function StakePage() {
                   {
                     title: "Approve DaiJoin",
                     description: depositAmount
-                      ? `Allow DaiJoin to spend ${depositAmount} USDog tokens`
-                      : "Allow DaiJoin to spend USDog tokens",
+                      ? `Allow DaiJoin to spend ${depositAmount} OGUSD tokens`
+                      : "Allow DaiJoin to spend OGUSD tokens",
                     function: () => approveDaiJoin(depositAmount || "0"),
                     icon: "🔓",
                   },
                   {
                     title: "Join Vat",
                     description: depositAmount
-                      ? `Convert ${depositAmount} USDog tokens to dai in the Vat`
-                      : "Convert USDog tokens to dai in the Vat",
+                      ? `Convert ${depositAmount} OGUSD tokens to dai in the Vat`
+                      : "Convert OGUSD tokens to dai in the Vat",
                     function: () => joinStablecoinToVat(depositAmount || "0"),
                     icon: "🏦",
                   },
@@ -295,7 +295,7 @@ export default function StakePage() {
               <div className="mt-6 p-4 bg-muted/50 rounded-lg">
                 <p className="text-sm text-muted-foreground">
                   <strong>Note:</strong> Execute each step in order to deposit
-                  your USDog safely into the savings contract.
+                  your OGUSD safely into the savings contract.
                 </p>
               </div>
             </CardContent>
@@ -312,8 +312,8 @@ export default function StakePage() {
             <div className="prose prose-gray max-w-none">
               <p className="text-muted-foreground mb-4">
                 The <strong>Pot contract</strong> is a core component of the
-                USDog Savings Rate (USR) system in decentralized finance,
-                specifically enabling USDog holders to earn yield by depositing
+                OGUSD Savings Rate (USR) system in decentralized finance,
+                specifically enabling OGUSD holders to earn yield by depositing
                 their stablecoins into a savings mechanism. The contract tracks
                 deposited balances, accrues interest, and allows users to enter
                 or exit the USR system safely, all while managing system-level
@@ -324,7 +324,7 @@ export default function StakePage() {
                 Main Functions and Purpose
               </h3>
               <p className="text-muted-foreground mb-4">
-                The contract lets users deposit USDog stablecoins, building up a
+                The contract lets users deposit OGUSD stablecoins, building up a
                 normalized balance ("pie") that earns interest at the global
                 savings rate ("dsr").
               </p>
@@ -336,7 +336,7 @@ export default function StakePage() {
               </p>
               <p className="text-muted-foreground mb-4">
                 Depositing (via join) and withdrawing (via exit) operations move
-                the user's USDog to/from the contract, updating tracked balances
+                the user's OGUSD to/from the contract, updating tracked balances
                 so accrued interest is reflected mathematically.
               </p>
 
@@ -351,7 +351,7 @@ export default function StakePage() {
                   based on their normalized balances.
                 </li>
                 <li>
-                  <strong>Deposit/Withdrawal:</strong> Anyone can deposit USDog
+                  <strong>Deposit/Withdrawal:</strong> Anyone can deposit OGUSD
                   to start earning yield or withdraw their principal plus
                   accrued interest at any time after the system is updated.
                 </li>
@@ -374,7 +374,7 @@ export default function StakePage() {
               <div className="bg-muted/50 p-4 rounded-lg mb-4">
                 <div className="space-y-2 text-sm">
                   <div>
-                    <strong>Deposit – join(wad):</strong> A user deposits USDog,
+                    <strong>Deposit – join(wad):</strong> A user deposits OGUSD,
                     establishing a normalized savings balance (pie) that
                     immediately starts earning at the current USR.
                   </div>
@@ -386,7 +386,7 @@ export default function StakePage() {
                   </div>
                   <div>
                     <strong>Withdraw – exit(wad):</strong> User withdraws some
-                    or all savings, receiving USDog plus interest (calculated
+                    or all savings, receiving OGUSD plus interest (calculated
                     using chi).
                   </div>
                   <div>
@@ -397,7 +397,7 @@ export default function StakePage() {
               </div>
 
               <h3 className="text-xl font-semibold text-foreground mt-6 mb-3">
-                USDog Savings Rate – Core Mechanism
+                OGUSD Savings Rate – Core Mechanism
               </h3>
               <div className="overflow-x-auto">
                 <table className="w-full border-collapse border border-border rounded-lg">
@@ -450,7 +450,7 @@ export default function StakePage() {
               </div>
 
               <p className="text-muted-foreground mt-4">
-                This mechanism is central to USDog's USR, letting USDog holders
+                This mechanism is central to OGUSD's USR, letting OGUSD holders
                 benefit from programmable interest while preserving control and
                 security of deposited funds.
               </p>

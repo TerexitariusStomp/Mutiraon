@@ -2,7 +2,7 @@
 pragma solidity ^0.8.19;
 
 // MockToken - ERC20 token for testing
-// Used to simulate DOGE and SHIB tokens for testing purposes
+// Used to simulate ECO and BIO tokens for testing purposes
 
 contract MockToken {
     
@@ -70,10 +70,10 @@ contract MockToken {
     }
 }
 
-contract MockDoge is MockToken {
-    constructor() MockToken("Mock Dogecoin", "DOGE", 1000000 * 10**18) {}
+contract MockEco is MockToken {
+    constructor() MockToken("Mock ECO", "ECO", 1000000 * 10**18) {}
 }
 
-contract MockShib is MockToken {
-    constructor() MockToken("Mock Shiba Inu", "SHIB", 1000000000000 * 10**18) {}
+contract MockBio is MockToken {
+    constructor() MockToken("Mock BIO", "BIO", 1000000000000 * 10**18) {}
 }

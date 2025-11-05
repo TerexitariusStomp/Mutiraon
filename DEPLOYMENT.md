@@ -1,8 +1,8 @@
-# USDog Stablecoin Deployment Guide
+# OGUSD Environmental Stablecoin Deployment Guide
 
 ## Overview
 
-USDog is a stablecoin system on Binance Smart Chain that accepts Dogecoin and Shiba Inu as collateral. This guide covers deployment to BSC mainnet and testnet.
+OGUSD is a stablecoin system that accepts environmental impact tokens as collateral. Supported examples include AMZN, BIO, REN, AGRI, AQUA, NIL, and ECO. This guide covers deployment to EVM networks (testnets first, then mainnet).
 
 ## Prerequisites
 
@@ -52,25 +52,29 @@ npm run deploy:bsc
 
 ## Contract Addresses
 
-### Collateral Tokens (BSC Mainnet)
-- **DOGE**: `0xba2ae424d960c63147c624c9a5505711facf8614`
-- **SHIB**: `0x2859e4544c4bb03966803b044a93563bd2d0dd4d`
+### Collateral Tokens (example)
+- **AMZN**: <address>
+- **BIO**: <address>
+- **REN**: <address>
+- **AGRI**: <address>
+- **AQUA**: <address>
+- **NIL**: <address>
+- **ECO**: <address>
 
-### Chainlink Price Feeds (BSC Mainnet)
-- **DOGE/USD**: `0x3AB0A0d137D4F946fBB19eecc6e92E64660231C8`
-- **SHIB/USD**: `0xA615Be6cb0f3F36A641858dB6F30B9242d0ABeD8`
+### Oracle Price Feeds
+- Configure Chainlink/API3 feeds per collateral where available
 
 ## System Configuration
 
 ### Collateral Parameters
-- **Liquidation Ratio**: 150% for both DOGE and SHIB
+- **Liquidation Ratio**: 150% (per collateral)
 - **Stability Fee**: 2% APR
 - **Liquidation Penalty**: 10%
-- **Debt Ceiling**: 10M USDog per collateral type
-- **Dust Limit**: 100 USDog minimum
+- **Debt Ceiling**: 10M OGUSD per collateral type
+- **Dust Limit**: 100 OGUSD minimum
 
 ### Global Parameters
-- **Total Debt Ceiling**: 50M USDog
+- **Total Debt Ceiling**: 50M OGUSD
 - **Emergency Shutdown Delay**: 24 hours
 
 ## Post-Deployment Steps
@@ -87,8 +91,8 @@ npx hardhat verify --network bsc CONTRACT_ADDRESS
 
 ```javascript
 // Test price feeds
-const dogePrice = await dogePriceFeed.read();
-console.log("DOGE Price:", dogePrice);
+const ecoPrice = await ecoPriceFeed.read();
+console.log("ECO Price:", ecoPrice);
 
 // Test system health
 const totalDebt = await vat.debt();

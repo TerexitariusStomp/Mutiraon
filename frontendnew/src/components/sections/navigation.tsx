@@ -64,7 +64,7 @@ const Navigation = () => {
                 <Link href="https://github.com/your-username/mutiraon" target="_blank" rel="noopener noreferrer">Github</Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link href="https://t.me/usdog_bark" target="_blank" rel="noopener noreferrer">Telegram</Link>
+                <Link href="https://t.me/mutiraon" target="_blank" rel="noopener noreferrer">Telegram</Link>
               </DropdownMenuItem>
               {/* Mobile nav items */}
               <div className="lg:hidden">

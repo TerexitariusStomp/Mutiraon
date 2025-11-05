@@ -1101,8 +1101,6 @@ export const ILK_NIL = COLLATERAL_TYPES.NIL;
 export const ILK_ECO = COLLATERAL_TYPES.ECO;
 
 // Additional ILK constants for other collaterals
-export const ILK_DOGE = ethers.encodeBytes32String("DOGE-A");
-export const ILK_SHIB = ethers.encodeBytes32String("SHIB-A");
 
 // Environmental token information
 export const ENVIRONMENTAL_TOKENS = {

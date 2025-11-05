@@ -51,7 +51,7 @@ interface IPancakePair {
     function swap(uint amount0Out, uint amount1Out, address to, bytes calldata data) external;
 }
 
-// Flash Liquidator for DOGE/SHIB Stablecoin System
+// Flash Liquidator for OGUSD Environmental Stablecoin System
 // Implements ClipperCalleeFunction to enable flash liquidations
 // Uses PancakeSwap for flash loans and token swaps
 contract FlashLiquidator {

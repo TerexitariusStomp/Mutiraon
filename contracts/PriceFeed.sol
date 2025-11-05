@@ -172,17 +172,17 @@ contract Api3PriceFeed {
 }
 
 // Mock Price Feeds for Testing
-contract DogePriceFeed is PriceFeed {
+contract EcoPriceFeed is PriceFeed {
     constructor() PriceFeed() {
-        // Initialize with $0.10 per DOGE (in WAD format)
+        // Initialize with $0.10 per ECO (in WAD format)
         val = 100000000000000000; // 0.1 * 10^18
         zzz = uint32(block.timestamp);
     }
 }
 
-contract ShibPriceFeed is PriceFeed {
+contract BioPriceFeed is PriceFeed {
     constructor() PriceFeed() {
-        // Initialize with $0.00001 per SHIB (in WAD format) 
+        // Initialize with $0.00001 per BIO (in WAD format)
         val = 10000000000000; // 0.00001 * 10^18
         zzz = uint32(block.timestamp);
     }

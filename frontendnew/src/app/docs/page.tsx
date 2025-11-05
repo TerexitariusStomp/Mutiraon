@@ -2,7 +2,7 @@ export default function DocsPage() {
   return (
     <main className="min-h-screen bg-[#f3f1f7]">
       <div className="container mx-auto px-4 py-10">
-        <h1 className="text-4xl font-bold mb-4">USDog Codebase Documentation</h1>
+        <h1 className="text-4xl font-bold mb-4">OGUSD Codebase Documentation</h1>
         <p className="text-muted-foreground mb-8">
           Comprehensive overview of smart contracts, deployment scripts, subgraph, and frontends.
         </p>
@@ -42,7 +42,7 @@ export default function DocsPage() {
           <ul className="list-disc list-inside space-y-1">
             <li><code>contracts/</code> — Core protocol contracts (Maker-like: Vat, Spot, Dog, Clip, Jug, Vow, End, Pot, StableCoin, Join, PriceFeed, Calc, Multicall).</li>
             <li><code>scripts/</code> — Hardhat scripts for deployment, configuration, and end-to-end test flows.</li>
-            <li><code>usdog/</code> — The Graph subgraph for indexing on-chain data.</li>
+            <li><code>subgraph/</code> — The Graph subgraph for indexing on-chain data.</li>
             <li><code>frontendnew/</code> — Next.js app (current UI) with RainbowKit and shadcn/ui.</li>
             <li><code>frontend/</code> — Legacy React app (kept for reference).</li>
             <li><code>test/</code> — Mocha/Chai tests for contracts.</li>
@@ -52,7 +52,7 @@ export default function DocsPage() {
 
         <section id="contracts" className="mb-12">
           <h2 className="text-2xl font-semibold mb-3">Smart Contracts</h2>
-          <p className="mb-2">USDog is a collateralized debt position (CDP) system inspired by MakerDAO. Key components:</p>
+          <p className="mb-2">OGUSD is a collateralized debt position (CDP) system inspired by MakerDAO. Key components:</p>
           <ul className="list-disc list-inside space-y-2">
             <li><strong>StableCoin.sol</strong> — ERC-20 stablecoin minted/burned via joins and Vat.</li>
             <li><strong>Vat.sol</strong> — Core accounting: collateral/debt balances, urns, ilks, system-wide line/dust, move/frob.</li>
@@ -65,7 +65,7 @@ export default function DocsPage() {
             <li><strong>End.sol</strong> — Global settlement (emergency shutdown).</li>
             <li><strong>Pot.sol</strong> — Savings rate (DSR) for idle stablecoin deposits.</li>
             <li><strong>Join.sol</strong> — Adapters: GemJoin for collateral, DaiJoin for stablecoin.</li>
-            <li><strong>PriceFeed.sol</strong> — Price oracles (Chainlink, API3, custom Doge/Shib feeders, medianizer).</li>
+            <li><strong>PriceFeed.sol</strong> — Price oracles (Chainlink, API3, custom environmental feeders, medianizer).</li>
             <li><strong>Multicall.sol</strong> — Batch calls utility.</li>
             <li><strong>mocks/</strong> — Mock tokens and auctions for local testing.</li>
           </ul>
@@ -140,7 +140,7 @@ export default function DocsPage() {
 
         <section id="subgraph" className="mb-12">
           <h2 className="text-2xl font-semibold mb-3">Subgraph</h2>
-          <p className="mb-2">The <code>usdog/</code> package defines a Graph Protocol subgraph that indexes StableCoin, Vat, and Dog/Clip events.</p>
+          <p className="mb-2">The subgraph package defines a Graph Protocol subgraph that indexes StableCoin, Vat, and Dog/Clip events.</p>
           <ul className="list-disc list-inside space-y-1">
             <li><code>schema.graphql</code> — Entity definitions for vaults, auctions, and protocol metrics.</li>
             <li><code>subgraph.yaml</code> — Event sources and mappings configuration.</li>
