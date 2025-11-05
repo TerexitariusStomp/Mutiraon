@@ -471,12 +471,12 @@ export default function StakePage() {
               </div>
               <div className="mt-2 text-sm text-muted-foreground">
                 <a
-                  href={`https://bscscan.com/address/${CONTRACTS.pot}#code`}
+                  href={`https://sepolia.etherscan.io/address/${CONTRACTS.pot}#code`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-primary hover:underline"
                 >
-                  View on BSCScan ↗
+                  View on Sepolia Etherscan ↗
                 </a>
               </div>
             </div>
