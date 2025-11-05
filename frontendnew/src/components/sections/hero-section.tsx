@@ -27,7 +27,7 @@ const StatInfo = ({
 
 const HeroSection = () => {
   return (
-    <section className="relative flex w-full flex-col items-center overflow-x-hidden bg-[#f3f1f7] pt-20 pb-10 md:pt-[120px]">
+    <section className="relative flex w-full flex-col items-center overflow-x-hidden bg-[#f3f1f7] pt-8 pb-10 md:pt-12">
       <div
         className="absolute inset-0 z-0"
         style={{
