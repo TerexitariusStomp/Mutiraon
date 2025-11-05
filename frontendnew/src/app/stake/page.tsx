@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { CONTRACTS } from "@/lib/contracts";
 import { usePot } from "@/hooks/usePot";
@@ -196,7 +196,7 @@ export default function StakePage() {
                     title: t('stake.steps.update.title'),
                     description: t('stake.steps.update.desc'),
                     function: () => updateRates(),
-                    icon: "💧",
+                    icon: "ðŸ’§",
                   },
                   {
                     title: t('stake.steps.approve.title'),
@@ -204,7 +204,7 @@ export default function StakePage() {
                       ? t('stake.steps.approve.desc.some').replace('{amount}', depositAmount)
                       : t('stake.steps.approve.desc.none'),
                     function: () => approveDaiJoin(depositAmount || "0"),
-                    icon: "🔓",
+                    icon: "ðŸ”“",
                   },
                   {
                     title: t('stake.steps.join.title'),
@@ -212,13 +212,13 @@ export default function StakePage() {
                       ? t('stake.steps.join.desc.some').replace('{amount}', depositAmount)
                       : t('stake.steps.join.desc.none'),
                     function: () => joinStablecoinToVat(depositAmount || "0"),
-                    icon: "🏦",
+                    icon: "ðŸ¦",
                   },
                   {
                     title: t('stake.steps.auth.title'),
                     description: t('stake.steps.auth.desc'),
                     function: () => authorizePot(),
-                    icon: "🔑",
+                    icon: "ðŸ”‘",
                   },
                   {
                     title: t('stake.steps.deposit.title'),
@@ -226,7 +226,7 @@ export default function StakePage() {
                       ? t('stake.steps.deposit.desc.some').replace('{amount}', depositAmount)
                       : t('stake.steps.deposit.desc.none'),
                     function: () => depositToPot(depositAmount || "0"),
-                    icon: "💰",
+                    icon: "ðŸ’°",
                   },
                 ].map((step, index) => (
                   <div
@@ -238,7 +238,7 @@ export default function StakePage() {
                         <div
                           className={`text-xl ${completedSteps.has(index) ? "text-green-500" : currentStep === index ? "text-blue-500 animate-pulse" : "text-gray-400"}`}
                         >
-                          {completedSteps.has(index) ? "✅" : step.icon}
+                          {completedSteps.has(index) ? "âœ…" : step.icon}
                         </div>
                         <div>
                           <h4 className="font-medium text-sm">{t('stake.step')} {index + 1}: {step.title}</h4>
@@ -274,39 +274,39 @@ export default function StakePage() {
                         }`}>
                           {index === 0 && (
                             <>
-                              <li>• {t('stake.bullets.0.1')}</li>
-                              <li>• {t('stake.bullets.0.2')}</li>
-                              <li>• {t('stake.bullets.0.3')}</li>
+                              <li>â€¢ {t('stake.bullets.0.1')}</li>
+                              <li>â€¢ {t('stake.bullets.0.2')}</li>
+                              <li>â€¢ {t('stake.bullets.0.3')}</li>
                             </>
                           )}
                           {index === 1 && (
                             <>
-                              <li>• {t('stake.bullets.1.1')}</li>
-                              <li>• {t('stake.bullets.1.2')}</li>
-                              <li>• {t('stake.bullets.1.3')}</li>
-                              <li>• {t('stake.bullets.1.4')}</li>
+                              <li>â€¢ {t('stake.bullets.1.1')}</li>
+                              <li>â€¢ {t('stake.bullets.1.2')}</li>
+                              <li>â€¢ {t('stake.bullets.1.3')}</li>
+                              <li>â€¢ {t('stake.bullets.1.4')}</li>
                             </>
                           )}
                           {index === 2 && (
                             <>
-                              <li>• {t('stake.bullets.2.1')}</li>
-                              <li>• {t('stake.bullets.2.2')}</li>
-                              <li>• {t('stake.bullets.2.3')}</li>
-                              <li>• {t('stake.bullets.2.4')}</li>
+                              <li>â€¢ {t('stake.bullets.2.1')}</li>
+                              <li>â€¢ {t('stake.bullets.2.2')}</li>
+                              <li>â€¢ {t('stake.bullets.2.3')}</li>
+                              <li>â€¢ {t('stake.bullets.2.4')}</li>
                             </>
                           )}
                           {index === 3 && (
                             <>
-                              <li>• {t('stake.bullets.3.1')}</li>
-                              <li>• {t('stake.bullets.3.2')}</li>
-                              <li>• {t('stake.bullets.3.3')}</li>
+                              <li>â€¢ {t('stake.bullets.3.1')}</li>
+                              <li>â€¢ {t('stake.bullets.3.2')}</li>
+                              <li>â€¢ {t('stake.bullets.3.3')}</li>
                             </>
                           )}
                           {index === 4 && (
                             <>
-                              <li>• {t('stake.bullets.4.1')}</li>
-                              <li>• {t('stake.bullets.4.2')}</li>
-                              <li>• {t('stake.bullets.4.3')}</li>
+                              <li>â€¢ {t('stake.bullets.4.1')}</li>
+                              <li>â€¢ {t('stake.bullets.4.2')}</li>
+                              <li>â€¢ {t('stake.bullets.4.3')}</li>
                             </>
                           )}
                         </ul>
@@ -317,11 +317,11 @@ export default function StakePage() {
                           index === 3 ? "text-orange-700" :
                           "text-red-700"
                         }`}>
-                          {index === 0 && "Think of it like: Preparing your account for a deposit."}
-                          {index === 1 && "Think of it like: Giving permission for an automatic transfer."}
-                          {index === 2 && "Think of it like: Converting cash to a special savings format."}
-                          {index === 3 && "Think of it like: Signing a contract to hold your money safely."}
-                          {index === 4 && "Think of it like: Finally depositing money into your savings account."}
+                          {index === 0 && (lang === 'pt' ? "Pense assim: Preparar sua conta para um depÃ³sito." : "Think of it like: Preparing your account for a deposit.")}
+                          {index === 1 && (lang === 'pt' ? "Pense assim: Dar permissÃ£o para uma transferÃªncia automÃ¡tica." : "Think of it like: Giving permission for an automatic transfer.")}
+                          {index === 2 && (lang === 'pt' ? "Pense assim: Converter dinheiro para um formato especial de poupanÃ§a." : "Think of it like: Converting cash to a special savings format.")}
+                          {index === 3 && (lang === 'pt' ? "Pense assim: Assinar um contrato para manter seu dinheiro em seguranÃ§a." : "Think of it like: Signing a contract to hold your money safely.")}
+                          {index === 4 && (lang === 'pt' ? "Pense assim: Finalmente depositar dinheiro na sua conta poupanÃ§a." : "Think of it like: Finally depositing money into your savings account.")}
                         </p>
                       </div>
                       <Button
@@ -336,12 +336,12 @@ export default function StakePage() {
                         className="w-full"
                       >
                         {completedSteps.has(index)
-                          ? "Completed"
+                          ? (lang === 'pt' ? "ConcluÃ­do" : "Completed")
                           : currentStep === index
-                            ? "Processing..."
+                            ? (lang === 'pt' ? "Processando..." : "Processing...")
                             : !depositAmount
-                              ? "Enter Amount First"
-                              : "Execute Step"}
+                              ? (lang === 'pt' ? "Informe o valor primeiro" : "Enter Amount First")
+                              : (lang === 'pt' ? "Executar passo" : "Execute Step")}
                       </Button>
                     </div>
                   </div>
@@ -349,222 +349,23 @@ export default function StakePage() {
               </div>
               <div className="mt-6 p-4 bg-muted/50 rounded-lg">
                 <p className="text-sm text-muted-foreground">
-                  <strong>Note:</strong> Execute each step in order to deposit
-                  your OGUSD safely into the savings contract.
+                  {lang === 'pt' ? (
+                    <>
+                      <strong>ObservaÃ§Ã£o:</strong> Execute cada passo na ordem para depositar seus OGUSD com seguranÃ§a no contrato de poupanÃ§a.
+                    </>
+                  ) : (
+                    <>
+                      <strong>Note:</strong> Execute each step in order to deposit your OGUSD safely into the savings contract.
+                    </>
+                  )}
                 </p>
               </div>
             </CardContent>
           </Card>
 
           <Separator className="my-8" />
-
-          {/* Pot Contract Information */}
-          <div className="mb-8 rounded-2xl border border-border bg-card p-8 shadow-[0_4px_20px_rgba(0,0,0,0.06)]">
-            <h2 className="text-2xl font-semibold text-foreground mb-6">
-              {lang === 'pt' ? 'Sobre o Contrato Pot' : 'About the Pot Contract'}
-            </h2>
-
-            <div className="prose prose-gray max-w-none">
-              {lang === 'pt' && (
-                <>
-                  <p className="text-muted-foreground mb-4">
-                    O <strong>contrato Pot</strong> é um componente central do sistema de Taxa de Poupança do OGUSD (USR) em finanças descentralizadas, permitindo que detentores de OGUSD obtenham rendimento ao depositar seus tokens estáveis em um mecanismo de poupança. O contrato registra saldos depositados, acumula juros e permite que usuários entrem ou saiam do sistema USR com segurança, enquanto gerencia a administração do sistema e o ajuste de taxas.
-                  </p>
-                  <h3 className="text-xl font-semibold text-foreground mt-6 mb-3">Funções e Propósito Principais</h3>
-                  <p className="text-muted-foreground mb-4">
-                    O contrato permite que os usuários depositem OGUSD, formando um saldo normalizado ("pie") que rende juros na taxa global de poupança ("dsr").
-                  </p>
-                  <p className="text-muted-foreground mb-4">
-                    Os juros são acompanhados pelo acumulador de taxa "chi", atualizado por chamadas regulares à função "drip" — que sincroniza a acumulação de juros com o timestamp mais recente da blockchain e distribui os juros acumulados a todos os poupadores.
-                  </p>
-                  <p className="text-muted-foreground mb-4">
-                    Depósitos (via join) e saques (via exit) movem o OGUSD do/para o contrato, atualizando os saldos registrados para refletir matematicamente os juros acumulados.
-                  </p>
-                  <h3 className="text-xl font-semibold text-foreground mt-6 mb-3">Recursos‑Chave</h3>
-                  <ul className="text-muted-foreground mb-4 space-y-2">
-                    <li>
-                      <strong>Acúmulo de Juros:</strong> O contrato acumula juros para todos os participantes do USR com base na taxa global de poupança. Os juros são distribuídos proporcionalmente aos usuários conforme seus saldos normalizados.
-                    </li>
-                    <li>
-                      <strong>Depósito/Saque:</strong> Qualquer pessoa pode depositar OGUSD para começar a render ou sacar o principal mais os juros acumulados a qualquer momento após a atualização do sistema.
-                    </li>
-                    <li>
-                      <strong>Taxa e Administração:</strong> Administradores (com permissões “auth”) podem definir o valor da USR (dsr), configurar o tratamento de dívidas do sistema e até “cage” (desativar) o contrato em emergências.
-                    </li>
-                    <li>
-                      <strong>Segurança:</strong> O contrato utiliza rotinas matemáticas seguras, controles de acesso customizados e rotinas especiais para garantir cálculos corretos e evitar overflows.
-                    </li>
-                  </ul>
-                  <h3 className="text-xl font-semibold text-foreground mt-6 mb-3">Fluxo Simplificado</h3>
-                  <div className="bg-muted/50 p-4 rounded-lg mb-4">
-                    <div className="space-y-2 text-sm">
-                      <div>
-                        <strong>Depósito – join(wad):</strong> Usuário deposita OGUSD, estabelecendo um saldo normalizado (pie) que começa a render imediatamente na USR atual.
-                      </div>
-                      <div>
-                        <strong>Acúmulo de Juros – drip():</strong> Chamado periodicamente para atualizar o acumulador global (chi) e distribuir novos juros referentes ao período decorrido.
-                      </div>
-                      <div>
-                        <strong>Saque – exit(wad):</strong> Usuário saca parte ou todo o saldo, recebendo OGUSD mais juros (calculados via chi).
-                      </div>
-                      <div>
-                        <strong>Controles de Administração – file, cage:</strong> Funções de gestão para ajuste de taxa ou desligamento do sistema.
-                      </div>
-                    </div>
-                  </div>
-                </>
-              )}
-              <p className="text-muted-foreground mb-4">
-                {lang === 'pt'
-                  ? <>O <strong>contrato Pot</strong> é um componente central do sistema de Taxa de Poupança do OGUSD (USR) em finanças descentralizadas, permitindo que detentores de OGUSD obtenham rendimento ao depositar seus tokens estáveis em um mecanismo de poupança. O contrato registra saldos depositados, acumula juros e permite que usuários entrem ou saiam do sistema USR com segurança, enquanto gerencia a administração do sistema e o ajuste de taxas.</>
-                  : <>The <strong>Pot contract</strong> is a core component of the OGUSD Savings Rate (USR) system in decentralized finance, specifically enabling OGUSD holders to earn yield by depositing their stablecoins into a savings mechanism. The contract tracks deposited balances, accrues interest, and allows users to enter or exit the USR system safely, all while managing system-level administration and rate adjustment.</>}
-              </p>
-
-              <h3 className="text-xl font-semibold text-foreground mt-6 mb-3">
-                {lang === 'pt' ? 'Funções e Propósito Principais' : 'Main Functions and Purpose'}
-              </h3>
-              <p className="text-muted-foreground mb-4">
-                {lang === 'pt'
-                  ? 'O contrato permite que os usuários depositem OGUSD, formando um saldo normalizado ("pie") que rende juros na taxa global de poupança ("dsr").'
-                  : 'The contract lets users deposit OGUSD stablecoins, building up a normalized balance ("pie") that earns interest at the global savings rate ("dsr").'}
-              </p>
-              <p className="text-muted-foreground mb-4">
-                Interest is tracked via the "chi" rate accumulator, which is
-                updated with regular calls to the "drip" function—this function
-                synchronizes interest accrual to the latest blockchain timestamp
-                and distributes the accumulated interest to all savers.
-              </p>
-              <p className="text-muted-foreground mb-4">
-                Depositing (via join) and withdrawing (via exit) operations move
-                the user's OGUSD to/from the contract, updating tracked balances
-                so accrued interest is reflected mathematically.
-              </p>
-
-              <h3 className="text-xl font-semibold text-foreground mt-6 mb-3">
-                Key Features
-              </h3>
-              <ul className="text-muted-foreground mb-4 space-y-2">
-                <li>
-                  <strong>Interest Accrual:</strong> The contract accrues
-                  interest for all USR participants based on the global savings
-                  rate. The interest is distributed proportionally to all users
-                  based on their normalized balances.
-                </li>
-                <li>
-                  <strong>Deposit/Withdrawal:</strong> Anyone can deposit OGUSD
-                  to start earning yield or withdraw their principal plus
-                  accrued interest at any time after the system is updated.
-                </li>
-                <li>
-                  <strong>Rate and Administration:</strong> Administrators (with
-                  auth rights) can set the USR (dsr) value, configure system
-                  debt handling, and even "cage" (disable) the contract in
-                  emergencies.
-                </li>
-                <li>
-                  <strong>Security:</strong> The contract uses safe math, custom
-                  access controls, and special mathematical routines to ensure
-                  correct calculation and avoid overflows.
-                </li>
-              </ul>
-
-              <h3 className="text-xl font-semibold text-foreground mt-6 mb-3">
-                Simplified Flow
-              </h3>
-              <div className="bg-muted/50 p-4 rounded-lg mb-4">
-                <div className="space-y-2 text-sm">
-                  <div>
-                    <strong>Deposit – join(wad):</strong> A user deposits OGUSD,
-                    establishing a normalized savings balance (pie) that
-                    immediately starts earning at the current USR.
-                  </div>
-                  <div>
-                    <strong>Interest Accrual – drip():</strong> Periodically
-                    called to update the global rate accumulator (chi) and
-                    distribute new interest to all savers for the elapsed time
-                    period.
-                  </div>
-                  <div>
-                    <strong>Withdraw – exit(wad):</strong> User withdraws some
-                    or all savings, receiving OGUSD plus interest (calculated
-                    using chi).
-                  </div>
-                  <div>
-                    <strong>Admin Controls – file, cage:</strong> Management
-                    functions for rate adjustment or system shutdown.
-                  </div>
-                </div>
-              </div>
-
-              <h3 className="text-xl font-semibold text-foreground mt-6 mb-3">
-                OGUSD Savings Rate – Core Mechanism
-              </h3>
-              <div className="overflow-x-auto">
-                <table className="w-full border-collapse border border-border rounded-lg">
-                  <thead>
-                    <tr className="bg-muted/50">
-                      <th className="border border-border p-3 text-left font-semibold">
-                        Feature
-                      </th>
-                      <th className="border border-border p-3 text-left font-semibold">
-                        Functionality Description
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td className="border border-border p-3 font-medium">
-                        Interest Accrual
-                      </td>
-                      <td className="border border-border p-3">
-                        Users' deposits earn yield based on the USR and time in
-                        system
-                      </td>
-                    </tr>
-                    <tr className="bg-muted/25">
-                      <td className="border border-border p-3 font-medium">{t('stake.table.savings')}</td>
-                      <td className="border border-border p-3">{t('stake.table.savings.desc')}</td>
-                    </tr>
-                    <tr>
-                      <td className="border border-border p-3 font-medium">{t('stake.table.rate')}</td>
-                      <td className="border border-border p-3">{t('stake.table.rate.desc')}</td>
-                    </tr>
-                    <tr className="bg-muted/25">
-                      <td className="border border-border p-3 font-medium">{t('stake.table.shutdown')}</td>
-                      <td className="border border-border p-3">{t('stake.table.shutdown.desc')}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-
-              <p className="text-muted-foreground mt-4">{t('stake.note')}</p>
-            </div>
-          </div>
-
-          {/* Contract Address */}
-          <div className="rounded-2xl border border-border bg-card p-6 shadow-[0_4px_20px_rgba(0,0,0,0.06)]">
-            <h3 className="text-lg font-semibold text-foreground mb-3">{t('stake.contract.info')}</h3>
-            <div className="bg-muted/50 p-4 rounded-lg">
-              <div className="flex items-center justify-between">
-                <span className="font-medium">{t('stake.contract.pot')}</span>
-                <code className="bg-background px-2 py-1 rounded text-sm font-mono">
-                  {CONTRACTS.pot}
-                </code>
-              </div>
-              <div className="mt-2 text-sm text-muted-foreground">
-                <a
-                  href={`https://sepolia.etherscan.io/address/${CONTRACTS.pot}#code`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary hover:underline"
-                >
-                  {t('stake.view.etherscan')}
-                </a>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
-    </main>
+  </main>
   );
 }

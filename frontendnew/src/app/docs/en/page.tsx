@@ -162,7 +162,32 @@ export default function DocsEnPage() {
           </ul>
         </section>
       </div>
+      <section id="pot" className="mb-12">
+        <h2 className="text-2xl font-semibold mb-3">Pot Contract</h2>
+        <p className="mb-2">
+          The Pot contract powers the OGUSD Savings Rate (USR), letting OGUSD holders earn yield by depositing into a savings mechanism. It tracks balances, accrues interest, and enables safe entry/exit while supporting admin rate adjustments.
+        </p>
+        <h3 className="text-xl font-semibold mt-4 mb-2">Main Functions</h3>
+        <ul className="list-disc list-inside space-y-1">
+          <li>Deposits create a normalized balance ("pie") that earns at the global savings rate ("dsr").</li>
+          <li>Interest accrues via the "chi" accumulator and is updated with drip().</li>
+          <li>join/exit moves funds in/out, with math reflecting accrued interest.</li>
+        </ul>
+        <h3 className="text-xl font-semibold mt-4 mb-2">Key Features</h3>
+        <ul className="list-disc list-inside space-y-1">
+          <li>Interest accrual for all savers proportional to normalized balances.</li>
+          <li>Anyone can deposit or withdraw principal plus accrued interest.</li>
+          <li>Admins can set USR (dsr), configure debt handling, and cage in emergencies.</li>
+          <li>Secure math and access controls to avoid overflows and ensure correctness.</li>
+        </ul>
+        <h3 className="text-xl font-semibold mt-4 mb-2">Simplified Flow</h3>
+        <ul className="list-disc list-inside space-y-1">
+          <li>Deposit – join(wad): Start earning at current USR.</li>
+          <li>Accrual – drip(): Update chi and distribute interest over elapsed time.</li>
+          <li>Withdraw – exit(wad): Receive OGUSD plus interest (via chi).</li>
+          <li>Admin – file, cage: Adjust rates or shutdown in emergencies.</li>
+        </ul>
+      </section>
     </main>
   );
 }
-

@@ -39,7 +39,7 @@ export default function RiskDisclaimer() {
         {expanded && (
           <div id="risk-details" className="border-t border-red-200 p-4 pt-3 text-sm">
             <p className="mt-1">
-              <strong>Mutiraon: Brazil's Impact Backed Stablecoin</strong> - This is a testnet deployment on Ethereum Sepolia. All tokens and transactions are for testing purposes only and have no real monetary value.
+              <strong>{t('risk.brand')}</strong> - {t('risk.line1')}
             </p>
 
             <h3 className="mt-4 font-bold">{t('risk.features')}</h3>
@@ -51,7 +51,7 @@ export default function RiskDisclaimer() {
             </ul>
 
             <h3 className="mt-4 font-bold">{t('risk.getting')}</h3>
-            <p className="mt-1">To interact with this testnet deployment:</p>
+            <p className="mt-1">{t('risk.getting.hint')}</p>
             <ul className="ml-5 mt-2 list-disc space-y-1">
               <li>{t('risk.getting.1')}</li>
               <li>{t('risk.getting.2')}</li>

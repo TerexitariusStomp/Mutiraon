@@ -162,7 +162,32 @@ export default function DocsPtPage() {
           </ul>
         </section>
       </div>
+      <section id="pot" className="mb-12">
+        <h2 className="text-2xl font-semibold mb-3">Contrato Pot</h2>
+        <p className="mb-2">
+          O contrato Pot sustenta a Taxa de Poupança do OGUSD (USR), permitindo que detentores de OGUSD obtenham rendimento ao depositar em um mecanismo de poupança. Ele registra saldos, acumula juros e permite entrada/saída com segurança, além de suportar ajustes administrativos de taxa.
+        </p>
+        <h3 className="text-xl font-semibold mt-4 mb-2">Funções Principais</h3>
+        <ul className="list-disc list-inside space-y-1">
+          <li>Depósitos criam um saldo normalizado ("pie") que rende na taxa global ("dsr").</li>
+          <li>Juros acumulam via o acumulador "chi" e são atualizados com drip().</li>
+          <li>join/exit move fundos para dentro/fora, com matemática refletindo juros acumulados.</li>
+        </ul>
+        <h3 className="text-xl font-semibold mt-4 mb-2">Recursos‑Chave</h3>
+        <ul className="list-disc list-inside space-y-1">
+          <li>Acúmulo de juros proporcional aos saldos normalizados de todos os poupadores.</li>
+          <li>Qualquer pessoa pode depositar ou sacar principal mais juros acumulados.</li>
+          <li>Administradores podem definir a USR (dsr), configurar tratamento de dívidas e ativar cage em emergências.</li>
+          <li>Rotinas seguras e controles de acesso para evitar overflows e garantir correção.</li>
+        </ul>
+        <h3 className="text-xl font-semibold mt-4 mb-2">Fluxo Simplificado</h3>
+        <ul className="list-disc list-inside space-y-1">
+          <li>Depósito – join(wad): começa a render na USR atual.</li>
+          <li>Acúmulo – drip(): atualiza chi e distribui juros pelo período decorrido.</li>
+          <li>Saque – exit(wad): recebe OGUSD mais juros (via chi).</li>
+          <li>Admin – file, cage: ajuste de taxa ou desligamento em emergências.</li>
+        </ul>
+      </section>
     </main>
   );
 }
-

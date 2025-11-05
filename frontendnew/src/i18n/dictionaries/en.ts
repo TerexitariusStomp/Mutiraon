@@ -1,4 +1,4 @@
-export const en = {
+﻿export const en = {
   // Navigation
   "nav.get": "GET OGUSD",
   "nav.stake": "STAKE",
@@ -23,8 +23,10 @@ export const en = {
   "layout.docs": "Docs",
   "layout.github": "Github",
   "layout.telegram": "Telegram",
-  "layout.copyright": "©Mutiraon - All rights reserved.",
+  "layout.copyright": "Â©Mutiraon - All rights reserved.",
 
+  // Risk banner brand
+  "risk.brand": "Mutiraon: Brazil's Impact Backed Stablecoin",
   // Vaults
   "vaults.title": "Select Environmental Collateral",
   "vaults.subtitle": "Choose a collateral type to manage your vault and mint OGUSD.",
@@ -55,11 +57,11 @@ export const en = {
   "vault.status.avail": "Available Collateral",
   "vault.status.ready": "Ready to lock",
   "vault.status.maxsafe": "Max Safe Mint",
-  "vault.status.strict": "⚠️ Contract enforces strict limits",
+  "vault.status.strict": "âš ï¸ Contract enforces strict limits",
 
   // Vaults page - sections
   "vault.dep.title": "Deposit {code}",
-  "vault.dep.step": "Step 1: Deposit {code} 💰",
+  "vault.dep.step": "Step 1: Deposit {code} ðŸ’°",
   "vault.dep.what": "What it does: Moves tokens from your account into the vault system",
   "vault.dep.li1": "Enter how many {code} tokens you want to deposit",
   "vault.dep.li2": "Click \"Approve\" (this gives the vault permission to handle your tokens)",
@@ -71,7 +73,7 @@ export const en = {
   "vault.dep.deposit": "2. Deposit",
 
   "vault.lock.title": "Manage Locked Collateral",
-  "vault.lock.step": "Step 2: Lock Tokens 🔒",
+  "vault.lock.step": "Step 2: Lock Tokens ðŸ”’",
   "vault.lock.what": "What it does: Locks your deposited tokens so you can create Mutiraon against them",
   "vault.lock.li1": "Look at \"Available to Lock\" to see how many deposited tokens you have",
   "vault.lock.li2": "Enter how many you want to lock",
@@ -86,7 +88,7 @@ export const en = {
   "vault.unlock.btn": "Unlock",
 
   "vault.mut.title": "Manage Mutiraon",
-  "vault.mut.step": "Step 3: Create Mutiraon 💵",
+  "vault.mut.step": "Step 3: Create Mutiraon ðŸ’µ",
   "vault.mut.what": "What it does: Creates new local currency that you can spend",
   "vault.mut.li1": "Check \"Maximum You Can Safely Create\" to see the recommended limit (this protects you from losing your tokens)",
   "vault.mut.li2": "Enter how much Mutiraon you want to create",
@@ -103,7 +105,7 @@ export const en = {
   "vault.mut.repay.btn": "Repay",
 
   "vault.wd.title": "Withdraw Collateral",
-  "vault.wd.step": "Step 4: Unlock & Withdraw ↩️",
+  "vault.wd.step": "Step 4: Unlock & Withdraw â†©ï¸",
   "vault.wd.what": "What it does: Gets your {code} tokens back to your regular account",
   "vault.wd.unlock.title": "To unlock:",
   "vault.wd.unlock.li1": "Go to \"Manage Locked Tokens\" section",
@@ -118,7 +120,7 @@ export const en = {
   "vault.wd.only": "Withdraw only",
   "vault.wd.placeholder": "Amount to withdraw",
   "vault.wd.btn": "Withdraw",
-  "vault.help.steps": "Follow these steps: 1) Deposit → 2) Lock → 3) Mint",
+  "vault.help.steps": "Follow these steps: 1) Deposit â†’ 2) Lock â†’ 3) Mint",
   "vault.loading.approving": "Approving...",
   "vault.loading.depositing": "Depositing...",
   "vault.loading.locking": "Locking...",
@@ -195,12 +197,13 @@ export const en = {
   "risk.env": "TESTNET ENVIRONMENT",
   "risk.line1": "This application is deployed on Ethereum Sepolia testnet. All transactions use test tokens and have no real value.",
   "risk.features": "TESTNET FEATURES",
-  "risk.features.1": "Test Tokens: Use Sepolia ETH and test ERC‑20 tokens",
+  "risk.features.1": "Test Tokens: Use Sepolia ETH and test ERCâ€‘20 tokens",
   "risk.features.2": "No Real Value: All assets on testnet have zero monetary value",
   "risk.features.3": "Learning Tool: Experiment with DeFi mechanics in a safe environment",
   "risk.features.4": "Development Testing: Help improve the protocol before mainnet",
   "risk.getting": "GETTING STARTED",
   "risk.getting.1": "Connect a Web3 wallet (MetaMask, etc.)",
+  "risk.getting.hint": "To interact with this testnet deployment:",
   "risk.getting.2": "Switch to Ethereum Sepolia testnet",
   "risk.getting.3": "Get free Sepolia ETH from a faucet",
   "risk.getting.4": "Use test tokens for collateral",
