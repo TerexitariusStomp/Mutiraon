@@ -2,9 +2,9 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ "main", "gh-pages" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "main", "gh-pages" ]
+    branches: [ "main" ]
 
 permissions:
   contents: read
@@ -32,19 +32,25 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v4
         
-      - name: Install dependencies
+      - name: Install frontend dependencies
         run: npm ci
+        working-directory: ./frontendnew
         
-      - name: Build with Next.js
+      - name: Build Next.js application
         run: npm run build
         working-directory: ./frontendnew
         env:
           NODE_ENV: production
           
+      - name: Verify build output
+        run: |
+          ls -la frontendnew/out
+          cat frontendnew/out/index.html | head -10
+          
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './frontendnew/out'
+          path: 'frontendnew/out'
 
   deploy:
     environment:
