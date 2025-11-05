@@ -84,7 +84,7 @@ export default function RootLayout({
               <span>©Mutiraon - All rights reserved.</span>
               <nav className="flex gap-4">
                 <a href="/docs" className="hover:text-foreground transition-colors">Docs</a>
-                <a href="https://github.com/your-username/mutiraon" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Github</a>
+                <a href="https://github.com/TerexitariusStomp/Mutiraon/" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Github</a>
                 <a href="https://t.me/mutiraon" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Telegram</a>
               </nav>
             </div>

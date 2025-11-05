@@ -78,7 +78,7 @@ const InnerNav = () => {
                 <Link href={lang === 'pt' ? "/docs/pt" : "/docs/en"}>{t('nav.docs')}</Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link href="https://github.com/your-username/mutiraon" target="_blank" rel="noopener noreferrer">{t('nav.github')}</Link>
+                <Link href="https://github.com/TerexitariusStomp/Mutiraon/" target="_blank" rel="noopener noreferrer">{t('nav.github')}</Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <Link href="https://t.me/mutiraon" target="_blank" rel="noopener noreferrer">{t('nav.telegram')}</Link>

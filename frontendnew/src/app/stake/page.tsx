@@ -18,7 +18,7 @@ import { Separator } from "@/components/ui/separator";
 import { useI18n } from "@/i18n/I18nContext";
 
 export default function StakePage() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const {
     userBalance,
     walletBalance,
@@ -361,27 +361,72 @@ export default function StakePage() {
           {/* Pot Contract Information */}
           <div className="mb-8 rounded-2xl border border-border bg-card p-8 shadow-[0_4px_20px_rgba(0,0,0,0.06)]">
             <h2 className="text-2xl font-semibold text-foreground mb-6">
-              About the Pot Contract
+              {lang === 'pt' ? 'Sobre o Contrato Pot' : 'About the Pot Contract'}
             </h2>
 
             <div className="prose prose-gray max-w-none">
+              {lang === 'pt' && (
+                <>
+                  <p className="text-muted-foreground mb-4">
+                    O <strong>contrato Pot</strong> é um componente central do sistema de Taxa de Poupança do OGUSD (USR) em finanças descentralizadas, permitindo que detentores de OGUSD obtenham rendimento ao depositar seus tokens estáveis em um mecanismo de poupança. O contrato registra saldos depositados, acumula juros e permite que usuários entrem ou saiam do sistema USR com segurança, enquanto gerencia a administração do sistema e o ajuste de taxas.
+                  </p>
+                  <h3 className="text-xl font-semibold text-foreground mt-6 mb-3">Funções e Propósito Principais</h3>
+                  <p className="text-muted-foreground mb-4">
+                    O contrato permite que os usuários depositem OGUSD, formando um saldo normalizado ("pie") que rende juros na taxa global de poupança ("dsr").
+                  </p>
+                  <p className="text-muted-foreground mb-4">
+                    Os juros são acompanhados pelo acumulador de taxa "chi", atualizado por chamadas regulares à função "drip" — que sincroniza a acumulação de juros com o timestamp mais recente da blockchain e distribui os juros acumulados a todos os poupadores.
+                  </p>
+                  <p className="text-muted-foreground mb-4">
+                    Depósitos (via join) e saques (via exit) movem o OGUSD do/para o contrato, atualizando os saldos registrados para refletir matematicamente os juros acumulados.
+                  </p>
+                  <h3 className="text-xl font-semibold text-foreground mt-6 mb-3">Recursos‑Chave</h3>
+                  <ul className="text-muted-foreground mb-4 space-y-2">
+                    <li>
+                      <strong>Acúmulo de Juros:</strong> O contrato acumula juros para todos os participantes do USR com base na taxa global de poupança. Os juros são distribuídos proporcionalmente aos usuários conforme seus saldos normalizados.
+                    </li>
+                    <li>
+                      <strong>Depósito/Saque:</strong> Qualquer pessoa pode depositar OGUSD para começar a render ou sacar o principal mais os juros acumulados a qualquer momento após a atualização do sistema.
+                    </li>
+                    <li>
+                      <strong>Taxa e Administração:</strong> Administradores (com permissões “auth”) podem definir o valor da USR (dsr), configurar o tratamento de dívidas do sistema e até “cage” (desativar) o contrato em emergências.
+                    </li>
+                    <li>
+                      <strong>Segurança:</strong> O contrato utiliza rotinas matemáticas seguras, controles de acesso customizados e rotinas especiais para garantir cálculos corretos e evitar overflows.
+                    </li>
+                  </ul>
+                  <h3 className="text-xl font-semibold text-foreground mt-6 mb-3">Fluxo Simplificado</h3>
+                  <div className="bg-muted/50 p-4 rounded-lg mb-4">
+                    <div className="space-y-2 text-sm">
+                      <div>
+                        <strong>Depósito – join(wad):</strong> Usuário deposita OGUSD, estabelecendo um saldo normalizado (pie) que começa a render imediatamente na USR atual.
+                      </div>
+                      <div>
+                        <strong>Acúmulo de Juros – drip():</strong> Chamado periodicamente para atualizar o acumulador global (chi) e distribuir novos juros referentes ao período decorrido.
+                      </div>
+                      <div>
+                        <strong>Saque – exit(wad):</strong> Usuário saca parte ou todo o saldo, recebendo OGUSD mais juros (calculados via chi).
+                      </div>
+                      <div>
+                        <strong>Controles de Administração – file, cage:</strong> Funções de gestão para ajuste de taxa ou desligamento do sistema.
+                      </div>
+                    </div>
+                  </div>
+                </>
+              )}
               <p className="text-muted-foreground mb-4">
-                The <strong>Pot contract</strong> is a core component of the
-                OGUSD Savings Rate (USR) system in decentralized finance,
-                specifically enabling OGUSD holders to earn yield by depositing
-                their stablecoins into a savings mechanism. The contract tracks
-                deposited balances, accrues interest, and allows users to enter
-                or exit the USR system safely, all while managing system-level
-                administration and rate adjustment.
+                {lang === 'pt'
+                  ? <>O <strong>contrato Pot</strong> é um componente central do sistema de Taxa de Poupança do OGUSD (USR) em finanças descentralizadas, permitindo que detentores de OGUSD obtenham rendimento ao depositar seus tokens estáveis em um mecanismo de poupança. O contrato registra saldos depositados, acumula juros e permite que usuários entrem ou saiam do sistema USR com segurança, enquanto gerencia a administração do sistema e o ajuste de taxas.</>
+                  : <>The <strong>Pot contract</strong> is a core component of the OGUSD Savings Rate (USR) system in decentralized finance, specifically enabling OGUSD holders to earn yield by depositing their stablecoins into a savings mechanism. The contract tracks deposited balances, accrues interest, and allows users to enter or exit the USR system safely, all while managing system-level administration and rate adjustment.</>}
               </p>
 
               <h3 className="text-xl font-semibold text-foreground mt-6 mb-3">
-                Main Functions and Purpose
+                {lang === 'pt' ? 'Funções e Propósito Principais' : 'Main Functions and Purpose'}
               </h3>
               <p className="text-muted-foreground mb-4">
-                The contract lets users deposit OGUSD stablecoins, building up a
-                normalized balance ("pie") that earns interest at the global
-                savings rate ("dsr").
+                {lang === 'pt'
+                  ? 'O contrato permite que os usuários depositem OGUSD, formando um saldo normalizado ("pie") que rende juros na taxa global de poupança ("dsr").'
+                  : 'The contract lets users deposit OGUSD stablecoins, building up a normalized balance ("pie") that earns interest at the global savings rate ("dsr").'}
               </p>
               <p className="text-muted-foreground mb-4">
                 Interest is tracked via the "chi" rate accumulator, which is

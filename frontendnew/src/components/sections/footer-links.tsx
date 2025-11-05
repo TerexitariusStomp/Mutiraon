@@ -9,10 +9,9 @@ export default function FooterLinks() {
       <span>{t('layout.copyright')}</span>
       <nav className="flex gap-4">
         <a href="/docs" className="hover:text-foreground transition-colors">{t('layout.docs')}</a>
-        <a href="https://github.com/your-username/mutiraon" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">{t('layout.github')}</a>
+        <a href="https://github.com/TerexitariusStomp/Mutiraon/" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">{t('layout.github')}</a>
         <a href="https://t.me/mutiraon" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">{t('layout.telegram')}</a>
       </nav>
     </div>
   );
 }
-
