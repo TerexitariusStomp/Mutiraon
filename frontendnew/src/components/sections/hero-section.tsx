@@ -83,3 +83,4 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
+"use client";

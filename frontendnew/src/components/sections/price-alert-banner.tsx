@@ -36,3 +36,4 @@ const PriceAlertBanner = () => {
 };
 
 export default PriceAlertBanner;
+"use client";
