@@ -28,7 +28,10 @@ const Navigation = () => {
         <div className="flex items-center gap-x-8">
           <Link href="/" className="flex shrink-0 items-center gap-x-2">
             <TreePine className="h-8 w-8 text-primary" />
-            <span className="font-logo text-foreground">Mutiraon</span>
+            <div className="flex flex-col">
+              <span className="font-logo text-foreground">Mutiraon</span>
+              <span className="text-xs text-muted-foreground -mt-1">Brazil's Impact Backed Stablecoin</span>
+            </div>
           </Link>
           <nav className="hidden items-center gap-x-6 lg:flex">
             {navLinks.map((link) => (

@@ -7,7 +7,7 @@ import Navigation from "@/components/sections/navigation";
 import RiskDisclaimer from "@/components/sections/risk-disclaimer";
 
 export const metadata: Metadata = {
-  title: "🌳 Mutiraon - OGUSD Stablecoin",
+  title: "🌳 Mutiraon: Brazil's Impact Backed Stablecoin",
   description: "Decentralized stablecoin backed by environmental impact tokens",
 };
 
