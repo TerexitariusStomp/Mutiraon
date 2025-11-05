@@ -431,37 +431,119 @@ export default function StakePage() {
                 ].map((step, index) => (
                   <div
                     key={index}
-                    className="flex items-center gap-4 p-4 border rounded-lg"
+                    className="border rounded-lg overflow-hidden"
                   >
-                    <div
-                      className={`text-2xl ${completedSteps.has(index) ? "text-green-500" : currentStep === index ? "text-blue-500 animate-pulse" : "text-gray-400"}`}
-                    >
-                      {completedSteps.has(index) ? "✅" : step.icon}
+                    <div className="bg-gray-50 border-b border-gray-200 p-3">
+                      <div className="flex items-center gap-3">
+                        <div
+                          className={`text-xl ${completedSteps.has(index) ? "text-green-500" : currentStep === index ? "text-blue-500 animate-pulse" : "text-gray-400"}`}
+                        >
+                          {completedSteps.has(index) ? "✅" : step.icon}
+                        </div>
+                        <div>
+                          <h4 className="font-medium text-sm">Step {index + 1}: {step.title}</h4>
+                          <p className="text-xs text-muted-foreground">
+                            {step.description}
+                          </p>
+                        </div>
+                      </div>
                     </div>
-                    <div className="flex-1">
-                      <h4 className="font-medium">{step.title}</h4>
-                      <p className="text-sm text-muted-foreground">
-                        {step.description}
-                      </p>
+                    <div className="p-4">
+                      <div className={`p-3 rounded-lg mb-3 ${
+                        index === 0 ? "bg-blue-50 border border-blue-200" :
+                        index === 1 ? "bg-green-50 border border-green-200" :
+                        index === 2 ? "bg-purple-50 border border-purple-200" :
+                        index === 3 ? "bg-orange-50 border border-orange-200" :
+                        "bg-red-50 border border-red-200"
+                      }`}>
+                        <p className={`text-sm font-medium mb-2 ${
+                          index === 0 ? "text-blue-900" :
+                          index === 1 ? "text-green-900" :
+                          index === 2 ? "text-purple-900" :
+                          index === 3 ? "text-orange-900" :
+                          "text-red-900"
+                        }`}>
+                          What it does: {step.title}
+                        </p>
+                        <ul className={`text-sm space-y-1 ml-4 ${
+                          index === 0 ? "text-blue-800" :
+                          index === 1 ? "text-green-800" :
+                          index === 2 ? "text-purple-800" :
+                          index === 3 ? "text-orange-800" :
+                          "text-red-800"
+                        }`}>
+                          {index === 0 && (
+                            <>
+                              <li>• Checks the current interest rate and prepares the system</li>
+                              <li>• Just click to confirm</li>
+                              <li>• This happens automatically behind the scenes</li>
+                            </>
+                          )}
+                          {index === 1 && (
+                            <>
+                              <li>• Gives the savings program permission to move your OGUSD</li>
+                              <li>• Similar to authorizing a payment app to use your bank account</li>
+                              <li>• You only need to do this once per session</li>
+                              <li>• Click to confirm</li>
+                            </>
+                          )}
+                          {index === 2 && (
+                            <>
+                              <li>• Converts your OGUSD into the format the savings system uses</li>
+                              <li>• This is automatic and happens instantly</li>
+                              <li>• No fees or delays</li>
+                              <li>• Just click to confirm</li>
+                            </>
+                          )}
+                          {index === 3 && (
+                            <>
+                              <li>• Gives the savings contract permission to hold your converted currency</li>
+                              <li>• Another security check to protect your money</li>
+                              <li>• Click to confirm</li>
+                            </>
+                          )}
+                          {index === 4 && (
+                            <>
+                              <li>• Actually moves your money into the savings account where it starts earning</li>
+                              <li>• Your money is now locked in and earning interest</li>
+                              <li>• Click to confirm</li>
+                            </>
+                          )}
+                        </ul>
+                        <p className={`text-xs mt-2 italic ${
+                          index === 0 ? "text-blue-700" :
+                          index === 1 ? "text-green-700" :
+                          index === 2 ? "text-purple-700" :
+                          index === 3 ? "text-orange-700" :
+                          "text-red-700"
+                        }`}>
+                          {index === 0 && "Think of it like: Preparing your account for a deposit."}
+                          {index === 1 && "Think of it like: Giving permission for an automatic transfer."}
+                          {index === 2 && "Think of it like: Converting cash to a special savings format."}
+                          {index === 3 && "Think of it like: Signing a contract to hold your money safely."}
+                          {index === 4 && "Think of it like: Finally depositing money into your savings account."}
+                        </p>
+                      </div>
+                      <Button
+                        onClick={() => handleStepClick(index, step.function)}
+                        disabled={
+                          isPending || completedSteps.has(index) || !depositAmount
+                        }
+                        variant={
+                          completedSteps.has(index) ? "secondary" : "outline"
+                        }
+                        size="sm"
+                        className="w-full"
+                      >
+                        {completedSteps.has(index)
+                          ? "Completed"
+                          : currentStep === index
+                            ? "Processing..."
+                            : !depositAmount
+                              ? "Enter Amount First"
+                              : "Execute Step"}
+                      </Button>
                     </div>
-                    <Button
-                      onClick={() => handleStepClick(index, step.function)}
-                      disabled={
-                        isPending || completedSteps.has(index) || !depositAmount
-                      }
-                      variant={
-                        completedSteps.has(index) ? "secondary" : "outline"
-                      }
-                      size="sm"
-                    >
-                      {completedSteps.has(index)
-                        ? "Completed"
-                        : currentStep === index
-                          ? "Processing..."
-                          : !depositAmount
-                            ? "Enter Amount First"
-                            : "Execute"}
-                    </Button>
                   </div>
                 ))}
               </div>

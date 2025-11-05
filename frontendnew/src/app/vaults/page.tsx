@@ -250,9 +250,21 @@ export default function VaultsPage() {
             <h3 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
               💰 Deposit {selectedCollateral}
             </h3>
-            <p className="text-sm text-muted-foreground mb-4">
-              Add {selectedCollateral} tokens to your vault
-            </p>
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+              <h4 className="font-semibold text-blue-900 mb-2">Step 1: Deposit {selectedCollateral} 💰</h4>
+              <p className="text-sm text-blue-800 mb-3">
+                <em>What it does</em>: Moves tokens from your account into the vault system
+              </p>
+              <ul className="text-sm text-blue-800 space-y-1 ml-4">
+                <li>• Enter how many {selectedCollateral} tokens you want to deposit</li>
+                <li>• Click "Approve" (this gives the vault permission to handle your tokens)</li>
+                <li>• Click "Deposit" (this actually moves them in)</li>
+                <li>• Your tokens are now in the vault but not locked - you can still take them back easily</li>
+              </ul>
+              <p className="text-xs text-blue-700 mt-2 italic">
+                Think of it like: Putting money in a bank account. It's in the bank, but not committed to anything yet.
+              </p>
+            </div>
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">
@@ -280,9 +292,21 @@ export default function VaultsPage() {
             <h3 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
               🔒 Manage Locked Collateral
             </h3>
-            <p className="text-sm text-muted-foreground mb-4">
-              Lock deposited {selectedCollateral} to enable borrowing
-            </p>
+            <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-4">
+              <h4 className="font-semibold text-green-900 mb-2">Step 2: Lock Tokens 🔒</h4>
+              <p className="text-sm text-green-800 mb-3">
+                <em>What it does</em>: Locks your deposited tokens so you can create Mutiraon against them
+              </p>
+              <ul className="text-sm text-green-800 space-y-1 ml-4">
+                <li>• Look at "Available to Lock" to see how many deposited tokens you have</li>
+                <li>• Enter how many you want to lock</li>
+                <li>• Click "Lock"</li>
+                <li>• These tokens are now securing your ability to create Mutiraon</li>
+              </ul>
+              <p className="text-xs text-green-700 mt-2 italic">
+                Think of it like: Putting money in a special savings account that lets you borrow against it. The money is still yours, but you can't touch it until you pay back what you borrow.
+              </p>
+            </div>
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">
@@ -322,9 +346,24 @@ export default function VaultsPage() {
             <h3 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
               💵 Manage Mutiraon
             </h3>
-            <p className="text-sm text-muted-foreground mb-4">
-              Mint or repay Mutiraon against your locked collateral
-            </p>
+            <div className="bg-purple-50 border border-purple-200 rounded-lg p-4 mb-4">
+              <h4 className="font-semibold text-purple-900 mb-2">Step 3: Create Mutiraon 💵</h4>
+              <p className="text-sm text-purple-800 mb-3">
+                <em>What it does</em>: Creates new local currency that you can spend
+              </p>
+              <ul className="text-sm text-purple-800 space-y-1 ml-4">
+                <li>• Check "Maximum You Can Safely Create" to see the recommended limit (this protects you from losing your tokens)</li>
+                <li>• Enter how much Mutiraon you want to create</li>
+                <li>• Click "Mint"</li>
+                <li>• Fresh Mutiraon appears in your account to use</li>
+              </ul>
+              <p className="text-xs text-purple-700 mt-2 italic">
+                Important: The system enforces strict limits to keep your vault safe. You can't create more Mutiraon than your locked {selectedCollateral} can support.
+              </p>
+              <p className="text-xs text-purple-700 italic">
+                Think of it like: Taking out a loan from a bank, using your savings as collateral. The more you have saved (locked), the more you can borrow.
+              </p>
+            </div>
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">
@@ -365,9 +404,33 @@ export default function VaultsPage() {
             <h3 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
               ↩️ Withdraw Collateral
             </h3>
-            <p className="text-sm text-muted-foreground mb-4">
-              Get deposited (but unlocked) {selectedCollateral} back to your wallet
-            </p>
+            <div className="bg-orange-50 border border-orange-200 rounded-lg p-4 mb-4">
+              <h4 className="font-semibold text-orange-900 mb-2">Step 4: Unlock & Withdraw ↩️</h4>
+              <p className="text-sm text-orange-800 mb-3">
+                <em>What it does</em>: Gets your {selectedCollateral} tokens back to your regular account
+              </p>
+              <div className="space-y-3">
+                <div>
+                  <p className="text-sm font-medium text-orange-900">To unlock:</p>
+                  <ul className="text-sm text-orange-800 space-y-1 ml-4">
+                    <li>• Go to "Manage Locked Tokens" section</li>
+                    <li>• Enter how much to unlock (only works if you've paid back enough debt)</li>
+                    <li>• Click "Unlock"</li>
+                  </ul>
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-orange-900">To withdraw:</p>
+                  <ul className="text-sm text-orange-800 space-y-1 ml-4">
+                    <li>• Enter how much to withdraw (can only withdraw unlocked tokens)</li>
+                    <li>• Click "Withdraw"</li>
+                    <li>• Tokens return to your account</li>
+                  </ul>
+                </div>
+              </div>
+              <p className="text-xs text-orange-700 mt-2 italic">
+                Think of it like: After paying off your bank loan, you can withdraw your money from that special savings account back to your regular checking account.
+              </p>
+            </div>
             <div className="p-3 bg-muted rounded-lg">
               <p className="text-sm text-muted-foreground">Available: 0.00 {selectedCollateral}</p>
             </div>
