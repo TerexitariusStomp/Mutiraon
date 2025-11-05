@@ -7,7 +7,7 @@ import Navigation from "@/components/sections/navigation";
 import RiskDisclaimer from "@/components/sections/risk-disclaimer";
 
 export const metadata: Metadata = {
-  title: "Mutiraon - OGUSD Stablecoin",
+  title: "🌳 Mutiraon - OGUSD Stablecoin",
   description: "Decentralized stablecoin backed by environmental impact tokens",
 };
 
@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased min-h-screen flex flex-col">
+      <body className="antialiased min-h-screen flex flex-col bg-[#f3f1f7]">
         <Providers>
           <ErrorReporter />
           <Script
@@ -31,24 +31,22 @@ export default function RootLayout({
             data-debug="true"
             data-custom-data='{"appName": "Mutiraon", "version": "1.0.0", "greeting": "Welcome to Mutiraon"}'
           />
-          <header>
-            <div className="container mx-auto px-4 py-5">
-              <Navigation />
-            </div>
-          </header>
+          <div className="pt-5 px-4">
+            <Navigation />
+          </div>
           <main className="flex-1">
             {children}
           </main>
-          <footer className="mt-8 border-t border-black/10 bg-[#f3f1f7]">
+          <footer className="mt-16 border-t border-black/10 bg-[#f3f1f7]">
             <div className="container mx-auto px-4 pt-6">
               <RiskDisclaimer />
             </div>
             <div className="container mx-auto px-4 py-8 text-sm text-muted-foreground flex flex-col sm:flex-row items-center justify-between gap-3">
               <span>©Mutiraon - All rights reserved.</span>
               <nav className="flex gap-4">
-                <a href="/docs" className="hover:text-foreground">Docs</a>
-                <a href="https://github.com/your-username/mutiraon" target="_blank" rel="noopener noreferrer" className="hover:text-foreground">Github</a>
-                <a href="https://t.me/mutiraon" target="_blank" rel="noopener noreferrer" className="hover:text-foreground">Telegram</a>
+                <a href="/docs" className="hover:text-foreground transition-colors">Docs</a>
+                <a href="https://github.com/your-username/mutiraon" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Github</a>
+                <a href="https://t.me/mutiraon" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Telegram</a>
               </nav>
             </div>
           </footer>

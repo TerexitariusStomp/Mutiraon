@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Smile, ChevronDown } from "lucide-react";
+import { TreePine, ChevronDown } from "lucide-react";
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useAccount, useDisconnect } from 'wagmi';
 
@@ -23,11 +23,11 @@ const Navigation = () => {
   const { disconnect } = useDisconnect();
 
   return (
-    <header className="sticky top-5 z-50 mx-auto max-w-[1200px] rounded-2xl bg-card px-4 shadow-[0_4px_20px_rgba(0,0,0,0.08)]">
-      <div className="flex h-20 items-center justify-between">
+    <nav className="sticky top-0 z-50 mx-auto max-w-[1200px] rounded-2xl bg-white/90 backdrop-blur-md px-4 shadow-[0_4px_20px_rgba(0,0,0,0.08)] border border-black/5">
+      <div className="flex h-16 items-center justify-between">
         <div className="flex items-center gap-x-8">
           <Link href="/" className="flex shrink-0 items-center gap-x-2">
-            <Smile className="h-8 w-8 text-primary" />
+            <TreePine className="h-8 w-8 text-primary" />
             <span className="font-logo text-foreground">Mutiraon</span>
           </Link>
           <nav className="hidden items-center gap-x-6 lg:flex">
@@ -89,7 +89,7 @@ const Navigation = () => {
           <ConnectButton />
         </div>
       </div>
-    </header>
+    </nav>
   );
 };
 
