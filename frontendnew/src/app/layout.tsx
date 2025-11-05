@@ -96,19 +96,3 @@ export default function RootLayout({
     </html>
   );
 }
-
-// Client component to render i18n footer links
-function FooterLinks() {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const { t } = useI18n() as any;
-  return (
-    <div className="container mx-auto px-4 py-8 text-sm text-muted-foreground flex flex-col sm:flex-row items-center justify-between gap-3">
-      <span>{t ? t('layout.copyright') : '©Mutiraon - All rights reserved.'}</span>
-      <nav className="flex gap-4">
-        <a href="/docs" className="hover:text-foreground transition-colors">{t ? t('layout.docs') : 'Docs'}</a>
-        <a href="https://github.com/your-username/mutiraon" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">{t ? t('layout.github') : 'Github'}</a>
-        <a href="https://t.me/mutiraon" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">{t ? t('layout.telegram') : 'Telegram'}</a>
-      </nav>
-    </div>
-  );
-}
