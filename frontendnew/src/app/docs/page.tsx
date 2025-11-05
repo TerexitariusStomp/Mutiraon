@@ -1,3 +1,5 @@
+"use client";
+
 import { useI18n } from "@/i18n/I18nContext";
 
 export default function DocsPage() {
@@ -217,4 +219,3 @@ export default function DocsPage() {
     </main>
   );
 }
-"use client";

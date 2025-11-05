@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { Info, ChevronDown } from "lucide-react";
 import Link from "next/link";
@@ -83,4 +85,3 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
-"use client";
