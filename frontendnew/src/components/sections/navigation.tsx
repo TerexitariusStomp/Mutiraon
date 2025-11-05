@@ -19,11 +19,10 @@ const navLinks = [
   { key: "nav.stake", href: "/stake", active: false },
 ];
 
-const Navigation = () => {
+const InnerNav = () => {
   const { isConnected } = useAccount();
   const { disconnect } = useDisconnect();
   const { t, lang, setLang } = useI18n();
-
   return (
     <nav className="sticky top-0 z-50 mx-auto max-w-[1200px] rounded-2xl bg-white/90 backdrop-blur-md px-4 shadow-[0_4px_20px_rgba(0,0,0,0.08)] border border-black/5">
       <div className="flex h-16 items-center justify-between">
@@ -76,7 +75,7 @@ const Navigation = () => {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuItem asChild>
-                <Link href="/docs">{t('nav.docs')}</Link>
+                <Link href={lang === 'pt' ? "/docs/pt" : "/docs/en"}>{t('nav.docs')}</Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <Link href="https://github.com/your-username/mutiraon" target="_blank" rel="noopener noreferrer">{t('nav.github')}</Link>
@@ -109,6 +108,14 @@ const Navigation = () => {
       </div>
     </nav>
   );
+};
+
+import { useEffect, useState } from "react";
+const Navigation = () => {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  if (!mounted) return null;
+  return <InnerNav />;
 };
 
 export default Navigation;

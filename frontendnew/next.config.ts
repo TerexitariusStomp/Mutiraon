@@ -28,11 +28,9 @@ const nextConfig: NextConfig = {
 
   outputFileTracingRoot: path.resolve(__dirname, '../../'),
 
-  // Disable Turbopack completely
-  experimental: {
-    turbo: {
-      rules: {}
-    },
+  // Turbopack configuration (replacement for deprecated experimental.turbo)
+  turbopack: {
+    rules: {},
   },
 
   webpack: (config) => {
