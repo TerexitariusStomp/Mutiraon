@@ -1,5 +1,5 @@
 {
-  "name": "Stablecoin",
+  "name": "mutiraon-stablecoin",
   "version": "1.0.0",
   "scripts": {
     "dev": "cd frontendnew && npm run dev",
@@ -21,6 +21,6 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "https://github.com/flamingbark/USDog"
+    "url": "https://github.com/flamingbark/Mutiraon"
   }
 }

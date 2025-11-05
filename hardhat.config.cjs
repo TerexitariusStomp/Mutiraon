@@ -52,23 +52,22 @@ module.exports = {
       gas: 2000000, // Set explicit gas limit
       accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
-    bscTestnet: {
+    sepolia: {
       type: "http",
-      url: process.env.BSC_TESTNET_RPC_URL || "https://data-seed-prebsc-1-s1.binance.org:8545/",
-      chainId: 97,
-      gasPrice: 20000000000,
+      url: process.env.ETH_SEPOLIA_RPC_URL || "https://sepolia.infura.io/v3/9aa3d95b3b440d8892e67c5a5e4d9a5c",
+      chainId: 11155111,
       accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     }
   },
   etherscan: {
-    apiKey: process.env.BSCSCAN_API_KEY || "3FBKFF8AXVXFCG3QHD5K2S6J7UYTKIEM5C",
+    apiKey: process.env.ETHERSCAN_API_KEY,
     customChains: [
       {
-        network: "bsc",
-        chainId: 56,
+        network: "sepolia",
+        chainId: 11155111,
         urls: {
-          apiURL: "https://api.bscscan.com/api",
-          browserURL: "https://bscscan.com"
+          apiURL: "https://api-sepolia.etherscan.io/api",
+          browserURL: "https://sepolia.etherscan.io"
         }
       }
     ]

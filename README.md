@@ -1,4 +1,4 @@
-# USDog Stablecoin System
+# Mutiraon Stablecoin System
 
 A comprehensive stablecoin system using **Dogecoin (DOGE)** and **Shiba Inu (SHIB)** as the only accepted collateral types on **Binance Smart Chain (BSC)**. Built on the battle-tested MakerDAO/Sky Ecosystem architecture.
 
@@ -8,8 +8,8 @@ A comprehensive stablecoin system using **Dogecoin (DOGE)** and **Shiba Inu (SHI
 - **Chainlink Price Feeds**: Real-time price data from Chainlink oracles
 - **Over-Collateralization**: Maintains stability through 150% collateralization ratio
 - **Dutch Auction Liquidations**: Efficient price discovery for liquidated collateral
-- **Savings Rate**: Earn yield on USDog holdings
-- **Stability Fees**: Interest rates on borrowed USDog
+- **Savings Rate**: Earn yield on Mutiraon holdings
+- **Stability Fees**: Interest rates on borrowed Mutiraon
 - **Emergency Shutdown**: Global settlement mechanism for crisis situations
 - **Batch Operations**: Multicall support for gas optimization
 - **No Governance Token**: Simplified system without governance token complexity
@@ -94,7 +94,7 @@ npx hardhat test
 ### 1. Creating a Collateralized Debt Position (CDP)
 
 ```javascript
-// Example: Use 1000 DOGE to mint 50 USDog stablecoins
+// Example: Use 1000 AMZN to mint 50 Mutiraon stablecoins
 
 // 1. Approve DOGE transfer
 await dogeToken.approve(dogeJoinAddress, parseEther("1000"));
@@ -138,7 +138,7 @@ await multicall.aggregate(calls);
 ```javascript
 // Join the savings pot to earn yield
 await pot.drip(); // Update savings rate
-await pot.join(parseEther("100")); // Deposit 100 USDog
+await pot.join(parseEther("100")); // Deposit 100 Mutiraon
 
 // Later, exit with accumulated interest
 await pot.exit(parseEther("100"));
@@ -173,7 +173,7 @@ await clipper.take(
 | **Token Address** | `0xba2ae424d960c26247dd6c32edc70b295c744c43` | `0x2859e4544c4bb03966803b044a93563bd2d0dd4d` | BSC token contracts |
 | **Chainlink Feed** | `0x3AB0A0d137D4F946fBB19eecc6e92E64660231C8` | `0x804EaE4dcB6A8Db6ca2FC4d24005d8F38D9d19bA` | Price feed addresses |
 | **Liquidation Ratio** | 150% | 150% | Minimum collateralization |
-| **Stability Fee** | 2% APR | 2% APR | Interest on borrowed USDog |
+| **Stability Fee** | 2% APR | 2% APR | Interest on borrowed Mutiraon |
 | **Liquidation Penalty** | 10% | 10% | Fee on liquidated positions |
 | **Debt Ceiling** | 10M | 10M | Maximum debt per collateral type |
 | **Dust Limit** | 100 | 100 | Minimum debt per position |

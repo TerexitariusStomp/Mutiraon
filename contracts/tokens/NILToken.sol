@@ -1,23 +1,25 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 pragma solidity ^0.8.19;
 
-// StableCoin - The main stablecoin token (similar to DAI)
-// This is an ERC-20 token with additional features:
-// - Mint/burn functionality (only by authorized contracts)
-// - EIP-712 permit functionality for gasless approvals
-// - Domain separator for signature verification
+import "../lib/DSMath.sol";
 
-contract StableCoin {
-    
+/**
+ * @title NIL Token - Nature Investment Lab Token
+ * @dev ERC20 token representing Nature Investment Lab environmental projects
+ * Contract follows the same pattern as other environmental tokens in the Mutiraon system
+ */
+contract NILToken {
+    using DSMath for uint256;
+
     // --- Auth ---
     mapping (address => uint256) public wards;
-    function rely(address guy) external auth { wards[guy] = 1; }
-    function deny(address guy) external auth { wards[guy] = 0; }
-    modifier auth { require(wards[msg.sender] == 1, "StableCoin/not-authorized"); _; }
+    function rely(address usr) external auth { wards[usr] = 1; }
+    function deny(address usr) external auth { wards[usr] = 0; }
+    modifier auth { require(wards[msg.sender] == 1, "NILToken/not-authorized"); _; }
 
     // --- ERC20 Data ---
-    string  public constant name     = "Mutiraon";
-    string  public constant symbol   = "Mutiraon";
+    string  public constant name     = "Nature Investment Lab Token";
+    string  public constant symbol   = "NIL";
     string  public constant version  = "1";
     uint8   public constant decimals = 18;
     uint256 public totalSupply;
@@ -29,6 +31,8 @@ contract StableCoin {
     // --- Events ---
     event Approval(address indexed src, address indexed guy, uint256 wad);
     event Transfer(address indexed src, address indexed dst, uint256 wad);
+    event Mint(address indexed usr, uint256 wad);
+    event Burn(address indexed usr, uint256 wad);
 
     // --- Math ---
     function add(uint256 x, uint256 y) internal pure returns (uint256 z) {
@@ -60,10 +64,10 @@ contract StableCoin {
     }
     
     function transferFrom(address src, address dst, uint256 wad) public returns (bool) {
-        require(balanceOf[src] >= wad, "StableCoin/insufficient-balance");
+        require(balanceOf[src] >= wad, "NILToken/insufficient-balance");
         
         if (src != msg.sender && allowance[src][msg.sender] != type(uint256).max) {
-            require(allowance[src][msg.sender] >= wad, "StableCoin/insufficient-allowance");
+            require(allowance[src][msg.sender] >= wad, "NILToken/insufficient-allowance");
             allowance[src][msg.sender] = sub(allowance[src][msg.sender], wad);
         }
         
@@ -80,29 +84,31 @@ contract StableCoin {
         return true;
     }
 
-    // --- Mint/Burn ---
+    // --- Mint/Burn (Admin only) ---
     function mint(address usr, uint256 wad) external auth {
         balanceOf[usr] = add(balanceOf[usr], wad);
         totalSupply    = add(totalSupply, wad);
+        emit Mint(usr, wad);
         emit Transfer(address(0), usr, wad);
     }
     
     function burn(address usr, uint256 wad) external {
-        require(balanceOf[usr] >= wad, "StableCoin/insufficient-balance");
+        require(balanceOf[usr] >= wad, "NILToken/insufficient-balance");
         
         if (usr != msg.sender && allowance[usr][msg.sender] != type(uint256).max) {
-            require(allowance[usr][msg.sender] >= wad, "StableCoin/insufficient-allowance");
+            require(allowance[usr][msg.sender] >= wad, "NILToken/insufficient-allowance");
             allowance[usr][msg.sender] = sub(allowance[usr][msg.sender], wad);
         }
         
         balanceOf[usr] = sub(balanceOf[usr], wad);
         totalSupply    = sub(totalSupply, wad);
+        emit Burn(usr, wad);
         emit Transfer(usr, address(0), wad);
     }
 
     // --- Permit ---
     function permit(address owner, address spender, uint256 value, uint256 deadline, uint8 v, bytes32 r, bytes32 s) external {
-        require(deadline >= block.timestamp, "StableCoin/permit-expired");
+        require(deadline >= block.timestamp, "NILToken/permit-expired");
         
         bytes32 digest = keccak256(abi.encodePacked(
             "\x19\x01",
@@ -111,7 +117,7 @@ contract StableCoin {
         ));
         
         address recoveredAddress = ecrecover(digest, v, r, s);
-        require(recoveredAddress != address(0) && recoveredAddress == owner, "StableCoin/invalid-permit");
+        require(recoveredAddress != address(0) && recoveredAddress == owner, "NILToken/invalid-permit");
         
         allowance[owner][spender] = value;
         emit Approval(owner, spender, value);

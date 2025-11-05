@@ -1,0 +1,290 @@
+import hre from "hardhat";
+import fs from "fs";
+
+async function main() {
+    console.log("🚀 Deploying Mutiraon Stablecoin System on Ethereum Sepolia...\n");
+
+    // Get network info
+    const network = await hre.ethers.provider.getNetwork();
+    const chainId = network.chainId;
+    console.log("Network Chain ID:", chainId);
+
+    // Get signers
+    const [deployer] = await hre.ethers.getSigners();
+    const deployerBalance = await hre.ethers.provider.getBalance(deployer.address);
+    console.log("Deployer address:", deployer.address);
+    console.log("Deployer balance:", hre.ethers.formatEther(deployerBalance), "ETH\n");
+
+    // Check if we have enough balance (but don't fail if balance check is inconclusive)
+    if (deployerBalance === 0n) {
+        console.log("⚠️  Deployer shows 0 ETH balance - attempting deployment anyway");
+        console.log("    (This might be due to RPC caching or transaction still pending)\n");
+    } else {
+        console.log("✅ Deployer has balance for deployment!\n");
+    }
+
+    try {
+        // Deploy the main Mutiraon stablecoin
+        console.log("🏦 Deploying Mutiraon stablecoin...");
+        const StableCoin = await hre.ethers.getContractFactory("StableCoin");
+        const stablecoin = await StableCoin.deploy(chainId);
+        await stablecoin.deployed();
+        console.log("✅ Mutiraon deployed to:", stablecoin.address);
+
+        // Deploy environmental tokens
+        console.log("\n🌱 Deploying Brazilian Environmental Tokens...");
+        
+        const tokenContracts = {};
+        const tokenNames = [
+            "AMZN", "BIO", "REN", "AGRB", "AQUA", "NIL", "ECO"
+        ];
+        
+        for (const tokenName of tokenNames) {
+            console.log(`Deploying ${tokenName} token...`);
+            const TokenFactory = await hre.ethers.getContractFactory(`${tokenName}Token`);
+            const token = await TokenFactory.deploy(chainId);
+            await token.deployed();
+            tokenContracts[tokenName] = token;
+            console.log(`✅ ${tokenName} deployed to:`, token.address);
+        }
+
+        // Deploy core system contracts
+        console.log("\n⚙️ Deploying core system contracts...");
+        
+        // Deploy Vat (CDP Engine)
+        const Vat = await hre.ethers.getContractFactory("Vat");
+        const vat = await Vat.deploy();
+        await vat.deployed();
+        console.log("✅ Vat deployed to:", vat.address);
+
+        // Deploy Pot (Savings Rate)
+        const Pot = await hre.ethers.getContractFactory("Pot");
+        const pot = await Pot.deploy(vat.address);
+        await pot.deployed();
+        console.log("✅ Pot deployed to:", pot.address);
+
+        // Deploy Vow (Debt Accounting)
+        const Vow = await hre.ethers.getContractFactory("Vow");
+        const vow = await Vow.deploy(vat.address, hre.ethers.constants.AddressZero, hre.ethers.constants.AddressZero);
+        await vow.deployed();
+        console.log("✅ Vow deployed to:", vow.address);
+
+        // Deploy Dog (Liquidation Engine)
+        const Dog = await hre.ethers.getContractFactory("Dog");
+        const dog = await Dog.deploy(vat.address);
+        await dog.deployed();
+        console.log("✅ Dog deployed to:", dog.address);
+
+        // Deploy Spot (Price Oracle)
+        const Spot = await hre.ethers.getContractFactory("Spot");
+        const spot = await Spot.deploy(vat.address);
+        await spot.deployed();
+        console.log("✅ Spot deployed to:", spot.address);
+
+        // Deploy Jug (Stability Fee)
+        const Jug = await hre.ethers.getContractFactory("Jug");
+        const jug = await Jug.deploy(vat.address);
+        await jug.deployed();
+        console.log("✅ Jug deployed to:", jug.address);
+
+        // Deploy DaiJoin (Stablecoin Adapter)
+        const DaiJoin = await hre.ethers.getContractFactory("DaiJoin");
+        const daiJoin = await DaiJoin.deploy(vat.address, stablecoin.address);
+        await daiJoin.deployed();
+        console.log("✅ DaiJoin deployed to:", daiJoin.address);
+
+        // Deploy GemJoin contracts for each environmental token
+        const GemJoin = await hre.ethers.getContractFactory("GemJoin");
+        const joinContracts = {};
+        
+        const ilkNames = ["AMZN-A", "BIO-A", "REN-A", "AGRB-A", "AQUA-A", "NIL-A", "ECO-A"];
+        
+        for (let i = 0; i < tokenNames.length; i++) {
+            const tokenName = tokenNames[i];
+            const ilkName = ilkNames[i];
+            const tokenAddress = tokenContracts[tokenName].address;
+            
+            console.log(`Deploying ${tokenName}Join...`);
+            const tokenJoin = await GemJoin.deploy(vat.address, hre.ethers.formatBytes32String(ilkName), tokenAddress);
+            await tokenJoin.deployed();
+            joinContracts[tokenName] = tokenJoin;
+            console.log(`✅ ${tokenName}Join deployed to:`, tokenJoin.address);
+        }
+
+        // Deploy Clipper (Auction House) for each collateral
+        console.log("\n🔨 Deploying auction mechanisms...");
+        const Clipper = await hre.ethers.getContractFactory("Clipper");
+        const clipperContracts = {};
+        
+        for (let i = 0; i < tokenNames.length; i++) {
+            const tokenName = tokenNames[i];
+            const ilkName = ilkNames[i];
+            
+            console.log(`Deploying ${tokenName}Clipper...`);
+            const clipper = await Clipper.deploy(vat.address, spot.address, dog.address, hre.ethers.formatBytes32String(ilkName));
+            await clipper.deployed();
+            clipperContracts[tokenName] = clipper;
+            console.log(`✅ ${tokenName}Clipper deployed to:`, clipper.address);
+        }
+
+        // Authorize core contracts
+        console.log("\n🔑 Authorizing core contracts...");
+        
+        // Authorize Dog to access Vat
+        await vat.rely(dog.address);
+        console.log("✅ Dog authorized in Vat");
+        
+        // Authorize Spot to access Vat
+        await vat.rely(spot.address);
+        console.log("✅ Spot authorized in Vat");
+        
+        // Authorize Jug to access Vat
+        await vat.rely(jug.address);
+        console.log("✅ Jug authorized in Vat");
+        
+        // Authorize Vow to access Vat
+        await vat.rely(vow.address);
+        console.log("✅ Vow authorized in Vat");
+        
+        // Authorize join contracts to access Vat
+        for (const tokenName of tokenNames) {
+            await vat.rely(joinContracts[tokenName].address);
+            console.log(`✅ ${tokenName}Join authorized in Vat`);
+        }
+        
+        // Authorize DaiJoin to manage Mutiraon
+        await stablecoin.rely(daiJoin.address);
+        console.log("✅ DaiJoin authorized in StableCoin");
+
+        // Initialize parameters for each collateral
+        console.log("\n⚙️ Initializing collateral parameters...");
+        
+        // Set liquidation ratio (150%)
+        const liquidationRatio = hre.ethers.parseUnits("1.5", 27); // 150% inRAY
+        
+        // Set debt ceiling per collateral (10M Mutiraon each)
+        const debtCeiling = hre.ethers.parseUnits("10000000", 45); // 10M RAD
+        
+        // Set stability fee (2% APR = 0.02)
+        const stabilityFee = hre.ethers.parseUnits("0.02", 27); // 2% inRAY
+        
+        for (let i = 0; i < tokenNames.length; i++) {
+            const tokenName = tokenNames[i];
+            const ilkName = ilkNames[i];
+            const ilkBytes = hre.ethers.formatBytes32String(ilkName);
+            
+            // Initialize ilk in Vat
+            await vat.init(ilkBytes);
+            console.log(`✅ ${ilkName} initialized in Vat`);
+            
+            // Set liquidation ratio
+            await vat.file(ilkBytes, hre.ethers.formatBytes32String("mat"), liquidationRatio);
+            console.log(`✅ ${ilkName} liquidation ratio set to 150%`);
+            
+            // Set debt ceiling
+            await vat.file(ilkBytes, hre.ethers.formatBytes32String("line"), debtCeiling);
+            console.log(`✅ ${ilkName} debt ceiling set to 10M Mutiraon`);
+            
+            // Set stability fee
+            await jug.init(ilkBytes);
+            await jug.file(ilkBytes, hre.ethers.formatBytes32String("duty"), stabilityFee);
+            console.log(`✅ ${ilkName} stability fee set to 2% APR`);
+            
+            // Set spot price feed
+            await spot.file(ilkBytes, hre.ethers.formatBytes32String("pip"), clipperContracts[tokenName].address);
+            console.log(`✅ ${ilkName} price feed set`);
+            
+            // Set liquidation parameters in Dog
+            await dog.file(ilkBytes, hre.ethers.formatBytes32String("chop"), hre.ethers.parseUnits("1.1", 27)); // 10% penalty
+            await dog.file(ilkBytes, hre.ethers.formatBytes32String("hole"), hre.ethers.parseUnits("1000000", 45)); // 1M RAD
+            await dog.file(ilkBytes, hre.ethers.formatBytes32String("clip"), clipperContracts[tokenName].address);
+            console.log(`✅ ${ilkName} liquidation parameters set`);
+        }
+
+        // Set global debt ceiling (70M Mutiraon total - 7 collaterals * 10M each)
+        const globalDebtCeiling = hre.ethers.parseUnits("70000000", 45);
+        await vat.file(hre.ethers.formatBytes32String("Line"), globalDebtCeiling);
+        console.log("✅ Global debt ceiling set to 70M Mutiraon");
+
+        // Set global stability fee (0% for savings rate)
+        await jug.file(hre.ethers.formatBytes32String("base"), hre.ethers.parseUnits("0", 27));
+        console.log("✅ Global base stability fee set to 0%");
+
+        // Update Pot savings rate
+        await pot.file(hre.ethers.formatBytes32String("pie"), hre.ethers.parseUnits("1", 27));
+        await pot.file(hre.ethers.formatBytes32String("dsr"), hre.ethers.parseUnits("0", 27)); // 0% savings rate
+        console.log("✅ Savings rate configured");
+
+        // Save deployment addresses
+        const deploymentAddresses = {
+            stablecoin: stablecoin.address,
+            vat: vat.address,
+            pot: pot.address,
+            vow: vow.address,
+            dog: dog.address,
+            spot: spot.address,
+            jug: jug.address,
+            daiJoin: daiJoin.address,
+            tokens: {},
+            joins: {},
+            clippers: {}
+        };
+
+        // Add token addresses
+        for (const tokenName of tokenNames) {
+            deploymentAddresses.tokens[tokenName] = tokenContracts[tokenName].address;
+            deploymentAddresses.joins[tokenName] = joinContracts[tokenName].address;
+            deploymentAddresses.clippers[tokenName] = clipperContracts[tokenName].address;
+        }
+
+        // Write addresses to file
+        const addressesFile = './mutiraon-sepolia-addresses.json';
+        fs.writeFileSync(addressesFile, JSON.stringify(deploymentAddresses, null, 2));
+        console.log(`\n📝 Deployment addresses saved to ${addressesFile}`);
+
+        // Print summary
+        console.log("\n🎉 Mutiraon System Deployment Complete!");
+        console.log("=====================================");
+        console.log("📊 Deployment Summary:");
+        console.log(`- Network: Ethereum Sepolia (Chain ID: ${chainId})`);
+        console.log(`- Mutiraon Stablecoin: ${stablecoin.address}`);
+        console.log(`- Environmental Tokens: 7 deployed`);
+        console.log(`- Core System Contracts: 6 deployed`);
+        console.log(`- Collateral Adapters: 7 deployed`);
+        console.log(`- Auction Mechanisms: 7 deployed`);
+        console.log(`- Total Contracts: ${22 + tokenNames.length} deployed`);
+
+        console.log("\n🌱 Environmental Token Addresses:");
+        for (const tokenName of tokenNames) {
+            console.log(`- ${tokenName}: ${tokenContracts[tokenName].address}`);
+        }
+
+        console.log("\n🔧 Next Steps:");
+        console.log("1. Verify contracts on Etherscan");
+        console.log("2. Configure price feeds for each collateral");
+        console.log("3. Set up governance and admin permissions");
+        console.log("4. Initialize liquidity pools for tokens");
+        console.log("5. Deploy frontend with new contract addresses");
+        console.log("6. Run comprehensive testing on Sepolia");
+
+        console.log("\n✅ Mutiraon is ready for Sepolia deployment!");
+
+    } catch (error) {
+        if (error.code === 'INSUFFICIENT_FUNDS') {
+            console.error("❌ Insufficient funds for deployment");
+            console.log("💡 Please ensure your account has enough Sepolia ETH for gas fees");
+            console.log("   Estimated cost: 2-5 ETH for full deployment");
+        } else {
+            console.error("❌ Deployment failed:", error.message);
+            console.error("Full error:", error);
+        }
+        throw error;
+    }
+}
+
+main()
+    .then(() => process.exit(0))
+    .catch((error) => {
+        console.error("❌ Deployment failed:", error);
+        process.exit(1);
+    });

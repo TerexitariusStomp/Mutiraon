@@ -20,7 +20,7 @@ interface StableCoinLike {
     function burn(address, uint256) external;
 }
 
-// GemJoin - Adapter for ERC20 collateral tokens (DOGE, SHIB)
+// GemJoin - Adapter for ERC20 collateral tokens (AMZN, BIO, REN, AGRB, AQUA, NIL, ECO)
 // This contract handles deposits and withdrawals of collateral tokens
 contract GemJoin {
     using DSMath for uint256;
@@ -106,14 +106,44 @@ contract DaiJoin {
     }
 }
 
-// DogeJoin - Specialized GemJoin for Dogecoin collateral
-contract DogeJoin is GemJoin {
-    constructor(address vat_, address doge_)
-        GemJoin(vat_, bytes32("DOGE-A"), doge_) {}
+// AMZNJoin - Specialized GemJoin for Amazon Conservation Token
+contract AMZNJoin is GemJoin {
+    constructor(address vat_, address amzn_)
+        GemJoin(vat_, bytes32("AMZN-A"), amzn_) {}
 }
 
-// ShibJoin - Specialized GemJoin for Shiba Inu collateral
-contract ShibJoin is GemJoin {
-    constructor(address vat_, address shib_)
-        GemJoin(vat_, bytes32("SHIB-A"), shib_) {}
+// BIOJoin - Specialized GemJoin for Brazilian Restoration & Bioeconomy Token
+contract BIOJoin is GemJoin {
+    constructor(address vat_, address bio_)
+        GemJoin(vat_, bytes32("BIO-A"), bio_) {}
+}
+
+// RENJoin - Specialized GemJoin for Brazilian Renewable Energy Token
+contract RENJoin is GemJoin {
+    constructor(address vat_, address ren_)
+        GemJoin(vat_, bytes32("REN-A"), ren_) {}
+}
+
+// AGRIJoin - Specialized GemJoin for Sustainable Agriculture & Carbon Credit Token
+contract AGRIJoin is GemJoin {
+    constructor(address vat_, address agrb_)
+        GemJoin(vat_, bytes32("AGRB-A"), agrb_) {}
+}
+
+// AQUAJoin - Specialized GemJoin for Water & Sanitation Token
+contract AQUAJoin is GemJoin {
+    constructor(address vat_, address aqua_)
+        GemJoin(vat_, bytes32("AQUA-A"), aqua_) {}
+}
+
+// NILJoin - Specialized GemJoin for Nature Investment Lab Token
+contract NILJoin is GemJoin {
+    constructor(address vat_, address nil_)
+        GemJoin(vat_, bytes32("NIL-A"), nil_) {}
+}
+
+// ECOJoin - Specialized GemJoin for Eco Invest Brasil Token
+contract ECOJoin is GemJoin {
+    constructor(address vat_, address eco_)
+        GemJoin(vat_, bytes32("ECO-A"), eco_) {}
 }
