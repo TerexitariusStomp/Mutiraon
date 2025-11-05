@@ -2,7 +2,10 @@
 
 import { useState } from "react";
 
+import { useI18n } from "@/i18n/I18nContext";
+
 export default function RiskDisclaimer() {
+  const { t } = useI18n();
   const [expanded, setExpanded] = useState(true);
 
   return (
@@ -14,14 +17,12 @@ export default function RiskDisclaimer() {
       <div className="rounded-xl border border-red-300 bg-red-50 text-red-900 shadow-sm">
         <div className="flex items-start justify-between gap-3 p-4">
           <div>
-            <h1 className="text-base font-extrabold">
-              ⚠️ IMPORTANT NOTICE ⚠️
-            </h1>
+            <h1 className="text-base font-extrabold">⚠️ {t('risk.title')} ⚠️</h1>
             <h2 className="mt-1 text-sm font-bold">
-              TESTNET ENVIRONMENT
+              {t('risk.env')}
             </h2>
             <p className="mt-1 text-sm font-semibold">
-              This application is currently deployed on Ethereum Sepolia testnet. All transactions use test tokens and have no real value.
+              {t('risk.line1')}
             </p>
           </div>
           <button
@@ -41,38 +42,26 @@ export default function RiskDisclaimer() {
               <strong>Mutiraon: Brazil's Impact Backed Stablecoin</strong> - This is a testnet deployment on Ethereum Sepolia. All tokens and transactions are for testing purposes only and have no real monetary value.
             </p>
 
-            <h3 className="mt-4 font-bold">TESTNET FEATURES</h3>
+            <h3 className="mt-4 font-bold">{t('risk.features')}</h3>
             <ul className="ml-5 mt-2 list-disc space-y-1">
-              <li>
-                <strong>Test Tokens</strong>: Use Sepolia ETH and test ERC-20 tokens for all transactions
-              </li>
-              <li>
-                <strong>No Real Value</strong>: All assets on testnet have zero monetary value
-              </li>
-              <li>
-                <strong>Learning Tool</strong>: Experiment with DeFi mechanics in a safe environment
-              </li>
-              <li>
-                <strong>Development Testing</strong>: Help test and improve the protocol before mainnet launch
-              </li>
+              <li>{t('risk.features.1')}</li>
+              <li>{t('risk.features.2')}</li>
+              <li>{t('risk.features.3')}</li>
+              <li>{t('risk.features.4')}</li>
             </ul>
 
-            <h3 className="mt-4 font-bold">GETTING STARTED</h3>
-            <p className="mt-1">
-              To interact with this testnet deployment:
-            </p>
+            <h3 className="mt-4 font-bold">{t('risk.getting')}</h3>
+            <p className="mt-1">To interact with this testnet deployment:</p>
             <ul className="ml-5 mt-2 list-disc space-y-1">
-              <li>Connect a Web3 wallet (MetaMask, etc.)</li>
-              <li>Switch to Ethereum Sepolia testnet</li>
-              <li>Get free Sepolia ETH from a faucet</li>
-              <li>Use test tokens for collateral</li>
+              <li>{t('risk.getting.1')}</li>
+              <li>{t('risk.getting.2')}</li>
+              <li>{t('risk.getting.3')}</li>
+              <li>{t('risk.getting.4')}</li>
             </ul>
 
             <hr className="my-4 border-red-200" />
 
-            <p className="font-semibold">
-              <strong>This is experimental software for testing purposes. Use at your own discretion.</strong>
-            </p>
+            <p className="font-semibold"><strong>{t('risk.disclaimer')}</strong></p>
           </div>
         )}
       </div>

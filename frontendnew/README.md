@@ -1,10 +1,10 @@
-# USDog Frontend - Environmental Impact Stablecoin
+# Mutiraon Frontend - OGUSD Environmental Stablecoin
 
-A modern DeFi frontend for the USDog stablecoin system, backed by Brazilian environmental tokens. This project allows users to mint and manage positions using collateral from verified environmental conservation projects.
+A modern DeFi frontend for the OGUSD stablecoin system, backed by environmental tokens. This project allows users to mint and manage positions using collateral from verified environmental conservation projects.
 
 ## 🌱 Environmental Impact
 
-USDog is backed by 7 Brazilian environmental tokens representing different conservation efforts:
+OGUSD supports 7 environmental tokens representing different conservation efforts:
 
 - **AMZN** - Amazon Rainforest Token (Rainforest Conservation)
 - **BIO** - Biodiversity Protection Token (Species Protection)
@@ -31,8 +31,8 @@ Visit the deployed application: [https://your-username.github.io/mutiraon](https
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/your-username/USDog.git
-cd USDog
+git clone https://github.com/your-username/mutiraon.git
+cd mutiraon
 ```
 
 2. Install dependencies:
@@ -76,7 +76,7 @@ The static files will be generated in the `out` directory.
 
 This project is configured for GitHub Pages deployment:
 
-1. The repository is set up with the base path `/USDog`
+1. The repository is set up with the base path `/Mutiraon`
 2. Static files are generated in the `out` directory
 3. GitHub Actions can be used for automated deployment
 
@@ -114,7 +114,7 @@ src/
 The frontend interacts with the following deployed contracts on Ethereum Sepolia:
 
 - **Vat**: Core CDP engine
-- **StableCoin**: USDog token contract
+- **StableCoin**: OGUSD token contract
 - **Spot**: Price feed system
 - **Pot**: Savings rate mechanism
 - **Dog**: Liquidation engine
@@ -141,7 +141,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 🌍 Environmental Impact
 
-By using USDog, you're supporting real environmental conservation efforts in Brazil. Each token represents verified environmental projects that contribute to:
+By using OGUSD, you're supporting real environmental conservation efforts. Each token represents verified environmental projects that contribute to:
 
 - Amazon rainforest protection
 - Biodiversity conservation

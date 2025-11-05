@@ -166,17 +166,17 @@ If system issues arise:
 
 ```javascript
 // 1. Approve collateral
-await dogeToken.approve(dogeJoinAddress, collateralAmount);
+await ecoToken.approve(ecoJoinAddress, collateralAmount);
 
 // 2. Use Multicall for atomic CDP creation
 const calls = await multicall.createCDPBatch(
     userAddress,
     vatAddress,
-    dogeJoinAddress,
+    ecoJoinAddress,
     daiJoinAddress,
-    ethers.utils.formatBytes32String("DOGE-A"),
-    parseEther("1000"), // DOGE amount
-    parseEther("50")    // USDog amount
+    ethers.utils.formatBytes32String("ECO-A"),
+    parseEther("1000"), // ECO amount
+    parseEther("50")    // OGUSD amount
 );
 
 await multicall.aggregate(calls);

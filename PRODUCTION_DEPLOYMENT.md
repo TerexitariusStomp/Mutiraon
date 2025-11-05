@@ -1,6 +1,6 @@
 # Mutiraon Production Deployment Instructions
 
-## 🚨 PRODUCTION READY - BSC MAINNET DEPLOYMENT
+## 🚨 PRODUCTION READY - EVM MAINNET DEPLOYMENT
 
 ### Pre-Deployment Checklist
 - [x] Private key with deployment funds configured
@@ -14,22 +14,21 @@
 
 ```bash
 # Deployment Account
-Private Key: 916916ceaffb3c0028d1f14631740c5a1ddf8380c52aef8121b20cd3d0141b17
+Private Key: <redacted>
 
 # DAO Safe (will receive admin rights)
 Safe Address: 0x754dc60D811eebfAD39Db915eE0fD3905Ea4D978
 
 # BSCScan API Key
-API Key: 3FBKFF8AXVXFCG3QHD5K2S6J7UYTKIEM5C
+API Key: <redacted>
 ```
 
-### BSC Token Addresses (Production)
-- **DOGE**: `0xba2ae424d960c63147c624c9a5505711facf8614`
-- **SHIB**: `0x2859e4544c4bb03966803b044a93563bd2d0dd4d`
+### Environmental Token Addresses (Production, examples)
+- **AMZN**: `<address>`
+- **BIO**: `<address>`
 
-### Chainlink Price Feeds (BSC Mainnet)
-- **DOGE/USD**: `0x3AB0A0d137D4F946fBB19eecc6e92E64660231C8`
-- **SHIB/USD**: `0xA615Be6cb0f3F36A641858dB6F30B9242d0ABeD8`
+### Oracle Price Feeds
+- Configure Chainlink/API3 feeds for each collateral
 
 ## Deployment Steps
 
@@ -66,14 +65,14 @@ const totalDebtCeiling = await vat.Line();
 console.log("Total Debt Ceiling:", totalDebtCeiling);
 
 // Check collateral configurations
-const dogeIlk = await vat.ilks(formatBytes32String("DOGE-A"));
-console.log("DOGE Configuration:", dogeIlk);
+const ecoIlk = await vat.ilks(formatBytes32String("ECO-A"));
+console.log("ECO Configuration:", ecoIlk);
 ```
 
 ### 2. Verify Price Feeds
 ```javascript
-const [dogePrice, valid] = await dogePriceFeed.peek();
-console.log("DOGE Price:", dogePrice, "Valid:", valid);
+const [ecoPrice, valid] = await ecoPriceFeed.peek();
+console.log("ECO Price:", ecoPrice, "Valid:", valid);
 ```
 
 ### 3. Verify Admin Rights
@@ -92,12 +91,11 @@ console.log("Deployer Rights:", deployerRights);
 | Parameter | Value | Description |
 |-----------|-------|-------------|
 | **Liquidation Ratio** | 150% | Minimum collateralization |
-| **Stability Fee** | 2% APR | Interest on borrowed USDog |
+| **Stability Fee** | 2% APR | Interest on borrowed OGUSD |
 | **Liquidation Penalty** | 10% | Fee on liquidated positions |
-| **DOGE Debt Ceiling** | 10M USDog | Maximum debt for DOGE |
-| **SHIB Debt Ceiling** | 10M USDog | Maximum debt for SHIB |
-| **Total Debt Ceiling** | 50M USDog | System-wide limit |
-| **Dust Limit** | 100 USDog | Minimum position size |
+| **Per-Ilk Debt Ceiling** | 10M OGUSD | Maximum debt per collateral |
+| **Total Debt Ceiling** | 50M OGUSD | System-wide limit |
+| **Dust Limit** | 100 OGUSD | Minimum position size |
 
 ## Security Notes
 

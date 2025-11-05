@@ -1,38 +1,30 @@
+import { useI18n } from "@/i18n/I18nContext";
+
 export default function DocsPage() {
+  const { t, lang } = useI18n();
   return (
     <main className="min-h-screen bg-[#f3f1f7]">
       <div className="container mx-auto px-4 py-10">
-        <h1 className="text-4xl font-bold mb-4">OGUSD Codebase Documentation</h1>
+        <h1 className="text-4xl font-bold mb-4">{lang === 'pt' ? 'Documentação do Código OGUSD' : 'OGUSD Codebase Documentation'}</h1>
         <p className="text-muted-foreground mb-8">
-          Comprehensive overview of smart contracts, deployment scripts, subgraph, and frontends.
+          {lang === 'pt' ? 'Visão geral de contratos inteligentes, scripts de implantação, subgraph e frontends.' : 'Comprehensive overview of smart contracts, deployment scripts, subgraph, and frontends.'}
         </p>
         <section className="mb-10">
-          <h2 className="text-2xl font-semibold mb-3">Table of Contents</h2>
+          <h2 className="text-2xl font-semibold mb-3">{lang === 'pt' ? 'Índice' : 'Table of Contents'}</h2>
 
-          <div className="mb-4 rounded-xl border border-border bg-card p-4">
-            <h3 className="text-lg font-semibold mb-2">Generated API Docs (Doxygen)</h3>
-            <p className="text-sm text-muted-foreground mb-3">
-              Full, auto-generated documentation of contracts, scripts, frontend, and subgraph code.
-            </p>
-            <a
-              href="/doxygen/html/index.html"
-              className="inline-flex items-center rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow hover:opacity-90"
-            >
-              Open API Reference
-            </a>
-          </div>
+          {/* API reference temporarily unavailable; Doxygen removed */}
 
           <ol className="list-decimal list-inside space-y-1">
-            <li><a href="#structure" className="text-primary underline">Repository Structure</a></li>
-            <li><a href="#contracts" className="text-primary underline">Smart Contracts</a></li>
-            <li><a href="#flows" className="text-primary underline">System Flows</a></li>
-            <li><a href="#deployment" className="text-primary underline">Deployment & Scripts</a></li>
+            <li><a href="#structure" className="text-primary underline">{lang === 'pt' ? 'Estrutura do Repositório' : 'Repository Structure'}</a></li>
+            <li><a href="#contracts" className="text-primary underline">{lang === 'pt' ? 'Contratos Inteligentes' : 'Smart Contracts'}</a></li>
+            <li><a href="#flows" className="text-primary underline">{lang === 'pt' ? 'Fluxos do Sistema' : 'System Flows'}</a></li>
+            <li><a href="#deployment" className="text-primary underline">{lang === 'pt' ? 'Implantação e Scripts' : 'Deployment & Scripts'}</a></li>
             <li><a href="#subgraph" className="text-primary underline">Subgraph</a></li>
-            <li><a href="#frontend" className="text-primary underline">Frontends</a></li>
-            <li><a href="#config" className="text-primary underline">Configuration</a></li>
-            <li><a href="#dev" className="text-primary underline">Developer Guide</a></li>
-            <li><a href="#troubleshooting" className="text-primary underline">Troubleshooting</a></li>
-            <li><a href="#glossary" className="text-primary underline">Glossary</a></li>
+            <li><a href="#frontend" className="text-primary underline">{lang === 'pt' ? 'Frontends' : 'Frontends'}</a></li>
+            <li><a href="#config" className="text-primary underline">{lang === 'pt' ? 'Configuração' : 'Configuration'}</a></li>
+            <li><a href="#dev" className="text-primary underline">{lang === 'pt' ? 'Guia do Desenvolvedor' : 'Developer Guide'}</a></li>
+            <li><a href="#troubleshooting" className="text-primary underline">{lang === 'pt' ? 'Solução de Problemas' : 'Troubleshooting'}</a></li>
+            <li><a href="#glossary" className="text-primary underline">{lang === 'pt' ? 'Glossário' : 'Glossary'}</a></li>
           </ol>
         </section>
 

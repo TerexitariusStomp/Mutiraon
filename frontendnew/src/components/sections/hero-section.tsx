@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Info, ChevronDown } from "lucide-react";
 import Link from "next/link";
+import { useI18n } from "@/i18n/I18nContext";
 
 const StatInfo = ({
   label,
@@ -26,22 +27,24 @@ const StatInfo = ({
 );
 
 const HeroSection = () => {
+  const { t } = useI18n();
   return (
-    <section className="relative flex w-full flex-col items-center overflow-x-hidden bg-[#f3f1f7] pt-8 pb-10 md:pt-12">
+    <section className="relative flex w-full flex-col items-center overflow-x-hidden bg-[#f3f7f3] pt-8 pb-10 md:pt-12">
       <div
         className="absolute inset-0 z-0"
         style={{
           background:
-            "linear-gradient(180deg, rgb(211, 196, 237), rgb(238, 230, 247) 25%, rgb(238, 230, 247) 75%, rgb(211, 196, 237))",
+            "linear-gradient(180deg, rgba(220,245,230,1), rgba(236,250,242,1) 25%, rgba(236,250,242,1) 75%, rgba(210,238,223,1))",
         }}
       />
-      <Image
-        src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/874d37be-1344-4eb0-bcaf-1bcd64691e5c-letsgethai-com/assets/images/cloud-2-eb099a6d-2.png?"
-        alt="background cloud"
-        width={594}
-        height={595}
-        className="pointer-events-none absolute top-[80px] -left-[300px] z-0 md:-left-[200px]"
-        priority
+      {/* Soft canopy highlight */}
+      <div
+        className="pointer-events-none absolute top-[60px] -left-[220px] z-0 h-[420px] w-[420px] rounded-full"
+        style={{
+          background:
+            "radial-gradient(closest-side, rgba(46,179,151,0.25), rgba(46,179,151,0) 70%)",
+          filter: "blur(6px)",
+        }}
       />
 
       <div className="z-10 mx-auto w-full max-w-4xl px-4">
@@ -56,20 +59,20 @@ const HeroSection = () => {
         >
           <div className="flex flex-col items-center gap-1.5 text-center">
             <h1 className="text-4xl font-bold leading-none tracking-tight md:text-5xl">
-              <span className="text-[#2eb397]">I </span>
-              <span className="text-[#5599cc]">WANT </span>
-              <span className="text-[#9768d5]">TO</span>
+              <span className="text-[#2eb397]">{t('hero.title.1')}</span>
+              <span className="text-[#2f855a]">{t('hero.title.2')}</span>
+              <span className="text-[#14532d]">{t('hero.title.3')}</span>
             </h1>
             <Link href="/vaults" className="relative flex cursor-pointer items-center gap-2">
-              <h1 className="bg-gradient-to-r from-[#ffaa4c] via-[#ff7c9a] to-[#ff5cd3] bg-clip-text text-4xl font-extrabold leading-none tracking-tight text-transparent md:text-5xl">
-                GET $OGUSD
+              <h1 className="bg-gradient-to-r from-[#166534] via-[#15803d] to-[#3f6212] bg-clip-text text-4xl font-extrabold leading-none tracking-tight text-transparent md:text-5xl">
+                {t('hero.cta')}
               </h1>
-              <ChevronDown className="h-7 w-7 text-[#ff7c9a] md:h-8 md:w-8" />
+              <ChevronDown className="h-7 w-7 text-[#166534] md:h-8 md:w-8" />
             </Link>
           </div>
 
-          <p className="mt-4 text-center text-sm text-[#333333]">
-            Mint & borrow OGUSD against your preferred environmental collateral.
+          <p className="mt-4 text-center text-sm text-[#1f2937]">
+            {t('hero.subtitle')}
           </p>
 
           {/* Stats removed per request */}

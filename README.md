@@ -1,10 +1,10 @@
 # Mutiraon Stablecoin System
 
-A comprehensive stablecoin system using **Dogecoin (DOGE)** and **Shiba Inu (SHIB)** as the only accepted collateral types on **Binance Smart Chain (BSC)**. Built on the battle-tested MakerDAO/Sky Ecosystem architecture.
+A comprehensive stablecoin system using environmental impact tokens (e.g., **AMZN**, **BIO**, **REN**, **AGRI**, **AQUA**, **NIL**, **ECO**) as collateral. Built on the battle-tested MakerDAO/Sky Ecosystem architecture.
 
 ## 🌟 Features
 
-- **Multi-Collateral Support**: Accept both DOGE and SHIB as collateral on BSC
+- **Multi-Collateral Support**: Accept multiple environmental tokens as collateral
 - **Chainlink Price Feeds**: Real-time price data from Chainlink oracles
 - **Over-Collateralization**: Maintains stability through 150% collateralization ratio
 - **Dutch Auction Liquidations**: Efficient price discovery for liquidated collateral
@@ -20,7 +20,7 @@ A comprehensive stablecoin system using **Dogecoin (DOGE)** and **Shiba Inu (SHI
 
 ```mermaid
 graph TD
-    A[User] --> B[GemJoin/DogeJoin/ShibJoin]
+    A[User] --> B[GemJoin]
     B --> C[Vat - Central Accounting]
     C --> D[DaiJoin]
     D --> E[StableCoin Token]
@@ -94,17 +94,17 @@ npx hardhat test
 ### 1. Creating a Collateralized Debt Position (CDP)
 
 ```javascript
-// Example: Use 1000 AMZN to mint 50 Mutiraon stablecoins
+// Example: Use 1000 ECO to mint 50 OGUSD stablecoins
 
-// 1. Approve DOGE transfer
-await dogeToken.approve(dogeJoinAddress, parseEther("1000"));
+// 1. Approve ECO transfer
+await ecoToken.approve(ecoJoinAddress, parseEther("1000"));
 
-// 2. Deposit DOGE collateral
-await dogeJoin.join(userAddress, parseEther("1000"));
+// 2. Deposit ECO collateral
+await ecoJoin.join(userAddress, parseEther("1000"));
 
 // 3. Create CDP and draw stablecoins
 await vat.frob(
-    formatBytes32String("DOGE-A"), // collateral type
+    formatBytes32String("ECO-A"), // collateral type
     userAddress,                    // CDP owner
     userAddress,                    // collateral source
     userAddress,                    // stablecoin destination
@@ -123,10 +123,10 @@ await daiJoin.exit(userAddress, parseEther("50"));
 const calls = await multicall.createCDPBatch(
     userAddress,
     vatAddress,
-    dogeJoinAddress,
+    ecoJoinAddress,
     daiJoinAddress,
-    formatBytes32String("DOGE-A"),
-    parseEther("1000"), // DOGE amount
+    formatBytes32String("ECO-A"),
+    parseEther("1000"), // ECO amount
     parseEther("50")    // Stablecoin amount
 );
 
@@ -149,7 +149,7 @@ await pot.exit(parseEther("100"));
 ```javascript
 // Liquidate an unsafe position
 await dog.bark(
-    formatBytes32String("DOGE-A"), // collateral type
+    formatBytes32String("ECO-A"), // collateral type
     unsafeUserAddress,              // CDP to liquidate
     keeperAddress                   // liquidation incentive recipient
 );
@@ -168,12 +168,12 @@ await clipper.take(
 
 ### Collateral Types
 
-| Parameter | DOGE-A | SHIB-A | Description |
-|-----------|--------|--------|-------------|
-| **Token Address** | `0xba2ae424d960c26247dd6c32edc70b295c744c43` | `0x2859e4544c4bb03966803b044a93563bd2d0dd4d` | BSC token contracts |
-| **Chainlink Feed** | `0x3AB0A0d137D4F946fBB19eecc6e92E64660231C8` | `0x804EaE4dcB6A8Db6ca2FC4d24005d8F38D9d19bA` | Price feed addresses |
+| Parameter | ECO-A | BIO-A | Description |
+|-----------|-------|-------|-------------|
+| **Token Address** | `<address>` | `<address>` | Token contracts |
+| **Oracle Feed** | `<address>` | `<address>` | Price feed addresses |
 | **Liquidation Ratio** | 150% | 150% | Minimum collateralization |
-| **Stability Fee** | 2% APR | 2% APR | Interest on borrowed Mutiraon |
+| **Stability Fee** | 2% APR | 2% APR | Interest on borrowed OGUSD |
 | **Liquidation Penalty** | 10% | 10% | Fee on liquidated positions |
 | **Debt Ceiling** | 10M | 10M | Maximum debt per collateral type |
 | **Dust Limit** | 100 | 100 | Minimum debt per position |
@@ -181,7 +181,7 @@ await clipper.take(
 ### Global Parameters
 
 - **Network**: Binance Smart Chain (BSC)
-- **Total Debt Ceiling**: 50M USDog
+- **Total Debt Ceiling**: 50M OGUSD
 - **Savings Rate**: 0% (configurable)
 - **Emergency Shutdown Delay**: 24 hours
 
@@ -205,16 +205,16 @@ await clipper.take(
 ### Price Feeds
 
 ```javascript
-// Update DOGE price feed
+// Update ECO price feed
 await spot.file(
-    formatBytes32String("DOGE-A"),
+    formatBytes32String("ECO-A"),
     formatBytes32String("pip"),
     newPriceFeedAddress
 );
 
 // Update liquidation ratio
 await spot.file(
-    formatBytes32String("DOGE-A"),
+    formatBytes32String("ECO-A"),
     formatBytes32String("mat"),
     newLiquidationRatio
 );
@@ -226,14 +226,14 @@ await spot.file(
 // Update stability fee (5% APR example)
 const fivePercentAPR = "1000000001547125957863212448";
 await jug.file(
-    formatBytes32String("DOGE-A"),
+    formatBytes32String("ECO-A"),
     formatBytes32String("duty"),
     fivePercentAPR
 );
 
 // Update debt ceiling
 await vat.file(
-    formatBytes32String("DOGE-A"),
+    formatBytes32String("ECO-A"),
     formatBytes32String("line"),
     newDebtCeiling
 );
@@ -244,7 +244,7 @@ await vat.file(
 ### Key Metrics to Track
 
 1. **System Health**
-   - Total USDog debt outstanding
+   - Total OGUSD debt outstanding
    - Collateralization ratio
    - Surplus/deficit
 
@@ -270,12 +270,12 @@ await vat.file(
 const totalDebt = await vat.debt();
 
 // Get collateral info
-const dogeIlk = await vat.ilks(formatBytes32String("DOGE-A"));
-console.log("DOGE debt:", dogeIlk.Art);
-console.log("DOGE rate:", dogeIlk.rate);
+const ecoIlk = await vat.ilks(formatBytes32String("ECO-A"));
+console.log("ECO debt:", ecoIlk.Art);
+console.log("ECO rate:", ecoIlk.rate);
 
 // Get user position
-const userVault = await vat.urns(formatBytes32String("DOGE-A"), userAddress);
+const userVault = await vat.urns(formatBytes32String("ECO-A"), userAddress);
 console.log("Collateral:", userVault.ink);
 console.log("Debt:", userVault.art);
 ```
@@ -289,12 +289,12 @@ console.log("Debt:", userVault.art);
 await end.cage();
 
 // Process individual collateral types
-await end.cage(formatBytes32String("DOGE-A"));
-await end.cage(formatBytes32String("SHIB-A"));
+await end.cage(formatBytes32String("ECO-A"));
+await end.cage(formatBytes32String("BIO-A"));
 
-// Users can then redeem USDog for proportional collateral
-await end.pack(usdogAmount); // Convert USDog to claims
-await end.cash(formatBytes32String("DOGE-A"), claimAmount); // Redeem for DOGE
+// Users can then redeem OGUSD for proportional collateral
+await end.pack(ogusdAmount); // Convert OGUSD to claims
+await end.cash(formatBytes32String("ECO-A"), claimAmount); // Redeem for ECO
 ```
 
 ## 🧪 Testing

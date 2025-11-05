@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useAccount, useReadContract } from 'wagmi';
 import { ethers } from 'ethers';
 import { CONTRACT_ADDRESSES, ENVIRONMENTAL_TOKENS, COLLATERAL_TYPES } from '@/lib/contracts';
+import { useI18n } from "@/i18n/I18nContext";
 import { useChainId } from 'wagmi';
 
 interface CollateralSelectionProps {
@@ -12,6 +13,7 @@ interface CollateralSelectionProps {
 
 const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) => {
   const { address, isConnected, chainId: walletChainId } = useAccount();
+  const { t } = useI18n();
   const appChainId = useChainId();
   const addresses = CONTRACT_ADDRESSES.sepolia;
 
@@ -437,7 +439,7 @@ const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) =>
           ) : (
             <div className="text-center py-4">
               <p className="text-gray-600">No active vault found</p>
-              <p className="text-sm text-gray-500">Follow these steps: 1) Deposit → 2) Lock → 3) Mint</p>
+          <p className="text-sm text-gray-500">{t('vault.help.steps')}</p>
             </div>
           )}
         </div>
@@ -446,14 +448,14 @@ const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) =>
         
         {/* 1. Deposit Collateral */}
         <div className="bg-green-50 p-4 rounded-lg border border-green-200">
-          <h4 className="font-semibold mb-3 text-green-800">💰 Deposit {currentCollateralInfo.symbol}</h4>
-          <p className="text-sm text-green-700 mb-3">Add {currentCollateralInfo.symbol} tokens to your vault</p>
+          <h4 className="font-semibold mb-3 text-green-800">💰 {t('vault.dep.title').replace('{code}', currentCollateralInfo.symbol)}</h4>
+          <p className="text-sm text-green-700 mb-3">{t('vault.dep.what')}</p>
           
           <div className="space-y-3">
             <div className="flex gap-2">
               <input
                 type="number"
-                placeholder={`Amount of ${currentCollateralInfo.symbol}`}
+                placeholder={t('vault.dep.amount').replace('{code}', currentCollateralInfo.symbol)}
                 value={depositAmount}
                 onChange={(e) => setDepositAmount(e.target.value)}
                 className="flex-1 px-3 py-2 border border-green-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
@@ -466,14 +468,14 @@ const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) =>
                 disabled={isApproving || !depositAmount}
                 className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50"
               >
-                {isApproving ? 'Approving...' : '1. Approve'}
+                {isApproving ? t('vault.loading.approving') : t('vault.dep.approve')}
               </button>
               <button
                 onClick={handleDeposit}
                 disabled={isDepositing || !depositAmount}
                 className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 disabled:opacity-50"
               >
-                {isDepositing ? 'Depositing...' : '2. Deposit'}
+                {isDepositing ? t('vault.loading.depositing') : t('vault.dep.deposit')}
               </button>
             </div>
           </div>
@@ -481,16 +483,16 @@ const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) =>
 
         {/* 2. Lock/Unlock Collateral */}
         <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
-          <h4 className="font-semibold mb-3 text-blue-800">🔒 Manage Locked Collateral</h4>
-          <p className="text-sm text-blue-700 mb-3">Lock deposited {currentCollateralInfo.symbol} to enable borrowing</p>
+          <h4 className="font-semibold mb-3 text-blue-800">🔒 {t('vault.lock.title')}</h4>
+          <p className="text-sm text-blue-700 mb-3">{t('vault.lock.what')}</p>
           
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-blue-700 mb-2">Lock Collateral</label>
+              <label className="block text-sm font-medium text-blue-700 mb-2">{t('vault.lock.label')}</label>
               <div className="flex gap-2">
                 <input
                   type="number"
-                  placeholder="Amount to lock"
+                  placeholder={t('vault.lock.placeholder')}
                   value={lockAmount}
                   onChange={(e) => setLockAmount(e.target.value)}
                   className="flex-1 px-3 py-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -500,17 +502,17 @@ const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) =>
                   disabled={isLocking || !lockAmount}
                   className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50"
                 >
-                  {isLocking ? 'Locking...' : 'Lock'}
+                  {isLocking ? t('vault.loading.locking') : t('vault.lock.btn')}
                 </button>
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-blue-700 mb-2">Unlock Collateral</label>
+              <label className="block text-sm font-medium text-blue-700 mb-2">{t('vault.unlock.label')}</label>
               <div className="flex gap-2">
                 <input
                   type="number"
-                  placeholder="Amount to unlock"
+                  placeholder={t('vault.unlock.placeholder')}
                   value={unlockAmount}
                   onChange={(e) => setUnlockAmount(e.target.value)}
                   className="flex-1 px-3 py-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -520,7 +522,7 @@ const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) =>
                   disabled={isUnlocking || !unlockAmount}
                   className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50"
                 >
-                  {isUnlocking ? 'Unlocking...' : 'Unlock'}
+                  {isUnlocking ? t('vault.loading.unlocking') : t('vault.unlock.btn')}
                 </button>
               </div>
             </div>
@@ -529,16 +531,16 @@ const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) =>
 
         {/* 3. Mint/Repay Stablecoin */}
         <div className="bg-purple-50 p-4 rounded-lg border border-purple-200">
-          <h4 className="font-semibold mb-3 text-purple-800">💵 Manage Mutiraon</h4>
-          <p className="text-sm text-purple-700 mb-3">Mint or repay Mutiraon against your locked collateral</p>
+          <h4 className="font-semibold mb-3 text-purple-800">💵 {t('vault.mut.title')}</h4>
+          <p className="text-sm text-purple-700 mb-3">{t('vault.mut.what')}</p>
           
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-purple-700 mb-2">Mint Mutiraon</label>
+              <label className="block text-sm font-medium text-purple-700 mb-2">{t('vault.mut.mint.label')}</label>
               <div className="flex gap-2">
                 <input
                   type="number"
-                  placeholder={`Max safe: ${calculateMaxSafeMint()}`}
+                  placeholder={t('vault.mut.mint.maxsafe').replace('{amt}', calculateMaxSafeMint())}
                   value={mintAmount}
                   onChange={(e) => setMintAmount(e.target.value)}
                   className="flex-1 px-3 py-2 border border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
@@ -548,17 +550,17 @@ const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) =>
                   disabled={isMinting || !mintAmount}
                   className="px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 disabled:opacity-50"
                 >
-                  {isMinting ? 'Minting...' : 'Mint'}
+                  {isMinting ? t('vault.loading.minting') : t('vault.mut.mint.btn')}
                 </button>
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-purple-700 mb-2">Repay Mutiraon</label>
+              <label className="block text-sm font-medium text-purple-700 mb-2">{t('vault.mut.repay.label')}</label>
               <div className="flex gap-2">
                 <input
                   type="number"
-                  placeholder="Amount to repay"
+                  placeholder={t('vault.mut.repay.placeholder')}
                   value={repayAmount}
                   onChange={(e) => setRepayAmount(e.target.value)}
                   className="flex-1 px-3 py-2 border border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
@@ -568,7 +570,7 @@ const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) =>
                   disabled={isRepaying || !repayAmount}
                   className="px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 disabled:opacity-50"
                 >
-                  {isRepaying ? 'Repaying...' : 'Repay'}
+                  {isRepaying ? t('vault.loading.repaying') : t('vault.mut.repay.btn')}
                 </button>
               </div>
             </div>
@@ -577,13 +579,13 @@ const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) =>
 
         {/* 4. Withdraw Collateral */}
         <div className="bg-orange-50 p-4 rounded-lg border border-orange-200">
-          <h4 className="font-semibold mb-3 text-orange-800">↩️ Withdraw Collateral</h4>
-          <p className="text-sm text-orange-700 mb-3">Get deposited (but unlocked) {currentCollateralInfo.symbol} back to your wallet</p>
+          <h4 className="font-semibold mb-3 text-orange-800">↩️ {t('vault.wd.title')}</h4>
+          <p className="text-sm text-orange-700 mb-3">{t('vault.wd.brief').replace('{code}', currentCollateralInfo.symbol)}</p>
           
           <div className="flex gap-2">
             <input
               type="number"
-              placeholder={`Available: ${formatBalance(collateralBalance as bigint | undefined, 18)} ${currentCollateralInfo.symbol}`}
+              placeholder={t('vault.wd.available').replace('{amt}', formatBalance(collateralBalance as bigint | undefined, 18)).replace('{code}', currentCollateralInfo.symbol)}
               value={withdrawAmount}
               onChange={(e) => setWithdrawAmount(e.target.value)}
               className="flex-1 px-3 py-2 border border-orange-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
@@ -593,7 +595,7 @@ const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) =>
               disabled={isWithdrawing || !withdrawAmount}
               className="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 disabled:opacity-50"
             >
-              {isWithdrawing ? 'Withdrawing...' : 'Withdraw'}
+              {isWithdrawing ? t('vault.loading.withdrawing') : t('vault.wd.btn')}
             </button>
           </div>
         </div>

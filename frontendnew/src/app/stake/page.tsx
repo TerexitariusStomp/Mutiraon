@@ -15,8 +15,10 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import { useI18n } from "@/i18n/I18nContext";
 
 export default function StakePage() {
+  const { t } = useI18n();
   const {
     userBalance,
     walletBalance,
@@ -85,22 +87,15 @@ export default function StakePage() {
         <div className="mx-auto max-w-4xl">
           {/* Header */}
           <div className="mb-8 text-center">
-            <h1 className="text-4xl font-bold text-foreground mb-4">
-              OGUSD Savings Rate
-            </h1>
-            <p className="text-lg text-muted-foreground">
-              Earn yield by depositing your OGUSD stablecoins into our savings
-              mechanism
-            </p>
+            <h1 className="text-4xl font-bold text-foreground mb-4">{t('stake.title')}</h1>
+            <p className="text-lg text-muted-foreground">{t('stake.subtitle')}</p>
           </div>
 
           {/* Current Stats */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             <Card>
               <CardHeader className="pb-3">
-                <CardTitle className="text-sm font-medium text-muted-foreground">
-                  Your Savings Balance
-                </CardTitle>
+                <CardTitle className="text-sm font-medium text-muted-foreground">{t('stake.balance')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">
@@ -111,9 +106,7 @@ export default function StakePage() {
 
             <Card>
               <CardHeader className="pb-3">
-                <CardTitle className="text-sm font-medium text-muted-foreground">
-                  Savings Rate
-                </CardTitle>
+                <CardTitle className="text-sm font-medium text-muted-foreground">{t('stake.rate')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold text-green-600">
@@ -124,9 +117,7 @@ export default function StakePage() {
 
             <Card>
               <CardHeader className="pb-3">
-                <CardTitle className="text-sm font-medium text-muted-foreground">
-                  Wallet Balance
-                </CardTitle>
+                <CardTitle className="text-sm font-medium text-muted-foreground">{t('stake.wallet')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">
@@ -141,18 +132,12 @@ export default function StakePage() {
             {/* Deposit Card */}
             <Card>
               <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  Deposit OGUSD
-                  <Badge variant="secondary">Earn {savingsRate}% APY</Badge>
-                </CardTitle>
-                <CardDescription>
-                  Use the step-by-step process below to deposit your OGUSD and
-                  start earning yield
-                </CardDescription>
+                <CardTitle className="flex items-center gap-2">{t('stake.deposit')} <Badge variant="secondary">{t('stake.rate')}: {savingsRate}%</Badge></CardTitle>
+                <CardDescription>{t('stake.deposit.subtitle')}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
-                  <label className="text-sm font-medium">Amount (OGUSD)</label>
+                  <label className="text-sm font-medium">{t('stake.amount')}</label>
                   <Input
                     type="number"
                     placeholder="0.00"
@@ -160,27 +145,21 @@ export default function StakePage() {
                     onChange={(e) => setDepositAmount(e.target.value)}
                     className="mt-1"
                   />
-                  <p className="text-xs text-muted-foreground mt-1">
-                    Available: {parseFloat(walletBalance).toFixed(4)} OGUSD
-                  </p>
+                  <p className="text-xs text-muted-foreground mt-1">{t('stake.available')}: {parseFloat(walletBalance).toFixed(4)} OGUSD</p>
                 </div>
-                <div className="text-sm text-muted-foreground">
-                  Use the manual step-by-step process below to deposit safely.
-                </div>
+                <div className="text-sm text-muted-foreground">{t('stake.exec.steps')}</div>
               </CardContent>
             </Card>
 
             {/* Withdraw Card */}
             <Card>
               <CardHeader>
-                <CardTitle>Withdraw OGUSD</CardTitle>
-                <CardDescription>
-                  Withdraw your OGUSD plus accrued interest
-                </CardDescription>
+                <CardTitle>{t('stake.withdraw')}</CardTitle>
+                <CardDescription>{t('stake.withdraw.desc')}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
-                  <label className="text-sm font-medium">Amount (OGUSD)</label>
+                  <label className="text-sm font-medium">{t('stake.amount')}</label>
                   <Input
                     type="number"
                     placeholder="0.00"
@@ -188,9 +167,7 @@ export default function StakePage() {
                     onChange={(e) => setWithdrawAmount(e.target.value)}
                     className="mt-1"
                   />
-                  <p className="text-xs text-muted-foreground mt-1">
-                    Available: {parseFloat(userBalance).toFixed(4)} OGUSD
-                  </p>
+                  <p className="text-xs text-muted-foreground mt-1">{t('stake.available')}: {parseFloat(userBalance).toFixed(4)} OGUSD</p>
                 </div>
                 <Button
                   onClick={handleWithdraw}
@@ -198,7 +175,7 @@ export default function StakePage() {
                   variant="outline"
                   className="w-full"
                 >
-                  {isPending ? "Withdrawing..." : "Withdraw"}
+                  {isPending ? t('stake.withdrawing') : t('stake.withdraw')}
                 </Button>
               </CardContent>
             </Card>
@@ -207,51 +184,47 @@ export default function StakePage() {
           {/* Step-by-Step Deposit Process */}
           <Card className="mb-8">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                Step-by-Step Deposit Process
-                <Badge variant="outline">Manual Mode</Badge>
-              </CardTitle>
+              <CardTitle className="flex items-center gap-2">{t('stake.process.title')} <Badge variant="outline">{t('stake.process.mode')}</Badge></CardTitle>
               <CardDescription>
-                Execute each step individually to deposit OGUSD safely
+                {t('stake.exec.steps')}
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 {[
                   {
-                    title: "Update Rates",
-                    description:
-                      "Update savings rate via drip() (required before deposit)",
+                    title: t('stake.steps.update.title'),
+                    description: t('stake.steps.update.desc'),
                     function: () => updateRates(),
                     icon: "💧",
                   },
                   {
-                    title: "Approve DaiJoin",
+                    title: t('stake.steps.approve.title'),
                     description: depositAmount
-                      ? `Allow DaiJoin to spend ${depositAmount} OGUSD tokens`
-                      : "Allow DaiJoin to spend OGUSD tokens",
+                      ? t('stake.steps.approve.desc.some').replace('{amount}', depositAmount)
+                      : t('stake.steps.approve.desc.none'),
                     function: () => approveDaiJoin(depositAmount || "0"),
                     icon: "🔓",
                   },
                   {
-                    title: "Join Vat",
+                    title: t('stake.steps.join.title'),
                     description: depositAmount
-                      ? `Convert ${depositAmount} OGUSD tokens to dai in the Vat`
-                      : "Convert OGUSD tokens to dai in the Vat",
+                      ? t('stake.steps.join.desc.some').replace('{amount}', depositAmount)
+                      : t('stake.steps.join.desc.none'),
                     function: () => joinStablecoinToVat(depositAmount || "0"),
                     icon: "🏦",
                   },
                   {
-                    title: "Authorize Pot",
-                    description: "Authorize the Pot contract to move your dai",
+                    title: t('stake.steps.auth.title'),
+                    description: t('stake.steps.auth.desc'),
                     function: () => authorizePot(),
                     icon: "🔑",
                   },
                   {
-                    title: "Deposit to Pot",
+                    title: t('stake.steps.deposit.title'),
                     description: depositAmount
-                      ? `Deposit ${depositAmount} dai into the savings contract`
-                      : "Deposit dai into the savings contract",
+                      ? t('stake.steps.deposit.desc.some').replace('{amount}', depositAmount)
+                      : t('stake.steps.deposit.desc.none'),
                     function: () => depositToPot(depositAmount || "0"),
                     icon: "💰",
                   },
@@ -268,7 +241,7 @@ export default function StakePage() {
                           {completedSteps.has(index) ? "✅" : step.icon}
                         </div>
                         <div>
-                          <h4 className="font-medium text-sm">Step {index + 1}: {step.title}</h4>
+                          <h4 className="font-medium text-sm">{t('stake.step')} {index + 1}: {step.title}</h4>
                           <p className="text-xs text-muted-foreground">
                             {step.description}
                           </p>
@@ -290,7 +263,7 @@ export default function StakePage() {
                           index === 3 ? "text-orange-900" :
                           "text-red-900"
                         }`}>
-                          What it does: {step.title}
+                          {t('stake.step.what')}: {step.title}
                         </p>
                         <ul className={`text-sm space-y-1 ml-4 ${
                           index === 0 ? "text-blue-800" :
@@ -301,39 +274,39 @@ export default function StakePage() {
                         }`}>
                           {index === 0 && (
                             <>
-                              <li>• Checks the current interest rate and prepares the system</li>
-                              <li>• Just click to confirm</li>
-                              <li>• This happens automatically behind the scenes</li>
+                              <li>• {t('stake.bullets.0.1')}</li>
+                              <li>• {t('stake.bullets.0.2')}</li>
+                              <li>• {t('stake.bullets.0.3')}</li>
                             </>
                           )}
                           {index === 1 && (
                             <>
-                              <li>• Gives the savings program permission to move your OGUSD</li>
-                              <li>• Similar to authorizing a payment app to use your bank account</li>
-                              <li>• You only need to do this once per session</li>
-                              <li>• Click to confirm</li>
+                              <li>• {t('stake.bullets.1.1')}</li>
+                              <li>• {t('stake.bullets.1.2')}</li>
+                              <li>• {t('stake.bullets.1.3')}</li>
+                              <li>• {t('stake.bullets.1.4')}</li>
                             </>
                           )}
                           {index === 2 && (
                             <>
-                              <li>• Converts your OGUSD into the format the savings system uses</li>
-                              <li>• This is automatic and happens instantly</li>
-                              <li>• No fees or delays</li>
-                              <li>• Just click to confirm</li>
+                              <li>• {t('stake.bullets.2.1')}</li>
+                              <li>• {t('stake.bullets.2.2')}</li>
+                              <li>• {t('stake.bullets.2.3')}</li>
+                              <li>• {t('stake.bullets.2.4')}</li>
                             </>
                           )}
                           {index === 3 && (
                             <>
-                              <li>• Gives the savings contract permission to hold your converted currency</li>
-                              <li>• Another security check to protect your money</li>
-                              <li>• Click to confirm</li>
+                              <li>• {t('stake.bullets.3.1')}</li>
+                              <li>• {t('stake.bullets.3.2')}</li>
+                              <li>• {t('stake.bullets.3.3')}</li>
                             </>
                           )}
                           {index === 4 && (
                             <>
-                              <li>• Actually moves your money into the savings account where it starts earning</li>
-                              <li>• Your money is now locked in and earning interest</li>
-                              <li>• Click to confirm</li>
+                              <li>• {t('stake.bullets.4.1')}</li>
+                              <li>• {t('stake.bullets.4.2')}</li>
+                              <li>• {t('stake.bullets.4.3')}</li>
                             </>
                           )}
                         </ul>
@@ -504,49 +477,31 @@ export default function StakePage() {
                       </td>
                     </tr>
                     <tr className="bg-muted/25">
-                      <td className="border border-border p-3 font-medium">
-                        Savings Management
-                      </td>
-                      <td className="border border-border p-3">
-                        Deposits and withdrawals update normalized balances
-                      </td>
+                      <td className="border border-border p-3 font-medium">{t('stake.table.savings')}</td>
+                      <td className="border border-border p-3">{t('stake.table.savings.desc')}</td>
                     </tr>
                     <tr>
-                      <td className="border border-border p-3 font-medium">
-                        Rate Updates
-                      </td>
-                      <td className="border border-border p-3">
-                        The USR can be changed by authorized parties
-                      </td>
+                      <td className="border border-border p-3 font-medium">{t('stake.table.rate')}</td>
+                      <td className="border border-border p-3">{t('stake.table.rate.desc')}</td>
                     </tr>
                     <tr className="bg-muted/25">
-                      <td className="border border-border p-3 font-medium">
-                        Shutdown
-                      </td>
-                      <td className="border border-border p-3">
-                        The system can be halted through cage()
-                      </td>
+                      <td className="border border-border p-3 font-medium">{t('stake.table.shutdown')}</td>
+                      <td className="border border-border p-3">{t('stake.table.shutdown.desc')}</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
 
-              <p className="text-muted-foreground mt-4">
-                This mechanism is central to OGUSD's USR, letting OGUSD holders
-                benefit from programmable interest while preserving control and
-                security of deposited funds.
-              </p>
+              <p className="text-muted-foreground mt-4">{t('stake.note')}</p>
             </div>
           </div>
 
           {/* Contract Address */}
           <div className="rounded-2xl border border-border bg-card p-6 shadow-[0_4px_20px_rgba(0,0,0,0.06)]">
-            <h3 className="text-lg font-semibold text-foreground mb-3">
-              Contract Information
-            </h3>
+            <h3 className="text-lg font-semibold text-foreground mb-3">{t('stake.contract.info')}</h3>
             <div className="bg-muted/50 p-4 rounded-lg">
               <div className="flex items-center justify-between">
-                <span className="font-medium">Pot Contract Address:</span>
+                <span className="font-medium">{t('stake.contract.pot')}</span>
                 <code className="bg-background px-2 py-1 rounded text-sm font-mono">
                   {CONTRACTS.pot}
                 </code>
@@ -558,7 +513,7 @@ export default function StakePage() {
                   rel="noopener noreferrer"
                   className="text-primary hover:underline"
                 >
-                  View on Sepolia Etherscan ↗
+                  {t('stake.view.etherscan')}
                 </a>
               </div>
             </div>
