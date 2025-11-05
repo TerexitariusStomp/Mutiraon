@@ -62,14 +62,14 @@ const HeroSection = () => {
             </h1>
             <Link href="/vaults" className="relative flex cursor-pointer items-center gap-2">
               <h1 className="bg-gradient-to-r from-[#ffaa4c] via-[#ff7c9a] to-[#ff5cd3] bg-clip-text text-4xl font-extrabold leading-none tracking-tight text-transparent md:text-5xl">
-                GET $USDog
+                GET $OGUSD
               </h1>
               <ChevronDown className="h-7 w-7 text-[#ff7c9a] md:h-8 md:w-8" />
             </Link>
           </div>
 
           <p className="mt-4 text-center text-sm text-[#333333]">
-            Mint & borrow USDog against your preferred collateral.
+            Mint & borrow OGUSD against your preferred environmental collateral.
           </p>
 
           {/* Stats removed per request */}

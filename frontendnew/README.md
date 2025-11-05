@@ -1,36 +1,156 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# USDog Frontend - Environmental Impact Stablecoin
 
-## Getting Started
+A modern DeFi frontend for the USDog stablecoin system, backed by Brazilian environmental tokens. This project allows users to mint and manage positions using collateral from verified environmental conservation projects.
 
-First, run the development server:
+## 🌱 Environmental Impact
 
+USDog is backed by 7 Brazilian environmental tokens representing different conservation efforts:
+
+- **AMZN** - Amazon Rainforest Token (Rainforest Conservation)
+- **BIO** - Biodiversity Protection Token (Species Protection)
+- **REN** - Renewable Energy Token (Clean Energy Projects)
+- **AGRI** - Sustainable Agriculture Token (Sustainable Farming)
+- **AQUA** - Water Conservation Token (Water Protection)
+- **NIL** - Nitrogen Offset Token (Soil Conservation)
+- **ECO** - Carbon Credits Token (Carbon Offsetting)
+
+## 🚀 Live Demo
+
+Visit the deployed application: [https://your-username.github.io/mutiraon](https://your-username.github.io/mutiraon)
+
+## 🏗️ Tech Stack
+
+- **Framework**: Next.js 15.5.6
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Blockchain**: Wagmi + RainbowKit
+- **State Management**: React Hooks
+- **Build**: Static Export
+
+## 📦 Installation
+
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/your-username/USDog.git
+cd USDog
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Set up environment variables:
+```bash
+cp .env.example .env.local
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Update the environment variables with your API keys and contract addresses.
 
-## Learn More
+## 🛠️ Development
 
-To learn more about Next.js, take a look at the following resources:
+Run the development server:
+```bash
+npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Open [http://localhost:3000](http://localhost:3000) to view the application.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🏗️ Build
 
-## Deploy on Vercel
+Build the project for production:
+```bash
+npm run build
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Generate static files:
+```bash
+npm run build:static
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The static files will be generated in the `out` directory.
+
+## 🌐 Deployment
+
+### GitHub Pages
+
+This project is configured for GitHub Pages deployment:
+
+1. The repository is set up with the base path `/USDog`
+2. Static files are generated in the `out` directory
+3. GitHub Actions can be used for automated deployment
+
+### Manual Deployment
+
+1. Build the project: `npm run build:static`
+2. Upload the contents of the `out` directory to your hosting provider
+
+## 📁 Project Structure
+
+```
+src/
+├── app/                    # Next.js app router pages
+│   ├── globals.css
+│   ├── layout.tsx
+│   ├── page.tsx           # Home page
+│   ├── vaults/            # Vault management pages
+│   ├── docs/              # Documentation
+│   └── stake/             # Staking pages
+├── components/            # Reusable React components
+│   ├── ui/                # UI components (shadcn/ui)
+│   ├── sections/          # Page sections
+│   └── providers.tsx      # App providers
+├── hooks/                 # Custom React hooks
+│   ├── usePot.ts         # POT contract interactions
+│   └── useStablecoin.ts  # Stablecoin operations
+└── lib/                   # Utility libraries
+    ├── contracts.ts       # Contract addresses and ABIs
+    ├── utils.ts          # Helper functions
+    └── wagmi.ts          # Wagmi configuration
+```
+
+## 🔗 Smart Contracts
+
+The frontend interacts with the following deployed contracts on Ethereum Sepolia:
+
+- **Vat**: Core CDP engine
+- **StableCoin**: USDog token contract
+- **Spot**: Price feed system
+- **Pot**: Savings rate mechanism
+- **Dog**: Liquidation engine
+- **Join**: Collateral token adapters
+- **Jug**: Stability fee management
+
+## 🔐 Security
+
+⚠️ **IMPORTANT**: This is experimental software. The smart contracts have NOT been audited by any third-party security firm. Use at your own risk.
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📞 Support
+
+- Documentation: Visit the `/docs` page in the application
+- Issues: Create an issue in this repository
+- Community: Join our Telegram group
+
+## 🌍 Environmental Impact
+
+By using USDog, you're supporting real environmental conservation efforts in Brazil. Each token represents verified environmental projects that contribute to:
+
+- Amazon rainforest protection
+- Biodiversity conservation
+- Renewable energy generation
+- Sustainable agriculture
+- Water conservation
+- Soil conservation
+- Carbon emission reduction
+
+---
+
+**Built with ❤️ for environmental conservation**

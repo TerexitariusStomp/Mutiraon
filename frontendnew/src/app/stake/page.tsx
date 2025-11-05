@@ -86,10 +86,10 @@ export default function StakePage() {
           {/* Header */}
           <div className="mb-8 text-center">
             <h1 className="text-4xl font-bold text-foreground mb-4">
-              USDog Savings Rate
+              OGUSD Savings Rate
             </h1>
             <p className="text-lg text-muted-foreground">
-              Earn yield by depositing your USDog stablecoins into our savings
+              Earn yield by depositing your OGUSD stablecoins into our savings
               mechanism
             </p>
           </div>

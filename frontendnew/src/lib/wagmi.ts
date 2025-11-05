@@ -1,9 +1,9 @@
 import { getDefaultConfig } from '@rainbow-me/rainbowkit'
-import { bsc, bscTestnet } from 'wagmi/chains'
+import { sepolia } from 'viem/chains'
 
 export const config = getDefaultConfig({
-  appName: 'USDog Stablecoin',
+  appName: 'Mutiraon Stablecoin',
   projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || 'demo-project-id',
-  chains: [bsc, bscTestnet],
+  chains: [sepolia],
   ssr: true,
 })

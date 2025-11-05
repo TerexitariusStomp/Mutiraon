@@ -4,12 +4,12 @@ import path from "node:path";
 const LOADER = path.resolve(__dirname, 'src/visual-edits/component-tagger-loader.js');
 
 const nextConfig: NextConfig = {
-  // Generate a fully static site (no Node server required)
-  output: 'export',
+  // Enable development server
+  output: process.env.NODE_ENV === 'production' ? 'export' : undefined,
   // Safer for static hosts (S3, CF Pages, etc.)
   trailingSlash: true,
   // Base path for GitHub Pages deployment
-  basePath: process.env.NODE_ENV === 'production' ? '/USDog' : '',
+  basePath: process.env.NODE_ENV === 'production' ? '/mutiraon' : '',
 
   images: {
     // next/image optimization is not available on static export
@@ -28,12 +28,11 @@ const nextConfig: NextConfig = {
 
   outputFileTracingRoot: path.resolve(__dirname, '../../'),
 
-  turbopack: {
-    rules: {
-      "*.{jsx,tsx}": {
-        loaders: [LOADER]
-      }
-    }
+  // Disable Turbopack completely
+  experimental: {
+    turbo: {
+      rules: {}
+    },
   },
 
   webpack: (config) => {

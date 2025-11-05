@@ -14,31 +14,31 @@ type Person = {
 // Data (ported as provided)
 const people: Person[] = [
   {
-    department: "Executive Leadership (DIC)",
+    department: "Executive Leadership",
     role: "Honorary Founder & Chief Advisor",
     assignee: "Billy Markus",
     twitter: "https://x.com/BillyM2k",
     wallet: "0x2218e854019D3Ac7989333470E8CF7BDA8b930F3",
     description:
-      "The co-creator of Dogecoin, bringing unmatched credibility to the stablecoin project. With a deep understanding of Dogecoin’s codebase and community ethos, he provides strategic guidance on technical integration, ensuring seamless compatibility with the stablecoin’s infrastructure. His authentic voice and massive following amplify marketing efforts, fostering trust among memecoin enthusiasts. Markus aligns the project with Dogecoin’s decentralized, inclusive values, bridging communities to drive adoption and cultural resonance.",
+      "The co-creator of Dogecoin, bringing unmatched credibility to the stablecoin project. With a deep understanding of blockchain technology and community ethos, he provides strategic guidance on technical integration, ensuring seamless compatibility with the stablecoin's infrastructure. His authentic voice and massive following amplify marketing efforts, fostering trust among blockchain enthusiasts. Markus aligns the project with decentralized, inclusive values, bridging communities to drive adoption and cultural resonance.",
   },
   {
-    department: "Executive Leadership (DIC)",
+    department: "Executive Leadership",
     role: "Head of Operations & Business Development",
     assignee: "Smoke_theArtist",
     twitter: "https://x.com/Smoke_theArtist",
     wallet: "0x0A0ed6600A19D3b349311e513fB9D84e288FF33C",
     description:
-      "A seasoned DAO leader and early NFT adopter, excels in operations and partnership-building, having secured high-profile collaborations with Wintermute and Magic Eden for Own The Doge DAO. With a track record of scaling businesses to $10M in revenue, Smoke oversees day-to-day operations, liquidity integrations, and sponsorships. Their cross-chain expertise and community engagement skills ensure the stablecoin achieves robust adoption and seamless user experiences across diverse platforms.",
+      "A seasoned DAO leader and early NFT adopter, excels in operations and partnership-building, having secured high-profile collaborations with Wintermute and Magic Eden for various DAOs. With a track record of scaling businesses to $10M in revenue, Smoke oversees day-to-day operations, liquidity integrations, and sponsorships. Their cross-chain expertise and community engagement skills ensure the stablecoin achieves robust adoption and seamless user experiences across diverse platforms.",
   },
   {
-    department: "Executive Leadership (DIC)",
+    department: "Executive Leadership",
     role: "Head of Community & Global Outreach",
     assignee: "Saladpingers",
     twitter: "https://x.com/saladpingers",
     wallet: "0x6C41932a0afD71b30F3119B8f129617BC34161aF",
     description:
-      "A passionate Doge ecosystem contributor, has led impactful projects like the Doge Pilgrimage and Bronze Doge Statue. They leverage a global network and creative storytelling to coordinate IRL events, charity drives, and transparent grant programs. Their operational rigor and cultural alignment with memecoin communities foster trust and engagement, ensuring the stablecoin resonates worldwide while maintaining ethical, community-first outreach.",
+      "A passionate blockchain ecosystem contributor, has led impactful community projects and events. They leverage a global network and creative storytelling to coordinate IRL events, charity drives, and transparent grant programs. Their operational rigor and cultural alignment with crypto communities foster trust and engagement, ensuring the stablecoin resonates worldwide while maintaining ethical, community-first outreach.",
   },
   {
     department: "Technical & Tokenomics",
@@ -47,7 +47,7 @@ const people: Person[] = [
     twitter: "https://x.com/0xluden",
     wallet: "0xf63488819D82e794c52cc792D9c9fe1a84AEFeec",
     description:
-      "With a decade in gaming and token economy design, architects sustainable mechanics for the stablecoin, including community-driven mini-games to boost engagement. Based in Asia, she spearheads market expansion in Japan and Korea, leveraging her DAO experience from Own The Doge and MonkeDAO. Her expertise in tokenomics and governance ensures fair, scalable reward systems, aligning incentives to drive adoption and long-term stability.",
+      "With a decade in gaming and token economy design, architects sustainable mechanics for the stablecoin, including community-driven mini-games to boost engagement. Based in Asia, she spearheads market expansion in Japan and Korea, leveraging her DAO experience from various blockchain communities. Her expertise in tokenomics and governance ensures fair, scalable reward systems, aligning incentives to drive adoption and long-term stability.",
   },
   {
     department: "Technical & Tokenomics",
@@ -56,7 +56,7 @@ const people: Person[] = [
     twitter: "https://x.com/_Thalex_",
     wallet: "0x547411802E5d39275aEcaCaa17d27F0a9D3f2692",
     description:
-      "A crypto veteran since 2016, specializes in provenance and decentralized governance, with experience in Elonrwa DAO and commercial tech contracts. They ensure secure smart contract design and align incentives with memecoin cultural roots. Expertise in risk management and cross-disciplinary negotiation strengthens the stablecoin’s technical foundation, ensuring transparency and trust in its decentralized operations.",
+      "A crypto veteran since 2016, specializes in provenance and decentralized governance, with experience in Elonrwa DAO and commercial tech contracts. They ensure secure smart contract design and align incentives with blockchain cultural roots. Expertise in risk management and cross-disciplinary negotiation strengthens the stablecoin's technical foundation, ensuring transparency and trust in its decentralized operations.",
   },
   {
     department: "Technical & Tokenomics",
@@ -65,7 +65,7 @@ const people: Person[] = [
     twitter: "https://x.com/tridog",
     wallet: "0xE768687Cf9Ff40a1319F4847d3afD5b9fb6a4700",
     description:
-      "A memecoin governance expert, designs equitable voting systems and airdrop mechanics to engage dog communities. With hands-on experience in cross-chain integrations and no-code wallet solutions, they ensure seamless onboarding and privacy-first approaches. Their community mobilization skills, honed through meme contests and AMAs, drive sustained participation and align the stablecoin with decentralized ethos.",
+      "A crypto governance expert, designs equitable voting systems and airdrop mechanics to engage crypto communities. With hands-on experience in cross-chain integrations and no-code wallet solutions, they ensure seamless onboarding and privacy-first approaches. Their community mobilization skills, honed through community contests and AMAs, drive sustained participation and align the stablecoin with decentralized ethos.",
   },
   {
     department: "Marketing & Branding",
@@ -74,7 +74,7 @@ const people: Person[] = [
     twitter: "https://x.com/LucieSHIB",
     wallet: "0xEf0CA0aFe00df4c9021656825958DEf42b721AaF",
     description:
-      "A core Shiba Inu ecosystem leader, brings proven marketing expertise from launching Shibarium and managing multi-token ecosystems (SHIB, BONE, LEASH). Crafts strategic campaigns, navigates community sentiment through volatility, and secures partnerships with major platforms.Crisis communication skills and regulatory awareness ensure the stablecoin’s messaging resonates globally while maintaining trust and adoption.",
+      "A core blockchain ecosystem leader, brings proven marketing expertise from launching Layer 2 solutions and managing multi-token ecosystems. Crafts strategic campaigns, navigates community sentiment through volatility, and secures partnerships with major platforms. Crisis communication skills and regulatory awareness ensure the stablecoin's messaging resonates globally while maintaining trust and adoption.",
   },
   {
     department: "Marketing & Branding",
@@ -83,7 +83,7 @@ const people: Person[] = [
     twitter: "https://x.com/HorBull",
     wallet: "0x8e373f0426A6102A550016125156B4526A4ABDF6",
     description:
-      "A memecoin analyst with a knack for viral content, creates meme-driven campaigns that capture the playful spirit of Dogecoin and Shiba Inu. Their technical analysis and market sentiment expertise inform branding strategies, ensuring community resonance. Amplifies the stablecoin’s visibility through shareable visuals and storytelling, driving organic adoption.",
+      "A crypto analyst with a knack for viral content, creates engaging campaigns that capture the innovative spirit of the stablecoin project. Their technical analysis and market sentiment expertise inform branding strategies, ensuring community resonance. Amplifies the stablecoin's visibility through shareable visuals and storytelling, driving organic adoption.",
   },
   {
     department: "Marketing & Branding",
@@ -92,7 +92,7 @@ const people: Person[] = [
     twitter: "https://x.com/meta_rach",
     wallet: "0x792d2B50BFfF0B004EE631e6fFE2d9928f8eF34F",
     description:
-      "An OG Dogecoin advocate with a BFA in Art History, blends creativity and analytics to educate communities on stablecoin mechanics. Revitalizes platforms like Pixel Portal and hosts experiential events to foster engagement. Focus on fun, authentic storytelling strengthens community loyalty, making the stablecoin accessible and appealing to both degen and mainstream audiences.",
+      "An OG crypto advocate with a BFA in Art History, blends creativity and analytics to educate communities on stablecoin mechanics. Revitalizes platforms and hosts experiential events to foster engagement. Focus on fun, authentic storytelling strengthens community loyalty, making the stablecoin accessible and appealing to both degen and mainstream audiences.",
   },
   {
     department: "Community Management",
@@ -101,16 +101,16 @@ const people: Person[] = [
     twitter: "https://x.com/SpecialShib",
     wallet: "0x2B06649686f516Ba7CE9C29513DF01C4af6C8919",
     description:
-      "An experienced Shibarium moderator, excels in managing high-traffic discussions and facilitating DAO proposals like LEASH v2. Their transparent communication and crisis management skills build trust and retention in volatile memecoin communities. As Lead Community Moderator, ensures real-time engagement, resolves conflicts, and drives governance participation for the stablecoin.",
+      "An experienced blockchain moderator, excels in managing high-traffic discussions and facilitating DAO proposals. Their transparent communication and crisis management skills build trust and retention in volatile crypto communities. As Lead Community Moderator, ensures real-time engagement, resolves conflicts, and drives governance participation for the stablecoin.",
   },
   {
     department: "Partnerships & Growth",
-    role: "Meme Marketing & Partnership Liaison",
+    role: "Marketing & Partnership Liaison",
     assignee: "Cryptopathic",
     twitter: "https://x.com/Cryptopathic",
     wallet: "0x1d4B9b250B1Bd41DAA35d94BF9204Ec1b0494eE3",
     description:
-      "A crypto trader since 2013, leverages deep ties in Dogecoin and Shiba Inu communities to drive meme marketing and partnerships. Their expertise in on-chain analytics and NFT art fuels viral campaigns and DEX integrations. Cryptopathic’s authentic engagement ensures the stablecoin resonates with memecoin culture, fostering trust and expanding adoption through strategic collaborations.",
+      "A crypto trader since 2013, leverages deep ties in blockchain communities to drive marketing and partnerships. Their expertise in on-chain analytics and NFT art fuels viral campaigns and DEX integrations. Cryptopathic's authentic engagement ensures the stablecoin resonates with crypto culture, fostering trust and expanding adoption through strategic collaborations.",
   },
 ];
 

@@ -1,6 +1,6 @@
 {
-  "name": "app",
-  "version": "0.1.0",
+  "name": "mutiraon-frontend",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
@@ -137,6 +137,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/flamingbark/USDog"
+    "url": "https://github.com/your-username/mutiraon"
   }
 }

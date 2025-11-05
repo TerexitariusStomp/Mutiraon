@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 const navLinks = [
-  { name: "GET USDog", href: "/vaults", active: true },
+  { name: "GET OGUSD", href: "/vaults", active: true },
   { name: "STAKE", href: "/stake", active: false },
 ];
 
@@ -28,7 +28,7 @@ const Navigation = () => {
         <div className="flex items-center gap-x-8">
           <Link href="/" className="flex shrink-0 items-center gap-x-2">
             <Smile className="h-8 w-8 text-primary" />
-            <span className="font-logo text-foreground">USDog</span>
+            <span className="font-logo text-foreground">Mutiraon</span>
           </Link>
           <nav className="hidden items-center gap-x-6 lg:flex">
             {navLinks.map((link) => (
@@ -61,7 +61,7 @@ const Navigation = () => {
                 <Link href="/docs">Docs</Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link href="https://github.com/flamingbark/USDog" target="_blank" rel="noopener noreferrer">Github</Link>
+                <Link href="https://github.com/your-username/mutiraon" target="_blank" rel="noopener noreferrer">Github</Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <Link href="https://t.me/usdog_bark" target="_blank" rel="noopener noreferrer">Telegram</Link>

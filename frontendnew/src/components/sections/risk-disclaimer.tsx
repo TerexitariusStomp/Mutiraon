@@ -21,7 +21,7 @@ export default function RiskDisclaimer() {
               UNAUDITED CODE - USE AT YOUR OWN RISK
             </h2>
             <p className="mt-1 text-sm font-semibold">
-              The USDog stablecoin smart contract code has NOT been audited by any third-party security firm or independent auditors.
+              The OGUSD stablecoin smart contract code has NOT been audited by any third-party security firm or independent auditors.
             </p>
           </div>
           <button
@@ -39,7 +39,7 @@ export default function RiskDisclaimer() {
           <div id="risk-details" className="border-t border-red-200 p-4 pt-3 text-sm">
             <h3 className="font-bold">RISK OF TOTAL LOSS</h3>
             <p className="mt-1">
-              <strong>YOU MAY LOSE ALL FUNDS DEPOSITED OR INVESTED IN THIS PROTOCOL.</strong> By interacting with USDog, you acknowledge and accept the following risks:
+              <strong>YOU MAY LOSE ALL FUNDS DEPOSITED OR INVESTED IN THIS PROTOCOL.</strong> By interacting with OGUSD, you acknowledge and accept the following risks:
             </p>
             <ul className="ml-5 mt-2 list-disc space-y-1">
               <li>
@@ -71,13 +71,13 @@ export default function RiskDisclaimer() {
 
             <h3 className="mt-4 font-bold">JURISDICTION AND COMPLIANCE</h3>
             <p className="mt-1">
-              You are responsible for ensuring your use of USDog complies with all applicable laws and regulations in your jurisdiction.
+              You are responsible for ensuring your use of OGUSD complies with all applicable laws and regulations in your jurisdiction.
             </p>
 
             <hr className="my-4 border-red-200" />
 
             <p className="font-semibold">
-              <strong>BY USING USDOG, YOU ACKNOWLEDGE THAT YOU HAVE READ, UNDERSTOOD, AND AGREE TO ASSUME ALL RISKS ASSOCIATED WITH THIS UNAUDITED EXPERIMENTAL PROTOCOL.</strong>
+              <strong>BY USING OGUSD, YOU ACKNOWLEDGE THAT YOU HAVE READ, UNDERSTOOD, AND AGREE TO ASSUME ALL RISKS ASSOCIATED WITH THIS UNAUDITED EXPERIMENTAL PROTOCOL.</strong>
             </p>
             <p className="mt-1 font-bold">ONLY INVEST WHAT YOU CAN AFFORD TO LOSE COMPLETELY.</p>
           </div>

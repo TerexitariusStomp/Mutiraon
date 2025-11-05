@@ -7,8 +7,8 @@ import Navigation from "@/components/sections/navigation";
 import RiskDisclaimer from "@/components/sections/risk-disclaimer";
 
 export const metadata: Metadata = {
-  title: "USDog Stablecoin",
-  description: "Decentralized stablecoin backed by DOGE and SHIB collateral",
+  title: "Mutiraon - OGUSD Stablecoin",
+  description: "Decentralized stablecoin backed by environmental impact tokens",
 };
 
 export default function RootLayout({
@@ -29,7 +29,7 @@ export default function RootLayout({
             data-include-search-params="true"
             data-only-in-iframe="true"
             data-debug="true"
-            data-custom-data='{"appName": "USDog", "version": "1.0.0", "greeting": "Welcome to USDog"}'
+            data-custom-data='{"appName": "Mutiraon", "version": "1.0.0", "greeting": "Welcome to Mutiraon"}'
           />
           <header>
             <div className="container mx-auto px-4 py-5">
@@ -44,11 +44,11 @@ export default function RootLayout({
               <RiskDisclaimer />
             </div>
             <div className="container mx-auto px-4 py-8 text-sm text-muted-foreground flex flex-col sm:flex-row items-center justify-between gap-3">
-              <span>©USDog - All rights reserved.</span>
+              <span>©Mutiraon - All rights reserved.</span>
               <nav className="flex gap-4">
                 <a href="/docs" className="hover:text-foreground">Docs</a>
-                <a href="https://github.com/flamingbark/USDog" target="_blank" rel="noopener noreferrer" className="hover:text-foreground">Github</a>
-                <a href="https://t.me/usdog_bark" target="_blank" rel="noopener noreferrer" className="hover:text-foreground">Telegram</a>
+                <a href="https://github.com/your-username/mutiraon" target="_blank" rel="noopener noreferrer" className="hover:text-foreground">Github</a>
+                <a href="https://t.me/mutiraon" target="_blank" rel="noopener noreferrer" className="hover:text-foreground">Telegram</a>
               </nav>
             </div>
           </footer>

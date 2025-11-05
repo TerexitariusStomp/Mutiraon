@@ -1,14 +1,14 @@
 import { useAccount, useWriteContract, useReadContract, useWaitForTransactionReceipt } from 'wagmi';
 import { parseEther, formatEther } from 'viem';
-import { CONTRACT_ADDRESSES, ILK_DOGE, ILK_SHIB, VAT_ABI, STABLECOIN_ABI } from '@/lib/contracts';
+import { CONTRACT_ADDRESSES, ILK_AMZN, ILK_BIO, ILK_REN, ILK_AGRI, ILK_AQUA, ILK_NIL, ILK_ECO, VAT_ABI, STABLECOIN_ABI } from '@/lib/contracts';
 import { useState } from 'react';
 import { useChainId } from 'wagmi';
 import { ethers } from 'ethers';
 
-export function useStablecoin(selectedCollateral: 'DOGE' | 'SHIB' = 'SHIB') {
+export function useStablecoin(selectedCollateral: 'AMZN' | 'BIO' | 'REN' | 'AGRI' | 'AQUA' | 'NIL' | 'ECO' = 'AMZN') {
   const { address } = useAccount();
   const chainId = useChainId();
-  const addresses = chainId === 56 ? CONTRACT_ADDRESSES.bsc : CONTRACT_ADDRESSES.bscTestnet;
+  const addresses = CONTRACT_ADDRESSES.sepolia;
   
   const { writeContract, data: hash, isPending: isWritePending } = useWriteContract();
   const { isPending: isReceiptPending, isSuccess } = useWaitForTransactionReceipt({
@@ -18,8 +18,65 @@ export function useStablecoin(selectedCollateral: 'DOGE' | 'SHIB' = 'SHIB') {
   const [isApproving, setIsApproving] = useState(false);
   const isPending = isWritePending || (!!hash && isReceiptPending) || isApproving;
 
+  // Get collateral configuration
+  const getCollateralConfig = (collateralType: string) => {
+    switch (collateralType) {
+      case 'AMZN':
+        return {
+          ilk: ILK_AMZN,
+          tokenAddress: addresses.amznToken,
+          joinAddress: addresses.amznJoin,
+          decimals: 18
+        };
+      case 'BIO':
+        return {
+          ilk: ILK_BIO,
+          tokenAddress: addresses.bioToken,
+          joinAddress: addresses.bioJoin,
+          decimals: 18
+        };
+      case 'REN':
+        return {
+          ilk: ILK_REN,
+          tokenAddress: addresses.renToken,
+          joinAddress: addresses.renJoin,
+          decimals: 18
+        };
+      case 'AGRI':
+        return {
+          ilk: ILK_AGRI,
+          tokenAddress: addresses.agriToken,
+          joinAddress: addresses.agriJoin,
+          decimals: 18
+        };
+      case 'AQUA':
+        return {
+          ilk: ILK_AQUA,
+          tokenAddress: addresses.aquaToken,
+          joinAddress: addresses.aquaJoin,
+          decimals: 18
+        };
+      case 'NIL':
+        return {
+          ilk: ILK_NIL,
+          tokenAddress: addresses.nilToken,
+          joinAddress: addresses.nilJoin,
+          decimals: 18
+        };
+      case 'ECO':
+        return {
+          ilk: ILK_ECO,
+          tokenAddress: addresses.ecoToken,
+          joinAddress: addresses.ecoJoin,
+          decimals: 18
+        };
+      default:
+        throw new Error(`Unsupported collateral type: ${collateralType}`);
+    }
+  };
+
   // Read current CDP position for the selected collateral
-  const currentIlk = selectedCollateral === 'DOGE' ? ILK_DOGE : ILK_SHIB;
+  const currentIlk = getCollateralConfig(selectedCollateral).ilk;
   const { data: urnData, refetch: refetchUrn } = useReadContract({
     address: addresses.vat as `0x${string}`,
     abi: [
@@ -38,7 +95,7 @@ export function useStablecoin(selectedCollateral: 'DOGE' | 'SHIB' = 'SHIB') {
   const ink = urnData?.[0] ? formatEther(urnData[0]) : '0';
   const art = urnData?.[1] ? formatEther(urnData[1]) : '0';
 
-  // --- Preflight reads for USDog withdraws ---
+  // --- Preflight reads for OGUSD withdraws ---
   // 1) Internal dai balance (rad) in Vat for the user
   const { data: daiRadBalance } = useReadContract({
     address: addresses.vat as `0x${string}`,
@@ -95,27 +152,25 @@ export function useStablecoin(selectedCollateral: 'DOGE' | 'SHIB' = 'SHIB') {
   }
 
   // Deposit collateral - returns a promise to handle approval then deposit
-  const depositCollateral = (amount: string, collateralType: 'DOGE' | 'SHIB') => {
+  const depositCollateral = (amount: string, collateralType: 'AMZN' | 'BIO' | 'REN' | 'AGRI' | 'AQUA' | 'NIL' | 'ECO') => {
     if (!address) return Promise.reject('No address');
     
-    const joinAddress = collateralType === 'DOGE' ? addresses.dogeJoin : addresses.shibJoin;
-    const tokenAddress = collateralType === 'DOGE' ? addresses.dogeToken : addresses.shibToken;
+    const config = getCollateralConfig(collateralType);
     
     console.log('🎯 Deposit initiated for', collateralType);
-    console.log('📋 Token:', tokenAddress);
-    console.log('📋 Join:', joinAddress);
+    console.log('📋 Token:', config.tokenAddress);
+    console.log('📋 Join:', config.joinAddress);
     console.log('💰 Amount:', amount);
     
-    // Use exact decimals for each token - same as approval function
-    const decimals = collateralType === 'DOGE' ? 8 : 18;
-    const exactAmount = ethers.parseUnits(amount, decimals);
+    // Use exact decimals for each token
+    const exactAmount = ethers.parseUnits(amount, config.decimals);
     
     console.log('📊 Deposit amount in token units:', exactAmount.toString());
-    console.log('🔍 Using decimals:', decimals);
+    console.log('🔍 Using decimals:', config.decimals);
     
     // For now, just do the join directly - user should approve manually first
     return writeContract({
-      address: joinAddress as `0x${string}`,
+      address: config.joinAddress as `0x${string}`,
       abi: [
         {
           name: 'join',
@@ -131,25 +186,23 @@ export function useStablecoin(selectedCollateral: 'DOGE' | 'SHIB' = 'SHIB') {
   };
 
   // Approve token for spending (exact amount only)
-  const approveToken = (amount: string, collateralType: 'DOGE' | 'SHIB') => {
+  const approveToken = (amount: string, collateralType: 'AMZN' | 'BIO' | 'REN' | 'AGRI' | 'AQUA' | 'NIL' | 'ECO') => {
     if (!address) return Promise.reject('No address');
     
-    const joinAddress = collateralType === 'DOGE' ? addresses.dogeJoin : addresses.shibJoin;
-    const tokenAddress = collateralType === 'DOGE' ? addresses.dogeToken : addresses.shibToken;
+    const config = getCollateralConfig(collateralType);
     
     console.log('🔓 Approving exact amount:', amount, collateralType);
-    console.log('📋 Token address:', tokenAddress);
-    console.log('📋 Spender (join):', joinAddress);
+    console.log('📋 Token address:', config.tokenAddress);
+    console.log('📋 Spender (join):', config.joinAddress);
     
     // Use exact decimals for each token - approve exact amount requested
-    const decimals = collateralType === 'DOGE' ? 8 : 18;
-    const exactAmount = ethers.parseUnits(amount, decimals);
+    const exactAmount = ethers.parseUnits(amount, config.decimals);
     
     console.log('💰 Approving exactly:', amount, collateralType);
     console.log('📊 In wei:', exactAmount.toString());
     
     return writeContract({
-      address: tokenAddress as `0x${string}`,
+      address: config.tokenAddress as `0x${string}`,
       abi: [
         {
           name: 'approve',
@@ -160,7 +213,7 @@ export function useStablecoin(selectedCollateral: 'DOGE' | 'SHIB' = 'SHIB') {
         }
       ],
       functionName: 'approve',
-      args: [joinAddress as `0x${string}`, exactAmount],
+      args: [config.joinAddress as `0x${string}`, exactAmount],
     });
   };
 
@@ -541,24 +594,23 @@ export function useStablecoin(selectedCollateral: 'DOGE' | 'SHIB' = 'SHIB') {
   };
 
   // Withdraw collateral - use join exit to get tokens back to wallet
-  const withdrawCollateral = (amount: string, collateralType: 'DOGE' | 'SHIB') => {
+  const withdrawCollateral = (amount: string, collateralType: 'AMZN' | 'BIO' | 'REN' | 'AGRI' | 'AQUA' | 'NIL' | 'ECO') => {
     if (!address) return Promise.reject('No address');
     
-    const joinAddress = collateralType === 'DOGE' ? addresses.dogeJoin : addresses.shibJoin;
+    const config = getCollateralConfig(collateralType);
     
     console.log('💸 Withdrawing collateral via join exit...');
     console.log('Amount to withdraw:', amount);
-    console.log('Join address:', joinAddress);
+    console.log('Join address:', config.joinAddress);
     
     // Use exact decimals for each token - same as approval and deposit functions
-    const decimals = collateralType === 'DOGE' ? 8 : 18;
-    const exactAmount = ethers.parseUnits(amount, decimals);
+    const exactAmount = ethers.parseUnits(amount, config.decimals);
     
     console.log('📊 Withdraw amount in token units:', exactAmount.toString());
-    console.log('🔍 Using decimals:', decimals);
+    console.log('🔍 Using decimals:', config.decimals);
     
     return writeContract({
-      address: joinAddress as `0x${string}`,
+      address: config.joinAddress as `0x${string}`,
       abi: [
         {
           name: 'exit',
@@ -637,10 +689,10 @@ export function useStablecoin(selectedCollateral: 'DOGE' | 'SHIB' = 'SHIB') {
   };
 
   // Close vault (repay all debt and withdraw all collateral)
-  const closeVault = async (ilk: string) => {
+  const closeVault = async (ilk: string, collateralType: 'AMZN' | 'BIO' | 'REN' | 'AGRI' | 'AQUA' | 'NIL' | 'ECO') => {
     // This would combine repay and withdraw - simplified
     await repayStablecoin(art, ilk);
-    await withdrawCollateral(ink, selectedCollateral);
+    await withdrawCollateral(ink, collateralType);
   };
 
   return {

@@ -8,11 +8,11 @@ export default function VaultsPage() {
       <div className="mx-auto max-w-5xl">
         <header className="mb-8">
           <h1 className="text-3xl font-bold text-foreground">
-            Open a USDog Vault
+            Open an OGUSD Vault
           </h1>
           <p className="mt-2 text-muted-foreground">
-            Choose a collateral to open a vault and mint USDog. Available
-            collaterals are limited to Dogecoin and Shiba Inu.
+            Choose an environmental collateral to open a vault and mint OGUSD. Available
+            collaterals represent verified conservation projects.
           </p>
         </header>
 
@@ -34,7 +34,7 @@ export default function VaultsPage() {
                 <div>
                   <div className="flex items-center gap-2">
                     <h2 className="text-lg font-semibold text-foreground">
-                      Shiba Inu
+                      Biological Diversity (BIO)
                     </h2>
                     <span className="rounded-full bg-muted px-2 py-0.5 text-[11px] text-muted-foreground">
                       SHIB
@@ -79,7 +79,7 @@ export default function VaultsPage() {
 
             <div className="mt-5 flex items-center justify-between">
               <p className="text-xs text-muted-foreground">
-                Open a vault using SHIB to mint USDog.
+                Open a vault using BIO tokens to mint OGUSD.
               </p>
               <Link
                 href="/vaults/open?collateral=SHIB"
@@ -100,7 +100,7 @@ export default function VaultsPage() {
                 <div>
                   <div className="flex items-center gap-2">
                     <h2 className="text-lg font-semibold text-foreground">
-                      Dogecoin
+                      Environmental Agriculture (AGRI)
                     </h2>
                     <span className="rounded-full bg-muted px-2 py-0.5 text-[11px] text-muted-foreground">
                       DOGE
@@ -145,7 +145,7 @@ export default function VaultsPage() {
 
             <div className="mt-5 flex items-center justify-between">
               <p className="text-xs text-muted-foreground">
-                Open a vault using DOGE to mint USDog.
+                Open a vault using AGRI tokens to mint OGUSD.
               </p>
               <Link
                 href="/vaults/open?collateral=DOGE"

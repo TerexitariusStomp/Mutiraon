@@ -804,84 +804,6 @@ export const JOIN_ABI = [
   },
 ];
 
-export const POT_ABI = [
-  {
-    inputs: [],
-    name: "drip",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "pie",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "usr",
-        type: "address",
-      },
-    ],
-    name: "pieOf",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "usr",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "wad",
-        type: "uint256",
-      },
-    ],
-    name: "join",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "usr",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "wad",
-        type: "uint256",
-      },
-    ],
-    name: "exit",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-];
-
 export const DAI_JOIN_ABI = [
   {
     inputs: [
@@ -919,29 +841,6 @@ export const DAI_JOIN_ABI = [
     stateMutability: "nonpayable",
     type: "function",
   },
-];
-
-export const MULTICALL_ABI = [
-  {
-    inputs: [
-      {
-        components: [
-          { internalType: "address", name: "target", type: "address" },
-          { internalType: "bytes", name: "callData", type: "bytes" }
-        ],
-        internalType: "struct Multicall3.Call[]",
-        name: "calls",
-        type: "tuple[]"
-      }
-    ],
-    name: "aggregate",
-    outputs: [
-      { internalType: "uint256", name: "blockNumber", type: "uint256" },
-      { internalType: "bytes[]", name: "returnData", type: "bytes[]" }
-    ],
-    stateMutability: "view",
-    type: "function"
-  }
 ];
 
 export const ERC20_ABI = [
@@ -1099,10 +998,6 @@ export const ILK_AGRI = COLLATERAL_TYPES.AGRI;
 export const ILK_AQUA = COLLATERAL_TYPES.AQUA;
 export const ILK_NIL = COLLATERAL_TYPES.NIL;
 export const ILK_ECO = COLLATERAL_TYPES.ECO;
-
-// Additional ILK constants for other collaterals
-export const ILK_DOGE = ethers.encodeBytes32String("DOGE-A");
-export const ILK_SHIB = ethers.encodeBytes32String("SHIB-A");
 
 // Environmental token information
 export const ENVIRONMENTAL_TOKENS = {

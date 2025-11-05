@@ -19,8 +19,7 @@ import { useChainId } from "wagmi";
 export function usePot() {
   const { address } = useAccount();
   const chainId = useChainId();
-  const addresses =
-    chainId === 56 ? CONTRACT_ADDRESSES.bsc : CONTRACT_ADDRESSES.bscTestnet;
+  const addresses = CONTRACT_ADDRESSES.sepolia;
 
   const {
     writeContract,
@@ -65,7 +64,7 @@ export function usePot() {
     functionName: "Pie",
   });
 
-  // Read user's wallet USDog balance
+  // Read user's wallet OGUSD balance
   const { data: walletBalance, refetch: refetchWalletBalance } =
     useReadContract({
       address: addresses.stablecoin as `0x${string}`,
