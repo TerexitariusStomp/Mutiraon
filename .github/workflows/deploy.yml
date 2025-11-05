@@ -1,20 +1,14 @@
 name: Deploy to GitHub Pages
-# Updated workflow - environment protection removed
+# Simple workflow using official GitHub Pages action
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
     branches: [ "main" ]
 
 permissions:
   contents: read
   pages: write
   id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
 
 jobs:
   build:
@@ -30,23 +24,15 @@ jobs:
           cache: 'npm'
           cache-dependency-path: 'frontendnew/package-lock.json'
           
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-        
       - name: Install frontend dependencies
         run: npm ci --legacy-peer-deps
         working-directory: ./frontendnew
-        
+          
       - name: Build Next.js application
         run: npm run build
         working-directory: ./frontendnew
         env:
           NODE_ENV: production
-          
-      - name: Verify build output
-        run: |
-          ls -la frontendnew/out
-          cat frontendnew/out/index.html | head -10
           
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
@@ -58,7 +44,4 @@ jobs:
     needs: build
     steps:
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./frontendnew/out
+        uses: actions/deploy-pages@v4
