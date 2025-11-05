@@ -15,13 +15,13 @@ export default function RiskDisclaimer() {
         <div className="flex items-start justify-between gap-3 p-4">
           <div>
             <h1 className="text-base font-extrabold">
-              ⚠️ IMPORTANT RISK DISCLAIMER ⚠️
+              ⚠️ IMPORTANT NOTICE ⚠️
             </h1>
             <h2 className="mt-1 text-sm font-bold">
-              UNAUDITED CODE - USE AT YOUR OWN RISK
+              TESTNET ENVIRONMENT
             </h2>
             <p className="mt-1 text-sm font-semibold">
-              The OGUSD stablecoin smart contract code has NOT been audited by any third-party security firm or independent auditors.
+              This application is currently deployed on Ethereum Sepolia testnet. All transactions use test tokens and have no real value.
             </p>
           </div>
           <button
@@ -37,49 +37,42 @@ export default function RiskDisclaimer() {
 
         {expanded && (
           <div id="risk-details" className="border-t border-red-200 p-4 pt-3 text-sm">
-            <h3 className="font-bold">RISK OF TOTAL LOSS</h3>
             <p className="mt-1">
-              <strong>YOU MAY LOSE ALL FUNDS DEPOSITED OR INVESTED IN THIS PROTOCOL.</strong> By interacting with OGUSD, you acknowledge and accept the following risks:
+              This is a testnet deployment on Ethereum Sepolia. All tokens and transactions are for testing purposes only and have no real monetary value.
             </p>
+
+            <h3 className="mt-4 font-bold">TESTNET FEATURES</h3>
             <ul className="ml-5 mt-2 list-disc space-y-1">
               <li>
-                <strong>Smart Contract Vulnerabilities</strong>: Unaudited code may contain critical bugs, exploits, or security flaws that could result in permanent loss of funds
+                <strong>Test Tokens</strong>: Use Sepolia ETH and test ERC-20 tokens for all transactions
               </li>
               <li>
-                <strong>Economic Risks</strong>: The stablecoin mechanism may fail, leading to depegging, liquidity crises, or total collapse
+                <strong>No Real Value</strong>: All assets on testnet have zero monetary value
               </li>
               <li>
-                <strong>Regulatory Risks</strong>: Future regulatory action may impact the protocol's operation or your ability to access funds
+                <strong>Learning Tool</strong>: Experiment with DeFi mechanics in a safe environment
               </li>
               <li>
-                <strong>Technical Risks</strong>: Platform outages, network congestion, or technical failures may prevent access to your assets
-              </li>
-              <li>
-                <strong>Experimental Nature</strong>: This protocol is experimental technology with no guarantees of functionality or safety
+                <strong>Development Testing</strong>: Help test and improve the protocol before mainnet launch
               </li>
             </ul>
 
-            <h3 className="mt-4 font-bold">NO WARRANTIES OR GUARANTEES</h3>
+            <h3 className="mt-4 font-bold">GETTING STARTED</h3>
             <p className="mt-1">
-              This software is provided "AS IS" without warranty of any kind. The developers make no representations about the security, functionality, or suitability of this code for any purpose.
+              To interact with this testnet deployment:
             </p>
-
-            <h3 className="mt-4 font-bold">NO FINANCIAL ADVICE</h3>
-            <p className="mt-1">
-              Nothing in this protocol or documentation constitutes financial, investment, trading, or legal advice. You are solely responsible for your own financial decisions.
-            </p>
-
-            <h3 className="mt-4 font-bold">JURISDICTION AND COMPLIANCE</h3>
-            <p className="mt-1">
-              You are responsible for ensuring your use of OGUSD complies with all applicable laws and regulations in your jurisdiction.
-            </p>
+            <ul className="ml-5 mt-2 list-disc space-y-1">
+              <li>Connect a Web3 wallet (MetaMask, etc.)</li>
+              <li>Switch to Ethereum Sepolia testnet</li>
+              <li>Get free Sepolia ETH from a faucet</li>
+              <li>Use test tokens for collateral</li>
+            </ul>
 
             <hr className="my-4 border-red-200" />
 
             <p className="font-semibold">
-              <strong>BY USING OGUSD, YOU ACKNOWLEDGE THAT YOU HAVE READ, UNDERSTOOD, AND AGREE TO ASSUME ALL RISKS ASSOCIATED WITH THIS UNAUDITED EXPERIMENTAL PROTOCOL.</strong>
+              <strong>This is experimental software for testing purposes. Use at your own discretion.</strong>
             </p>
-            <p className="mt-1 font-bold">ONLY INVEST WHAT YOU CAN AFFORD TO LOSE COMPLETELY.</p>
           </div>
         )}
       </div>

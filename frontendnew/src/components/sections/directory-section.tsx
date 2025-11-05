@@ -152,6 +152,10 @@ export default function DirectorySection() {
 
   return (
     <section className="orgdir-wrapper" aria-label="Project Directory">
+      <div className="container">
+        <h2 className="section-title">Team Section</h2>
+        <p className="section-subtitle">To be announced</p>
+      </div>
 
       <main className="container">
         <section className="grid" aria-live="polite">
@@ -275,8 +279,23 @@ export default function DirectorySection() {
           --chip: #eef2ff;
           position: relative;
           margin-top: 3rem;
+          padding-top: 2rem;
+          padding-bottom: 3rem;
           color: var(--text);
           background: transparent;
+        }
+        .section-title {
+          text-align: center;
+          font-size: 32px;
+          font-weight: 700;
+          color: #111827;
+          margin-bottom: 8px;
+        }
+        .section-subtitle {
+          text-align: center;
+          font-size: 16px;
+          color: #6b7280;
+          margin-bottom: 32px;
         }
         .container {
           max-width: 1100px;
