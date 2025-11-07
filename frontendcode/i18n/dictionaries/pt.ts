@@ -5,7 +5,10 @@ export const pt = {
   "header.toggle": "PT",
 
   // Hero
-  "hero.title": "Amaz-One Dollar: Stablecoin de Impacto para a Economia Solidária do Brasil",
+  "hero.title.1": "Amaz-One Dollar:",
+  "hero.title.2": "Stablecoin de",
+  "hero.title.3": "Impacto",
+  "hero.cta": "Entrar no App",
   "hero.subtitle": "A convergência do Brasil — grande adoção de stablecoins (90% do volume cripto), 180+ moedas comunitárias ativas e clareza regulatória — cria a oportunidade para o Amaz-One Dollar: uma stablecoin lastreada em impacto que capitaliza ativos ambientais mantidos por comunidades.",
 
   // Mercado

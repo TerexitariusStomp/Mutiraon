@@ -5,7 +5,10 @@ export const en = {
   "header.toggle": "EN",
 
   // Hero
-  "hero.title": "Amaz-One Dollar: Impact-Backed Stablecoin for Brazil's Solidarity Economy",
+  "hero.title.1": "Amaz-One Dollar:",
+  "hero.title.2": "Impact-Backed",
+  "hero.title.3": "Stablecoin",
+  "hero.cta": "Enter App",
   "hero.subtitle": "Brazil's convergence of massive stablecoin adoption (90% of crypto volume), 180+ active community currencies, and regulatory clarity creates an opportunity for Amaz-One Dollar — a USD-pegged, impact-backed stablecoin that capitalizes environmental assets held by underserved communities.",
 
   // Market Opportunity
