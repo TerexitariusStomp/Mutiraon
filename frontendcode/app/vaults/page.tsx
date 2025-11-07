@@ -274,6 +274,7 @@ export default function VaultsPage() {
               ? 'Obtenha tokens de teste para experimentar o protocolo.'
               : 'Get test tokens to try out the protocol.'}
           </p>
+          <CombinedFaucetClaim />
         </section>
 
         {/* Authorize */}
