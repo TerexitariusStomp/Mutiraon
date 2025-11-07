@@ -17,7 +17,9 @@ export function Hero() {
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 py-20 text-center max-w-5xl">
         <h1 className="text-5xl md:text-7xl font-bold mb-6 text-balance leading-tight">
-          {t("hero.title")}
+          {t("hero.title.1")} <br />
+          {t("hero.title.2")} <br />
+          {t("hero.title.3")}
         </h1>
         <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
           {t("hero.subtitle")}
