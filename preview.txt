@@ -1,0 +1,8 @@
+const handleApprove = async () => {
+    if (!depositAmount) return;
+    setIsApproving(true);
+    try {
+      console.log("🎯 Starting approval process...");
+      // Add approval logic here
+      console.log("✅ Approval successful!");
+      alert("Approval successful! You can now deposit

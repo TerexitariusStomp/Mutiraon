@@ -6,6 +6,7 @@ import { ethers } from 'ethers';
 import { CONTRACT_ADDRESSES, ENVIRONMENTAL_TOKENS, COLLATERAL_TYPES } from '@/lib/contracts-updated';
 import { useI18n } from "@/i18n/I18nContext";
 import { useChainId } from 'wagmi';
+import { useStablecoin } from '@/hooks/useStablecoin';
 
 interface CollateralSelectionProps {
   initialCollateral?: 'CBiomaH'
@@ -16,6 +17,16 @@ const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) =>
   const { t } = useI18n();
   const appChainId = useChainId();
   const addresses = CONTRACT_ADDRESSES.sepolia;
+
+  const {
+    approveToken,
+    depositCollateral,
+    lockCollateral,
+    unlockCollateral,
+    generateAndSendStablecoin,
+    repayStablecoin,
+    withdrawCollateral,
+  } = useStablecoin('CBiomaH');
 
   const [selectedCollateral, setSelectedCollateral] = useState<keyof typeof ENVIRONMENTAL_TOKENS>(
     initialCollateral ?? 'CBiomaH'
@@ -231,12 +242,9 @@ const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) =>
     if (!depositAmount) return;
     setIsApproving(true);
     try {
-      console.log("🎯 Starting approval process...");
-      // Add approval logic here
-      console.log("✅ Approval successful!");
-      alert("Approval successful! You can now deposit the tokens.");
+      await approveToken(depositAmount, selectedCollateral);
     } catch (error: any) {
-      console.error('❌ Approval failed:', error);
+      console.error('Approval failed:', error);
       alert(`Approval failed: ${error.message || 'Unknown error'}. Check console for details.`);
     } finally {
       setIsApproving(false);
@@ -247,12 +255,10 @@ const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) =>
     if (!depositAmount) return;
     setIsDepositing(true);
     try {
-      console.log("🎯 Starting deposit process...");
-      // Add deposit logic here
-      console.log("✅ Deposit successful!");
+      await depositCollateral(depositAmount, selectedCollateral);
       setDepositAmount('');
     } catch (error: any) {
-      console.error('❌ Deposit failed:', error);
+      console.error('Deposit failed:', error);
       alert(`Deposit failed: ${error.message || 'Unknown error'}. Check console for details.`);
     } finally {
       setIsDepositing(false);
@@ -263,10 +269,10 @@ const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) =>
     if (!lockAmount) return;
     setIsLocking(true);
     try {
-      // Add lock logic here
+      await lockCollateral(lockAmount, currentIlkBytes as unknown as string);
       setLockAmount('');
     } catch (error: any) {
-      console.error('❌ Lock failed:', error);
+      console.error('Lock failed:', error);
       alert(`Lock failed: ${error.message || 'Unknown error'}.`);
     } finally {
       setIsLocking(false);
@@ -277,10 +283,10 @@ const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) =>
     if (!unlockAmount) return;
     setIsUnlocking(true);
     try {
-      // Add unlock logic here
+      await unlockCollateral(unlockAmount, currentIlkBytes as unknown as string);
       setUnlockAmount('');
     } catch (error: any) {
-      console.error('❌ Unlock failed:', error);
+      console.error('Unlock failed:', error);
       alert(`Unlock failed: ${error.message || 'Unknown error'}.`);
     } finally {
       setIsUnlocking(false);
@@ -291,10 +297,11 @@ const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) =>
     if (!mintAmount) return;
     setIsMinting(true);
     try {
-      // Add mint logic here
+      if (!address) throw new Error('Wallet not connected');
+      await generateAndSendStablecoin(mintAmount, currentIlkBytes as unknown as string, address as string);
       setMintAmount('');
     } catch (error: any) {
-      console.error('❌ Mint failed:', error);
+      console.error('Mint failed:', error);
       alert(`Mint failed: ${error.message || 'Unknown error'}.`);
     } finally {
       setIsMinting(false);
@@ -305,10 +312,10 @@ const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) =>
     if (!repayAmount) return;
     setIsRepaying(true);
     try {
-      // Add repay logic here
+      await repayStablecoin(repayAmount, currentIlkBytes as unknown as string);
       setRepayAmount('');
     } catch (error: any) {
-      console.error('❌ Repay failed:', error);
+      console.error('Repay failed:', error);
       alert(`Repay failed: ${error.message || 'Unknown error'}.`);
     } finally {
       setIsRepaying(false);
@@ -319,10 +326,10 @@ const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) =>
     if (!withdrawAmount) return;
     setIsWithdrawing(true);
     try {
-      // Add withdraw logic here
+      await withdrawCollateral(withdrawAmount, selectedCollateral);
       setWithdrawAmount('');
     } catch (error: any) {
-      console.error('❌ Withdraw failed:', error);
+      console.error('Withdraw failed:', error);
       alert(`Withdraw failed: ${error.message || 'Unknown error'}.`);
     } finally {
       setIsWithdrawing(false);
@@ -400,7 +407,7 @@ const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) =>
 
         {/* Vault Status & Health */}
         <div className="bg-gradient-to-r from-indigo-50 to-purple-50 p-4 rounded-lg border border-indigo-200">
-          <h4 className="font-semibold mb-3 text-indigo-800">🏛️ Vault Status</h4>
+          <h4 className="font-semibold mb-3 text-indigo-800">Ã°Å¸Ââ€ºÃ¯Â¸Â Vault Status</h4>
           {urnRaw ? (
             <div className="grid grid-cols-4 gap-4 text-sm">
               <div className="bg-white/60 p-3 rounded-lg">
@@ -433,7 +440,7 @@ const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) =>
                 <p className="font-bold text-lg text-orange-700">
                   {calculateMaxSafeMint()} Amaz-One Dollar
                 </p>
-                <p className="text-xs text-gray-500">⚠️ Contract enforces strict limits</p>
+                <p className="text-xs text-gray-500">Ã¢Å¡Â Ã¯Â¸Â Contract enforces strict limits</p>
               </div>
             </div>
           ) : (
@@ -448,7 +455,7 @@ const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) =>
         
         {/* 1. Deposit Collateral */}
         <div className="bg-green-50 p-4 rounded-lg border border-green-200">
-          <h4 className="font-semibold mb-3 text-green-800">💰 {t('vault.dep.title').replace('{code}', currentCollateralInfo.symbol)}</h4>
+          <h4 className="font-semibold mb-3 text-green-800">Ã°Å¸â€™Â° {t('vault.dep.title').replace('{code}', currentCollateralInfo.symbol)}</h4>
           <p className="text-sm text-green-700 mb-3">{t('vault.dep.what')}</p>
           
           <div className="space-y-3">
@@ -483,7 +490,7 @@ const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) =>
 
         {/* 2. Lock/Unlock Collateral */}
         <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
-          <h4 className="font-semibold mb-3 text-blue-800">🔒 {t('vault.lock.title')}</h4>
+          <h4 className="font-semibold mb-3 text-blue-800">Ã°Å¸â€â€™ {t('vault.lock.title')}</h4>
           <p className="text-sm text-blue-700 mb-3">{t('vault.lock.what')}</p>
           
           <div className="grid grid-cols-2 gap-4">
@@ -531,7 +538,7 @@ const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) =>
 
         {/* 3. Mint/Repay Stablecoin */}
         <div className="bg-purple-50 p-4 rounded-lg border border-purple-200">
-          <h4 className="font-semibold mb-3 text-purple-800">💵 {t('vault.mut.title')}</h4>
+          <h4 className="font-semibold mb-3 text-purple-800">Ã°Å¸â€™Âµ {t('vault.mut.title')}</h4>
           <p className="text-sm text-purple-700 mb-3">{t('vault.mut.what')}</p>
           
           <div className="grid grid-cols-2 gap-4">
@@ -579,7 +586,7 @@ const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) =>
 
         {/* 4. Withdraw Collateral */}
         <div className="bg-orange-50 p-4 rounded-lg border border-orange-200">
-          <h4 className="font-semibold mb-3 text-orange-800">↩️ {t('vault.wd.title')}</h4>
+          <h4 className="font-semibold mb-3 text-orange-800">Ã¢â€ Â©Ã¯Â¸Â {t('vault.wd.title')}</h4>
           <p className="text-sm text-orange-700 mb-3">{t('vault.wd.brief').replace('{code}', currentCollateralInfo.symbol)}</p>
           
           <div className="flex gap-2">
@@ -606,4 +613,7 @@ const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) =>
 };
 
 export default CollateralSelection;
+
+
+
 

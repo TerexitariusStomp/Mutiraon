@@ -205,7 +205,6 @@ export const pt = {
   "faucet.claim": "Reivindicar",
   "faucet.claiming": "Reivindicando...",
   "faucet.claimed": "Reivindicado",
-  "faucet.claimed": "Reivindicado",
   "faucet.success.both": "Ambas as reivindicações concluídas.",
   "faucet.success.token": "CBiomaH reivindicado com sucesso.",
   "faucet.success.eth": "ETH reivindicado com sucesso.",
@@ -215,3 +214,4 @@ export const pt = {
   "faucet.banner.subtitle": "Reivindique CBiomaH e ETH de Sepolia para começar a usar o app",
   "faucet.banner.cooldown": "Intervalo ativo — volte mais tarde",
 };
+

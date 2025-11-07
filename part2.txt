@@ -1,0 +1,51 @@
+    } catch {
+      return '0';
+    }
+  };
+
+  const handleApprove = async () => {\n    if (!depositAmount) return;\n    setIsApproving(true);\n    try {\n      await approveToken(depositAmount, selectedCollateral);\n    } catch (error: any) {\n      console.error('Approval failed:', error);\n      alert(Approval failed: . Check console for details.);\n    } finally {\n      setIsApproving(false);\n    }\n  };
+
+  const handleDeposit = async () => {\n    if (!depositAmount) return;\n    setIsDepositing(true);\n    try {\n      await depositCollateral(depositAmount, selectedCollateral);\n      setDepositAmount('');\n    } catch (error: any) {\n      console.error('Deposit failed:', error);\n      alert(Deposit failed: . Check console for details.);\n    } finally {\n      setIsDepositing(false);\n    }\n  };
+
+  const handleLock = async () => {\n    if (!lockAmount) return;\n    setIsLocking(true);\n    try {\n      await lockCollateral(lockAmount, currentIlkBytes as unknown as string);\n      setLockAmount('');\n    } catch (error: any) {\n      console.error('Lock failed:', error);\n      alert(Lock failed: .);\n    } finally {\n      setIsLocking(false);\n    }\n  };
+
+  const handleUnlock = async () => {\n    if (!unlockAmount) return;\n    setIsUnlocking(true);\n    try {\n      await unlockCollateral(unlockAmount, currentIlkBytes as unknown as string);\n      setUnlockAmount('');\n    } catch (error: any) {\n      console.error('Unlock failed:', error);\n      alert(Unlock failed: .);\n    } finally {\n      setIsUnlocking(false);\n    }\n  };
+
+  const handleMint = async () => {
+    if (!mintAmount) return;
+    setIsMinting(true);
+    try {
+      // Add mint logic here
+      setMintAmount('');
+    } catch (error: any) {
+      console.error('Ã¢ÂÅ’ Mint failed:', error);
+      alert(`Mint failed: ${error.message || 'Unknown error'}.`);
+    } finally {
+      setIsMinting(false);
+    }
+  };
+
+  const handleRepay = async () => {
+    if (!repayAmount) return;
+    setIsRepaying(true);
+    try {
+      // Add repay logic here
+      setRepayAmount('');
+    } catch (error: any) {
+      console.error('Ã¢ÂÅ’ Repay failed:', error);
+      alert(`Repay failed: ${error.message || 'Unknown error'}.`);
+    } finally {
+      setIsRepaying(false);
+    }
+  };
+
+  const handleWithdrawCollateral = async () => {
+    if (!withdrawAmount) return;
+    setIsWithdrawing(true);
+    try {
+      // Add withdraw logic here
+      setWithdrawAmount('');
+    } catch (error: any) {
+      console.error('Ã¢ÂÅ’ Withdraw failed:', error);
+      alert(`Withdraw failed: ${error.message || 'Unknown error'}.`);
+    } finally {

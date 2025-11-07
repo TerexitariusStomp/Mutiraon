@@ -173,7 +173,6 @@ export const en = {
   "faucet.claim": "Claim",
   "faucet.claiming": "Claiming...",
   "faucet.claimed": "Claimed",
-  "faucet.claimed": "Claimed",
   "faucet.success.both": "Both claims successful.",
   "faucet.success.token": "CBiomaH claim successful.",
   "faucet.success.eth": "ETH claim successful.",
@@ -226,5 +225,6 @@ export const en = {
   "price.diff": "PRICE DIFFERENCE",
   "price.rate": "REDEMPTION RATE",
 };
+
 
 
