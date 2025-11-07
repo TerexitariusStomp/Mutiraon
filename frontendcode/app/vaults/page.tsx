@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { waitForTxConfirmation } from "@src/lib/utils";
 import { ILK_CBiomaH } from "@src/lib/contracts-updated";
-import CombinedFaucetClaim from "@/components/sections/combined-faucet-claim";
+import CombinedFaucetClaim from "@src/components/sections/combined-faucet-claim";
 
 export default function VaultsPage() {
   const { t, lang } = useI18n();
@@ -79,15 +79,19 @@ export default function VaultsPage() {
   };
 
   const doLock = async () => {
-    if (!requireWallet() || !lockAmount) return;
-    const hash = await lockCollateral(lockAmount, ILK_CBiomaH);
-    toast.message(lang === "pt" ? "Transação enviada" : "Transaction submitted", { description: hash });
-    await waitForTxConfirmation(hash);
-    toast.success("Lock OK");
-    setLockAmount("");
-    refetchData();
-    setTimeout(refetchData, 1500);
-  };
+  if (!requireWallet()) return;
+  const amountToLock = lockAmount && Number(lockAmount) > 0
+    ? lockAmount
+    : (Number(gem) > 0 ? Number(gem).toFixed(4) : "");
+  if (!amountToLock) return;
+  const hash = await lockCollateral(amountToLock, ILK_CBiomaH);
+  toast.message("Transaction submitted", { description: hash });
+  await waitForTxConfirmation(hash);
+  toast.success("Lock OK");
+  setLockAmount("");
+  refetchData();
+  setTimeout(refetchData, 1500);
+};
 
   const doUnlock = async () => {
     if (!requireWallet() || !unlockAmount) return;
@@ -209,7 +213,7 @@ export default function VaultsPage() {
               <Button size="sm" variant="outline" onClick={() => setLockAmount((Number(gem) || 0).toFixed(4))} disabled={isPending}>
                 {t('common.max') || 'Max'}
               </Button>
-              <Button onClick={doLock} disabled={isPending || !lockAmount}>{t('vault.lock.btn')}</Button>
+              <Button onClick={doLock} disabled={isPending || (!lockAmount && Number(gem) <= 0)}>{t('vault.lock.btn')}</Button>
             </div>
             <label className="text-sm text-muted-foreground">{t('vault.unlock.label')}</label>
             <div className="flex gap-2">
@@ -270,7 +274,6 @@ export default function VaultsPage() {
               ? 'Obtenha tokens de teste para experimentar o protocolo.'
               : 'Get test tokens to try out the protocol.'}
           </p>
-          <CombinedFaucetClaim />
         </section>
 
         {/* Authorize */}
@@ -288,3 +291,4 @@ export default function VaultsPage() {
     </main>
   );
 }
+
