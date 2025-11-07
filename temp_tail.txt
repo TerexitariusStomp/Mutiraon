@@ -1,0 +1,200 @@
+            { name: 'usr', type: 'address' },
+            { name: 'wad', type: 'uint256' },
+          ],
+          outputs: [],
+        },
+      ],
+      functionName: 'join',
+      args: [address as `0x${string}`, wad],
+    })
+  }
+
+  const authorizeVat = async () => {
+    return writeContractAsync({
+      address: vatAddress,
+      abi: [
+        { name: 'hope', type: 'function', stateMutability: 'nonpayable', inputs: [{ name: 'usr', type: 'address' }], outputs: [] },
+      ],
+      functionName: 'hope',
+      args: [daiJoinAddress],
+    })
+  }
+
+  const lockCollateral = async (amount: string, ilkArg: string) => {
+    const wad = parseEther(amount)
+    if (wad > gemWad) throw new Error(`Cannot lock more than available. Available: ${formatEther(gemWad)}`)
+    return writeContractAsync({
+      address: vatAddress,
+      abi: [
+        {
+          name: 'frob',
+          type: 'function',
+          stateMutability: 'nonpayable',
+          inputs: [
+            { name: 'i', type: 'bytes32' },
+            { name: 'u', type: 'address' },
+            { name: 'v', type: 'address' },
+            { name: 'w', type: 'address' },
+            { name: 'dink', type: 'int256' },
+            { name: 'dart', type: 'int256' },
+          ],
+          outputs: [],
+        },
+      ],
+      functionName: 'frob',
+      args: [ilkArg as `0x${string}`, address as `0x${string}`, address as `0x${string}`, address as `0x${string}`, wad, 0n],
+    })
+  }
+
+  const unlockCollateral = async (amount: string, ilkArg: string) => {
+    const req = parseEther(amount)
+    // Safety: ensure vault remains safe (rate*art <= (ink-req)*spot)
+    if (rateRay !== 0n && spotRay !== 0n) {
+      const minInkRequired = (rateRay * artWad + (spotRay - 1n)) / spotRay // ceil
+      const maxUnlock = inkWad > minInkRequired ? inkWad - minInkRequired : 0n
+      if (req > maxUnlock) throw new Error(`Unlock would be unsafe. Max: ${formatEther(maxUnlock)}`)
+    }
+    return writeContractAsync({
+      address: vatAddress,
+      abi: [
+        {
+          name: 'frob',
+          type: 'function',
+          stateMutability: 'nonpayable',
+          inputs: [
+            { name: 'i', type: 'bytes32' },
+            { name: 'u', type: 'address' },
+            { name: 'v', type: 'address' },
+            { name: 'w', type: 'address' },
+            { name: 'dink', type: 'int256' },
+            { name: 'dart', type: 'int256' },
+          ],
+          outputs: [],
+        },
+      ],
+      functionName: 'frob',
+      args: [ilkArg as `0x${string}`, address as `0x${string}`, address as `0x${string}`, address as `0x${string}`, -req, 0n],
+    })
+  }
+
+  const generateStablecoin = async (amount: string, ilkArg: string) => {
+    const req = parseEther(amount)
+    if (req > safeMaxMintWad) throw new Error(`Mint exceeds safe limit. Max: ${safeMaxMint}`)
+    return writeContractAsync({
+      address: vatAddress,
+      abi: [
+        {
+          name: 'frob',
+          type: 'function',
+          stateMutability: 'nonpayable',
+          inputs: [
+            { name: 'i', type: 'bytes32' },
+            { name: 'u', type: 'address' },
+            { name: 'v', type: 'address' },
+            { name: 'w', type: 'address' },
+            { name: 'dink', type: 'int256' },
+            { name: 'dart', type: 'int256' },
+          ],
+          outputs: [],
+        },
+      ],
+      functionName: 'frob',
+      args: [ilkArg as `0x${string}`, address as `0x${string}`, address as `0x${string}`, address as `0x${string}`, 0n, req],
+    })
+  }
+
+  const repayStablecoin = async (amount: string, ilkArg: string) => {
+    const req = parseEther(amount)
+    return writeContractAsync({
+      address: vatAddress,
+      abi: [
+        {
+          name: 'frob',
+          type: 'function',
+          stateMutability: 'nonpayable',
+          inputs: [
+            { name: 'i', type: 'bytes32' },
+            { name: 'u', type: 'address' },
+            { name: 'v', type: 'address' },
+            { name: 'w', type: 'address' },
+            { name: 'dink', type: 'int256' },
+            { name: 'dart', type: 'int256' },
+          ],
+          outputs: [],
+        },
+      ],
+      functionName: 'frob',
+      args: [ilkArg as `0x${string}`, address as `0x${string}`, address as `0x${string}`, address as `0x${string}`, 0n, -req],
+    })
+  }
+
+  const withdrawStablecoin = async (amount: string, _ilkArg: string) => {
+    const wad = parseEther(amount)
+    return writeContractAsync({
+      address: daiJoinAddress,
+      abi: [
+        {
+          name: 'exit',
+          type: 'function',
+          stateMutability: 'nonpayable',
+          inputs: [
+            { name: 'usr', type: 'address' },
+            { name: 'wad', type: 'uint256' },
+          ],
+          outputs: [],
+        },
+      ],
+      functionName: 'exit',
+      args: [address as `0x${string}`, wad],
+    })
+  }
+
+  const withdrawCollateral = async (amount: string, _collateral: 'CBiomaH') => {
+    const wad = parseUnits(amount, tokenDecimals)
+    return writeContractAsync({
+      address: joinAddress,
+      abi: [
+        {
+          name: 'exit',
+          type: 'function',
+          stateMutability: 'nonpayable',
+          inputs: [
+            { name: 'usr', type: 'address' },
+            { name: 'wad', type: 'uint256' },
+          ],
+          outputs: [],
+        },
+      ],
+      functionName: 'exit',
+      args: [address as `0x${string}`, wad],
+    })
+  }
+
+  // After a successful tx, lightly refresh state
+  if (isSuccess) setTimeout(refresh, 1500)
+
+  return {
+    // formatted data
+    ink,
+    art,
+    gem,
+    walletTokenBalance,
+    stableAvailable,
+    safeMaxMint,
+    // actions
+    approveToken,
+    depositCollateral,
+    authorizeVat,
+    lockCollateral,
+    unlockCollateral,
+    generateStablecoin,
+    repayStablecoin,
+    withdrawStablecoin,
+    withdrawCollateral,
+    // status + refresh
+    isPending,
+    isSuccess,
+    refetchData: refresh,
+  }
+}
+

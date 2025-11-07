@@ -19,6 +19,9 @@ export default function VaultsPage() {
     ink,
     art,
     gem,
+    walletTokenBalance,
+    stableAvailable,
+    safeMaxMint,
     depositCollateral,
     approveToken,
     authorizeVat,
@@ -152,7 +155,11 @@ export default function VaultsPage() {
         </header>
 
         {/* Balances */}
-        <section className="grid gap-4 md:grid-cols-3">
+        <section className="grid gap-4 md:grid-cols-4">
+          <div className="rounded-xl border border-border bg-card p-4">
+            <h3 className="font-semibold text-foreground mb-1">{t('vault.bal.wallet').replace('{code}', selectedCollateral)}</h3>
+            <p className="text-2xl font-bold">{parseFloat(walletTokenBalance).toFixed(4)} {selectedCollateral}</p>
+          </div>
           <div className="rounded-xl border border-border bg-card p-4">
             <h3 className="font-semibold text-foreground mb-1">{t('vault.bal.deposited').replace('{code}', selectedCollateral)}</h3>
             <p className="text-2xl font-bold">{parseFloat(gem).toFixed(4)} {selectedCollateral}</p>
