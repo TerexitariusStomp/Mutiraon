@@ -2,10 +2,41 @@
 
 import { useState } from "react";
 import { useI18n } from "@/i18n/I18nContext";
+import { useStablecoin } from "@/hooks/useStablecoin";
+import { useAccount } from "wagmi";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { toast } from 'sonner'
 
 export default function VaultsPage() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const [selectedCollateral, setSelectedCollateral] = useState("CBiomaH");
+  const { address } = useAccount();
+  const {
+    ink,
+    art,
+    depositCollateral,
+    approveToken,
+    authorizeVat,
+    lockCollateral,
+    unlockCollateral,
+    generateStablecoin,
+    generateAndSendStablecoin,
+    withdrawStablecoin,
+    repayStablecoin,
+    withdrawCollateral,
+    isPending,
+    isSuccess,
+    refetchData,
+  } = useStablecoin(selectedCollateral as 'CBiomaH');
+  const [depositAmount, setDepositAmount] = useState("");
+  const [withdrawAmount, setWithdrawAmount] = useState("");
+  const [lockAmount, setLockAmount] = useState("");
+  const [unlockAmount, setUnlockAmount] = useState("");
+  const [mintAmount, setMintAmount] = useState("");
+  const [repayAmount, setRepayAmount] = useState("");
+  const [currentStep, setCurrentStep] = useState(-1);
+  const [completedSteps, setCompletedSteps] = useState<Set<number>>(new Set());
 
   const icons: Record<string, string> = {
     CBiomaH: "dYO3",
@@ -14,6 +45,166 @@ export default function VaultsPage() {
   const collaterals = [
     { code: "CBiomaH" },
   ];
+
+  const handleDepositApprove = async () => {
+    if (!depositAmount) return;
+    console.log("Deposit Approve button clicked with amount:", depositAmount);
+
+    // Check if user is connected to wallet
+    if (!address) {
+      alert("Please connect your wallet first before depositing.");
+      return;
+    }
+
+    try {
+      console.log("Calling approveToken...");
+      await approveToken(depositAmount, selectedCollateral as 'CBiomaH');
+      console.log("Approve completed successfully");
+      toast.success(`Approve ${selectedCollateral}: OK`);
+    } catch (error) {
+      console.error("Approve failed:", error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      alert(`Approve failed: ${errorMessage}`);
+    }
+  };
+
+  const handleDeposit = async () => {
+    if (!depositAmount) return;
+    console.log("Deposit button clicked with amount:", depositAmount);
+
+    // Check if user is connected to wallet
+    if (!address) {
+      alert("Please connect your wallet first before depositing.");
+      return;
+    }
+
+    try {
+      console.log("Calling depositCollateral...");
+      await depositCollateral(depositAmount, selectedCollateral as 'CBiomaH');
+      console.log("Deposit completed successfully");
+      toast.success(`Deposit ${selectedCollateral}: OK`);
+      setDepositAmount("");
+    } catch (error) {
+      console.error("Deposit failed:", error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      alert(`Deposit failed: ${errorMessage}`);
+    }
+  };
+
+  const handleLock = async () => {
+    if (!lockAmount) return;
+    console.log("Lock button clicked with amount:", lockAmount);
+
+    // Check if user is connected to wallet
+    if (!address) {
+      alert("Please connect your wallet first before locking.");
+      return;
+    }
+
+    try {
+      console.log("Calling lockCollateral...");
+      await lockCollateral(lockAmount, '0x4342696f6d614800000000000000000000000000000000000000000000000000');
+      console.log("Lock completed successfully");
+      toast.success(`Lock ${selectedCollateral}: OK`);
+      setLockAmount("");
+    } catch (error) {
+      console.error("Lock failed:", error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      alert(`Lock failed: ${errorMessage}`);
+    }
+  };
+
+  const handleUnlock = async () => {
+    if (!unlockAmount) return;
+    console.log("Unlock button clicked with amount:", unlockAmount);
+
+    // Check if user is connected to wallet
+    if (!address) {
+      alert("Please connect your wallet first before unlocking.");
+      return;
+    }
+
+    try {
+      console.log("Calling unlockCollateral...");
+      await unlockCollateral(unlockAmount, '0x4342696f6d614800000000000000000000000000000000000000000000000000');
+      console.log("Unlock completed successfully");
+      toast.success(`Unlock ${selectedCollateral}: OK`);
+      setUnlockAmount("");
+    } catch (error) {
+      console.error("Unlock failed:", error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      alert(`Unlock failed: ${errorMessage}`);
+    }
+  };
+
+  const handleMint = async () => {
+    if (!mintAmount) return;
+    console.log("Mint button clicked with amount:", mintAmount);
+
+    // Check if user is connected to wallet
+    if (!address) {
+      alert("Please connect your wallet first before minting.");
+      return;
+    }
+
+    try {
+      console.log("Calling generateAndSendStablecoin...");
+      await generateAndSendStablecoin(mintAmount, '0x4342696f6d614800000000000000000000000000000000000000000000000000', address);
+      console.log("Mint completed successfully");
+      toast.success(`Mint ONEDOLLAR: OK`);
+      setMintAmount("");
+    } catch (error) {
+      console.error("Mint failed:", error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      alert(`Mint failed: ${errorMessage}`);
+    }
+  };
+
+  const handleRepay = async () => {
+    if (!repayAmount) return;
+    console.log("Repay button clicked with amount:", repayAmount);
+
+    // Check if user is connected to wallet
+    if (!address) {
+      alert("Please connect your wallet first before repaying.");
+      return;
+    }
+
+    try {
+      console.log("Calling repayStablecoin...");
+      await repayStablecoin(repayAmount, '0x4342696f6d614800000000000000000000000000000000000000000000000000');
+      console.log("Repay completed successfully");
+      toast.success(`Repay ONEDOLLAR: OK`);
+      setRepayAmount("");
+    } catch (error) {
+      console.error("Repay failed:", error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      alert(`Repay failed: ${errorMessage}`);
+    }
+  };
+
+  const handleWithdraw = async () => {
+    if (!withdrawAmount) return;
+    console.log("Withdraw button clicked with amount:", withdrawAmount);
+
+    // Check if user is connected to wallet
+    if (!address) {
+      alert("Please connect your wallet first before withdrawing.");
+      return;
+    }
+
+    try {
+      console.log("Calling withdrawCollateral...");
+      await withdrawCollateral(withdrawAmount, selectedCollateral as 'CBiomaH');
+      console.log("Withdraw completed successfully");
+      toast.success(`Withdraw ${selectedCollateral}: OK`);
+      setWithdrawAmount("");
+    } catch (error) {
+      console.error("Withdraw failed:", error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      alert(`Withdraw failed: ${errorMessage}`);
+    }
+  };
 
   return (
     <div className="container mx-auto min-h-[70vh] px-4 py-12">
@@ -71,7 +262,7 @@ export default function VaultsPage() {
             </div>
             <div className="rounded-xl border border-border bg-card p-4">
               <h3 className="font-semibold text-foreground mb-2">{t('vault.bal.deposited').replace('{code}', selectedCollateral)}</h3>
-              <p className="text-2xl font-bold text-foreground">0.00 {selectedCollateral}</p>
+              <p className="text-2xl font-bold text-foreground">{parseFloat(ink).toFixed(4)} {selectedCollateral}</p>
             </div>
             <div className="rounded-xl border border-border bg-card p-4">
               <h3 className="font-semibold text-foreground mb-2">{t('vault.bal.available')}</h3>
@@ -79,7 +270,7 @@ export default function VaultsPage() {
             </div>
             <div className="rounded-xl border border-border bg-card p-4">
               <h3 className="font-semibold text-foreground mb-2">{t('vault.bal.mut')}</h3>
-              <p className="text-2xl font-bold text-foreground">0.00 Amaz-One Dollar</p>
+              <p className="text-2xl font-bold text-foreground">{parseFloat(art).toFixed(4)} Amaz-One Dollar</p>
             </div>
           </div>
 
@@ -89,11 +280,11 @@ export default function VaultsPage() {
             <div className="grid gap-4 md:grid-cols-2">
               <div>
                 <p className="text-sm text-muted-foreground">{t('vault.status.locked')}</p>
-                <p className="text-xl font-semibold text-foreground">0.00 {selectedCollateral}</p>
+                <p className="text-xl font-semibold text-foreground">{parseFloat(ink).toFixed(4)} {selectedCollateral}</p>
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">{t('vault.status.debt')}</p>
-                <p className="text-xl font-semibold text-foreground">0.00 Amaz-One Dollar</p>
+                <p className="text-xl font-semibold text-foreground">{parseFloat(art).toFixed(4)} Amaz-One Dollar</p>
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">{t('vault.status.avail')}</p>
@@ -127,15 +318,17 @@ export default function VaultsPage() {
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">{t('vault.dep.amount').replace('{code}', selectedCollateral)}</label>
-                <input
+                <Input
                   type="number"
-                  className="w-full rounded-lg border border-border bg-background px-3 py-2 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                  value={depositAmount}
+                  onChange={(e) => setDepositAmount(e.target.value)}
+                  className="w-full"
                   placeholder="0.00"
                 />
               </div>
               <div className="flex gap-3">
-                <button className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:opacity-90">{t('vault.dep.approve')}</button>
-                <button className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:opacity-90">{t('vault.dep.deposit')}</button>
+                <Button onClick={handleDepositApprove} disabled={isPending || !depositAmount} className="flex-1">{t('vault.dep.approve')}</Button>
+                <Button onClick={handleDeposit} disabled={isPending || !depositAmount} className="flex-1">{t('vault.dep.deposit')}</Button>
               </div>
             </div>
           </div>
@@ -158,23 +351,27 @@ export default function VaultsPage() {
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">{t('vault.lock.label')}</label>
                 <div className="flex gap-2">
-                  <input
+                  <Input
                     type="number"
-                    className="flex-1 rounded-lg border border-border bg-background px-3 py-2 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                    value={lockAmount}
+                    onChange={(e) => setLockAmount(e.target.value)}
+                    className="flex-1"
                     placeholder={t('vault.lock.placeholder')}
                   />
-                  <button className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:opacity-90">{t('vault.lock.btn')}</button>
+                  <Button onClick={handleLock} disabled={isPending || !lockAmount} className="px-4">{t('vault.lock.btn')}</Button>
                 </div>
               </div>
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">{t('vault.unlock.label')}</label>
                 <div className="flex gap-2">
-                  <input
+                  <Input
                     type="number"
-                    className="flex-1 rounded-lg border border-border bg-background px-3 py-2 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                    value={unlockAmount}
+                    onChange={(e) => setUnlockAmount(e.target.value)}
+                    className="flex-1"
                     placeholder={t('vault.unlock.placeholder')}
                   />
-                  <button className="rounded-lg bg-sBIOMEndary px-4 py-2 text-sm font-semibold text-sBIOMEndary-foreground hover:opacity-90">{t('vault.unlock.btn')}</button>
+                  <Button onClick={handleUnlock} disabled={isPending || !unlockAmount} variant="outline" className="px-4">{t('vault.unlock.btn')}</Button>
                 </div>
               </div>
             </div>
@@ -200,23 +397,27 @@ export default function VaultsPage() {
                 <label className="block text-sm font-medium text-foreground mb-2">{t('vault.mut.mint.label')}</label>
                 <p className="text-xs text-muted-foreground mb-2">{t('vault.mut.mint.maxsafe').replace('{amt}', '0')}</p>
                 <div className="flex gap-2">
-                  <input
+                  <Input
                     type="number"
-                    className="flex-1 rounded-lg border border-border bg-background px-3 py-2 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                    value={mintAmount}
+                    onChange={(e) => setMintAmount(e.target.value)}
+                    className="flex-1"
                     placeholder={t('vault.mut.mint.placeholder')}
                   />
-                  <button className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:opacity-90">{t('vault.mut.mint.btn')}</button>
+                  <Button onClick={handleMint} disabled={isPending || !mintAmount} className="px-4">{t('vault.mut.mint.btn')}</Button>
                 </div>
               </div>
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">{t('vault.mut.repay.label')}</label>
                 <div className="flex gap-2">
-                  <input
+                  <Input
                     type="number"
-                    className="flex-1 rounded-lg border border-border bg-background px-3 py-2 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                    value={repayAmount}
+                    onChange={(e) => setRepayAmount(e.target.value)}
+                    className="flex-1"
                     placeholder={t('vault.mut.repay.placeholder')}
                   />
-                  <button className="rounded-lg bg-sBIOMEndary px-4 py-2 text-sm font-semibold text-sBIOMEndary-foreground hover:opacity-90">{t('vault.mut.repay.btn')}</button>
+                  <Button onClick={handleRepay} disabled={isPending || !repayAmount} variant="outline" className="px-4">{t('vault.mut.repay.btn')}</Button>
                 </div>
               </div>
             </div>
@@ -254,12 +455,14 @@ export default function VaultsPage() {
             <div className="mt-4">
               <label className="block text-sm font-medium text-foreground mb-2">{t('vault.wd.only')}</label>
               <div className="flex gap-2">
-                <input
+                <Input
                   type="number"
-                  className="flex-1 rounded-lg border border-border bg-background px-3 py-2 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                  value={withdrawAmount}
+                  onChange={(e) => setWithdrawAmount(e.target.value)}
+                  className="flex-1"
                   placeholder={t('vault.wd.placeholder')}
                 />
-                <button className="rounded-lg bg-sBIOMEndary px-4 py-2 text-sm font-semibold text-sBIOMEndary-foreground hover:opacity-90">{t('vault.wd.btn')}</button>
+                <Button onClick={handleWithdraw} disabled={isPending || !withdrawAmount} variant="outline" className="px-4">{t('vault.wd.btn')}</Button>
               </div>
             </div>
           </div>

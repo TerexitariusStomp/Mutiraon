@@ -75,11 +75,30 @@ export default function StakePage() {
       await stepFunction();
       setCompletedSteps((prev) => new Set([...prev, stepIndex]));
       setCurrentStep(-1); // Reset current step
+      // Show success message
+      const stepTitles = [
+        t('stake.steps.update.title'),
+        t('stake.steps.approve.title'),
+        t('stake.steps.join.title'),
+        t('stake.steps.auth.title'),
+        t('stake.steps.deposit.title'),
+      ];
+      toast.success(`${stepTitles[stepIndex]}: ${lang === 'pt' ? 'Concluído com sucesso' : 'Completed successfully'}`);
       // Refetch all data after each successful step
       setTimeout(() => refetchData(), 2000);
     } catch (error) {
       console.error(`Step ${stepIndex + 1} failed:`, error);
       setCurrentStep(-1);
+      // Show error message
+      const stepTitles = [
+        t('stake.steps.update.title'),
+        t('stake.steps.approve.title'),
+        t('stake.steps.join.title'),
+        t('stake.steps.auth.title'),
+        t('stake.steps.deposit.title'),
+      ];
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      toast.error(`${stepTitles[stepIndex]}: ${lang === 'pt' ? 'Falhou' : 'Failed'} - ${errorMessage}`);
     }
   };
 
