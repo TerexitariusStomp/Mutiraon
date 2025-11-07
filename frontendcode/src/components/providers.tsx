@@ -4,7 +4,7 @@ import '@rainbow-me/rainbowkit/styles.css';
 import { RainbowKitProvider, darkTheme } from '@rainbow-me/rainbowkit';
 import { WagmiProvider } from 'wagmi'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { config } from '@/src/lib/wagmi'
+import { config } from '@src/lib/wagmi'
 import { I18nProvider } from "@/i18n/I18nContext";
 
 const queryClient = new QueryClient()

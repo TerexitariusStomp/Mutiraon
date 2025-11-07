@@ -3,7 +3,7 @@
 import { useMemo } from "react";
 import { useAccount, useReadContract, useWriteContract, useWaitForTransactionReceipt } from "wagmi";
 import { formatEther, formatUnits } from "viem";
-import { CONTRACT_ADDRESSES, FAUCET_ABI, ETH_FAUCET_ABI } from "@/src/lib/contracts-updated";
+import { CONTRACT_ADDRESSES, FAUCET_ABI, ETH_FAUCET_ABI } from "@src/lib/contracts-updated";
 import { useI18n } from "@/i18n/I18nContext";
 
 export default function CombinedFaucetClaim() {

@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import "./globals.css";
-import ErrorReporter from "@/src/components/ErrorReporter";
+import ErrorReporter from "@src/components/ErrorReporter";
 import Script from "next/script";
-import { Providers } from "@/src/components/providers";
+import { Providers } from "@src/components/providers";
 import { Toaster } from "@/components/ui/sonner";
-import Navigation from "@/src/components/sections/navigation";
-import FaucetBanner from "@/src/components/sections/faucet-banner";
-import RiskDisclaimer from "@/src/components/sections/risk-disclaimer";
+import Navigation from "@src/components/sections/navigation";
+import FaucetBanner from "@src/components/sections/faucet-banner";
+import RiskDisclaimer from "@src/components/sections/risk-disclaimer";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {

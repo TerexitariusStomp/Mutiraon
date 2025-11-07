@@ -1,7 +1,7 @@
 "use client";
 
 import { CONTRACTS } from "@/lib/contracts";
-import { usePot } from "@/src/hooks/usePot";
+import { usePot } from "@src/hooks/usePot";
 import { useState } from "react";
 import { useAccount } from "wagmi";
 import { Button } from "@/components/ui/button";
@@ -18,7 +18,7 @@ import { Separator } from "@/components/ui/separator";
 import { useI18n } from "@/i18n/I18nContext";
 
 import { toast } from 'sonner'
-import { waitForTxConfirmation } from "../../lib/utils";
+import { waitForTxConfirmation } from "@src/lib/utils";
 export default function StakePage() {
   const { t, lang } = useI18n();
   const {

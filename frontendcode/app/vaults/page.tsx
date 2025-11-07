@@ -2,13 +2,13 @@
 
 import { useState } from "react";
 import { useI18n } from "@/i18n/I18nContext";
-import { useStablecoin } from "@/src/hooks/useStablecoin";
+import { useStablecoin } from "@src/hooks/useStablecoin";
 import { useAccount } from "wagmi";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from 'sonner'
-import { waitForTxConfirmation } from "../../lib/utils";
-import { ILK_CBiomaH } from "@/src/lib/contracts-updated";
+import { waitForTxConfirmation } from "@src/lib/utils";
+import { ILK_CBiomaH } from "@src/lib/contracts-updated";
 
 export default function VaultsPage() {
   const { t, lang } = useI18n();

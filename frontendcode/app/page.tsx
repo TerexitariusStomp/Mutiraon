@@ -19,15 +19,15 @@ import { Impact } from "@/components/impact";
 
 import { Footer } from "@/components/footer";
 
-import HeroSection from "@/src/components/sections/hero-section";
+import HeroSection from "@src/components/sections/hero-section";
 
-import CollateralSelection from "@/src/components/sections/collateral-selection";
+import CollateralSelection from "@src/components/sections/collateral-selection";
 
-import WalletConnection from "@/src/components/sections/wallet-connection";
+import WalletConnection from "@src/components/sections/wallet-connection";
 
-import CombinedFaucetClaim from "@/src/components/sections/combined-faucet-claim";
+import CombinedFaucetClaim from "@src/components/sections/combined-faucet-claim";
 
-import DecorativeElements from "@/src/components/sections/decorative-elements";
+import DecorativeElements from "@src/components/sections/decorative-elements";
 
 
 export default function Page() {
@@ -91,5 +91,4 @@ export default function Page() {
   );
 
 }
-
 

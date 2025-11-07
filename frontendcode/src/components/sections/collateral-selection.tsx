@@ -3,11 +3,11 @@
 import { useState, useEffect } from 'react';
 import { useAccount, useReadContract } from 'wagmi';
 import { ethers } from 'ethers';
-import { CONTRACT_ADDRESSES, ENVIRONMENTAL_TOKENS, COLLATERAL_TYPES } from '@/src/lib/contracts-updated';
+import { CONTRACT_ADDRESSES, ENVIRONMENTAL_TOKENS, COLLATERAL_TYPES } from '@src/lib/contracts-updated';
 import { useI18n } from "@/i18n/I18nContext";
 import { useChainId } from 'wagmi';
 import { toast } from 'sonner';
-import { useStablecoin } from '@/src/hooks/useStablecoin';
+import { useStablecoin } from '@src/hooks/useStablecoin';
 
 interface CollateralSelectionProps {
   initialCollateral?: 'CBiomaH'
