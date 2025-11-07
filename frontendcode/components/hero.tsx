@@ -24,7 +24,6 @@ export function Hero() {
         <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
           {t("hero.subtitle")}
         </p>
-        {/* CTA buttons removed; use header navigation */}
       </div>
 
       {/* Scroll Indicator */}

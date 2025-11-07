@@ -8,6 +8,7 @@ export const pt = {
   "nav.more": "Mais",
   "nav.home": "Início",
   "nav.stake": "Poupança",
+  "nav.vaults": "Cofres",
   "nav.docs": "Docs",
   "nav.github": "GitHub",
   "nav.telegram": "Telegram",

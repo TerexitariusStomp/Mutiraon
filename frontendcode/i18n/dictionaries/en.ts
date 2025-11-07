@@ -13,6 +13,7 @@ export const en = {
   "nav.more": "More",
   "nav.home": "Home",
   "nav.stake": "Stake",
+  "nav.vaults": "Vaults",
   "nav.docs": "Docs",
   "nav.github": "GitHub",
   "nav.telegram": "Telegram",

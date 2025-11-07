@@ -16,8 +16,8 @@ import {
 
 const navLinks = [
   { key: "nav.home", href: "/", active: true },
+  { key: "nav.vaults", href: "/vaults", active: false },
   { key: "nav.stake", href: "/stake", active: false },
-  { key: "nav.get", href: "/stake", active: false },
 ];
 
 const InnerNav = () => {
