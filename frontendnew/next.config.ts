@@ -3,13 +3,15 @@ import path from "node:path";
 
 const LOADER = path.resolve(__dirname, 'src/visual-edits/component-tagger-loader.js');
 
+const isProd = process.env.NODE_ENV === 'production';
+
 const nextConfig: NextConfig = {
   // Enable development server
-  output: process.env.NODE_ENV === 'production' ? 'export' : undefined,
+  output: isProd ? 'export' : undefined,
   // Safer for static hosts (S3, CF Pages, etc.)
   trailingSlash: true,
   // Base path for GitHub Pages deployment at /Mutiraon/
-  basePath: process.env.NODE_ENV === 'production' ? '/Mutiraon' : '',
+  basePath: isProd ? '/Mutiraon' : '',
 
   images: {
     // next/image optimization is not available on static export
@@ -26,7 +28,10 @@ const nextConfig: NextConfig = {
     ],
   },
 
-  outputFileTracingRoot: path.resolve(__dirname, '../../'),
+  // Disable server output tracing for static exports to avoid pages/_app traces
+  outputFileTracing: isProd ? false : undefined,
+  // Only set tracing root in non-export mode if needed
+  // outputFileTracingRoot: path.resolve(__dirname, '../../'),
 
   // Turbopack configuration (replacement for deprecated experimental.turbo)
   turbopack: {

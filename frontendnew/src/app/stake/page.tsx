@@ -212,7 +212,7 @@ export default function StakePage() {
                       ? t('stake.steps.join.desc.some').replace('{amount}', depositAmount)
                       : t('stake.steps.join.desc.none'),
                     function: () => joinStablecoinToVat(depositAmount || "0"),
-                    icon: "ðŸ¦",
+                    icon: "🏦",
                   },
                   {
                     title: t('stake.steps.auth.title'),
@@ -238,7 +238,7 @@ export default function StakePage() {
                         <div
                           className={`text-xl ${completedSteps.has(index) ? "text-green-500" : currentStep === index ? "text-blue-500 animate-pulse" : "text-gray-400"}`}
                         >
-                          {completedSteps.has(index) ? "âœ…" : step.icon}
+                          {completedSteps.has(index) ? "✅" : step.icon}
                         </div>
                         <div>
                           <h4 className="font-medium text-sm">{t('stake.step')} {index + 1}: {step.title}</h4>
@@ -274,39 +274,39 @@ export default function StakePage() {
                         }`}>
                           {index === 0 && (
                             <>
-                              <li>â€¢ {t('stake.bullets.0.1')}</li>
-                              <li>â€¢ {t('stake.bullets.0.2')}</li>
-                              <li>â€¢ {t('stake.bullets.0.3')}</li>
+                              <li>• {t('stake.bullets.0.1')}</li>
+                              <li>• {t('stake.bullets.0.2')}</li>
+                              <li>• {t('stake.bullets.0.3')}</li>
                             </>
                           )}
                           {index === 1 && (
                             <>
-                              <li>â€¢ {t('stake.bullets.1.1')}</li>
-                              <li>â€¢ {t('stake.bullets.1.2')}</li>
-                              <li>â€¢ {t('stake.bullets.1.3')}</li>
-                              <li>â€¢ {t('stake.bullets.1.4')}</li>
+                              <li>• {t('stake.bullets.1.1')}</li>
+                              <li>• {t('stake.bullets.1.2')}</li>
+                              <li>• {t('stake.bullets.1.3')}</li>
+                              <li>• {t('stake.bullets.1.4')}</li>
                             </>
                           )}
                           {index === 2 && (
                             <>
-                              <li>â€¢ {t('stake.bullets.2.1')}</li>
-                              <li>â€¢ {t('stake.bullets.2.2')}</li>
-                              <li>â€¢ {t('stake.bullets.2.3')}</li>
-                              <li>â€¢ {t('stake.bullets.2.4')}</li>
+                              <li>• {t('stake.bullets.2.1')}</li>
+                              <li>• {t('stake.bullets.2.2')}</li>
+                              <li>• {t('stake.bullets.2.3')}</li>
+                              <li>• {t('stake.bullets.2.4')}</li>
                             </>
                           )}
                           {index === 3 && (
                             <>
-                              <li>â€¢ {t('stake.bullets.3.1')}</li>
-                              <li>â€¢ {t('stake.bullets.3.2')}</li>
-                              <li>â€¢ {t('stake.bullets.3.3')}</li>
+                              <li>• {t('stake.bullets.3.1')}</li>
+                              <li>• {t('stake.bullets.3.2')}</li>
+                              <li>• {t('stake.bullets.3.3')}</li>
                             </>
                           )}
                           {index === 4 && (
                             <>
-                              <li>â€¢ {t('stake.bullets.4.1')}</li>
-                              <li>â€¢ {t('stake.bullets.4.2')}</li>
-                              <li>â€¢ {t('stake.bullets.4.3')}</li>
+                              <li>• {t('stake.bullets.4.1')}</li>
+                              <li>• {t('stake.bullets.4.2')}</li>
+                              <li>• {t('stake.bullets.4.3')}</li>
                             </>
                           )}
                         </ul>
