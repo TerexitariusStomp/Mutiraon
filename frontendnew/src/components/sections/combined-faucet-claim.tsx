@@ -132,7 +132,7 @@ export default function CombinedFaucetClaim() {
         disabled={disabled}
         className="mt-4 rounded-md bg-emerald-600 px-4 py-2 text-white disabled:opacity-50"
       >
-        {pToken || pEth || mToken || mEth ? t('faucet.claiming') : (sToken || sEth) ? t('faucet.claimed') : t('faucet.claimBoth')}
+        {pToken || pEth || mToken || mEth ? t('faucet.claiming') : (sToken || sEth) ? t('faucet.claimed') : t('faucet.claim')}
       </button>
 
       {(sToken || sEth) && (
@@ -143,4 +143,3 @@ export default function CombinedFaucetClaim() {
     </div>
   );
 }
-

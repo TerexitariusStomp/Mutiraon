@@ -1,0 +1,15 @@
+      let maxUnlockWad = inkWad > minInkRequired ? (inkWad - minInkRequired) : 0n;
+
+      // 0.5% buffer
+      maxUnlockWad = (maxUnlockWad * 995n) / 1000n;
+
+      const value = Number(ethers.formatUnits(maxUnlockWad, 18));
+      return value.toFixed(6).replace(/\.?0+$/, '');
+    } catch {
+      return '0';
+    }
+  };
+
+  const handleApprove = async () => {\n    if (!depositAmount) return;\n    setIsApproving(true);\n    try {\n      await approveToken(depositAmount, selectedCollateral);\n    } catch (error: any) {\n      console.error('Approval failed:', error);\n      alert(Approval failed: . Check console for details.);\n    } finally {\n      setIsApproving(false);\n    }\n  };
+
+export default CollateralSelection;

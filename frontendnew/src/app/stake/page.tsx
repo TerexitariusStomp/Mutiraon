@@ -317,11 +317,11 @@ export default function StakePage() {
                           index === 3 ? "text-orange-700" :
                           "text-red-700"
                         }`}>
-                          {index === 0 && (lang === 'pt' ? "Pense assim: Preparar sua conta para um depÃ³sito." : "Think of it like: Preparing your account for a deposit.")}
-                          {index === 1 && (lang === 'pt' ? "Pense assim: Dar permissÃ£o para uma transferÃªncia automÃ¡tica." : "Think of it like: Giving permission for an automatic transfer.")}
-                          {index === 2 && (lang === 'pt' ? "Pense assim: Converter dinheiro para um formato especial de poupanÃ§a." : "Think of it like: Converting cash to a special savings format.")}
-                          {index === 3 && (lang === 'pt' ? "Pense assim: Assinar um contrato para manter seu dinheiro em seguranÃ§a." : "Think of it like: Signing a contract to hold your money safely.")}
-                          {index === 4 && (lang === 'pt' ? "Pense assim: Finalmente depositar dinheiro na sua conta poupanÃ§a." : "Think of it like: Finally depositing money into your savings account.")}
+                          {index === 0 && (lang === 'pt' ? "Pense assim: Preparar sua conta para um depósito." : "Think of it like: Preparing your account for a deposit.")}
+                          {index === 1 && (lang === 'pt' ? "Pense assim: Dar permissão para uma transferência automática." : "Think of it like: Giving permission for an automatic transfer.")}
+                          {index === 2 && (lang === 'pt' ? "Pense assim: Converter dinheiro para um formato especial de poupança." : "Think of it like: Converting cash to a special savings format.")}
+                          {index === 3 && (lang === 'pt' ? "Pense assim: Assinar um contrato para manter seu dinheiro em segurança." : "Think of it like: Signing a contract to hold your money safely.")}
+                          {index === 4 && (lang === 'pt' ? "Pense assim: Finalmente depositar dinheiro na sua conta poupança." : "Think of it like: Finally depositing money into your savings account.")}
                         </p>
                       </div>
                       <Button
@@ -336,7 +336,7 @@ export default function StakePage() {
                         className="w-full"
                       >
                         {completedSteps.has(index)
-                          ? (lang === 'pt' ? "ConcluÃ­do" : "Completed")
+                          ? (lang === 'pt' ? "Concluído" : "Completed")
                           : currentStep === index
                             ? (lang === 'pt' ? "Processando..." : "Processing...")
                             : !depositAmount
@@ -351,7 +351,7 @@ export default function StakePage() {
                 <p className="text-sm text-muted-foreground">
                   {lang === 'pt' ? (
                     <>
-                      <strong>ObservaÃ§Ã£o:</strong> Execute cada passo na ordem para depositar seus ONEDOLLAR com seguranÃ§a no contrato de poupanÃ§a.
+                      <strong>Observação:</strong> Execute cada passo na ordem para depositar seus ONEDOLLAR com segurança no contrato de poupança.
                     </>
                   ) : (
                     <>

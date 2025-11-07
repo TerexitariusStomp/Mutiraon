@@ -1,0 +1,17 @@
+const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) => {
+  const { address, isConnected, chainId: walletChainId } = useAccount();
+  const { t } = useI18n();
+  const appChainId = useChainId();
+  const addresses = CONTRACT_ADDRESSES.sepolia;
+
+  const {\n    approveToken,\n    depositCollateral,\n    lockCollateral,\n    unlockCollateral,\n    generateAndSendStablecoin,\n    repayStablecoin,\n    withdrawCollateral,\n  } = useStablecoin('CBiomaH');
+
+  const [selectedCollateral, setSelectedCollateral] = useState<keyof typeof ENVIRONMENTAL_TOKENS>(
+    initialCollateral ?? 'CBiomaH'
+  );
+
+  // Ensure selection follows initialCollateral even if it becomes available after first render
+  useEffect(() => {
+    if (initialCollateral && initialCollateral !== selectedCollateral) {
+      setSelectedCollateral(initialCollateral);
+    }

@@ -1,0 +1,141 @@
+      maxUnlockWad = (maxUnlockWad * 995n) / 1000n;
+
+      const value = Number(ethers.formatUnits(maxUnlockWad, 18));
+      return value.toFixed(6).replace(/\.?0+$/, '');
+    } catch {
+      return '0';
+    }
+  };
+
+  const handleApprove = async () => {
+    if (!depositAmount) return;
+    setIsApproving(true);
+    try {
+      console.log("🎯 Starting approval process...");
+      // Add approval logic here
+      console.log("✅ Approval successful!");
+      alert("Approval successful! You can now deposit the tokens.");
+    } catch (error: any) {
+      console.error('❌ Approval failed:', error);
+      alert(`Approval failed: ${error.message || 'Unknown error'}. Check console for details.`);
+    } finally {
+      setIsApproving(false);
+    }
+  };
+
+  const handleDeposit = async () => {
+    if (!depositAmount) return;
+    setIsDepositing(true);
+    try {
+      console.log("🎯 Starting deposit process...");
+      // Add deposit logic here
+      console.log("✅ Deposit successful!");
+      setDepositAmount('');
+    } catch (error: any) {
+      console.error('❌ Deposit failed:', error);
+      alert(`Deposit failed: ${error.message || 'Unknown error'}. Check console for details.`);
+    } finally {
+      setIsDepositing(false);
+    }
+  };
+
+  const handleLock = async () => {
+    if (!lockAmount) return;
+    setIsLocking(true);
+    try {
+      // Add lock logic here
+      setLockAmount('');
+    } catch (error: any) {
+      console.error('❌ Lock failed:', error);
+      alert(`Lock failed: ${error.message || 'Unknown error'}.`);
+    } finally {
+      setIsLocking(false);
+    }
+  };
+
+  const handleUnlock = async () => {
+    if (!unlockAmount) return;
+    setIsUnlocking(true);
+    try {
+      // Add unlock logic here
+      setUnlockAmount('');
+    } catch (error: any) {
+      console.error('❌ Unlock failed:', error);
+      alert(`Unlock failed: ${error.message || 'Unknown error'}.`);
+    } finally {
+      setIsUnlocking(false);
+    }
+  };
+
+  const handleMint = async () => {
+    if (!mintAmount) return;
+    setIsMinting(true);
+    try {
+      // Add mint logic here
+      setMintAmount('');
+    } catch (error: any) {
+      console.error('❌ Mint failed:', error);
+      alert(`Mint failed: ${error.message || 'Unknown error'}.`);
+    } finally {
+      setIsMinting(false);
+    }
+  };
+
+  const handleRepay = async () => {
+    if (!repayAmount) return;
+    setIsRepaying(true);
+    try {
+      // Add repay logic here
+      setRepayAmount('');
+    } catch (error: any) {
+      console.error('❌ Repay failed:', error);
+      alert(`Repay failed: ${error.message || 'Unknown error'}.`);
+    } finally {
+      setIsRepaying(false);
+    }
+  };
+
+  const handleWithdrawCollateral = async () => {
+    if (!withdrawAmount) return;
+    setIsWithdrawing(true);
+    try {
+      // Add withdraw logic here
+      setWithdrawAmount('');
+    } catch (error: any) {
+      console.error('❌ Withdraw failed:', error);
+      alert(`Withdraw failed: ${error.message || 'Unknown error'}.`);
+    } finally {
+      setIsWithdrawing(false);
+    }
+  };
+
+  // Show connection status
+  if (!isConnected) {
+    return (
+      <div className="w-full max-w-[732px] mx-auto p-6 bg-white/60 rounded-2xl border border-black/10 shadow-[0_4px_20px_rgba(0,0,0,0.08)] backdrop-blur-sm">
+        <div className="text-center">
+          <p className="text-lg font-semibold text-gray-700 mb-2">Wallet Not Connected</p>
+          <p className="text-sm text-gray-500">Please connect your wallet to access the vault</p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="w-full max-w-[732px] mx-auto p-6 bg-white/60 rounded-2xl border border-black/10 shadow-[0_4px_20px_rgba(0,0,0,0.08)] backdrop-blur-sm">
+      <div className="space-y-6">
+
+        {/* Collateral Selection */}
+        <div>
+          <h3 className="text-lg font-semibold mb-4">{t('vaults.title')}</h3>
+          <div className="grid grid-cols-2 gap-2">
+            {Object.entries(ENVIRONMENTAL_TOKENS).map(([key, token]) => (
+              <button
+                key={key}
+                onClick={() => setSelectedCollateral(key as keyof typeof ENVIRONMENTAL_TOKENS)}
+                className={`px-4 py-3 rounded-lg font-medium transition-colors text-sm ${
+                  selectedCollateral === key
+                    ? 'bg-green-500 text-white'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+              >

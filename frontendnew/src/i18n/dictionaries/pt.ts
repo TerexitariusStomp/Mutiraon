@@ -28,6 +28,23 @@ export const pt = {
   // Risk banner brand
   "risk.brand": "Amaz-One Dollar: Stablecoin de Impacto do Brasil",
 
+  // Risk Disclaimer
+  "risk.title": "AVISO IMPORTANTE",
+  "risk.env": "AMBIENTE DE TESTNET",
+  "risk.line1": "Esta aplicação está implantada na testnet Ethereum Sepolia. Todas as transações usam tokens de teste e não têm valor real.",
+  "risk.features": "RECURSOS DA TESTNET",
+  "risk.features.1": "Tokens de Teste: Use Sepolia ETH e tokens ERC-20 de teste",
+  "risk.features.2": "Sem Valor Real: Todos os ativos na testnet têm valor monetário zero",
+  "risk.features.3": "Ferramenta de Aprendizado: Experimente mecânicas DeFi em um ambiente seguro",
+  "risk.features.4": "Teste de Desenvolvimento: Ajude a melhorar o protocolo antes do mainnet",
+  "risk.getting": "COMEÇANDO",
+  "risk.getting.1": "Conecte uma carteira Web3 (MetaMask, etc.)",
+  "risk.getting.hint": "Para interagir com esta implantação de testnet:",
+  "risk.getting.2": "Mude para a testnet Ethereum Sepolia",
+  "risk.getting.3": "Obtenha ETH Sepolia gratuito de um faucet",
+  "risk.getting.4": "Use tokens de teste para colateral",
+  "risk.disclaimer": "Software experimental para fins de teste. Use por sua própria conta e risco.",
+
   // Vaults
   "vaults.title": "Selecione o Colateral Ambiental",
   "vaults.subtitle": "Escolha um tipo de colateral para gerir seu cofre e emitir ONEDOLLAR.",
@@ -185,7 +202,9 @@ export const pt = {
   "faucet.eth.title": "Faucet de ETH",
   "faucet.eth.cooldownActive": "Intervalo ativo",
   "faucet.claimBoth": "Reivindicar ambos",
+  "faucet.claim": "Reivindicar",
   "faucet.claiming": "Reivindicando...",
+  "faucet.claimed": "Reivindicado",
   "faucet.claimed": "Reivindicado",
   "faucet.success.both": "Ambas as reivindicações concluídas.",
   "faucet.success.token": "CBiomaH reivindicado com sucesso.",
@@ -196,4 +215,3 @@ export const pt = {
   "faucet.banner.subtitle": "Reivindique CBiomaH e ETH de Sepolia para começar a usar o app",
   "faucet.banner.cooldown": "Intervalo ativo — volte mais tarde",
 };
-
