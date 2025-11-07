@@ -2,97 +2,163 @@
 sidebar_position: 1
 ---
 
-# Amaz-One Dollar Documentation
+# Amaz-One Dollar
 
-Welcome to the comprehensive documentation for **Amaz-One Dollar**, an impact-backed stablecoin for Brazil's solidarity economy.
+> Impact-backed, Brazil-focused stablecoin — built to unlock environmental value for communities while preserving local control.
 
-## What is Amaz-One Dollar?
+:::info Why it exists
+Brazil has a thriving solidarity economy (FRS funds, cooperatives, CDBs) and vast environmental assets. Communities protect biomes yet lack access to capital. Amaz-One Dollar bridges this gap with a transparent, on-chain credit system collateralized by environmental tokens.
+:::
 
-Amaz-One Dollar is a transformative financial instrumentâ€”an impact-backed stablecoin fully collateralized by tokenized BiomaH creditsâ€”that bridges Brazil's thriving solidarity economy, maturing digital asset market, and untapped environmental assets.
+## At a Glance
 
-### Key Features
+- Impact collateral: biodiversity/forest credits (e.g., CBiomaH)
+- Maker-style CDP core: lock collateral ? mint stablecoin ? repay ? unlock
+- Safety first: over-collateralization, oracles, liquidation auctions
+- Earn yield: deposit stablecoin into the Pot (USR)
+- Frontends: Vaults (CDP) and Stake (Savings)
+- Network: Ethereum Sepolia (testnet)
 
-- **Impact-Backed Collateral**: BiomaH credits representing conserved/regenerating Brazilian biomes
-- **Multi-Collateral Support**: Accept multiple environmental tokens as collateral (AMZN, BIO, REN, AGRI, AQUA, NIL, ECO)
-- **Chainlink Price Feeds**: Real-time price data from Chainlink oracles
-- **Over-Collateralization**: Maintains stability through 150% collateralization ratio (70% LTV)
-- **Dutch Auction Liquidations**: Efficient price discovery for liquidated collateral
-- **Savings Rate**: Earn yield on stablecoin holdings
-- **Stability Fees**: Interest rates on borrowed stablecoins (2-4% annual)
-- **Emergency Shutdown**: Global settlement mechanism for crisis situations
-- **Batch Operations**: Multicall support for gas optimization
-- **Brazil Integration**: Pix/WanderWallet off-ramps for BRL conversion
-- **Solidarity Economy Focus**: Designed for FRS, cooperatives, and community organizations
+### Quick Links
+- App (Vaults & Stake): https://amazonedollar.org/
+- Code: https://github.com/TerexitariusStomp/Mutiraon
+- Telegram: https://t.me/mutiraon
+
+---
+
+## Architecture
+
+`
+User Wallet
+   ¦                +--------------+
+   +-- approve ---?¦  Gem Join    ¦------+
+   +-- join    ---?¦ (collateral) ¦      ¦ gem
+   ¦                +--------------+      ?
+   ¦                                      Vat -- frob --? debt/ink
+   ¦                +--------------+      ?
+   +-- frob (lock)?¦      Vat      ¦?-----+ dai
+   +-- frob (mint)?¦   (core)      ¦
+   ¦                +--------------+
+   ¦                +--------------+
+   +-- join/exit -?¦  Dai Join    ¦--- StableCoin (ERC-20)
+   ¦                +--------------+
+   ¦                +--------------+
+   +-- join/exit -?¦     Pot       ¦--- USR (savings)
+                    +--------------+
+`
+
+### Core Contracts
+- StableCoin.sol — ERC-20 stablecoin, minted/burned via DaiJoin/Vat
+- Vat.sol — system accounting: collateral (ink), debt (art), rob safety
+- Join adapters — ERC-20 in/out for collateral and stablecoin
+- Spot/Jug/Dog/Clip/Calc/Vow/End — risk, fees, liquidation, settlement
+- Pot.sol — savings rate (USR)
+- Multicall — batch operations
+
+:::tip Safety
+rob enforces collateralization. If you attempt to lock/unlock or mint/repay beyond safe limits, the transaction reverts. Use the UI’s available values and “Max” helpers.
+:::
+
+---
+
+## Frontends
+
+### Vaults (CDP)
+- Approve + Deposit collateral via GemJoin
+- Lock collateral (ink) and Mint stablecoin (art)
+- Repay debt and Unlock
+- Withdraw stablecoin or collateral
+
+### Stake (Savings)
+- Approve + Join stablecoin into Vat
+- Authorize Pot
+- Deposit to Pot and accrue USR
+- Withdraw principal + interest
+
+:::note Latency
+On-chain confirmations take time. If balances do not update immediately after a transaction, click Refresh in the UI.
+:::
+
+---
 
 ## Getting Started
 
 ### Prerequisites
+- Node.js 18+
+- npm 9+/pnpm/bun
+- Git and a Sepolia wallet with test ETH
 
-- [Node.js](https://nodejs.org/en/download/) version 18.0 or above
-- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
-- [Git](https://git-scm.com/)
-
-### Installation
-
-Clone the repository and install dependencies:
-
-```bash
+### Install & Run
+`ash
+# Clone
 git clone https://github.com/TerexitariusStomp/Mutiraon.git
-cd mutiraon-stablecoin
+cd Mutiraon
 
-# Install root dependencies
-npm install
-
-# Install frontend dependencies
-cd frontendnew
-npm install
-cd ..
-```
-
-### Development
-
-Start the development server:
-
-```bash
-# Start the frontend
+# App
+cd frontendcode
+npm ci
 npm run dev
 
-# In another terminal, start the documentation
-cd documentation
+# Docs
+cd ../documentation
+npm ci
 npm start
-```
+`
 
-The app will be available at [http://localhost:3000](http://localhost:3000) and documentation at [http://localhost:3001](http://localhost:3001).
+The app runs at http://localhost:3000 and docs at http://localhost:3001 (by default).
 
-## Architecture Overview
+---
 
-Amaz-One Dollar employs a Collateralized Debt Position (CDP) model inspired by MakerDAO:
+## Deployment
 
-### Core Components
+### GitHub Pages (App)
+- Next.js static export with output: 'export'
+- Custom domain mazonedollar.org (CNAME) supported
+- Workflow: .github/workflows/deploy.yml
 
-- **StableCoin.sol**: ERC-20 stablecoin minted/burned via joins and Vat
-- **Vat.sol**: Core accounting for collateral/debt balances, urns, ilks, system-wide line/dust
-- **Spot.sol**: Collateral risk config and price feeds; sets safe collateralization via mat
-- **Dog.sol**: Liquidation keeper that starts auctions when vaults are unsafe
-- **Clip.sol**: Dutch auctions for liquidations with price decay via Calc
-- **Jug.sol**: Stability fees (per-ilk duty) accruing over time
-- **Vow.sol**: System surplus/deficit management
-- **Pot.sol**: Savings rate (DSR) for idle stablecoin deposits
-- **End.sol**: Global settlement (emergency shutdown)
+### Docs (Docusaurus)
+- Build: 
+pm run build (in documentation)
+- Deploy to GitHub Pages or any static host
 
-### System Flow
+---
 
-1. **Deposit**: FRS, cooperatives deposit tokenized BiomaH credits into secure vault
-2. **Valuation**: Oracle networks verify current market value of deposited credits
-3. **Minting**: Stablecoins minted up to 70% of collateral value (150% collateralization ratio)
-4. **Borrowing**: Organizations receive stablecoins for immediate liquidity needs
-5. **Utilization**: Stablecoins converted to BRL via WanderWallet/Pix for payroll, investment
-6. **Repayment**: Borrowers repay stablecoin debt plus stability fee to unlock collateral
-7. **Liquidation Protection**: 30% buffer protects against collateral value decline
+## Configuration
 
-## Next Steps
+### Environment Variables (App)
+`
+NEXT_PUBLIC_ALCHEMY_API_KEY=...
+NEXT_PUBLIC_CHAIN_ID=11155111 # Sepolia
+NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=...
+`
 
-- [Smart Contracts Overview](./tutorial-basics/create-a-document)
-- [Frontend Architecture](./tutorial-basics/create-a-page)
-- [Deployment Guide](./tutorial-basics/deploy-your-site)
-- [API Reference](./tutorial-extras/manage-docs-versions)
+### Addresses (Sepolia)
+`
+Vat:         0x7E198F35577fCbaA93c9Cf983A8d9d96979cdD25
+StableCoin:  0x3B3Dc8305bd491cffe41DC955C0fCa16bfbE1E3A
+DaiJoin:     0xd8D7Ab4762e0d70DdCDEF22f757c5662E1488dB8
+CBiomaH:     0x56050c12F0571DdA13621cBcb7c1c333EA4842BB
+CBiomaHJoin: 0xBafCF10F52e206c67De3cd82951088f94d3fC6F5
+Pot:         0x34C886c7C6407A65d193DF006f3Ef600e9b992d7
+`
+
+---
+
+## FAQs
+
+### Why environmental collateral?
+It aligns financial incentives with conservation and community development.
+
+### How is stability maintained?
+Over-collateralization, oracle pricing (Spot), and liquidation via Dog/Clip.
+
+### Is this audited?
+Not yet — use on testnet only. See the risk banner inside the app.
+
+---
+
+## Contributing
+PRs are welcome. Please read the repository README for coding standards and run linters/tests before submitting changes.
+
+## License
+See LICENSE in the repository.

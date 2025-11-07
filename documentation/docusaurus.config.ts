@@ -89,7 +89,7 @@ const config: Config = {
         },
         {to: '/blog', label: 'Blog', position: 'left'},
         {
-          href: 'https://terexitariusstomp.github.io/Mutiraon/',
+          href: 'https://amazonedollar.org/',
           label: 'App',
           position: 'right',
         },
@@ -146,7 +146,7 @@ const config: Config = {
             },
             {
               label: 'App',
-              href: 'https://terexitariusstomp.github.io/Mutiraon/',
+              href: 'https://amazonedollar.org/',
             },
           ],
         },
