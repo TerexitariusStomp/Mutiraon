@@ -11,6 +11,8 @@ export const pt = {
   "nav.telegram": "Telegram",
   "nav.app": "Entrar no App",
   "nav.disconnect": "Desconectar",
+  "wallet.connect": "Conectar Carteira",
+  "wallet.switchNetwork": "Trocar Rede",
   // Header
   "header.enter": "Entrar no App",
   "header.home": "Início",
@@ -198,6 +200,7 @@ export const pt = {
   // Faucet e banners
   "faucet.banner.title": "Ativos de teste disponíveis no faucet",
   "faucet.banner.subtitle": "Solicite tokens de impacto e ETH de gás para testar o app.",
+  "faucet.banner.cooldown": "Intervalo ativo — aguarde antes de solicitar novamente",
   "faucet.title": "Faucet de Teste",
   "faucet.subtitle": "Solicite tokens de teste para explorar o protocolo.",
   "faucet.token.title": "Token de Impacto",

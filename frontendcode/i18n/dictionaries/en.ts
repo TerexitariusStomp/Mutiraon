@@ -16,6 +16,8 @@ export const en = {
   "nav.telegram": "Telegram",
   "nav.app": "Open App",
   "nav.disconnect": "Disconnect",
+  "wallet.connect": "Connect Wallet",
+  "wallet.switchNetwork": "Switch Network",
 
   // Hero
   "hero.title.1": "Amaz-One Dollar:",
@@ -199,6 +201,7 @@ export const en = {
   // Faucet and banners
   "faucet.banner.title": "Test assets available via faucet",
   "faucet.banner.subtitle": "Claim test impact tokens and gas ETH to try the app.",
+  "faucet.banner.cooldown": "Cooldown active - please wait before claiming again",
   "faucet.banner.cooldown": "Cooldown active - please wait before claiming again",
   "faucet.title": "Testing Faucet",
   "faucet.subtitle": "Claim free test tokens to explore the protocol.",

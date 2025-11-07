@@ -112,7 +112,31 @@ const InnerNav = () => {
               {t('nav.disconnect')}
             </Button>
           )}
-          <ConnectButton />
+          <ConnectButton.Custom>
+            {({ account, chain, openAccountModal, openChainModal, openConnectModal, mounted }) => {
+              const ready = mounted;
+              const connected = ready && account && chain;
+              if (!connected) {
+                return (
+                  <Button className="rounded-full px-4 py-2 font-button" onClick={openConnectModal}>
+                    {t('wallet.connect')}
+                  </Button>
+                );
+              }
+              if (chain?.unsupported) {
+                return (
+                  <Button variant="destructive" className="rounded-full px-4 py-2 font-button" onClick={openChainModal}>
+                    {t('wallet.switchNetwork')}
+                  </Button>
+                );
+              }
+              return (
+                <Button variant="outline" className="rounded-full px-4 py-2 font-button" onClick={openAccountModal}>
+                  {account?.displayName}
+                </Button>
+              );
+            }}
+          </ConnectButton.Custom>
         </div>
       </div>
     </nav>

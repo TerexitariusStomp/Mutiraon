@@ -41,10 +41,16 @@ export function Impact() {
                 <h3 className="text-2xl font-bold mb-4">{t("impact.join.title")}</h3>
                 <p className="text-muted-foreground leading-relaxed mb-6">{t("impact.join.subtitle")}</p>
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <button className="px-6 py-3 bg-accent text-accent-foreground rounded-lg font-semibold hover:opacity-90 transition-opacity">
+                  <button
+                    onClick={() => window.open('https://t.me/amazonedollar', '_blank')}
+                    className="px-6 py-3 bg-accent text-accent-foreground rounded-lg font-semibold hover:opacity-90 transition-opacity"
+                  >
                     {t("impact.join.cta1")}
                   </button>
-                  <button className="px-6 py-3 border border-border rounded-lg font-semibold hover:bg-muted transition-colors">
+                  <button
+                    onClick={() => window.location.href = '/docs'}
+                    className="px-6 py-3 border border-border rounded-lg font-semibold hover:bg-muted transition-colors"
+                  >
                     {t("impact.join.cta2")}
                   </button>
                 </div>
