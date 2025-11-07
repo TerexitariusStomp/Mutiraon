@@ -1,37 +1,37 @@
-import { AlertCircle } from "lucide-react"
+import { AlertCircle } from "lucide-react";
+import { useI18n } from "@/i18n/I18nContext";
 
 export function CapitalGap() {
+  const { t } = useI18n();
   return (
     <section className="py-24">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold mb-16 text-center text-balance">The Capital Gap Crisis</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-16 text-center text-balance">{t("capital.title")}</h2>
 
           <div className="grid lg:grid-cols-2 gap-12 items-start">
             {/* Current Constraints */}
             <div className="space-y-6">
               <div className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-accent mb-2">
                 <AlertCircle className="w-4 h-4" />
-                Current Constraints
+                {t("capital.constraints.tag")}
               </div>
-              <h3 className="text-2xl font-bold">Limited Access to Capital</h3>
+              <h3 className="text-2xl font-bold">{t("capital.constraints.title")}</h3>
               <p className="text-muted-foreground leading-relaxed">
-                Community Development Banks require 1:1 Real backing, limiting capital generation. Solidarity Revolving
-                Funds (FRS) and Credit Cooperatives face severe liquidity scarcity—a typical FRS manages only R$40,000
-                despite demand from hundreds of borrowers.
+                {t("capital.constraints.p")}
               </p>
               <ul className="space-y-4">
                 <li className="flex items-start gap-3">
                   <div className="w-1.5 h-1.5 rounded-full bg-accent mt-2 flex-shrink-0" />
-                  <span className="text-muted-foreground">BCDs limited by 1:1 backing requirements</span>
+                  <span className="text-muted-foreground">{t("capital.constraints.li1")}</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-1.5 h-1.5 rounded-full bg-accent mt-2 flex-shrink-0" />
-                  <span className="text-muted-foreground">FRS managing minimal capital (R$40,000 average)</span>
+                  <span className="text-muted-foreground">{t("capital.constraints.li2")}</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-1.5 h-1.5 rounded-full bg-accent mt-2 flex-shrink-0" />
-                  <span className="text-muted-foreground">Hundreds of borrowers unable to access credit</span>
+                  <span className="text-muted-foreground">{t("capital.constraints.li3")}</span>
                 </li>
               </ul>
             </div>
@@ -39,12 +39,11 @@ export function CapitalGap() {
             {/* Untapped Assets */}
             <div className="space-y-6">
               <div className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-accent mb-2">
-                Untapped Assets
+                {t("capital.assets.tag")}
               </div>
-              <h3 className="text-2xl font-bold">Billions in Trapped Environmental Value</h3>
+              <h3 className="text-2xl font-bold">{t("capital.assets.title")}</h3>
               <p className="text-muted-foreground leading-relaxed">
-                Communities control vast environmental assets that generate no immediate capital access: forests, carbon
-                credits, biodiversity reserves, and sustainable agriculture land worth billions in trapped value.
+                {t("capital.assets.p")}
               </p>
 
               <div className="relative rounded-lg overflow-hidden h-80 group">
@@ -56,8 +55,7 @@ export function CapitalGap() {
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-6 text-primary-foreground">
                   <p className="text-sm font-medium">
-                    Communities control environmental assets worth billions, but lack mechanisms to unlock capital while
-                    maintaining ownership and impact.
+                    {t("capital.assets.caption")}
                   </p>
                 </div>
               </div>
@@ -66,5 +64,6 @@ export function CapitalGap() {
         </div>
       </div>
     </section>
-  )
+  );
 }
+

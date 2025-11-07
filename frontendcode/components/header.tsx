@@ -1,27 +1,19 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useI18n } from "@/i18n/I18nContext";
 
 const APP_PATH = process.env.NEXT_PUBLIC_MAIN_APP_PATH || "/Mutiraon/";
 
 export function Header() {
-  const [lang, setLang] = useState<"pt" | "en">("pt");
-
-  useEffect(() => {
-    const saved = typeof window !== "undefined" ? (localStorage.getItem("lang_frontendcode") as "pt" | "en" | null) : null;
-    if (saved) setLang(saved);
-    if (typeof document !== "undefined") document.documentElement.lang = saved || "pt";
-  }, []);
+  const { lang, setLang, t } = useI18n();
 
   const toggleLang = () => {
     const next = lang === "pt" ? "en" : "pt";
     setLang(next);
-    if (typeof window !== "undefined") localStorage.setItem("lang_frontendcode", next);
-    if (typeof document !== "undefined") document.documentElement.lang = next;
   };
 
-  const labelEnter = lang === "pt" ? "Entrar no App" : "Enter App";
+  const labelEnter = t("header.enter");
   const labelLang = lang === "pt" ? "EN" : "PT";
 
   return (
@@ -42,4 +34,3 @@ export function Header() {
     </div>
   );
 }
-

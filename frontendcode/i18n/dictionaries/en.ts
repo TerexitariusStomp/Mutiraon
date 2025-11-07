@@ -1,0 +1,78 @@
+export const en = {
+  // Header
+  "header.enter": "Enter App",
+  "header.toggle": "EN",
+
+  // Hero
+  "hero.title": "Amaz-One Dollar: Impact-Backed Stablecoin for Brazil's Solidarity Economy",
+  "hero.subtitle": "Brazil's convergence of massive stablecoin adoption (90% of crypto volume), 180+ active community currencies, and regulatory clarity creates an opportunity for Amaz-One Dollar — a USD-pegged, impact-backed stablecoin that capitalizes environmental assets held by underserved communities.",
+
+  // Market Opportunity
+  "market.title": "The Market Opportunity",
+  "market.subtitle": "Brazil's Virtual Assets Law established Latin America's first comprehensive crypto framework, with institutional adoption accelerating. Stablecoins serve as essential inflation hedges and payment rails for millions.",
+  "market.stat1.label": "Digital Assets Flow",
+  "market.stat1.desc": "Brazil received in digital assets (Jul 2024–Jun 2025), with 90% through stablecoins",
+  "market.stat2.label": "Community Currencies",
+  "market.stat2.desc": "Active community currencies via Ethnheiro platform",
+  "market.stat3.label": "Registered Firms",
+  "market.stat3.desc": "Crypto firms registered under Brazil's Virtual Assets Law",
+  "market.stat4.label": "Development Banks",
+  "market.stat4.desc": "Community Development Banks operating solidarity finance",
+
+  // Capital Gap
+  "capital.title": "The Capital Gap Crisis",
+  "capital.constraints.tag": "Current Constraints",
+  "capital.constraints.title": "Limited Access to Capital",
+  "capital.constraints.p": "Community Development Banks require 1:1 Real backing, limiting capital generation. Solidarity Revolving Funds and Credit Cooperatives face severe liquidity scarcity.",
+  "capital.constraints.li1": "BCDs limited by 1:1 backing requirements",
+  "capital.constraints.li2": "FRS managing minimal capital (R$40,000 average)",
+  "capital.constraints.li3": "Hundreds of borrowers unable to access credit",
+  "capital.assets.tag": "Untapped Assets",
+  "capital.assets.title": "Billions in Trapped Environmental Value",
+  "capital.assets.p": "Communities control vast environmental assets that generate no immediate capital access: forests, carbon credits, biodiversity reserves, and sustainable agriculture land.",
+  "capital.assets.caption": "Communities control environmental assets worth billions while lacking mechanisms to unlock capital.",
+
+  // Solution
+  "solution.title": "The Solution: Amaz-One Dollar",
+  "solution.subtitle": "A USD-pegged stablecoin that bridges traditional solidarity finance with blockchain innovation, collateralized by environmental assets to unlock capital while preserving local control.",
+  "solution.f1.title": "Asset-Backed Stability",
+  "solution.f1.desc": "Collateralized by real environmental assets — forests, carbon credits, sustainable land — providing value backing pegged to USD",
+  "solution.f2.title": "Solidarity Fund Investment & Credit",
+  "solution.f2.desc": "Enables investment in solidarity funds and credit provision, unlocking liquidity from environmental assets without sale",
+  "solution.f3.title": "Community Ownership",
+  "solution.f3.desc": "Assets remain under community control, ensuring local governance and long-term sustainability",
+  "solution.f4.title": "Environmental Impact",
+  "solution.f4.desc": "Incentivizes conservation and sustainable practices while creating opportunity",
+
+  // How it works
+  "how.title": "How It Works",
+  "how.subtitle": "A transparent, blockchain-enabled process that transforms environmental stewardship into accessible capital.",
+  "how.s1.title": "Asset Verification",
+  "how.s1.desc": "Environmental assets are assessed, verified, and tokenized as reserves",
+  "how.s2.title": "Stablecoin Issuance",
+  "how.s2.desc": "Amaz-One Dollar is minted against verified assets and pegged to USD",
+  "how.s3.title": "Community Distribution",
+  "how.s3.desc": "Stablecoins fund solidarity investments and credit via BCDs",
+  "how.s4.title": "Impact Monitoring",
+  "how.s4.desc": "On-chain tracking preserves value and supports development",
+
+  // Impact
+  "impact.title": "Projected Impact",
+  "impact.subtitle": "Bridging blockchain and solidarity finance unlocks value while advancing conservation.",
+  "impact.card1.label": "Forest Protected",
+  "impact.card1.desc": "Environmental assets under community stewardship",
+  "impact.card2.label": "Lives Impacted",
+  "impact.card2.desc": "Community members with improved access",
+  "impact.card3.label": "Capital Unlocked",
+  "impact.card3.desc": "Liquidity generated from environmental assets",
+  "impact.card4.label": "Sustainable",
+  "impact.card4.desc": "Aligned with UN SDGs and climate goals",
+  "impact.join.title": "Join the Movement",
+  "impact.join.subtitle": "We're building partnerships to create a sustainable financial future for Brazil's solidarity economy.",
+  "impact.join.cta1": "Partner With Us",
+  "impact.join.cta2": "Learn More",
+
+  // Footer
+  "footer.mission": "Building sustainable financial infrastructure for Brazil's solidarity economy through USD-pegged, impact-backed stablecoins.",
+  "footer.copy": "© 2025 Amaz-One Dollar. All rights reserved.",
+};

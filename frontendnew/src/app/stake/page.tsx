@@ -18,6 +18,7 @@ import { Separator } from "@/components/ui/separator";
 import { useI18n } from "@/i18n/I18nContext";
 
 import { toast } from 'sonner'
+import { waitForTxConfirmation } from "../../lib/utils";
 export default function StakePage() {
   const { t, lang } = useI18n();
   const {
@@ -53,9 +54,11 @@ export default function StakePage() {
 
     try {
       console.log("Calling withdrawSavings...");
-      await withdrawSavings(withdrawAmount);
-      console.log("Withdraw completed successfully");
-      toast.success(`${t('stake.withdraw')}: OK`);
+      const hash = await withdrawSavings(withdrawAmount);
+      toast.message(lang === 'pt' ? 'Transação enviada' : 'Transaction submitted', { description: hash as string });
+      await waitForTxConfirmation(hash as string);
+      console.log("Withdraw confirmed on-chain");
+      toast.success(`${t('stake.withdraw')}: ${lang === 'pt' ? 'Confirmado em blockchain' : 'Confirmed on-chain'}`);
       setWithdrawAmount("");
     } catch (error) {
       console.error("Withdraw failed:", error);
@@ -72,7 +75,11 @@ export default function StakePage() {
 
     try {
       setCurrentStep(stepIndex);
-      await stepFunction();
+      const hash = await stepFunction();
+      if (hash) {
+        toast.message(lang === 'pt' ? 'Transação enviada' : 'Transaction submitted', { description: hash as string });
+        await waitForTxConfirmation(hash as string);
+      }
       setCompletedSteps((prev) => new Set([...prev, stepIndex]));
       setCurrentStep(-1); // Reset current step
       // Show success message

@@ -1,36 +1,38 @@
+import { useI18n } from "@/i18n/I18nContext";
+
 export function MarketOpportunity() {
+  const { t } = useI18n();
+
   const stats = [
     {
       value: "$318.8B",
-      label: "Digital Assets Flow",
-      description: "Brazil received in digital assets (July 2024–June 2025), with 90% through stablecoins",
+      label: t("market.stat1.label"),
+      description: t("market.stat1.desc"),
     },
     {
       value: "180+",
-      label: "Community Currencies",
-      description: "Active community currencies serving underserved populations via Ethnheiro platform",
+      label: t("market.stat2.label"),
+      description: t("market.stat2.desc"),
     },
     {
       value: "500+",
-      label: "Registered Firms",
-      description: "Crypto firms registered under Brazil's Virtual Assets Law (BVAL, June 2023)",
+      label: t("market.stat3.label"),
+      description: t("market.stat3.desc"),
     },
     {
       value: "103",
-      label: "Development Banks",
-      description: "Community Development Banks (BCDs) proving solidarity finance operates at scale",
+      label: t("market.stat4.label"),
+      description: t("market.stat4.desc"),
     },
-  ]
+  ];
 
   return (
     <section className="py-24 bg-muted/30">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-center text-balance">The Market Opportunity</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-center text-balance">{t("market.title")}</h2>
           <p className="text-muted-foreground text-center mb-16 max-w-3xl mx-auto leading-relaxed">
-            Brazil's Virtual Assets Law established Latin America's first comprehensive crypto framework, with
-            institutional adoption accelerating. Stablecoins serve as essential inflation hedges and payment rails for
-            millions.
+            {t("market.subtitle")}
           </p>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -50,5 +52,6 @@ export function MarketOpportunity() {
         </div>
       </div>
     </section>
-  )
+  );
 }
+

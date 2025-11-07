@@ -960,7 +960,7 @@ export const CONTRACT_ADDRESSES = {
 
 // Collateral types for Brazilian Environmental Tokens
 export const COLLATERAL_TYPES = {
-  CBiomaH: ethers.encodeBytes32String("CBiomaH-A"),
+  CBiomaH: ethers.encodeBytes32String("CBiomaH"),
 };
 
 // Constants

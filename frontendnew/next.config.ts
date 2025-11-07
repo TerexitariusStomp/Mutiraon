@@ -28,10 +28,8 @@ const nextConfig: NextConfig = {
     ],
   },
 
-  // Disable server output tracing for static exports to avoid pages/_app traces
-  outputFileTracing: isProd ? false : undefined,
-  // Only set tracing root in non-export mode if needed
-  // outputFileTracingRoot: path.resolve(__dirname, '../../'),
+  // Hint workspace root for monorepo to silence root inference warnings
+  outputFileTracingRoot: __dirname,
 
   // Turbopack configuration (replacement for deprecated experimental.turbo)
   turbopack: {

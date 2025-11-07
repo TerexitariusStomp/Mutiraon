@@ -200,7 +200,7 @@ export function useStablecoin(selectedCollateral: 'CBiomaH' = 'CBiomaH') {
   const lockCollateral = async (amount: string, ilk: string) => {
     if (!address) return;
     
-    await writeContract({
+    const result = await writeContract({
       address: addresses.vat as `0x${string}`,
       abi: [
         {
@@ -221,6 +221,7 @@ export function useStablecoin(selectedCollateral: 'CBiomaH' = 'CBiomaH') {
       functionName: 'frob',
       args: [ilk as `0x${string}`, address as `0x${string}`, address as `0x${string}`, address as `0x${string}`, parseEther(amount), BigInt(0)],
     });
+    return result;
   };
 
   // Generate (mint) ONEDOLLAR - ONLY mints debt in Vat (no auto-withdrawal)
@@ -321,7 +322,7 @@ export function useStablecoin(selectedCollateral: 'CBiomaH' = 'CBiomaH') {
     }
 
     // 3) Exit directly to the recipient (mints ONEDOLLAR to recipient)
-    await writeContract({
+    const exitHash = await writeContract({
       address: addresses.daiJoin as `0x${string}`,
       abi: [
         {
@@ -335,6 +336,7 @@ export function useStablecoin(selectedCollateral: 'CBiomaH' = 'CBiomaH') {
       functionName: 'exit',
       args: [recipient as `0x${string}`, amountWad],
     });
+    return exitHash;
   };
 
   // Withdraw ONEDOLLAR

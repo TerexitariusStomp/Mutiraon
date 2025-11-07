@@ -7,7 +7,7 @@ import { useAccount } from "wagmi";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from 'sonner'
-import { waitForTxConfirmation } from "@/lib/utils";
+import { waitForTxConfirmation } from "../../lib/utils";
 import { ILK_CBiomaH } from "@/lib/contracts-updated";
 
 export default function VaultsPage() {

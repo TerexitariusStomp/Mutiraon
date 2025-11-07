@@ -1,4 +1,7 @@
+import { useI18n } from "@/i18n/I18nContext";
+
 export function Footer() {
+  const { t } = useI18n();
   return (
     <footer className="bg-primary text-primary-foreground py-16">
       <div className="container mx-auto px-4">
@@ -10,16 +13,16 @@ export function Footer() {
               <span className="text-xl font-bold">Amaz-One Dollar</span>
             </div>
             <p className="text-sm text-primary-foreground/70 leading-relaxed max-w-2xl mx-auto">
-              Building sustainable financial infrastructure for Brazil's solidarity economy through USD-pegged,
-              impact-backed stablecoins.
+              {t("footer.mission")}
             </p>
           </div>
 
           <div className="border-t border-primary-foreground/10 pt-8 text-center">
-            <p className="text-sm text-primary-foreground/70">© 2025 Amaz-One Dollar. All rights reserved.</p>
+            <p className="text-sm text-primary-foreground/70">{t("footer.copy")}</p>
           </div>
         </div>
       </div>
     </footer>
-  )
+  );
 }
+

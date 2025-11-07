@@ -1,4 +1,7 @@
+import { useI18n } from "@/i18n/I18nContext";
+
 export function Hero() {
+  const { t } = useI18n();
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
       {/* Background Image */}
@@ -14,12 +17,10 @@ export function Hero() {
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 py-20 text-center max-w-5xl">
         <h1 className="text-5xl md:text-7xl font-bold mb-6 text-balance leading-tight">
-          Amaz-One Dollar: Impact-Backed Stablecoin for Brazil's Solidarity Economy
+          {t("hero.title")}
         </h1>
         <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
-          Brazil's convergence of massive stablecoin adoption (90% of crypto volume), 180+ active community currencies,
-          and regulatory clarity creates an opportunity for Amaz-One Dollar—a USD-pegged impact-backed stablecoin that
-          capitalizes environmental assets held by underserved communities.
+          {t("hero.subtitle")}
         </p>
       </div>
 
@@ -30,5 +31,6 @@ export function Hero() {
         </div>
       </div>
     </section>
-  )
+  );
 }
+
