@@ -15,7 +15,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 const navLinks = [
-  { key: "nav.get", href: "/", active: true },
+  { key: "nav.home", href: "/", active: true },
+  { key: "nav.stake", href: "/stake", active: false },
+  { key: "nav.get", href: "/stake", active: false },
 ];
 
 const InnerNav = () => {
@@ -82,9 +84,6 @@ const InnerNav = () => {
               <DropdownMenuItem asChild>
                 <Link href="https://t.me/mutiraon" target="_blank" rel="noopener noreferrer">{t('nav.telegram')}</Link>
               </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link href="/">{t('nav.app')}</Link>
-              </DropdownMenuItem>
               {/* Mobile nav items */}
               <div className="lg:hidden">
                 {navLinks.map((link) => (
@@ -95,13 +94,6 @@ const InnerNav = () => {
               </div>
             </DropdownMenuContent>
           </DropdownMenu>
-
-          {/* Primary CTA: Go to App */}
-          <Link href="/" className="hidden sm:inline-block">
-            <Button className="rounded-full px-4 py-2 font-button">
-              {t('nav.app')}
-            </Button>
-          </Link>
 
           {isConnected && (
             <Button

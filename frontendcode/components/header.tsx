@@ -42,7 +42,7 @@ export function Header({ onEnterApp }: { onEnterApp?: () => void }) {
         Stake
       </Link>
       <Link
-        href="/app"
+        href="/vaults"
         className="rounded-md bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow hover:bg-emerald-700"
       >
         Open App
