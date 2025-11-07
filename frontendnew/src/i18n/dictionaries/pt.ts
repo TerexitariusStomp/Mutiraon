@@ -63,11 +63,11 @@ export const pt = {
   "vault.status.avail": "Colateral Disponível",
   "vault.status.ready": "Pronto para travar",
   "vault.status.maxsafe": "Emissão Segura Máxima",
-  "vault.status.strict": "O contrato aplica limites rigorosos",
+  "vault.status.strict": "⚠️ O contrato aplica limites rigorosos",
 
   // Vaults page - seções
   "vault.dep.title": "Depositar {code}",
-  "vault.dep.step": "Etapa 1: Depositar {code}",
+  "vault.dep.step": "Etapa 1: Depositar {code} 💰",
   "vault.dep.what": "O que faz: Move tokens da sua carteira para o sistema do cofre",
   "vault.dep.li1": "Informe quantos tokens {code} deseja depositar",
   "vault.dep.li2": "Clique em \"Aprovar\" (permite que o cofre mova seus tokens)",
@@ -79,7 +79,7 @@ export const pt = {
   "vault.dep.deposit": "2. Depositar",
 
   "vault.lock.title": "Gerir Colateral Travado",
-  "vault.lock.step": "Etapa 2: Travar Tokens",
+  "vault.lock.step": "Etapa 2: Travar Tokens 🔒",
   "vault.lock.what": "O que faz: Trava seus tokens depositados para poder criar Amaz-One Dollar",
   "vault.lock.li1": "Veja \"Disponível para Travar\" para saber quantos tokens depositados você tem",
   "vault.lock.li2": "Informe quantos deseja travar",
@@ -94,7 +94,7 @@ export const pt = {
   "vault.unlock.btn": "Destravar",
 
   "vault.mut.title": "Gerir Amaz-One Dollar",
-  "vault.mut.step": "Etapa 3: Criar Amaz-One Dollar",
+  "vault.mut.step": "Etapa 3: Criar Amaz-One Dollar 💵",
   "vault.mut.what": "O que faz: Cria moeda local que você pode usar",
   "vault.mut.li1": "Veja \"Máximo que Você Pode Criar com Segurança\" (protege seus tokens)",
   "vault.mut.li2": "Informe quanto Amaz-One Dollar deseja criar",
@@ -111,7 +111,7 @@ export const pt = {
   "vault.mut.repay.btn": "Quitar",
 
   "vault.wd.title": "Sacar Colateral",
-  "vault.wd.step": "Etapa 4: Destravar e Sacar",
+  "vault.wd.step": "Etapa 4: Destravar e Sacar ↩️",
   "vault.wd.what": "O que faz: Retorna seus tokens {code} para sua carteira",
   "vault.wd.unlock.title": "Para destravar:",
   "vault.wd.unlock.li1": "Vá à seção \"Gerir Colateral Travado\"",
@@ -126,7 +126,7 @@ export const pt = {
   "vault.wd.only": "Sacar apenas",
   "vault.wd.placeholder": "Quantidade para sacar",
   "vault.wd.btn": "Sacar",
-  "vault.help.steps": "Siga as etapas: 1) Depositar 2) Travar 3) Mintar",
+  "vault.help.steps": "Siga as etapas: 1) Depositar → 2) Travar → 3) Mintar",
   "vault.loading.approving": "Aprovando...",
   "vault.loading.depositing": "Depositando...",
   "vault.loading.locking": "Travando...",
