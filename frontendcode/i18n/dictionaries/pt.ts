@@ -1,7 +1,7 @@
 export const pt = {
   // Navegação
   "nav.tagline": "Stablecoin lastreada em impacto para o Brasil",
-  "nav.get": "Começar",
+  "nav.get": "Cofres",
   "nav.lang": "Idioma",
   "nav.lang.pt": "Português",
   "nav.lang.en": "Inglês",

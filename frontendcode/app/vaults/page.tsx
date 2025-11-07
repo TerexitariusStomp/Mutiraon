@@ -17,6 +17,7 @@ export default function VaultsPage() {
   const {
     ink,
     art,
+    gem,
     depositCollateral,
     approveToken,
     authorizeVat,
@@ -274,15 +275,15 @@ export default function VaultsPage() {
           <div className="grid gap-4 md:grid-cols-2">
             <div className="rounded-xl border border-border bg-card p-4">
               <h3 className="font-semibold text-foreground mb-2">{t('vault.bal.wallet').replace('{code}', selectedCollateral)}</h3>
-              <p className="text-2xl font-bold text-foreground">0.00 {selectedCollateral}</p>
+              <p className="text-2xl font-bold text-foreground">— {selectedCollateral}</p>
             </div>
             <div className="rounded-xl border border-border bg-card p-4">
               <h3 className="font-semibold text-foreground mb-2">{t('vault.bal.deposited').replace('{code}', selectedCollateral)}</h3>
-              <p className="text-2xl font-bold text-foreground">{parseFloat(ink).toFixed(4)} {selectedCollateral}</p>
+              <p className="text-2xl font-bold text-foreground">{parseFloat(gem).toFixed(4)} {selectedCollateral}</p>
             </div>
             <div className="rounded-xl border border-border bg-card p-4">
               <h3 className="font-semibold text-foreground mb-2">{t('vault.bal.available')}</h3>
-              <p className="text-2xl font-bold text-foreground">0.00 {selectedCollateral}</p>
+              <p className="text-2xl font-bold text-foreground">{parseFloat(gem).toFixed(4)} {selectedCollateral}</p>
             </div>
             <div className="rounded-xl border border-border bg-card p-4">
               <h3 className="font-semibold text-foreground mb-2">{t('vault.bal.mut')}</h3>

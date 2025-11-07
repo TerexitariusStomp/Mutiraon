@@ -6,7 +6,7 @@ export const en = {
 
   // Navigation
   "nav.tagline": "Impact-backed stablecoin for Brazil",
-  "nav.get": "Get Started",
+  "nav.get": "Vaults",
   "nav.lang": "Language",
   "nav.lang.pt": "Portuguese",
   "nav.lang.en": "English",

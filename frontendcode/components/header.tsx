@@ -20,11 +20,8 @@ export function Header() {
 
   return (
     <div className="fixed right-4 top-4 z-50 flex items-center gap-2">
-      <Link href="/" className="rounded-md border border-black/10 bg-white/70 px-3 py-1 text-xs shadow hover:bg-white/90">
-        {t('nav.home')}
-      </Link>
-      <Link href="/vaults" className="rounded-md bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow hover:bg-emerald-700">
-        {labelVaults}
+      <Link href="/stake" className="rounded-md border border-black/10 bg-white/70 px-3 py-1 text-xs shadow hover:bg-white/90">
+        Stake
       </Link>
       <button
         onClick={toggleLang}

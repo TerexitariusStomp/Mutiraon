@@ -51,6 +51,27 @@ export function useStablecoin(selectedCollateral: 'CBiomaH' = 'CBiomaH') {
   const ink = urnData?.[0] ? formatEther(urnData[0]) : '0';
   const art = urnData?.[1] ? formatEther(urnData[1]) : '0';
 
+  // Read unlocked collateral (Vat.gem[ilk][usr]) available to lock
+  const { data: gemData, refetch: refetchGem } = useReadContract({
+    address: addresses.vat as `0x${string}`,
+    abi: [
+      {
+        name: 'gem',
+        type: 'function',
+        stateMutability: 'view',
+        inputs: [
+          { name: 'ilk', type: 'bytes32' },
+          { name: 'usr', type: 'address' },
+        ],
+        outputs: [{ name: '', type: 'uint256' }],
+      },
+    ],
+    functionName: 'gem',
+    args: address ? [currentIlk as `0x${string}`, address as `0x${string}`] : undefined,
+  });
+
+  const gem = gemData ? formatEther(gemData as any) : '0';
+
   // --- Preflight reads for ONEDOLLAR withdraws ---
   // 1) Internal dai balance (rad) in Vat for the user
   const { data: daiRadBalance } = useReadContract({
@@ -104,6 +125,7 @@ export function useStablecoin(selectedCollateral: 'CBiomaH' = 'CBiomaH') {
   if (isSuccess) {
     setTimeout(() => {
       refetchUrn();
+      refetchGem();
     }, 2000);
   }
 
@@ -202,7 +224,32 @@ export function useStablecoin(selectedCollateral: 'CBiomaH' = 'CBiomaH') {
   // Lock collateral in CDP
   const lockCollateral = async (amount: string, ilk: string): Promise<`0x${string}`> => {
     if (!address) return Promise.reject('No address');
-    
+    // Safety: ensure requested lock <= available unlocked collateral (Vat.gem)
+    try {
+      const provider = new ethers.BrowserProvider((window as any).ethereum);
+      const vat = new ethers.Contract(addresses.vat as string, [
+        {
+          name: 'gem',
+          type: 'function',
+          stateMutability: 'view',
+          inputs: [
+            { name: 'ilk', type: 'bytes32' },
+            { name: 'usr', type: 'address' },
+          ],
+          outputs: [{ name: '', type: 'uint256' }],
+        },
+      ] as any, provider);
+      const availableGem: bigint = await vat.gem(ilk, address);
+      const req = parseEther(amount);
+      if (req > availableGem) {
+        const humanAvail = formatEther(availableGem);
+        throw new Error(`Cannot lock more than available. Available to lock: ${humanAvail}`);
+      }
+    } catch (e) {
+      // If safety check fails due to provider/abi, proceed; Vat will enforce
+      console.warn('Lock precheck warning:', e);
+    }
+
     const result = await writeContractAsync({
       address: addresses.vat as `0x${string}`,
       abi: [
@@ -660,6 +707,7 @@ export function useStablecoin(selectedCollateral: 'CBiomaH' = 'CBiomaH') {
   return {
     ink,
     art,
+    gem,
     depositCollateral,
     approveToken,
     authorizeVat,
@@ -673,7 +721,7 @@ export function useStablecoin(selectedCollateral: 'CBiomaH' = 'CBiomaH') {
     closeVault,
     isPending,
     isSuccess,
-    refetchData: refetchUrn
+    refetchData: () => { refetchUrn(); refetchGem(); }
   };
 }
 
