@@ -4,8 +4,8 @@ import Link from "next/link";
 import React from "react";
 import { useI18n } from "@/i18n/I18nContext";
 
-const APP_PATH = process.env.NEXT_PUBLIC_MAIN_APP_PATH || "http://localhost:4100/";
-const HOME_PATH = process.env.NEXT_PUBLIC_HOME_PATH || "http://localhost:4200/";
+const APP_PATH = process.env.NEXT_PUBLIC_MAIN_APP_PATH || "/app/";
+const HOME_PATH = process.env.NEXT_PUBLIC_HOME_PATH || "/";
 
 export function Header() {
   const { lang, setLang, t } = useI18n();
@@ -18,8 +18,8 @@ export function Header() {
   const labelEnter = t("header.enter");
   const labelLang = lang === "pt" ? "EN" : "PT";
 
-  // Check if we're on the app page (4100) or home page (4200)
-  const isOnApp = typeof window !== 'undefined' && window.location.port === '4100';
+  // Check if we're on the app page (/app/) or home page (/)
+  const isOnApp = typeof window !== 'undefined' && window.location.pathname.startsWith('/app/');
   const buttonHref = isOnApp ? HOME_PATH : APP_PATH;
   const buttonText = isOnApp ? t("header.home") : labelEnter;
 
