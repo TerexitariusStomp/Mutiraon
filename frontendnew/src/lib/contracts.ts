@@ -921,6 +921,138 @@ export const DAI_JOIN_ABI = [
   },
 ];
 
+export const ETH_FAUCET_ABI = [
+  {
+    inputs: [],
+    name: "CLAIM_AMOUNT",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "COOLDOWN",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "canClaim",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "claim",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "enabled",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    name: "lastClaim",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "owner",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "user",
+        type: "address",
+      },
+    ],
+    name: "canClaim",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "user",
+        type: "address",
+      },
+    ],
+    name: "getClaimTimeRemaining",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+];
+
 export const MULTICALL_ABI = [
   {
     inputs: [
@@ -1034,23 +1166,26 @@ export const CONTRACT_ADDRESSES = {
   // Ethereum Sepolia - Amaz-One Dollar System
   sepolia: {
     // Core System
-    vat: "0x7E198F35577fCbaA93c9Cf983A8d9d96979cdD25",
-    stablecoin: "0x3B3Dc8305bd491cffe41DC955C0fCa16bfbE1E3A",
-    spot: "0x8583bcD939571Eaa21D9BBfDCc82e7A0Fda2c38f",
-    pot: "0x34C886c7C6407A65d193DF006f3Ef600e9b992d7",
-    dog: "0x75af7fF5098beCBA8a8d483bEfd11ed12ad9525F",
-    jug: "0x1Db55dA3a3eD1BC092E297A5D166C9F1d4EC0283",
-    vow: "0x171949B94fE913a21BCD1Fb97dC1F08359C3b8Bc",
-    daiJoin: "0xd8D7Ab4762e0d70DdCDEF22f757c5662E1488dB8",
-    
+    vat: "0x0F52e95479f549a4246997129f7cEac5AEb03B3b",
+    stablecoin: "0xb4D43bF742cE16aFAaCA1332823DB0fCA2565ea4",
+    spot: "0xDA54e021F4C9B8239D9b70E3FCcBbaaC8954C70B",
+    pot: "0x77F1CC1791830208ccfC63A07beCd38E0780fa45",
+    dog: "0x176223ae0E66E10B33Cc64ab3E7f051Fa6adb5FD",
+    jug: "0x258C6Ff065D92ff829Cb62Ba5554aA763250a676",
+    vow: "0x139da3025aad2Ab370982c9bEAD0cCb1c853469A",
+    daiJoin: "0xB9224838D2feE670B3D2BcF4059bc7AE2bf31844",
+
     // Environmental Token Addresses (CBiomaH only)
-    cbiomehToken: "0x0000000000000000000000000000000000000000",
-    
+    cbiomehToken: "0xd8eF97d02082E7B707bADAF5bdE5b82a35483725",
+
     // Collateral Join Contracts (CBiomaH only)
-    cbiomehJoin: "0x0000000000000000000000000000000000000000",
-    
+    cbiomehJoin: "0xE59d40A58A79632c377e1Cd2f1c1ecF4596B7aC6",
+
     // Auction Mechanisms (CBiomaH only)
-    cbiomehClipper: "0x0000000000000000000000000000000000000000",
+    cbiomehClipper: "0xD41E77A6c244340b3173fEfade8C83A698D4dffa",
+
+    // Faucets
+    ethFaucet: "0x7A1BF48a4F7Ec9aD206153a038b77a85c7ef0000",
   },
 };
 
@@ -1081,4 +1216,3 @@ export const ENVIRONMENTAL_TOKENS = {
     clipperAddress: CONTRACT_ADDRESSES.sepolia.cbiomehClipper,
   },
 };
-

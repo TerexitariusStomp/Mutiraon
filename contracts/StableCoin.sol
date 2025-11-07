@@ -16,8 +16,8 @@ contract StableCoin {
     modifier auth { require(wards[msg.sender] == 1, "StableCoin/not-authorized"); _; }
 
     // --- ERC20 Data ---
-    string  public constant name     = "Mutiraon";
-    string  public constant symbol   = "Mutiraon";
+    string  public constant name     = "Amaz ONEDOLLAR";
+    string  public constant symbol   = "ONEDOLLAR";
     string  public constant version  = "1";
     uint8   public constant decimals = 18;
     uint256 public totalSupply;

@@ -1,0 +1,12 @@
+{
+  "network": "Ethereum Sepolia",
+  "deployer": "0xF0eFA1aD9b2470A496d705C8c890115e84a93Ad3",
+  "deploymentDate": "2025-11-07T04:11:25.214Z",
+  "contract": {
+    "name": "EthFaucet",
+    "address": "0xDc8E20701103C5B1Ef9134B1BBd85F4Ba0Cfc77B",
+    "claimAmount": "0.001 ETH",
+    "cooldown": "24 hours",
+    "funded": "0.01 ETH"
+  }
+}

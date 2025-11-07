@@ -943,13 +943,16 @@ export const CONTRACT_ADDRESSES = {
     daiJoin: "0xd8D7Ab4762e0d70DdCDEF22f757c5662E1488dB8",
     
     // Environmental Token Addresses
-    cbiomehToken: "0x9589B102eF9D61108B05F411e4d9F3c417F4c001",
+    cbiomehToken: "0x56050c12F0571DdA13621cBcb7c1c333EA4842BB",
     
     // Collateral Join Contracts
-    cbiomehJoin: "0x35aa94781FAcf8cAB70CBc7Fac6FccB4ECF346b5",
+    cbiomehJoin: "0xBafCF10F52e206c67De3cd82951088f94d3fC6F5",
     
     // Auction Mechanisms
-    cbiomehClipper: "0x1F440fB7dab4D3b27617f8e5b4855B476FDd95a2",
+    cbiomehClipper: "0x65FCfFDA4E4DA7562DECb4347e0B7b8BD440FB44",
+    
+    // Faucet
+    cbiomehFaucet: "0xc6a75D90B155C151D4ab564587972D4AA608f7e7",
   },
 };
 
@@ -980,4 +983,16 @@ export const ENVIRONMENTAL_TOKENS = {
     clipperAddress: CONTRACT_ADDRESSES.sepolia.cbiomehClipper,
   },
 };
+
+// Faucet ABI for claim UI
+export const FAUCET_ABI = [
+  { inputs: [{ name: "_token", type: "address" }], stateMutability: "nonpayable", type: "constructor" },
+  { inputs: [], name: "claim", outputs: [], stateMutability: "nonpayable", type: "function" },
+  { inputs: [], name: "claimAmount", outputs: [{ type: "uint256" }], stateMutability: "view", type: "function" },
+  { inputs: [], name: "cooldown", outputs: [{ type: "uint256" }], stateMutability: "view", type: "function" },
+  { inputs: [], name: "enabled", outputs: [{ type: "bool" }], stateMutability: "view", type: "function" },
+  { inputs: [{ name: "who", type: "address" }], name: "lastClaim", outputs: [{ type: "uint256" }], stateMutability: "view", type: "function" },
+  { inputs: [], name: "owner", outputs: [{ type: "address" }], stateMutability: "view", type: "function" },
+  { inputs: [], name: "token", outputs: [{ type: "address" }], stateMutability: "view", type: "function" },
+];
 
