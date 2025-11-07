@@ -10,7 +10,7 @@ export function useStablecoin(selectedCollateral: 'CBiomaH' = 'CBiomaH') {
   const chainId = useChainId();
   const addresses = CONTRACT_ADDRESSES.sepolia;
   
-  const { writeContract, data: hash, isPending: isWritePending } = useWriteContract();
+  const { writeContract, writeContractAsync, data: hash, isPending: isWritePending } = useWriteContract();
   const { isPending: isReceiptPending, isSuccess } = useWaitForTransactionReceipt({
     hash: hash
   });
@@ -108,7 +108,7 @@ export function useStablecoin(selectedCollateral: 'CBiomaH' = 'CBiomaH') {
   }
 
   // Deposit collateral - returns a promise to handle approval then deposit
-  const depositCollateral = (amount: string, collateralType: 'CBiomaH') => {
+  const depositCollateral = (amount: string, collateralType: 'CBiomaH'): Promise<`0x${string}`> => {
     if (!address) return Promise.reject('No address');
     
     const config = getCollateralConfig(collateralType);
@@ -125,7 +125,7 @@ export function useStablecoin(selectedCollateral: 'CBiomaH' = 'CBiomaH') {
     console.log('🔍 Using decimals:', config.decimals);
     
     // For now, just do the join directly - user should approve manually first
-    return writeContract({
+    return writeContractAsync({
       address: config.joinAddress as `0x${string}`,
       abi: [
         {
@@ -142,7 +142,7 @@ export function useStablecoin(selectedCollateral: 'CBiomaH' = 'CBiomaH') {
   };
 
   // Approve token for spending (exact amount only)
-  const approveToken = (amount: string, collateralType: 'CBiomaH') => {
+  const approveToken = (amount: string, collateralType: 'CBiomaH'): Promise<`0x${string}`> => {
     if (!address) return Promise.reject('No address');
     
     const config = getCollateralConfig(collateralType);
@@ -157,7 +157,7 @@ export function useStablecoin(selectedCollateral: 'CBiomaH' = 'CBiomaH') {
     console.log('💰 Approving exactly:', amount, collateralType);
     console.log('📊 In wei:', exactAmount.toString());
     
-    return writeContract({
+    return writeContractAsync({
       address: config.tokenAddress as `0x${string}`,
       abi: [
         {
@@ -174,13 +174,13 @@ export function useStablecoin(selectedCollateral: 'CBiomaH' = 'CBiomaH') {
   };
 
   // Authorize DaiJoin contract to manage ONEDOLLAR in Vat (required for minting)
-  const authorizeVat = () => {
+  const authorizeVat = (): Promise<`0x${string}`> => {
     if (!address) return Promise.reject('No address');
     
     console.log('🔑 Authorizing DaiJoin to manage ONEDOLLAR in Vat...');
     console.log('📋 DaiJoin address:', addresses.daiJoin);
     
-    return writeContract({
+    return writeContractAsync({
       address: addresses.vat as `0x${string}`,
       abi: [
         {
@@ -197,10 +197,10 @@ export function useStablecoin(selectedCollateral: 'CBiomaH' = 'CBiomaH') {
   };
 
   // Lock collateral in CDP
-  const lockCollateral = async (amount: string, ilk: string) => {
+  const lockCollateral = async (amount: string, ilk: string): Promise<`0x${string}`> => {
     if (!address) return;
     
-    const result = await writeContract({
+    const result = await writeContractAsync({
       address: addresses.vat as `0x${string}`,
       abi: [
         {
@@ -225,7 +225,7 @@ export function useStablecoin(selectedCollateral: 'CBiomaH' = 'CBiomaH') {
   };
 
   // Generate (mint) ONEDOLLAR - ONLY mints debt in Vat (no auto-withdrawal)
-  const generateStablecoin = async (amount: string, ilk: string) => {
+  const generateStablecoin = async (amount: string, ilk: string): Promise<`0x${string}`> => {
     if (!address) return;
     
     console.log('🏦 Minting ONEDOLLAR debt in Vat...');
@@ -233,7 +233,7 @@ export function useStablecoin(selectedCollateral: 'CBiomaH' = 'CBiomaH') {
     console.log('🔑 ILK:', ilk);
     
     // Only mint ONEDOLLAR debt in Vat - user can manually withdraw later if needed
-    return writeContract({
+    return writeContractAsync({
       address: addresses.vat as `0x${string}`,
       abi: [
         {
@@ -258,7 +258,7 @@ export function useStablecoin(selectedCollateral: 'CBiomaH' = 'CBiomaH') {
 
   // Generate and immediately send ONEDOLLAR to a recipient (e.g. minter wallet)
   // This performs: frob (mint internal) -> bounded wait -> ensure hope -> DaiJoin.exit(recipient)
-  const generateAndSendStablecoin = async (amount: string, ilk: string, recipient: string) => {
+  const generateAndSendStablecoin = async (amount: string, ilk: string, recipient: string): Promise<`0x${string}`> => {
     if (!address) return;
 
     const amountWad = parseEther(amount);
@@ -269,7 +269,7 @@ export function useStablecoin(selectedCollateral: 'CBiomaH' = 'CBiomaH') {
     };
 
     // 1) Generate internal ONEDOLLAR in Vat for the connected wallet (msg.sender)
-    const frobHash = await writeContract({
+    const frobHash = await writeContractAsync({
       address: addresses.vat as `0x${string}`,
       abi: [
         {
@@ -298,7 +298,7 @@ export function useStablecoin(selectedCollateral: 'CBiomaH' = 'CBiomaH') {
     let can = BigInt((canDaiJoin as any)?.toString() ?? '0');
     if (can === BigInt(0)) {
       // Submit hope tx and bounded wait to avoid race in vat.move
-      const hopeHash = await writeContract({
+      const hopeHash = await writeContractAsync({
         address: addresses.vat as `0x${string}`,
         abi: [
           {
@@ -322,7 +322,7 @@ export function useStablecoin(selectedCollateral: 'CBiomaH' = 'CBiomaH') {
     }
 
     // 3) Exit directly to the recipient (mints ONEDOLLAR to recipient)
-    const exitHash = await writeContract({
+    const exitHash = await writeContractAsync({
       address: addresses.daiJoin as `0x${string}`,
       abi: [
         {
@@ -340,7 +340,7 @@ export function useStablecoin(selectedCollateral: 'CBiomaH' = 'CBiomaH') {
   };
 
   // Withdraw ONEDOLLAR
-  const withdrawStablecoin = async (amount: string) => {
+  const withdrawStablecoin = async (amount: string): Promise<`0x${string}`> => {
     if (!address) return;
 
     const amountWad = parseEther(amount);
@@ -372,7 +372,7 @@ export function useStablecoin(selectedCollateral: 'CBiomaH' = 'CBiomaH') {
 
     // Ensure DaiJoin is approved to move your Vat dai balance (set once)
     if (can === BigInt(0)) {
-      await writeContract({
+      await writeContractAsync({
         address: addresses.vat as `0x${string}`,
         abi: [
           {
@@ -392,7 +392,7 @@ export function useStablecoin(selectedCollateral: 'CBiomaH' = 'CBiomaH') {
     }
 
     // Call DaiJoin.exit which will internally move rad and mint ONEDOLLAR
-    await writeContract({
+    const exitHash = await writeContractAsync({
       address: addresses.daiJoin as `0x${string}`,
       abi: [
         {
@@ -406,6 +406,7 @@ export function useStablecoin(selectedCollateral: 'CBiomaH' = 'CBiomaH') {
       functionName: 'exit',
       args: [address as `0x${string}`, amountWad],
     });
+    return exitHash;
   };
 
   // Repay ONEDOLLAR - robust path that derives safe repay from actual internal dai to avoid under/overflow
@@ -456,7 +457,7 @@ export function useStablecoin(selectedCollateral: 'CBiomaH' = 'CBiomaH') {
     // 1) Approve ONEDOLLAR spending to DaiJoin
     try {
       console.log('🔑 Approving ONEDOLLAR -> DaiJoin for repay...');
-      await writeContract({
+      await writeContractAsync({
         address: addresses.stablecoin as `0x${string}`,
         abi: [
           {
@@ -477,7 +478,7 @@ export function useStablecoin(selectedCollateral: 'CBiomaH' = 'CBiomaH') {
 
     // 2) DaiJoin.join to convert wallet ONEDOLLAR -> internal dai
     console.log('🏦 DaiJoin.join (convert wallet ONEDOLLAR -> internal dai)...');
-    await writeContract({
+    await writeContractAsync({
       address: addresses.daiJoin as `0x${string}`,
       abi: [
         {
@@ -552,7 +553,7 @@ export function useStablecoin(selectedCollateral: 'CBiomaH' = 'CBiomaH') {
   };
 
   // Withdraw collateral - use join exit to get tokens back to wallet
-  const withdrawCollateral = (amount: string, collateralType: 'CBiomaH') => {
+  const withdrawCollateral = (amount: string, collateralType: 'CBiomaH'): Promise<`0x${string}`> => {
     if (!address) return Promise.reject('No address');
     
     const config = getCollateralConfig(collateralType);
@@ -567,7 +568,7 @@ export function useStablecoin(selectedCollateral: 'CBiomaH' = 'CBiomaH') {
     console.log('📊 Withdraw amount in token units:', exactAmount.toString());
     console.log('🔍 Using decimals:', config.decimals);
     
-    return writeContract({
+    return writeContractAsync({
       address: config.joinAddress as `0x${string}`,
       abi: [
         {
@@ -584,7 +585,7 @@ export function useStablecoin(selectedCollateral: 'CBiomaH' = 'CBiomaH') {
   };
 
   // Unlock collateral with safety precheck to avoid Vat/not-safe
-  const unlockCollateral = async (amount: string, ilk: string) => {
+  const unlockCollateral = async (amount: string, ilk: string): Promise<`0x${string}`> => {
     if (!address) return Promise.reject('No address');
 
     console.log('🔓 Unlocking collateral via frob with safety precheck...');
@@ -623,7 +624,7 @@ export function useStablecoin(selectedCollateral: 'CBiomaH' = 'CBiomaH') {
 
     const negativeAmount = -reqUnlockWad;
 
-    return writeContract({
+    return writeContractAsync({
       address: addresses.vat as `0x${string}`,
       abi: [
         {

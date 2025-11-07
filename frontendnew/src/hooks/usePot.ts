@@ -23,6 +23,7 @@ export function usePot() {
 
   const {
     writeContract,
+    writeContractAsync,
     data: hash,
     isPending: isWritePending,
   } = useWriteContract();
@@ -88,9 +89,9 @@ export function usePot() {
     : "0";
 
   // Individual deposit step functions
-  const updateRates = async () => {
+  const updateRates = async (): Promise<`0x${string}`> => {
     console.log("💧 Updating interest rates...");
-    return writeContract({
+    return writeContractAsync({
       address: addresses.pot as `0x${string}`,
       abi: POT_ABI,
       functionName: "drip",
@@ -98,12 +99,12 @@ export function usePot() {
     });
   };
 
-  const approveDaiJoin = async (amount: string) => {
+  const approveDaiJoin = async (amount: string): Promise<`0x${string}`> => {
     console.log("🔓 Approving DaiJoin to spend tokens...");
     const wad = parseEther(amount);
     setIsApproving(true);
     try {
-      const result = await writeContract({
+      const result = await writeContractAsync({
         address: addresses.stablecoin as `0x${string}`,
         abi: STABLECOIN_ABI,
         functionName: "approve",
@@ -119,10 +120,10 @@ export function usePot() {
     }
   };
 
-  const joinStablecoinToVat = async (amount: string) => {
+  const joinStablecoinToVat = async (amount: string): Promise<`0x${string}`> => {
     console.log("🏦 Joining stablecoin into Vat...");
     const wad = parseEther(amount);
-    const result = await writeContract({
+    const result = await writeContractAsync({
       address: addresses.daiJoin as `0x${string}`,
       abi: DAI_JOIN_ABI,
       functionName: "join",
@@ -135,9 +136,9 @@ export function usePot() {
     return result;
   };
 
-  const authorizePot = async () => {
+  const authorizePot = async (): Promise<`0x${string}`> => {
     console.log("🔑 Authorizing Pot contract...");
-    const result = await writeContract({
+    const result = await writeContractAsync({
       address: addresses.vat as `0x${string}`,
       abi: VAT_ABI,
       functionName: "hope",
@@ -148,12 +149,12 @@ export function usePot() {
     return result;
   };
 
-  const depositToPot = async (amount: string) => {
+  const depositToPot = async (amount: string): Promise<`0x${string}`> => {
     console.log("💰 Depositing into Pot savings...");
 
     const wad = parseEther(amount);
 
-    return writeContract({
+    return writeContractAsync({
       address: addresses.pot as `0x${string}`,
       abi: POT_ABI,
       functionName: "join",
@@ -162,7 +163,7 @@ export function usePot() {
   };
 
   // Deposit ONEDOLLAR to savings (join)
-  const depositSavings = async (amount: string) => {
+  const depositSavings = async (amount: string): Promise<`0x${string}`> => {
     if (!address) return Promise.reject("No address");
 
     console.log("💰 Starting deposit process for:", amount, "ONEDOLLAR");
@@ -172,7 +173,7 @@ export function usePot() {
     // Step 1: Call drip first to update rates (required before join)
     console.log("💧 Step 1: Updating interest rates...");
     try {
-      await writeContract({
+      await writeContractAsync({
         address: addresses.pot as `0x${string}`,
         abi: POT_ABI,
         functionName: "drip",
@@ -189,7 +190,7 @@ export function usePot() {
     console.log("🔓 Step 2: Approving DaiJoin...");
     setIsApproving(true);
     try {
-      await writeContract({
+      await writeContractAsync({
         address: addresses.stablecoin as `0x${string}`,
         abi: STABLECOIN_ABI,
         functionName: "approve",
@@ -207,7 +208,7 @@ export function usePot() {
     // Step 3: Join stablecoin into Vat via DaiJoin
     console.log("🏦 Step 3: Joining stablecoin into Vat...");
     try {
-      await writeContract({
+      await writeContractAsync({
         address: addresses.daiJoin as `0x${string}`,
         abi: DAI_JOIN_ABI,
         functionName: "join",
@@ -223,7 +224,7 @@ export function usePot() {
     // Step 4: Authorize Pot contract to move user's dai
     console.log("🔑 Step 4: Authorizing Pot contract...");
     try {
-      await writeContract({
+      await writeContractAsync({
         address: addresses.vat as `0x${string}`,
         abi: VAT_ABI,
         functionName: "hope",
@@ -238,7 +239,7 @@ export function usePot() {
 
     // Step 5: Deposit into Pot
     console.log("💰 Step 5: Depositing into Pot savings...");
-    const result = await writeContract({
+    const result = await writeContractAsync({
       address: addresses.pot as `0x${string}`,
       abi: POT_ABI,
       functionName: "join",
@@ -254,7 +255,7 @@ export function usePot() {
   };
 
   // Withdraw ONEDOLLAR from savings (exit)
-  const withdrawSavings = async (amount: string) => {
+  const withdrawSavings = async (amount: string): Promise<`0x${string}`> => {
     if (!address) return Promise.reject("No address");
 
     console.log("💸 Starting withdrawal process for:", amount, "ONEDOLLAR");
@@ -287,7 +288,7 @@ export function usePot() {
     // Step 1: Call pot.exit() to move dai from Pot to user in Vat
     console.log("🏦 Step 1: Exiting from Pot...");
     try {
-      await writeContract({
+      await writeContractAsync({
         address: addresses.pot as `0x${string}`,
         abi: POT_ABI,
         functionName: "exit",
@@ -302,7 +303,7 @@ export function usePot() {
 
     // Step 2: Call daiJoin.exit() to convert dai to tokens
     console.log("💰 Step 2: Converting dai to tokens...");
-    const result = await writeContract({
+    const result = await writeContractAsync({
       address: addresses.daiJoin as `0x${string}`,
       abi: DAI_JOIN_ABI,
       functionName: "exit",
@@ -318,9 +319,9 @@ export function usePot() {
   };
 
   // Helper function to call drip before operations
-  const ensureDrip = async () => {
+  const ensureDrip = async (): Promise<`0x${string}`> => {
     console.log("💧 Calling drip to update interest accrual...");
-    await writeContract({
+    await writeContractAsync({
       address: addresses.pot as `0x${string}`,
       abi: POT_ABI,
       functionName: "drip",
@@ -332,10 +333,10 @@ export function usePot() {
   };
 
   // Drip function to update interest accrual
-  const drip = () => {
+  const drip = (): Promise<`0x${string}`> => {
     console.log("💧 Dripping interest...");
 
-    return writeContract({
+    return writeContractAsync({
       address: addresses.pot as `0x${string}`,
       abi: POT_ABI,
       functionName: "drip",
