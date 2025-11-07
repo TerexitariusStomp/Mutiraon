@@ -171,6 +171,7 @@ export const en = {
   "faucet.eth.cooldownActive": "Cooldown active",
   "faucet.claimBoth": "Claim Both",
   "faucet.claiming": "Claiming...",
+  "faucet.claimed": "Claimed",
   "faucet.success.both": "Both claims successful.",
   "faucet.success.token": "CBiomaH claim successful.",
   "faucet.success.eth": "ETH claim successful.",

@@ -4,9 +4,11 @@ import { useMemo } from "react";
 import { useAccount, useReadContract, useWriteContract, useWaitForTransactionReceipt } from "wagmi";
 import { formatEther, formatUnits } from "viem";
 import { CONTRACT_ADDRESSES, FAUCET_ABI, ETH_FAUCET_ABI } from "@/lib/contracts-updated";
+import { useI18n } from "@/i18n/I18nContext";
 
 export default function CombinedFaucetClaim() {
   const { isConnected, address } = useAccount();
+  const { t } = useI18n();
   const addresses = CONTRACT_ADDRESSES.sepolia;
 
   const tokenFaucet = addresses.cbiomehFaucet as `0x${string}`;
@@ -82,7 +84,7 @@ export default function CombinedFaucetClaim() {
 
   const canClaimEth = Boolean(eEnabled) && Boolean(eCanClaim);
 
-  // --- Writes (separate states for both claims) ---
+  // --- Writes ---
   const { writeContract: writeToken, data: txToken, isPending: pToken } = useWriteContract();
   const { writeContract: writeEth, data: txEth, isPending: pEth } = useWriteContract();
 
@@ -103,21 +105,25 @@ export default function CombinedFaucetClaim() {
 
   return (
     <div className="mt-6 rounded-xl border border-black/10 bg-white/70 p-4 shadow-sm">
-      <h3 className="text-lg font-semibold text-gray-800">Faucets</h3>
-      <p className="mt-1 text-sm text-gray-600">Claim both CBiomaH and Sepolia ETH in one click.</p>
+      <h3 className="text-lg font-semibold text-gray-800">{t('faucet.title')}</h3>
+      <p className="mt-1 text-sm text-gray-600">{t('faucet.subtitle')}</p>
 
       <div className="mt-3 grid gap-3 text-sm text-gray-700 md:grid-cols-2">
         <div>
-          <div className="font-medium">CBiomaH Faucet</div>
-          <div>Amount: {tClaimAmount ? `${formatUnits(tClaimAmount as bigint, 18)} CBiomaH` : "…"}</div>
-          <div>Cooldown: {tCooldown ? `${Number(tCooldown) / 3600}h` : "…"} {tEnabled ? "" : "(disabled)"}</div>
-          {tokenSecondsLeft > 0 && <div className="text-gray-500">Next claim in ~{Math.floor(tokenSecondsLeft/3600)}h {Math.floor((tokenSecondsLeft%3600)/60)}m</div>}
+          <div className="font-medium">{t('faucet.token.title')}</div>
+          <div>{t('faucet.amount')}: {tClaimAmount ? `${formatUnits(tClaimAmount as bigint, 18)} CBiomaH` : "…"}</div>
+          <div>{t('faucet.cooldown')}: {tCooldown ? `${Number(tCooldown) / 3600}h` : "…"} {tEnabled ? "" : t('faucet.disabled')}</div>
+          {tokenSecondsLeft > 0 && (
+            <div className="text-gray-500">
+              {t('faucet.next').replace('{h}', String(Math.floor(tokenSecondsLeft/3600))).replace('{m}', String(Math.floor((tokenSecondsLeft%3600)/60)))}
+            </div>
+          )}
         </div>
         <div>
-          <div className="font-medium">ETH Faucet</div>
-          <div>Amount: {eClaimAmount ? `${formatEther(eClaimAmount as bigint)} ETH` : "…"}</div>
-          <div>Cooldown: {eCooldown ? `${Number(eCooldown) / 3600}h` : "…"} {eEnabled ? "" : "(disabled)"}</div>
-          {eCanClaim === false && <div className="text-gray-500">Cooldown active</div>}
+          <div className="font-medium">{t('faucet.eth.title')}</div>
+          <div>{t('faucet.amount')}: {eClaimAmount ? `${formatEther(eClaimAmount as bigint)} ETH` : "…"}</div>
+          <div>{t('faucet.cooldown')}: {eCooldown ? `${Number(eCooldown) / 3600}h` : "…"} {eEnabled ? "" : t('faucet.disabled')}</div>
+          {eCanClaim === false && <div className="text-gray-500">{t('faucet.eth.cooldownActive')}</div>}
         </div>
       </div>
 
@@ -126,14 +132,15 @@ export default function CombinedFaucetClaim() {
         disabled={disabled}
         className="mt-4 rounded-md bg-emerald-600 px-4 py-2 text-white disabled:opacity-50"
       >
-        {pToken || pEth || mToken || mEth ? "Claiming…" : "Claim Both"}
+        {pToken || pEth || mToken || mEth ? t('faucet.claiming') : (sToken || sEth) ? t('faucet.claimed') : t('faucet.claimBoth')}
       </button>
 
       {(sToken || sEth) && (
         <div className="mt-2 text-sm text-emerald-700">
-          {sToken && sEth ? "Both claims successful." : sToken ? "CBiomaH claim successful." : "ETH claim successful."}
+          {sToken && sEth ? t('faucet.success.both') : sToken ? t('faucet.success.token') : t('faucet.success.eth')}
         </div>
       )}
     </div>
   );
 }
+

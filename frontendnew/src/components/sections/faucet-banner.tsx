@@ -6,9 +6,11 @@ import { formatEther, formatUnits } from "viem";
 import { CONTRACT_ADDRESSES, FAUCET_ABI, ETH_FAUCET_ABI } from "@/lib/contracts-updated";
 import { Button } from "@/components/ui/button";
 import { AlertTriangle, Coins } from "lucide-react";
+import { useI18n } from "@/i18n/I18nContext";
 
 export default function FaucetBanner() {
   const { isConnected, address } = useAccount();
+  const { t } = useI18n();
   const addresses = CONTRACT_ADDRESSES.sepolia;
 
   const tokenFaucet = addresses.cbiomehFaucet as `0x${string}`;
@@ -113,12 +115,8 @@ export default function FaucetBanner() {
         <div className="flex items-center gap-3">
           <AlertTriangle className="h-5 w-5 text-amber-600" />
           <div>
-            <p className="text-sm font-medium text-amber-800">
-              Testnet Faucets Available
-            </p>
-            <p className="text-xs text-amber-700">
-              Claim CBiomaH tokens and Sepolia ETH to start interacting with the app
-            </p>
+            <p className="text-sm font-medium text-amber-800">{t('faucet.banner.title')}</p>
+            <p className="text-xs text-amber-700">{t('faucet.banner.subtitle')}</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
@@ -130,13 +128,11 @@ export default function FaucetBanner() {
               className="bg-emerald-600 hover:bg-emerald-700 text-white"
             >
               <Coins className="h-4 w-4 mr-1" />
-              {isClaiming ? "Claiming..." : "Claim Both"}
+              {isClaiming ? t('faucet.claiming') : (sToken || sEth) ? t('faucet.claimed') : t('faucet.claimBoth')}
             </Button>
           )}
           {!canClaimAny && (
-            <span className="text-xs text-amber-600">
-              Cooldown active - check back later
-            </span>
+            <span className="text-xs text-amber-600">{t('faucet.banner.cooldown')}</span>
           )}
         </div>
       </div>

@@ -186,6 +186,23 @@
   "stake.table.shutdown.desc": "O sistema pode ser interrompido via cage()",
   "stake.note": "Este mecanismo é central para o USR do ONEDOLLAR, permitindo que os detentores se beneficiem de juros programáveis preservando controle e segurança dos fundos depositados.",
 
+  // Faucets
+  "faucet.title": "Faucets",
+  "faucet.subtitle": "Reivindique CBiomaH e Sepolia ETH em um clique.",
+  "faucet.amount": "Quantidade",
+  "faucet.cooldown": "Cooldown",
+  "faucet.disabled": "(desabilitado)",
+  "faucet.next": "Próxima reivindicação em ~{h}h {m}m",
+  "faucet.token.title": "Faucet CBiomaH",
+  "faucet.eth.title": "Faucet ETH",
+  "faucet.eth.cooldownActive": "Cooldown ativo",
+  "faucet.claimBoth": "Reivindicar Ambos",
+  "faucet.claiming": "Reivindicando...",
+  "faucet.claimed": "Reivindicado",
+  "faucet.success.both": "Ambas as reivindicações bem-sucedidas.",
+  "faucet.success.token": "Reivindicação CBiomaH bem-sucedida.",
+  "faucet.success.eth": "Reivindicação ETH bem-sucedida.",
+
   // Risk Disclaimer
   "risk.title": "AVISO IMPORTANTE",
   "risk.env": "AMBIENTE DE TESTE",
@@ -209,3 +226,4 @@
   "price.diff": "DIFERENÇA DE PREÇO",
   "price.rate": "TAXA DE RESGATE",
 };
+  "nav.connect": "Conectar Carteira",
