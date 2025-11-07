@@ -1,4 +1,4 @@
-﻿export const pt = {
+export const pt = {
   // Navigation
   "nav.get": "OBTER ONEDOLLAR",
   "nav.stake": "POUPAR",
@@ -23,16 +23,18 @@
   "layout.docs": "Docs",
   "layout.github": "Github",
   "layout.telegram": "Telegram",
-  "layout.copyright": "©Amaz-One Dollar - Todos os direitos reservados.",
+  "layout.copyright": "Amaz-One Dollar - Todos os direitos reservados.",
 
-  // Marca do banner de risco
+  // Risk banner brand
   "risk.brand": "Amaz-One Dollar: Stablecoin de Impacto do Brasil",
+
   // Vaults
   "vaults.title": "Selecione o Colateral Ambiental",
   "vaults.subtitle": "Escolha um tipo de colateral para gerir seu cofre e emitir ONEDOLLAR.",
   "vaults.header": "{name} ({code})",
   "coll.CBiomaH.name": "Crédito de BiomaH",
   "coll.CBiomaH.desc": "Lastreado por créditos de conservação de biomas H",
+
   // Vaults page - saldos & status
   "vault.bal.wallet": "Carteira {code}",
   "vault.bal.deposited": "Depositado {code}",
@@ -44,23 +46,23 @@
   "vault.status.avail": "Colateral Disponível",
   "vault.status.ready": "Pronto para travar",
   "vault.status.maxsafe": "Emissão Segura Máxima",
-  "vault.status.strict": "⚠️ O contrato aplica limites rigorosos",
+  "vault.status.strict": "O contrato aplica limites rigorosos",
 
   // Vaults page - seções
   "vault.dep.title": "Depositar {code}",
-  "vault.dep.step": "Etapa 1: Depositar {code} 💰",
+  "vault.dep.step": "Etapa 1: Depositar {code}",
   "vault.dep.what": "O que faz: Move tokens da sua carteira para o sistema do cofre",
   "vault.dep.li1": "Informe quantos tokens {code} deseja depositar",
   "vault.dep.li2": "Clique em \"Aprovar\" (permite que o cofre mova seus tokens)",
   "vault.dep.li3": "Clique em \"Depositar\" (move de fato os tokens)",
-  "vault.dep.li4": "Seus tokens agora estão no cofre mas não travados — você pode retirÃ¡-los facilmente",
-  "vault.dep.think": "Pense assim: Colocar dinheiro na conta do banco. Ele está no banco, mas ainda não comprometido.",
+  "vault.dep.li4": "Seus tokens agora estão no cofre mas não travados - você pode retirá-los facilmente",
+  "vault.dep.think": "Pense assim: Colocar dinheiro na conta do banco. Está no banco, mas ainda não comprometido.",
   "vault.dep.amount": "Quantidade de {code}",
   "vault.dep.approve": "1. Aprovar",
   "vault.dep.deposit": "2. Depositar",
 
   "vault.lock.title": "Gerir Colateral Travado",
-  "vault.lock.step": "Etapa 2: Travar Tokens 🔒",
+  "vault.lock.step": "Etapa 2: Travar Tokens",
   "vault.lock.what": "O que faz: Trava seus tokens depositados para poder criar Amaz-One Dollar",
   "vault.lock.li1": "Veja \"Disponível para Travar\" para saber quantos tokens depositados você tem",
   "vault.lock.li2": "Informe quantos deseja travar",
@@ -75,7 +77,7 @@
   "vault.unlock.btn": "Destravar",
 
   "vault.mut.title": "Gerir Amaz-One Dollar",
-  "vault.mut.step": "Etapa 3: Criar Amaz-One Dollar 💵",
+  "vault.mut.step": "Etapa 3: Criar Amaz-One Dollar",
   "vault.mut.what": "O que faz: Cria moeda local que você pode usar",
   "vault.mut.li1": "Veja \"Máximo que Você Pode Criar com Segurança\" (protege seus tokens)",
   "vault.mut.li2": "Informe quanto Amaz-One Dollar deseja criar",
@@ -92,7 +94,7 @@
   "vault.mut.repay.btn": "Quitar",
 
   "vault.wd.title": "Sacar Colateral",
-  "vault.wd.step": "Etapa 4: Destravar e Sacar ©",
+  "vault.wd.step": "Etapa 4: Destravar e Sacar",
   "vault.wd.what": "O que faz: Retorna seus tokens {code} para sua carteira",
   "vault.wd.unlock.title": "Para destravar:",
   "vault.wd.unlock.li1": "Vá à seção \"Gerir Colateral Travado\"",
@@ -101,13 +103,13 @@
   "vault.wd.withdraw.title": "Para sacar:",
   "vault.wd.withdraw.li1": "Informe quanto deseja sacar (apenas tokens destravados)",
   "vault.wd.withdraw.li2": "Clique em \"Sacar\"",
-  "vault.wd.withdraw.li3": "Os tokens voltam para sua carteira",
+  "vault.wd.withdraw.li3": "Tokens retornam para sua carteira",
   "vault.wd.think": "Pense assim: Após quitar o empréstimo, você pode sacar da poupança de volta para a conta corrente.",
   "vault.wd.available": "Disponível: {amt} {code}",
   "vault.wd.only": "Sacar apenas",
   "vault.wd.placeholder": "Quantidade para sacar",
   "vault.wd.btn": "Sacar",
-  "vault.help.steps": "Siga as etapas: 1) Depositar → 2) Travar → 3) Mintar",
+  "vault.help.steps": "Siga as etapas: 1) Depositar 2) Travar 3) Mintar",
   "vault.loading.approving": "Aprovando...",
   "vault.loading.depositing": "Depositando...",
   "vault.loading.locking": "Travando...",
@@ -171,59 +173,27 @@
   "stake.bullets.3.2": "Mais uma checagem de segurança para proteger seu dinheiro",
   "stake.bullets.3.3": "Clique para confirmar",
   "stake.bullets.4.1": "Move seu dinheiro para a poupança onde começa a render",
-  "stake.bullets.4.2": "Seu dinheiro fica travado rendendo juros",
-  "stake.bullets.4.3": "Clique para confirmar",
 
-  // Stake - contrato e tabela
-  "stake.contract.info": "Informações do Contrato",
-  "stake.contract.pot": "Endereço do Contrato Pot:",
-  "stake.view.etherscan": "Ver no Sepolia Etherscan →",
-  "stake.table.savings": "Gestão da Poupança",
-  "stake.table.savings.desc": "Depósitos e saques atualizam saldos normalizados",
-  "stake.table.rate": "Atualização de Taxas",
-  "stake.table.rate.desc": "A USR pode ser alterada por partes autorizadas",
-  "stake.table.shutdown": "Encerramento",
-  "stake.table.shutdown.desc": "O sistema pode ser interrompido via cage()",
-  "stake.note": "Este mecanismo é central para o USR do ONEDOLLAR, permitindo que os detentores se beneficiem de juros programáveis preservando controle e segurança dos fundos depositados.",
-
-  // Faucets
+  // Faucet (token + ETH)
   "faucet.title": "Faucets",
-  "faucet.subtitle": "Reivindique CBiomaH e Sepolia ETH em um clique.",
+  "faucet.subtitle": "Receba CBiomaH e ETH de Sepolia com um clique.",
   "faucet.amount": "Quantidade",
-  "faucet.cooldown": "Cooldown",
-  "faucet.disabled": "(desabilitado)",
+  "faucet.cooldown": "Intervalo",
+  "faucet.disabled": "(desativado)",
   "faucet.next": "Próxima reivindicação em ~{h}h {m}m",
-  "faucet.token.title": "Faucet CBiomaH",
-  "faucet.eth.title": "Faucet ETH",
-  "faucet.eth.cooldownActive": "Cooldown ativo",
-  "faucet.claimBoth": "Reivindicar Ambos",
+  "faucet.token.title": "Faucet de CBiomaH",
+  "faucet.eth.title": "Faucet de ETH",
+  "faucet.eth.cooldownActive": "Intervalo ativo",
+  "faucet.claimBoth": "Reivindicar ambos",
   "faucet.claiming": "Reivindicando...",
   "faucet.claimed": "Reivindicado",
-  "faucet.success.both": "Ambas as reivindicações bem-sucedidas.",
-  "faucet.success.token": "Reivindicação CBiomaH bem-sucedida.",
-  "faucet.success.eth": "Reivindicação ETH bem-sucedida.",
+  "faucet.success.both": "Ambas as reivindicações concluídas.",
+  "faucet.success.token": "CBiomaH reivindicado com sucesso.",
+  "faucet.success.eth": "ETH reivindicado com sucesso.",
 
-  // Risk Disclaimer
-  "risk.title": "AVISO IMPORTANTE",
-  "risk.env": "AMBIENTE DE TESTE",
-  "risk.line1": "Este aplicativo está implantado na rede de testes Ethereum Sepolia. Todas as transações usam tokens de teste e não têm valor real.",
-  "risk.features": "RECURSOS DE TESTE",
-  "risk.features.1": "Tokens de teste: use ETH de Sepolia e tokens ERC–20 de teste",
-  "risk.features.2": "Sem valor real: todos os ativos na testnet têm valor monetário zero",
-  "risk.features.3": "Ferramenta de aprendizado: experimente DeFi num ambiente seguro",
-  "risk.features.4": "Teste de desenvolvimento: ajude a melhorar o protocolo antes do mainnet",
-  "risk.getting": "COMEÇANDO",
-  "risk.getting.1": "Conecte uma carteira Web3 (MetaMask, etc.)",
-  "risk.getting.hint": "Para interagir com esta implantação em testnet:",
-  "risk.getting.2": "Mude para a rede de teste Ethereum Sepolia",
-  "risk.getting.3": "Obtenha ETH de Sepolia em uma faucet",
-  "risk.getting.4": "Use tokens de teste como colateral",
-  "risk.disclaimer": "Software experimental para testes. Use por sua conta e risco.",
-  // Price alert
-  "price.alert": "ALERTA DE PREÇO",
-  "price.market": "PREÇO DE MERCADO",
-  "price.redemption": "PREÇO DE RESGATE",
-  "price.diff": "DIFERENÇA DE PREÇO",
-  "price.rate": "TAXA DE RESGATE",
+  // Faucet banner
+  "faucet.banner.title": "Faucets de Teste Disponíveis",
+  "faucet.banner.subtitle": "Reivindique CBiomaH e ETH de Sepolia para começar a usar o app",
+  "faucet.banner.cooldown": "Intervalo ativo — volte mais tarde",
 };
-  "nav.connect": "Conectar Carteira",
+
