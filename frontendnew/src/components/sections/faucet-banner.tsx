@@ -101,8 +101,9 @@ export default function FaucetBanner() {
     }
   };
 
-  const disabled = !isConnected || (!canClaimToken && !canClaimEth) || pToken || pEth || mToken || mEth;
+  const disabled = !isConnected || (!canClaimToken && !canClaimEth) || (pToken && pEth) || (mToken && mEth);
   const canClaimAny = canClaimToken || canClaimEth;
+  const isClaiming = pToken || pEth || mToken || mEth;
 
   if (!isConnected) return null;
 
@@ -129,7 +130,7 @@ export default function FaucetBanner() {
               className="bg-emerald-600 hover:bg-emerald-700 text-white"
             >
               <Coins className="h-4 w-4 mr-1" />
-              {pToken || pEth || mToken || mEth ? "Claiming..." : "Claim Both"}
+              {isClaiming ? "Claiming..." : "Claim Both"}
             </Button>
           )}
           {!canClaimAny && (
