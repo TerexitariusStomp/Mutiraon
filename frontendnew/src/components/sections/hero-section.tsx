@@ -78,6 +78,23 @@ const HeroSection = () => {
             {t('hero.subtitle')}
           </p>
 
+          {/* YouTube Video Embed */}
+          <div className="mt-8 max-w-4xl mx-auto">
+            <div className="aspect-video w-full">
+              <iframe
+                width="560"
+                height="315"
+                src="https://www.youtube.com/embed/GfdzDh1bfbM?si=TddFRurX4vSGJuI-"
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+                className="w-full h-full rounded-lg shadow-lg"
+              ></iframe>
+            </div>
+          </div>
+
           {/* Stats removed per request */}
         </div>
       </div>
