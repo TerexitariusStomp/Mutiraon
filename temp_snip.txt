@@ -1,0 +1,131 @@
+
+  // Show connection status
+  if (!isConnected) {
+    return (
+      <div className="w-full max-w-[732px] mx-auto p-6 bg-white/60 rounded-2xl border border-black/10 shadow-[0_4px_20px_rgba(0,0,0,0.08)] backdrop-blur-sm">
+        <div className="text-center">
+          <p className="text-lg font-semibold text-gray-700 mb-2">Wallet Not Connected</p>
+          <p className="text-sm text-gray-500">Please connect your wallet to access the vault</p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="w-full max-w-[732px] mx-auto p-6 bg-white/60 rounded-2xl border border-black/10 shadow-[0_4px_20px_rgba(0,0,0,0.08)] backdrop-blur-sm">
+      <div className="space-y-6">
+
+        {/* Collateral Selection */}
+        <div>
+          <h3 className="text-lg font-semibold mb-4">Select Environmental Collateral</h3>
+          <div className="grid grid-cols-2 gap-2">
+            {Object.entries(ENVIRONMENTAL_TOKENS).map(([key, token]) => (
+              <button
+                key={key}
+                onClick={() => setSelectedCollateral(key as keyof typeof ENVIRONMENTAL_TOKENS)}
+                className={`px-4 py-3 rounded-lg font-medium transition-colors text-sm ${
+                  selectedCollateral === key
+                    ? 'bg-green-500 text-white'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+              >
+                {token.symbol}
+              </button>
+            ))}
+          </div>
+          <div className="mt-2 p-3 bg-green-50 rounded-lg">
+            <p className="text-sm text-green-800">
+              <strong>{currentCollateralInfo.name}</strong>
+            </p>
+            <p className="text-xs text-green-700 mt-1">
+              {currentCollateralInfo.description}
+            </p>
+          </div>
+        </div>
+
+        {/* Balances */}
+        <div className="grid grid-cols-3 gap-4">
+          <div className="bg-white/40 p-4 rounded-lg">
+            <p className="text-sm text-gray-600">{currentCollateralInfo.symbol} Wallet</p>
+            <p className="text-lg font-semibold">
+              {tokenLoading ? 'Loading...' : formatBalance(tokenBalance as bigint | undefined, 18)} {currentCollateralInfo.symbol}
+            </p>
+            {tokenError && <p className="text-xs text-red-600">Error: {tokenError.message}</p>}
+          </div>
+          <div className="bg-green-50 p-4 rounded-lg border border-green-200">
+            <p className="text-sm text-green-600">Deposited {currentCollateralInfo.symbol}</p>
+            <p className="text-lg font-semibold text-green-800">
+              {formatBalance(collateralBalance as bigint | undefined, 18)} {currentCollateralInfo.symbol}
+            </p>
+            <p className="text-xs text-green-600">Available to lock</p>
+          </div>
+          <div className="bg-white/40 p-4 rounded-lg">
+            <p className="text-sm text-gray-600">Amaz-One Dollar Balance</p>
+            <p className="text-lg font-semibold">
+              {mutiraonLoading ? 'Loading...' : formatBalance(mutiraonBalance as bigint | undefined, 18)} Amaz-One Dollar
+            </p>
+            {mutiraonError && <p className="text-xs text-red-600">Error: {mutiraonError.message}</p>}
+          </div>
+        </div>
+
+        {/* Vault Status & Health */}
+        <div className="bg-gradient-to-r from-indigo-50 to-purple-50 p-4 rounded-lg border border-indigo-200">
+          <h4 className="font-semibold mb-3 text-indigo-800">🏛️ Vault Status</h4>
+          {urnRaw ? (
+            <div className="grid grid-cols-4 gap-4 text-sm">
+              <div className="bg-white/60 p-3 rounded-lg">
+                <p className="text-gray-600 mb-1">Locked Collateral</p>
+                <p className="font-bold text-lg text-indigo-700">
+                  {(() => {
+                    const v = BigInt((urnRaw as any)?.[0]?.toString() ?? '0');
+                    return formatBalance(v, 18);
+                  })()} {currentCollateralInfo.symbol}
+                </p>
+              </div>
+              <div className="bg-white/60 p-3 rounded-lg">
+                <p className="text-gray-600 mb-1">Outstanding Debt</p>
+                <p className="font-bold text-lg text-purple-700">
+                  {(() => {
+                    const v = BigInt((urnRaw as any)?.[1]?.toString() ?? '0');
+                    return formatBalance(v, 18);
+                  })()} Amaz-One Dollar
+                </p>
+              </div>
+              <div className="bg-white/60 p-3 rounded-lg">
+                <p className="text-gray-600 mb-1">Available Collateral</p>
+                <p className="font-bold text-lg text-green-700">
+                  {formatBalance(collateralBalance as bigint | undefined, 18)} {currentCollateralInfo.symbol}
+                </p>
+                <p className="text-xs text-gray-500">Ready to lock</p>
+              </div>
+              <div className="bg-white/60 p-3 rounded-lg">
+                <p className="text-gray-600 mb-1">Max Safe Mint</p>
+                <p className="font-bold text-lg text-orange-700">
+                  {calculateMaxSafeMint()} Amaz-One Dollar
+                </p>
+                <p className="text-xs text-gray-500">⚠️ Contract enforces strict limits</p>
+              </div>
+            </div>
+          ) : (
+            <div className="text-center py-4">
+              <p className="text-gray-600">No active vault found</p>
+          <p className="text-sm text-gray-500">{t('vault.help.steps')}</p>
+            </div>
+          )}
+        </div>
+
+        {/* Vault Management Sections */}
+        
+        {/* 1. Deposit Collateral */}
+        <div className="bg-green-50 p-4 rounded-lg border border-green-200">
+          <h4 className="font-semibold mb-3 text-green-800">💰 {t('vault.dep.title').replace('{code}', currentCollateralInfo.symbol)}</h4>
+          <p className="text-sm text-green-700 mb-3">{t('vault.dep.what')}</p>
+          
+          <div className="space-y-3">
+            <div className="flex gap-2">
+              <input
+                type="number"
+                placeholder={t('vault.dep.amount').replace('{code}', currentCollateralInfo.symbol)}
+                value={depositAmount}
+                onChange={(e) => setDepositAmount(e.target.value)}
+                className="flex-1 px-3 py-2 border border-green-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"

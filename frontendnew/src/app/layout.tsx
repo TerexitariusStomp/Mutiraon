@@ -5,6 +5,7 @@ import ErrorReporter from "@/components/ErrorReporter";
 import Script from "next/script";
 import { Providers } from "@/components/providers";
 import Navigation from "@/components/sections/navigation";
+import FaucetBanner from "@/components/sections/faucet-banner";
 import RiskDisclaimer from "@/components/sections/risk-disclaimer";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -38,6 +39,7 @@ export default function RootLayout({
           />
           <div className="pt-5 px-4">
             <Navigation />
+            <FaucetBanner />
           </div>
           <main className="flex-1">
             {children}

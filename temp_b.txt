@@ -1,0 +1,65 @@
+            <p className="text-lg font-semibold text-green-800">
+              {formatBalance(collateralBalance as bigint | undefined, 18)} {currentCollateralInfo.symbol}
+            </p>
+            <p className="text-xs text-green-600">Available to lock</p>
+          </div>
+          <div className="bg-white/40 p-4 rounded-lg">
+            <p className="text-sm text-gray-600">Amaz-One Dollar Balance</p>
+            <p className="text-lg font-semibold">
+              {mutiraonLoading ? 'Loading...' : formatBalance(mutiraonBalance as bigint | undefined, 18)} Amaz-One Dollar
+            </p>
+            {mutiraonError && <p className="text-xs text-red-600">Error: {mutiraonError.message}</p>}
+          </div>
+        </div>
+
+        {/* Vault Status & Health */}
+        <div className="bg-gradient-to-r from-indigo-50 to-purple-50 p-4 rounded-lg border border-indigo-200">
+          <h4 className="font-semibold mb-3 text-indigo-800">🏛️ Vault Status</h4>
+          {urnRaw ? (
+            <div className="grid grid-cols-4 gap-4 text-sm">
+              <div className="bg-white/60 p-3 rounded-lg">
+                <p className="text-gray-600 mb-1">Locked Collateral</p>
+                <p className="font-bold text-lg text-indigo-700">
+                  {(() => {
+                    const v = BigInt((urnRaw as any)?.[0]?.toString() ?? '0');
+                    return formatBalance(v, 18);
+                  })()} {currentCollateralInfo.symbol}
+                </p>
+              </div>
+              <div className="bg-white/60 p-3 rounded-lg">
+                <p className="text-gray-600 mb-1">Outstanding Debt</p>
+                <p className="font-bold text-lg text-purple-700">
+                  {(() => {
+                    const v = BigInt((urnRaw as any)?.[1]?.toString() ?? '0');
+                    return formatBalance(v, 18);
+                  })()} Amaz-One Dollar
+                </p>
+              </div>
+              <div className="bg-white/60 p-3 rounded-lg">
+                <p className="text-gray-600 mb-1">Available Collateral</p>
+                <p className="font-bold text-lg text-green-700">
+                  {formatBalance(collateralBalance as bigint | undefined, 18)} {currentCollateralInfo.symbol}
+                </p>
+                <p className="text-xs text-gray-500">Ready to lock</p>
+              </div>
+              <div className="bg-white/60 p-3 rounded-lg">
+                <p className="text-gray-600 mb-1">Max Safe Mint</p>
+                <p className="font-bold text-lg text-orange-700">
+                  {calculateMaxSafeMint()} Amaz-One Dollar
+                </p>
+                <p className="text-xs text-gray-500">⚠️ Contract enforces strict limits</p>
+              </div>
+            </div>
+          ) : (
+            <div className="text-center py-4">
+              <p className="text-gray-600">No active vault found</p>
+          <p className="text-sm text-gray-500">{t('vault.help.steps')}</p>
+            </div>
+          )}
+        </div>
+
+        {/* Vault Management Sections */}
+        
+        {/* 1. Deposit Collateral */}
+        <div className="bg-green-50 p-4 rounded-lg border border-green-200">
+          <h4 className="font-semibold mb-3 text-green-800">💰 {t('vault.dep.title').replace('{code}', currentCollateralInfo.symbol)}</h4>

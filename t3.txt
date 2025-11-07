@@ -1,0 +1,13 @@
+        </div>
+
+        {/* Vault Status & Health */}
+        <div className="bg-gradient-to-r from-indigo-50 to-purple-50 p-4 rounded-lg border border-indigo-200">
+          <h4 className="font-semibold mb-3 text-indigo-800">🏛️ Vault Status</h4>
+          {urnRaw ? (
+            <div className="grid grid-cols-4 gap-4 text-sm">
+              <div className="bg-white/60 p-3 rounded-lg">
+                <p className="text-gray-600 mb-1">Locked Collateral</p>
+                <p className="font-bold text-lg text-indigo-700">
+                  {(() => {
+                    const v = BigInt((urnRaw as any)?.[0]?.toString() ?? '0');
+                    return formatBalance(v, 18);

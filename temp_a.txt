@@ -1,0 +1,30 @@
+        <div>
+          <h3 className="text-lg font-semibold mb-4">Select Environmental Collateral</h3>
+          <div className="grid grid-cols-2 gap-2">
+            {Object.entries(ENVIRONMENTAL_TOKENS).map(([key, token]) => (
+              <button
+                key={key}
+                onClick={() => setSelectedCollateral(key as keyof typeof ENVIRONMENTAL_TOKENS)}
+                className={`px-4 py-3 rounded-lg font-medium transition-colors text-sm ${
+                  selectedCollateral === key
+                    ? 'bg-green-500 text-white'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+              >
+                {token.symbol}
+              </button>
+            ))}
+          </div>
+          <div className="mt-2 p-3 bg-green-50 rounded-lg">
+            <p className="text-sm text-green-800">
+              <strong>{currentCollateralInfo.name}</strong>
+            </p>
+            <p className="text-xs text-green-700 mt-1">
+              {currentCollateralInfo.description}
+            </p>
+          </div>
+        </div>
+
+        {/* Balances */}
+        <div className="grid grid-cols-3 gap-4">
+          <div className="bg-white/40 p-4 rounded-lg">

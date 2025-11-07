@@ -347,7 +347,7 @@ const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) =>
 
         {/* Collateral Selection */}
         <div>
-          <h3 className="text-lg font-semibold mb-4">Select Environmental Collateral</h3>
+          <h3 className="text-lg font-semibold mb-4">{t('vaults.title')}</h3>
           <div className="grid grid-cols-2 gap-2">
             {Object.entries(ENVIRONMENTAL_TOKENS).map(([key, token]) => (
               <button
@@ -365,10 +365,10 @@ const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) =>
           </div>
           <div className="mt-2 p-3 bg-green-50 rounded-lg">
             <p className="text-sm text-green-800">
-              <strong>{currentCollateralInfo.name}</strong>
+              <strong>{t(`coll.${selectedCollateral}.name`)}</strong>
             </p>
             <p className="text-xs text-green-700 mt-1">
-              {currentCollateralInfo.description}
+              {t(`coll.${selectedCollateral}.desc`)}
             </p>
           </div>
         </div>
@@ -376,21 +376,21 @@ const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) =>
         {/* Balances */}
         <div className="grid grid-cols-3 gap-4">
           <div className="bg-white/40 p-4 rounded-lg">
-            <p className="text-sm text-gray-600">{currentCollateralInfo.symbol} Wallet</p>
+            <p className="text-sm text-gray-600">{t('vault.bal.wallet').replace('{code}', currentCollateralInfo.symbol)}</p>
             <p className="text-lg font-semibold">
               {tokenLoading ? 'Loading...' : formatBalance(tokenBalance as bigint | undefined, 18)} {currentCollateralInfo.symbol}
             </p>
             {tokenError && <p className="text-xs text-red-600">Error: {tokenError.message}</p>}
           </div>
           <div className="bg-green-50 p-4 rounded-lg border border-green-200">
-            <p className="text-sm text-green-600">Deposited {currentCollateralInfo.symbol}</p>
+            <p className="text-sm text-green-600">{t('vault.bal.deposited').replace('{code}', currentCollateralInfo.symbol)}</p>
             <p className="text-lg font-semibold text-green-800">
               {formatBalance(collateralBalance as bigint | undefined, 18)} {currentCollateralInfo.symbol}
             </p>
-            <p className="text-xs text-green-600">Available to lock</p>
+            <p className="text-xs text-green-600">{t('vault.bal.available')}</p>
           </div>
           <div className="bg-white/40 p-4 rounded-lg">
-            <p className="text-sm text-gray-600">Amaz-One Dollar Balance</p>
+            <p className="text-sm text-gray-600">{t('vault.bal.mut')}</p>
             <p className="text-lg font-semibold">
               {mutiraonLoading ? 'Loading...' : formatBalance(mutiraonBalance as bigint | undefined, 18)} Amaz-One Dollar
             </p>
@@ -404,7 +404,7 @@ const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) =>
           {urnRaw ? (
             <div className="grid grid-cols-4 gap-4 text-sm">
               <div className="bg-white/60 p-3 rounded-lg">
-                <p className="text-gray-600 mb-1">Locked Collateral</p>
+                <p className="text-gray-600 mb-1">{t('vault.status.locked')}</p>
                 <p className="font-bold text-lg text-indigo-700">
                   {(() => {
                     const v = BigInt((urnRaw as any)?.[0]?.toString() ?? '0');
@@ -413,7 +413,7 @@ const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) =>
                 </p>
               </div>
               <div className="bg-white/60 p-3 rounded-lg">
-                <p className="text-gray-600 mb-1">Outstanding Debt</p>
+                <p className="text-gray-600 mb-1">{t('vault.status.debt')}</p>
                 <p className="font-bold text-lg text-purple-700">
                   {(() => {
                     const v = BigInt((urnRaw as any)?.[1]?.toString() ?? '0');
@@ -422,14 +422,14 @@ const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) =>
                 </p>
               </div>
               <div className="bg-white/60 p-3 rounded-lg">
-                <p className="text-gray-600 mb-1">Available Collateral</p>
+                <p className="text-gray-600 mb-1">{t('vault.status.avail')}</p>
                 <p className="font-bold text-lg text-green-700">
                   {formatBalance(collateralBalance as bigint | undefined, 18)} {currentCollateralInfo.symbol}
                 </p>
-                <p className="text-xs text-gray-500">Ready to lock</p>
+                <p className="text-xs text-gray-500">{t('vault.status.ready')}</p>
               </div>
               <div className="bg-white/60 p-3 rounded-lg">
-                <p className="text-gray-600 mb-1">Max Safe Mint</p>
+                <p className="text-gray-600 mb-1">{t('vault.status.maxsafe')}</p>
                 <p className="font-bold text-lg text-orange-700">
                   {calculateMaxSafeMint()} Amaz-One Dollar
                 </p>
