@@ -1,6 +1,6 @@
 import { useAccount, useWriteContract, useReadContract, useWaitForTransactionReceipt } from 'wagmi';
 import { parseEther, formatEther } from 'viem';
-import { CONTRACT_ADDRESSES, ILK_CBiomaH, VAT_ABI, STABLECOIN_ABI } from '@/lib/contracts-updated';
+import { CONTRACT_ADDRESSES, ILK_CBiomaH, VAT_ABI, STABLECOIN_ABI } from '@/src/lib/contracts-updated';
 import { useState } from 'react';
 import { useChainId } from 'wagmi';
 import { ethers } from 'ethers';
