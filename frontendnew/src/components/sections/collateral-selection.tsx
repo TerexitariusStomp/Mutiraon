@@ -6,6 +6,7 @@ import { ethers } from 'ethers';
 import { CONTRACT_ADDRESSES, ENVIRONMENTAL_TOKENS, COLLATERAL_TYPES } from '@/lib/contracts-updated';
 import { useI18n } from "@/i18n/I18nContext";
 import { useChainId } from 'wagmi';
+import { toast } from 'sonner';
 import { useStablecoin } from '@/hooks/useStablecoin';
 
 interface CollateralSelectionProps {
@@ -243,6 +244,7 @@ const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) =>
     setIsApproving(true);
     try {
       await approveToken(depositAmount, selectedCollateral);
+      toast.success(t('vault.loading.approving'));
     } catch (error: any) {
       console.error('Approval failed:', error);
       alert(`Approval failed: ${error.message || 'Unknown error'}. Check console for details.`);
@@ -256,6 +258,7 @@ const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) =>
     setIsDepositing(true);
     try {
       await depositCollateral(depositAmount, selectedCollateral);
+      toast.success(t('vault.loading.depositing'));
       setDepositAmount('');
     } catch (error: any) {
       console.error('Deposit failed:', error);
@@ -270,6 +273,7 @@ const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) =>
     setIsLocking(true);
     try {
       await lockCollateral(lockAmount, currentIlkBytes as unknown as string);
+      toast.success(t('vault.loading.locking'));
       setLockAmount('');
     } catch (error: any) {
       console.error('Lock failed:', error);
@@ -284,6 +288,7 @@ const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) =>
     setIsUnlocking(true);
     try {
       await unlockCollateral(unlockAmount, currentIlkBytes as unknown as string);
+      toast.success(t('vault.loading.unlocking'));
       setUnlockAmount('');
     } catch (error: any) {
       console.error('Unlock failed:', error);
@@ -299,6 +304,7 @@ const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) =>
     try {
       if (!address) throw new Error('Wallet not connected');
       await generateAndSendStablecoin(mintAmount, currentIlkBytes as unknown as string, address as string);
+      toast.success(t('vault.loading.minting'));
       setMintAmount('');
     } catch (error: any) {
       console.error('Mint failed:', error);
@@ -313,6 +319,7 @@ const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) =>
     setIsRepaying(true);
     try {
       await repayStablecoin(repayAmount, currentIlkBytes as unknown as string);
+      toast.success(t('vault.loading.repaying'));
       setRepayAmount('');
     } catch (error: any) {
       console.error('Repay failed:', error);
@@ -327,6 +334,7 @@ const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) =>
     setIsWithdrawing(true);
     try {
       await withdrawCollateral(withdrawAmount, selectedCollateral);
+      toast.success(t('vault.loading.withdrawing'));
       setWithdrawAmount('');
     } catch (error: any) {
       console.error('Withdraw failed:', error);

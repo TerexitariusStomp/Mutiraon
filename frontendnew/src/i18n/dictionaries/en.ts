@@ -44,11 +44,11 @@ export const en = {
   "vault.status.avail": "Available Collateral",
   "vault.status.ready": "Ready to lock",
   "vault.status.maxsafe": "Max Safe Mint",
-  "vault.status.strict": "âš ï¸ Contract enforces strict limits",
+  "vault.status.strict": "⚠️ Contract enforces strict limits",
 
   // Vaults page - sections
   "vault.dep.title": "Deposit {code}",
-  "vault.dep.step": "Step 1: Deposit {code} ðŸ’°",
+  "vault.dep.step": "Step 1: Deposit {code} 💰",
   "vault.dep.what": "What it does: Moves tokens from your account into the vault system",
   "vault.dep.li1": "Enter how many {code} tokens you want to deposit",
   "vault.dep.li2": "Click \"Approve\" (this gives the vault permission to handle your tokens)",
@@ -60,7 +60,7 @@ export const en = {
   "vault.dep.deposit": "2. Deposit",
 
   "vault.lock.title": "Manage Locked Collateral",
-  "vault.lock.step": "Step 2: Lock Tokens ðŸ”’",
+  "vault.lock.step": "Step 2: Lock Tokens 🔒",
   "vault.lock.what": "What it does: Locks your deposited tokens so you can create Amaz-One Dollar against them",
   "vault.lock.li1": "Look at \"Available to Lock\" to see how many deposited tokens you have",
   "vault.lock.li2": "Enter how many you want to lock",
@@ -75,7 +75,7 @@ export const en = {
   "vault.unlock.btn": "Unlock",
 
   "vault.mut.title": "Manage Amaz-One Dollar",
-  "vault.mut.step": "Step 3: Create Mutiraon ðŸ’µ",
+  "vault.mut.step": "Step 3: Create Mutiraon 💵",
   "vault.mut.what": "What it does: Creates new local currency that you can spend",
   "vault.mut.li1": "Check \"Maximum You Can Safely Create\" to see the recommended limit (this protects you from losing your tokens)",
   "vault.mut.li2": "Enter how much Amaz-One Dollar you want to create",
@@ -92,7 +92,7 @@ export const en = {
   "vault.mut.repay.btn": "Repay",
 
   "vault.wd.title": "Withdraw Collateral",
-  "vault.wd.step": "Step 4: Unlock & Withdraw â†©ï¸",
+  "vault.wd.step": "Step 4: Unlock & Withdraw ↩️",
   "vault.wd.what": "What it does: Gets your {code} tokens back to your regular account",
   "vault.wd.unlock.title": "To unlock:",
   "vault.wd.unlock.li1": "Go to \"Manage Locked Tokens\" section",
@@ -107,7 +107,7 @@ export const en = {
   "vault.wd.only": "Withdraw only",
   "vault.wd.placeholder": "Amount to withdraw",
   "vault.wd.btn": "Withdraw",
-  "vault.help.steps": "Follow these steps: 1) Deposit â†’ 2) Lock â†’ 3) Mint",
+  "vault.help.steps": "Follow these steps: 1) Deposit → 2) Lock → 3) Mint",
   "vault.loading.approving": "Approving...",
   "vault.loading.depositing": "Depositing...",
   "vault.loading.locking": "Locking...",

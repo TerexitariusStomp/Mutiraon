@@ -17,7 +17,6 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { useI18n } from "@/i18n/I18nContext";
 
-import { toast } from 'sonner'
 export default function StakePage() {
   const { t, lang } = useI18n();
   const {
@@ -55,7 +54,6 @@ export default function StakePage() {
       console.log("Calling withdrawSavings...");
       await withdrawSavings(withdrawAmount);
       console.log("Withdraw completed successfully");
-      toast.success(${t('stake.withdraw')}: OK);
       setWithdrawAmount("");
     } catch (error) {
       console.error("Withdraw failed:", error);

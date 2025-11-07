@@ -1,0 +1,41 @@
+  const [currentStep, setCurrentStep] = useState(-1);
+  const [completedSteps, setCompletedSteps] = useState<Set<number>>(new Set());
+
+  const handleWithdraw = async () => {
+    if (!withdrawAmount) return;
+    console.log("Withdraw button clicked with amount:", withdrawAmount);
+
+    // Check if user is connected to wallet
+    if (!address) {
+      alert("Please connect your wallet first before withdrawing.");
+      return;
+    }
+
+    try {
+      console.log("Calling withdrawSavings...");
+      await withdrawSavings(withdrawAmount);
+      console.log("Withdraw completed successfully");
+      toast.success(${t('stake.withdraw')}: OK);
+      setWithdrawAmount("");
+    } catch (error) {
+      console.error("Withdraw failed:", error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      alert(`Withdraw failed: ${errorMessage}`);
+    }
+  };
+
+  const handleStepClick = async (
+    stepIndex: number,
+    stepFunction: () => Promise<any>,
+  ) => {
+    if (isPending) return;
+
+    try {
+      setCurrentStep(stepIndex);
+      await stepFunction();
+      setCompletedSteps((prev) => new Set([...prev, stepIndex]));
+      setCurrentStep(-1); // Reset current step
+      // Refetch all data after each successful step
+      setTimeout(() => refetchData(), 2000);
+    } catch (error) {
+      console.error(`Step ${stepIndex + 1} failed:`, error);

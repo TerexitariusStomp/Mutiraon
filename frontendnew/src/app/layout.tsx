@@ -4,6 +4,7 @@ import "./globals.css";
 import ErrorReporter from "@/components/ErrorReporter";
 import Script from "next/script";
 import { Providers } from "@/components/providers";
+import { Toaster } from "@/components/ui/sonner";
 import Navigation from "@/components/sections/navigation";
 import FaucetBanner from "@/components/sections/faucet-banner";
 import RiskDisclaimer from "@/components/sections/risk-disclaimer";
@@ -25,6 +26,7 @@ export default function RootLayout({
     <html lang="pt">
       <body className="antialiased min-h-screen flex flex-col eco-background">
         <Providers>
+          <Toaster />
           {/* Footer links use i18n inside a client wrapper */}
           <ErrorReporter />
           <Script
@@ -96,3 +98,5 @@ export default function RootLayout({
     </html>
   );
 }
+
+
