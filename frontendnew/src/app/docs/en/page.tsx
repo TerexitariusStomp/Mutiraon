@@ -2,7 +2,7 @@ export default function DocsEnPage() {
   return (
     <main className="min-h-screen bg-[#f3f1f7]">
       <div className="container mx-auto px-4 py-10 prose prose-slate max-w-none">
-        <h1>OGUSD Codebase Documentation</h1>
+        <h1>ONEDOLLAR Codebase Documentation</h1>
         <p>
           Comprehensive overview of smart contracts, deployment scripts, subgraph, and frontends.
         </p>
@@ -42,7 +42,7 @@ export default function DocsEnPage() {
         <section id="contracts">
           <h2>Smart Contracts</h2>
           <p>
-            OGUSD is a collateralized debt position (CDP) system inspired by MakerDAO. Key components:
+            ONEDOLLAR is a collateralized debt position (CDP) system inspired by MakerDAO. Key components:
           </p>
           <ul>
             <li><strong>StableCoin.sol</strong> — ERC-20 stablecoin minted/burned via joins and Vat.</li>
@@ -63,8 +63,8 @@ export default function DocsEnPage() {
         <section id="flows">
           <h2>System Flows</h2>
           <ul>
-            <li><strong>Open Vault</strong> — User locks collateral into Vat via Join, mints OGUSD debt.</li>
-            <li><strong>Repay &amp; Withdraw</strong> — Burn OGUSD to reduce debt, free collateral when safe.</li>
+            <li><strong>Open Vault</strong> — User locks collateral into Vat via Join, mints ONEDOLLAR debt.</li>
+            <li><strong>Repay &amp; Withdraw</strong> — Burn ONEDOLLAR to reduce debt, free collateral when safe.</li>
             <li><strong>Liquidation</strong> — Dog triggers Clip auction when position is unsafe; bidders buy collateral to cover debt.</li>
             <li><strong>Stability Fees</strong> — Accrue via Jug; protocol income managed by Vow.</li>
           </ul>
@@ -165,7 +165,7 @@ export default function DocsEnPage() {
       <section id="pot" className="mb-12">
         <h2 className="text-2xl font-semibold mb-3">Pot Contract</h2>
         <p className="mb-2">
-          The Pot contract powers the OGUSD Savings Rate (USR), letting OGUSD holders earn yield by depositing into a savings mechanism. It tracks balances, accrues interest, and enables safe entry/exit while supporting admin rate adjustments.
+          The Pot contract powers the ONEDOLLAR Savings Rate (USR), letting ONEDOLLAR holders earn yield by depositing into a savings mechanism. It tracks balances, accrues interest, and enables safe entry/exit while supporting admin rate adjustments.
         </p>
         <h3 className="text-xl font-semibold mt-4 mb-2">Main Functions</h3>
         <ul className="list-disc list-inside space-y-1">
@@ -184,7 +184,7 @@ export default function DocsEnPage() {
         <ul className="list-disc list-inside space-y-1">
           <li>Deposit – join(wad): Start earning at current USR.</li>
           <li>Accrual – drip(): Update chi and distribute interest over elapsed time.</li>
-          <li>Withdraw – exit(wad): Receive OGUSD plus interest (via chi).</li>
+          <li>Withdraw — exit(wad): Receive ONEDOLLAR plus interest (via chi).</li>
           <li>Admin – file, cage: Adjust rates or shutdown in emergencies.</li>
         </ul>
       </section>

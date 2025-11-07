@@ -42,13 +42,7 @@ async function main() {
     
     const contractFactories = [
         "StableCoin",
-        "AMZNToken",
-        "BIOToken", 
-        "RENToken",
-        "AGRIToken",
-        "AQUAToken",
-        "NILToken",
-        "ECOToken",
+        "BIOMEToken",
         "Vat",
         "Spot",
         "Dog",

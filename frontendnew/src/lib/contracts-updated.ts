@@ -930,7 +930,7 @@ export const ERC20_ABI = [
 
 // Contract addresses for deployed Sepolia contracts
 export const CONTRACT_ADDRESSES = {
-  // Ethereum Sepolia - Mutiraon System
+  // Ethereum Sepolia - Amaz-One Dollar System
   sepolia: {
     // Core System
     vat: "0x7E198F35577fCbaA93c9Cf983A8d9d96979cdD25",
@@ -943,43 +943,19 @@ export const CONTRACT_ADDRESSES = {
     daiJoin: "0xd8D7Ab4762e0d70DdCDEF22f757c5662E1488dB8",
     
     // Environmental Token Addresses
-    amznToken: "0xD11132dEceA2Dc1222173Fa14aa8D3a0B6F0ABFB",
-    bioToken: "0xc10F11C63Dc03C1ee9C6083301B896bbCC9069A2",
-    renToken: "0x908CdE3ea298A5FA7470bB42f4D9C02965669064",
-    agriToken: "0x500e5A12a2815C851A3c70dDf9d9CfCA82dd9476",
-    aquaToken: "0xa630422E0E0B215097ff059DECb4d31f239d66d4",
-    nilToken: "0xFac7fe3d371194b429D00b5cc2a234eFa8e1CE91",
-    ecoToken: "0xDEfC4A247F8E95b9b8a9Ac10bd807Acbf6044F9a",
+    biomeToken: "0x0000000000000000000000000000000000000000",
     
     // Collateral Join Contracts
-    amznJoin: "0xe9569757EBfC0fbccbC7F83bD25eA8919d4067F9",
-    bioJoin: "0x005769B28A55F60c5D9895eE260cd60Ad4f8d3eB",
-    renJoin: "0x8580f9Aa361fcb81675E2265Eb2E800A4385952F",
-    agriJoin: "0xa86802D9FBDaFbDB7716583eAA7c52E71704990C",
-    aquaJoin: "0x61B7bb26d96d174d5d0803d29cD326D326c54A51",
-    nilJoin: "0xBdc3b4c6866B21D43F21a96324D7caF4F79f9AE0",
-    ecoJoin: "0xf151Ab501361244EC3dA5a95a9850ff10b86a935",
+    biomeJoin: "0x0000000000000000000000000000000000000000",
     
     // Auction Mechanisms
-    amznClipper: "0x577C719E44BF4D9014be66629300D15a6359e0e4",
-    bioClipper: "0x8DdA22946Ee2a090649Fa528E40D838A47a2CE62",
-    renClipper: "0x760E0dc685eDB45e6C9A0Ea92859312108ca3527",
-    agriClipper: "0x77D9713A89e43F2173c331B880890Fc355950008",
-    aquaClipper: "0x8a3fB776A6110274DEdA50C928C9ec2dC345Cdb2",
-    nilClipper: "0xeCF40E58346A727Da9ff72D5B107fB9403Ec91bd",
-    ecoClipper: "0x1aC6FEC7d669171360055151aA1806ad466865A8",
+    biomeClipper: "0x0000000000000000000000000000000000000000",
   },
 };
 
 // Collateral types for Brazilian Environmental Tokens
 export const COLLATERAL_TYPES = {
-  AMZN: ethers.encodeBytes32String("AMZN-A"),
-  BIO: ethers.encodeBytes32String("BIO-A"),
-  REN: ethers.encodeBytes32String("REN-A"),
-  AGRI: ethers.encodeBytes32String("AGRI-A"),
-  AQUA: ethers.encodeBytes32String("AQUA-A"),
-  NIL: ethers.encodeBytes32String("NIL-A"),
-  ECO: ethers.encodeBytes32String("ECO-A"),
+  BIOME: ethers.encodeBytes32String("BIOME-A"),
 };
 
 // Constants
@@ -991,70 +967,15 @@ export const RAD = ethers.parseUnits("1", 45);
 export const CONTRACTS = CONTRACT_ADDRESSES.sepolia;
 
 // Export ILK constants for environmental tokens
-export const ILK_AMZN = COLLATERAL_TYPES.AMZN;
-export const ILK_BIO = COLLATERAL_TYPES.BIO;
-export const ILK_REN = COLLATERAL_TYPES.REN;
-export const ILK_AGRI = COLLATERAL_TYPES.AGRI;
-export const ILK_AQUA = COLLATERAL_TYPES.AQUA;
-export const ILK_NIL = COLLATERAL_TYPES.NIL;
-export const ILK_ECO = COLLATERAL_TYPES.ECO;
+export const ILK_BIOME = COLLATERAL_TYPES.BIOME;
 
 // Environmental token information
 export const ENVIRONMENTAL_TOKENS = {
-  AMZN: {
-    name: "Amazon Rainforest Token",
-    symbol: "AMZN",
-    description: "Backs carbon offset credits and rainforest conservation",
-    address: CONTRACT_ADDRESSES.sepolia.amznToken,
-    joinAddress: CONTRACT_ADDRESSES.sepolia.amznJoin,
-    clipperAddress: CONTRACT_ADDRESSES.sepolia.amznClipper,
-  },
-  BIO: {
-    name: "Biodiversity Protection Token",
-    symbol: "BIO", 
-    description: "Funds biodiversity conservation and species protection",
-    address: CONTRACT_ADDRESSES.sepolia.bioToken,
-    joinAddress: CONTRACT_ADDRESSES.sepolia.bioJoin,
-    clipperAddress: CONTRACT_ADDRESSES.sepolia.bioClipper,
-  },
-  REN: {
-    name: "Renewable Energy Token",
-    symbol: "REN",
-    description: "Supports renewable energy generation projects",
-    address: CONTRACT_ADDRESSES.sepolia.renToken,
-    joinAddress: CONTRACT_ADDRESSES.sepolia.renJoin,
-    clipperAddress: CONTRACT_ADDRESSES.sepolia.renClipper,
-  },
-  AGRI: {
-    name: "Sustainable Agriculture Token",
-    symbol: "AGRI",
-    description: "Promotes sustainable farming practices",
-    address: CONTRACT_ADDRESSES.sepolia.agriToken,
-    joinAddress: CONTRACT_ADDRESSES.sepolia.agriJoin,
-    clipperAddress: CONTRACT_ADDRESSES.sepolia.agriClipper,
-  },
-  AQUA: {
-    name: "Water Conservation Token",
-    symbol: "AQUA",
-    description: "Funds water conservation and purification projects",
-    address: CONTRACT_ADDRESSES.sepolia.aquaToken,
-    joinAddress: CONTRACT_ADDRESSES.sepolia.aquaJoin,
-    clipperAddress: CONTRACT_ADDRESSES.sepolia.aquaClipper,
-  },
-  NIL: {
-    name: "Nitrogen Offset Token",
-    symbol: "NIL",
-    description: "Offsets nitrogen emissions and soil conservation",
-    address: CONTRACT_ADDRESSES.sepolia.nilToken,
-    joinAddress: CONTRACT_ADDRESSES.sepolia.nilJoin,
-    clipperAddress: CONTRACT_ADDRESSES.sepolia.nilClipper,
-  },
-  ECO: {
-    name: "Carbon Credits Token",
-    symbol: "ECO",
-    description: "Verified carbon credit and offset certificates",
-    address: CONTRACT_ADDRESSES.sepolia.ecoToken,
-    joinAddress: CONTRACT_ADDRESSES.sepolia.ecoJoin,
-    clipperAddress: CONTRACT_ADDRESSES.sepolia.ecoClipper,
+  BIOME: {
+    name: "Biome Credit",
+    symbol: "BIOME",
+    description: "Backed by biome conservation credits",
+    address: CONTRACT_ADDRESSES.sepolia.biomeToken, joinAddress: CONTRACT_ADDRESSES.sepolia.biomeJoin, clipperAddress: CONTRACT_ADDRESSES.sepolia.biomeClipper,
   },
 };
+

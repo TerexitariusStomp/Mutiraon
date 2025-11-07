@@ -2,7 +2,9 @@
   "name": "mutiraon-stablecoin",
   "version": "1.0.0",
   "scripts": {
-    "dev": "cd frontendnew && npm run dev"
+    "dev": "cd frontendnew && npm run dev",
+    "compile": "hardhat compile",
+    "deploy:biome:sepolia": "hardhat run scripts/deploy-biome-sepolia.js --network sepolia"
   },
   "dependencies": {
     "@api3/contracts": "^27.0.0",

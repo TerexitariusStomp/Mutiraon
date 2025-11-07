@@ -99,7 +99,7 @@ export default function StakePage() {
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">
-                  {parseFloat(userBalance).toFixed(4)} OGUSD
+                  {parseFloat(userBalance).toFixed(4)} ONEDOLLAR
                 </div>
               </CardContent>
             </Card>
@@ -121,7 +121,7 @@ export default function StakePage() {
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">
-                  {parseFloat(walletBalance).toFixed(4)} OGUSD
+                  {parseFloat(walletBalance).toFixed(4)} ONEDOLLAR
                 </div>
               </CardContent>
             </Card>
@@ -145,7 +145,7 @@ export default function StakePage() {
                     onChange={(e) => setDepositAmount(e.target.value)}
                     className="mt-1"
                   />
-                  <p className="text-xs text-muted-foreground mt-1">{t('stake.available')}: {parseFloat(walletBalance).toFixed(4)} OGUSD</p>
+                  <p className="text-xs text-muted-foreground mt-1">{t('stake.available')}: {parseFloat(walletBalance).toFixed(4)} ONEDOLLAR</p>
                 </div>
                 <div className="text-sm text-muted-foreground">{t('stake.exec.steps')}</div>
               </CardContent>
@@ -167,7 +167,7 @@ export default function StakePage() {
                     onChange={(e) => setWithdrawAmount(e.target.value)}
                     className="mt-1"
                   />
-                  <p className="text-xs text-muted-foreground mt-1">{t('stake.available')}: {parseFloat(userBalance).toFixed(4)} OGUSD</p>
+                  <p className="text-xs text-muted-foreground mt-1">{t('stake.available')}: {parseFloat(userBalance).toFixed(4)} ONEDOLLAR</p>
                 </div>
                 <Button
                   onClick={handleWithdraw}
@@ -351,11 +351,11 @@ export default function StakePage() {
                 <p className="text-sm text-muted-foreground">
                   {lang === 'pt' ? (
                     <>
-                      <strong>ObservaÃ§Ã£o:</strong> Execute cada passo na ordem para depositar seus OGUSD com seguranÃ§a no contrato de poupanÃ§a.
+                      <strong>ObservaÃ§Ã£o:</strong> Execute cada passo na ordem para depositar seus ONEDOLLAR com seguranÃ§a no contrato de poupanÃ§a.
                     </>
                   ) : (
                     <>
-                      <strong>Note:</strong> Execute each step in order to deposit your OGUSD safely into the savings contract.
+                      <strong>Note:</strong> Execute each step in order to deposit your ONEDOLLAR safely into the savings contract.
                     </>
                   )}
                 </p>

@@ -1,11 +1,11 @@
 import { useAccount, useWriteContract, useReadContract, useWaitForTransactionReceipt } from 'wagmi';
 import { parseEther, formatEther } from 'viem';
-import { CONTRACT_ADDRESSES, ILK_AMZN, ILK_BIO, ILK_REN, ILK_AGRI, ILK_AQUA, ILK_NIL, ILK_ECO, VAT_ABI, STABLECOIN_ABI } from '@/lib/contracts';
+import { CONTRACT_ADDRESSES, ILK_BIOME, VAT_ABI, STABLECOIN_ABI } from '@/lib/contracts';
 import { useState } from 'react';
 import { useChainId } from 'wagmi';
 import { ethers } from 'ethers';
 
-export function useStablecoin(selectedCollateral: 'AMZN' | 'BIO' | 'REN' | 'AGRI' | 'AQUA' | 'NIL' | 'ECO' = 'AMZN') {
+export function useStablecoin(selectedCollateral: 'BIOME' = 'BIOME') {
   const { address } = useAccount();
   const chainId = useChainId();
   const addresses = CONTRACT_ADDRESSES.sepolia;
@@ -20,59 +20,15 @@ export function useStablecoin(selectedCollateral: 'AMZN' | 'BIO' | 'REN' | 'AGRI
 
   // Get collateral configuration
   const getCollateralConfig = (collateralType: string) => {
-    switch (collateralType) {
-      case 'AMZN':
-        return {
-          ilk: ILK_AMZN,
-          tokenAddress: addresses.amznToken,
-          joinAddress: addresses.amznJoin,
-          decimals: 18
-        };
-      case 'BIO':
-        return {
-          ilk: ILK_BIO,
-          tokenAddress: addresses.bioToken,
-          joinAddress: addresses.bioJoin,
-          decimals: 18
-        };
-      case 'REN':
-        return {
-          ilk: ILK_REN,
-          tokenAddress: addresses.renToken,
-          joinAddress: addresses.renJoin,
-          decimals: 18
-        };
-      case 'AGRI':
-        return {
-          ilk: ILK_AGRI,
-          tokenAddress: addresses.agriToken,
-          joinAddress: addresses.agriJoin,
-          decimals: 18
-        };
-      case 'AQUA':
-        return {
-          ilk: ILK_AQUA,
-          tokenAddress: addresses.aquaToken,
-          joinAddress: addresses.aquaJoin,
-          decimals: 18
-        };
-      case 'NIL':
-        return {
-          ilk: ILK_NIL,
-          tokenAddress: addresses.nilToken,
-          joinAddress: addresses.nilJoin,
-          decimals: 18
-        };
-      case 'ECO':
-        return {
-          ilk: ILK_ECO,
-          tokenAddress: addresses.ecoToken,
-          joinAddress: addresses.ecoJoin,
-          decimals: 18
-        };
-      default:
-        throw new Error(`Unsupported collateral type: ${collateralType}`);
+    if (collateralType !== 'BIOME') {
+      throw new Error(`Unsupported collateral type: ${collateralType}`);
     }
+    return {
+      ilk: ILK_BIOME,
+      tokenAddress: addresses.biomeToken,
+      joinAddress: addresses.biomeJoin,
+      decimals: 18,
+    };
   };
 
   // Read current CDP position for the selected collateral
@@ -95,7 +51,7 @@ export function useStablecoin(selectedCollateral: 'AMZN' | 'BIO' | 'REN' | 'AGRI
   const ink = urnData?.[0] ? formatEther(urnData[0]) : '0';
   const art = urnData?.[1] ? formatEther(urnData[1]) : '0';
 
-  // --- Preflight reads for OGUSD withdraws ---
+  // --- Preflight reads for ONEDOLLAR withdraws ---
   // 1) Internal dai balance (rad) in Vat for the user
   const { data: daiRadBalance } = useReadContract({
     address: addresses.vat as `0x${string}`,
@@ -128,7 +84,7 @@ export function useStablecoin(selectedCollateral: 'AMZN' | 'BIO' | 'REN' | 'AGRI
     args: address ? [address as `0x${string}`, addresses.daiJoin as `0x${string}`] : undefined,
   });
 
-  // 3) DaiJoin authorized to mint OGUSD? wards[daiJoin] == 1 on StableCoin
+  // 3) DaiJoin authorized to mint ONEDOLLAR? wards[daiJoin] == 1 on StableCoin
   const { data: wardsDaiJoin } = useReadContract({
     address: addresses.stablecoin as `0x${string}`,
     abi: [
@@ -152,7 +108,7 @@ export function useStablecoin(selectedCollateral: 'AMZN' | 'BIO' | 'REN' | 'AGRI
   }
 
   // Deposit collateral - returns a promise to handle approval then deposit
-  const depositCollateral = (amount: string, collateralType: 'AMZN' | 'BIO' | 'REN' | 'AGRI' | 'AQUA' | 'NIL' | 'ECO') => {
+  const depositCollateral = (amount: string, collateralType: 'BIOME') => {
     if (!address) return Promise.reject('No address');
     
     const config = getCollateralConfig(collateralType);
@@ -186,7 +142,7 @@ export function useStablecoin(selectedCollateral: 'AMZN' | 'BIO' | 'REN' | 'AGRI
   };
 
   // Approve token for spending (exact amount only)
-  const approveToken = (amount: string, collateralType: 'AMZN' | 'BIO' | 'REN' | 'AGRI' | 'AQUA' | 'NIL' | 'ECO') => {
+  const approveToken = (amount: string, collateralType: 'BIOME') => {
     if (!address) return Promise.reject('No address');
     
     const config = getCollateralConfig(collateralType);
@@ -217,11 +173,11 @@ export function useStablecoin(selectedCollateral: 'AMZN' | 'BIO' | 'REN' | 'AGRI
     });
   };
 
-  // Authorize DaiJoin contract to manage OGUSD in Vat (required for minting)
+  // Authorize DaiJoin contract to manage ONEDOLLAR in Vat (required for minting)
   const authorizeVat = () => {
     if (!address) return Promise.reject('No address');
     
-    console.log('🔑 Authorizing DaiJoin to manage OGUSD in Vat...');
+    console.log('🔑 Authorizing DaiJoin to manage ONEDOLLAR in Vat...');
     console.log('📋 DaiJoin address:', addresses.daiJoin);
     
     return writeContract({
@@ -267,15 +223,15 @@ export function useStablecoin(selectedCollateral: 'AMZN' | 'BIO' | 'REN' | 'AGRI
     });
   };
 
-  // Generate (mint) OGUSD - ONLY mints debt in Vat (no auto-withdrawal)
+  // Generate (mint) ONEDOLLAR - ONLY mints debt in Vat (no auto-withdrawal)
   const generateStablecoin = async (amount: string, ilk: string) => {
     if (!address) return;
     
-    console.log('🏦 Minting OGUSD debt in Vat...');
-    console.log('📊 Amount:', amount, 'OGUSD');
+    console.log('🏦 Minting ONEDOLLAR debt in Vat...');
+    console.log('📊 Amount:', amount, 'ONEDOLLAR');
     console.log('🔑 ILK:', ilk);
     
-    // Only mint OGUSD debt in Vat - user can manually withdraw later if needed
+    // Only mint ONEDOLLAR debt in Vat - user can manually withdraw later if needed
     return writeContract({
       address: addresses.vat as `0x${string}`,
       abi: [
@@ -299,7 +255,7 @@ export function useStablecoin(selectedCollateral: 'AMZN' | 'BIO' | 'REN' | 'AGRI
     });
   };
 
-  // Generate and immediately send OGUSD to a recipient (e.g. minter wallet)
+  // Generate and immediately send ONEDOLLAR to a recipient (e.g. minter wallet)
   // This performs: frob (mint internal) -> bounded wait -> ensure hope -> DaiJoin.exit(recipient)
   const generateAndSendStablecoin = async (amount: string, ilk: string, recipient: string) => {
     if (!address) return;
@@ -311,7 +267,7 @@ export function useStablecoin(selectedCollateral: 'AMZN' | 'BIO' | 'REN' | 'AGRI
       await new Promise((resolve) => setTimeout(resolve, ms));
     };
 
-    // 1) Generate internal OGUSD in Vat for the connected wallet (msg.sender)
+    // 1) Generate internal ONEDOLLAR in Vat for the connected wallet (msg.sender)
     const frobHash = await writeContract({
       address: addresses.vat as `0x${string}`,
       abi: [
@@ -364,7 +320,7 @@ export function useStablecoin(selectedCollateral: 'AMZN' | 'BIO' | 'REN' | 'AGRI
       console.log('ℹ️ Vat.can(user, DaiJoin) already set');
     }
 
-    // 3) Exit directly to the recipient (mints OGUSD to recipient)
+    // 3) Exit directly to the recipient (mints ONEDOLLAR to recipient)
     await writeContract({
       address: addresses.daiJoin as `0x${string}`,
       abi: [
@@ -381,7 +337,7 @@ export function useStablecoin(selectedCollateral: 'AMZN' | 'BIO' | 'REN' | 'AGRI
     });
   };
 
-  // Withdraw OGUSD
+  // Withdraw ONEDOLLAR
   const withdrawStablecoin = async (amount: string) => {
     if (!address) return;
 
@@ -402,14 +358,14 @@ export function useStablecoin(selectedCollateral: 'AMZN' | 'BIO' | 'REN' | 'AGRI
     console.log('- can[user][daiJoin]:', can.toString());
     console.log('- wards[daiJoin] on StableCoin:', wards.toString());
 
-    // Check sufficient internal OGUSD in Vat
+    // Check sufficient internal ONEDOLLAR in Vat
     if (daiWad < amountWad) {
-      throw new Error('Insufficient internal OGUSD balance in Vat. Mint (generate) more before withdrawing.');
+      throw new Error('Insufficient internal ONEDOLLAR balance in Vat. Mint (generate) more before withdrawing.');
     }
 
-    // Ensure DaiJoin is authorized to mint OGUSD
+    // Ensure DaiJoin is authorized to mint ONEDOLLAR
     if (wards !== BigInt(1)) {
-      throw new Error('DaiJoin is not authorized to mint OGUSD. Governance must call StableCoin.rely(DaiJoin).');
+      throw new Error('DaiJoin is not authorized to mint ONEDOLLAR. Governance must call StableCoin.rely(DaiJoin).');
     }
 
     // Ensure DaiJoin is approved to move your Vat dai balance (set once)
@@ -433,7 +389,7 @@ export function useStablecoin(selectedCollateral: 'AMZN' | 'BIO' | 'REN' | 'AGRI
       console.log('ℹ️ Vat.can(user, DaiJoin) already granted');
     }
 
-    // Call DaiJoin.exit which will internally move rad and mint OGUSD
+    // Call DaiJoin.exit which will internally move rad and mint ONEDOLLAR
     await writeContract({
       address: addresses.daiJoin as `0x${string}`,
       abi: [
@@ -450,11 +406,11 @@ export function useStablecoin(selectedCollateral: 'AMZN' | 'BIO' | 'REN' | 'AGRI
     });
   };
 
-  // Repay OGUSD - robust path that derives safe repay from actual internal dai to avoid under/overflow
+  // Repay ONEDOLLAR - robust path that derives safe repay from actual internal dai to avoid under/overflow
   const repayStablecoin = async (amount: string, ilk: string) => {
     if (!address) return Promise.reject('No address');
 
-    console.log('🔄 Repaying debt (join OGUSD then frob dart<0)...');
+    console.log('🔄 Repaying debt (join ONEDOLLAR then frob dart<0)...');
     console.log('Requested repay (wad):', amount);
     console.log('UI-reported current debt (art):', art);
 
@@ -495,9 +451,9 @@ export function useStablecoin(selectedCollateral: 'AMZN' | 'BIO' | 'REN' | 'AGRI
     console.log('Target repayWad:', targetRepayWad.toString());
     console.log('Planned joinWad (buffered):', joinWad.toString());
 
-    // 1) Approve OGUSD spending to DaiJoin
+    // 1) Approve ONEDOLLAR spending to DaiJoin
     try {
-      console.log('🔑 Approving OGUSD -> DaiJoin for repay...');
+      console.log('🔑 Approving ONEDOLLAR -> DaiJoin for repay...');
       await writeContract({
         address: addresses.stablecoin as `0x${string}`,
         abi: [
@@ -517,8 +473,8 @@ export function useStablecoin(selectedCollateral: 'AMZN' | 'BIO' | 'REN' | 'AGRI
       console.log('ℹ️ Approve step skipped or not required:', (e as any)?.message || e);
     }
 
-    // 2) DaiJoin.join to convert wallet OGUSD -> internal dai
-    console.log('🏦 DaiJoin.join (convert wallet OGUSD -> internal dai)...');
+    // 2) DaiJoin.join to convert wallet ONEDOLLAR -> internal dai
+    console.log('🏦 DaiJoin.join (convert wallet ONEDOLLAR -> internal dai)...');
     await writeContract({
       address: addresses.daiJoin as `0x${string}`,
       abi: [
@@ -553,7 +509,7 @@ export function useStablecoin(selectedCollateral: 'AMZN' | 'BIO' | 'REN' | 'AGRI
       repayWad = maxByDaiArtWad;
     }
     if (repayWad <= 0n) {
-      throw new Error('Insufficient internal OGUSD (dai) to repay. Increase amount joined or reduce repay amount.');
+      throw new Error('Insufficient internal ONEDOLLAR (dai) to repay. Increase amount joined or reduce repay amount.');
     }
 
     // Re-check dust rule with the final repay
@@ -594,7 +550,7 @@ export function useStablecoin(selectedCollateral: 'AMZN' | 'BIO' | 'REN' | 'AGRI
   };
 
   // Withdraw collateral - use join exit to get tokens back to wallet
-  const withdrawCollateral = (amount: string, collateralType: 'AMZN' | 'BIO' | 'REN' | 'AGRI' | 'AQUA' | 'NIL' | 'ECO') => {
+  const withdrawCollateral = (amount: string, collateralType: 'BIOME') => {
     if (!address) return Promise.reject('No address');
     
     const config = getCollateralConfig(collateralType);
@@ -689,7 +645,7 @@ export function useStablecoin(selectedCollateral: 'AMZN' | 'BIO' | 'REN' | 'AGRI
   };
 
   // Close vault (repay all debt and withdraw all collateral)
-  const closeVault = async (ilk: string, collateralType: 'AMZN' | 'BIO' | 'REN' | 'AGRI' | 'AQUA' | 'NIL' | 'ECO') => {
+  const closeVault = async (ilk: string, collateralType: 'BIOME') => {
     // This would combine repay and withdraw - simplified
     await repayStablecoin(art, ilk);
     await withdrawCollateral(ink, collateralType);
@@ -714,3 +670,5 @@ export function useStablecoin(selectedCollateral: 'AMZN' | 'BIO' | 'REN' | 'AGRI
     refetchData: refetchUrn
   };
 }
+
+

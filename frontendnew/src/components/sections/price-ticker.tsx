@@ -3,14 +3,8 @@
 import React from 'react';
 
 const tickers = [
-  { name: 'OGUSD', price: '$1.00' },
-  { name: 'AMZN', price: '$3.21' },
-  { name: 'BIO', price: '$0.42' },
-  { name: 'REN', price: '$1.87' },
-  { name: 'AGRI', price: '$0.73' },
-  { name: 'AQUA', price: '$0.64' },
-  { name: 'NIL', price: '$2.10' },
-  { name: 'ECO', price: '$0.95' },
+  { name: 'ONEDOLLAR', price: '$1.00' },
+  { name: 'BIOME', price: '$2.50' },
 ];
 
 const PriceTicker = () => {

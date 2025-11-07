@@ -2,7 +2,7 @@ export default function DocsPtPage() {
   return (
     <main className="min-h-screen bg-[#f3f1f7]">
       <div className="container mx-auto px-4 py-10 prose prose-slate max-w-none">
-        <h1>Documentação da Base de Código OGUSD</h1>
+        <h1>Documentação da Base de Código ONEDOLLAR</h1>
         <p>
           Visão geral de contratos inteligentes, scripts de implantação, subgraph e frontends.
         </p>
@@ -42,7 +42,7 @@ export default function DocsPtPage() {
         <section id="contracts">
           <h2>Contratos Inteligentes</h2>
           <p>
-            OGUSD é um sistema de posições de dívida colateralizadas (CDP) inspirado no MakerDAO. Componentes principais:
+            ONEDOLLAR é um sistema de posições de dívida colateralizadas (CDP) inspirado no MakerDAO. Componentes principais:
           </p>
           <ul>
             <li><strong>StableCoin.sol</strong> — Stablecoin ERC-20 cunhada/queimada via joins e Vat.</li>
@@ -63,8 +63,8 @@ export default function DocsPtPage() {
         <section id="flows">
           <h2>Fluxos do Sistema</h2>
           <ul>
-            <li><strong>Abrir Cofre</strong> — Usuário trava colateral via Join no Vat e cunha OGUSD.</li>
-            <li><strong>Quitar &amp; Retirar</strong> — Queima OGUSD para reduzir dívida e liberar colateral quando seguro.</li>
+            <li><strong>Abrir Cofre</strong> — Usuário trava colateral via Join no Vat e cunha ONEDOLLAR.</li>
+            <li><strong>Quitar &amp; Retirar</strong> — Queima ONEDOLLAR para reduzir dívida e liberar colateral quando seguro.</li>
             <li><strong>Liquidação</strong> — Dog aciona leilão no Clip quando o cofre está inseguro; lances cobrem a dívida.</li>
             <li><strong>Taxas de Estabilidade</strong> — Acumulam via Jug; receita gerida pelo Vow.</li>
           </ul>
@@ -165,7 +165,7 @@ export default function DocsPtPage() {
       <section id="pot" className="mb-12">
         <h2 className="text-2xl font-semibold mb-3">Contrato Pot</h2>
         <p className="mb-2">
-          O contrato Pot sustenta a Taxa de Poupança do OGUSD (USR), permitindo que detentores de OGUSD obtenham rendimento ao depositar em um mecanismo de poupança. Ele registra saldos, acumula juros e permite entrada/saída com segurança, além de suportar ajustes administrativos de taxa.
+          O contrato Pot sustenta a Taxa de Poupança do ONEDOLLAR (USR), permitindo que detentores de ONEDOLLAR obtenham rendimento ao depositar em um mecanismo de poupança. Ele registra saldos, acumula juros e permite entrada/saída com segurança, além de suportar ajustes administrativos de taxa.
         </p>
         <h3 className="text-xl font-semibold mt-4 mb-2">Funções Principais</h3>
         <ul className="list-disc list-inside space-y-1">
@@ -184,7 +184,7 @@ export default function DocsPtPage() {
         <ul className="list-disc list-inside space-y-1">
           <li>Depósito – join(wad): começa a render na USR atual.</li>
           <li>Acúmulo – drip(): atualiza chi e distribui juros pelo período decorrido.</li>
-          <li>Saque – exit(wad): recebe OGUSD mais juros (via chi).</li>
+          <li>Saque – exit(wad): recebe ONEDOLLAR mais juros (via chi).</li>
           <li>Admin – file, cage: ajuste de taxa ou desligamento em emergências.</li>
         </ul>
       </section>

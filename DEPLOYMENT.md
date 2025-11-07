@@ -1,8 +1,8 @@
-# OGUSD Environmental Stablecoin Deployment Guide
+# ONEDOLLAR Environmental Stablecoin Deployment Guide
 
 ## Overview
 
-OGUSD is a stablecoin system that accepts environmental impact tokens as collateral. Supported examples include AMZN, BIO, REN, AGRI, AQUA, NIL, and ECO. This guide covers deployment to EVM networks (testnets first, then mainnet).
+ONEDOLLAR is a stablecoin system that accepts environmental impact tokens as collateral. Supported examples include AMZN, BIO, REN, AGRI, AQUA, NIL, and ECO. This guide covers deployment to EVM networks (testnets first, then mainnet).
 
 ## Prerequisites
 
@@ -70,11 +70,11 @@ npm run deploy:bsc
 - **Liquidation Ratio**: 150% (per collateral)
 - **Stability Fee**: 2% APR
 - **Liquidation Penalty**: 10%
-- **Debt Ceiling**: 10M OGUSD per collateral type
-- **Dust Limit**: 100 OGUSD minimum
+- **Debt Ceiling**: 10M ONEDOLLAR per collateral type
+- **Dust Limit**: 100 ONEDOLLAR minimum
 
 ### Global Parameters
-- **Total Debt Ceiling**: 50M OGUSD
+- **Total Debt Ceiling**: 50M ONEDOLLAR
 - **Emergency Shutdown Delay**: 24 hours
 
 ## Post-Deployment Steps
@@ -176,7 +176,7 @@ const calls = await multicall.createCDPBatch(
     daiJoinAddress,
     ethers.utils.formatBytes32String("ECO-A"),
     parseEther("1000"), // ECO amount
-    parseEther("50")    // OGUSD amount
+    parseEther("50")    // ONEDOLLAR amount
 );
 
 await multicall.aggregate(calls);

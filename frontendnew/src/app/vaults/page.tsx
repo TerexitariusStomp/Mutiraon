@@ -5,26 +5,14 @@ import { useI18n } from "@/i18n/I18nContext";
 
 export default function VaultsPage() {
   const { t } = useI18n();
-  const [selectedCollateral, setSelectedCollateral] = useState("AMZN");
+  const [selectedCollateral, setSelectedCollateral] = useState("BIOME");
 
   const icons: Record<string, string> = {
-    AMZN: "🌳",
-    BIO: "🦋",
-    REN: "☀️",
-    AGRI: "🌾",
-    AQUA: "💧",
-    NIL: "🌍",
-    ECO: "🌱",
+    BIOME: "dYO3",
   };
 
   const collaterals = [
-    { code: "AMZN" },
-    { code: "BIO" },
-    { code: "REN" },
-    { code: "AGRI" },
-    { code: "AQUA" },
-    { code: "NIL" },
-    { code: "ECO" }
+    { code: "BIOME" },
   ];
 
   return (
@@ -91,7 +79,7 @@ export default function VaultsPage() {
             </div>
             <div className="rounded-xl border border-border bg-card p-4">
               <h3 className="font-semibold text-foreground mb-2">{t('vault.bal.mut')}</h3>
-              <p className="text-2xl font-bold text-foreground">0.00 Mutiraon</p>
+              <p className="text-2xl font-bold text-foreground">0.00 Amaz-One Dollar</p>
             </div>
           </div>
 
@@ -105,7 +93,7 @@ export default function VaultsPage() {
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">{t('vault.status.debt')}</p>
-                <p className="text-xl font-semibold text-foreground">0.00 Mutiraon</p>
+                <p className="text-xl font-semibold text-foreground">0.00 Amaz-One Dollar</p>
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">{t('vault.status.avail')}</p>
@@ -117,7 +105,7 @@ export default function VaultsPage() {
               </div>
             </div>
             <div className="mt-4 p-3 bg-amber-50 border border-amber-200 rounded-lg">
-              <p className="text-sm text-amber-800">{t('vault.status.maxsafe')}: 0 Mutiraon</p>
+              <p className="text-sm text-amber-800">{t('vault.status.maxsafe')}: 0 Amaz-One Dollar</p>
               <p className="text-xs text-amber-600 mt-1">{t('vault.status.strict')}</p>
             </div>
           </div>
@@ -186,13 +174,13 @@ export default function VaultsPage() {
                     className="flex-1 rounded-lg border border-border bg-background px-3 py-2 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
                     placeholder={t('vault.unlock.placeholder')}
                   />
-                  <button className="rounded-lg bg-secondary px-4 py-2 text-sm font-semibold text-secondary-foreground hover:opacity-90">{t('vault.unlock.btn')}</button>
+                  <button className="rounded-lg bg-sBIOMEndary px-4 py-2 text-sm font-semibold text-sBIOMEndary-foreground hover:opacity-90">{t('vault.unlock.btn')}</button>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Manage Mutiraon */}
+          {/* Manage Amaz-One Dollar */}
           <div className="rounded-2xl border border-border bg-card p-6">
             <h3 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">💵 {t('vault.mut.title')}</h3>
             <div className="bg-purple-50 border border-purple-200 rounded-lg p-4 mb-4">
@@ -228,7 +216,7 @@ export default function VaultsPage() {
                     className="flex-1 rounded-lg border border-border bg-background px-3 py-2 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
                     placeholder={t('vault.mut.repay.placeholder')}
                   />
-                  <button className="rounded-lg bg-secondary px-4 py-2 text-sm font-semibold text-secondary-foreground hover:opacity-90">{t('vault.mut.repay.btn')}</button>
+                  <button className="rounded-lg bg-sBIOMEndary px-4 py-2 text-sm font-semibold text-sBIOMEndary-foreground hover:opacity-90">{t('vault.mut.repay.btn')}</button>
                 </div>
               </div>
             </div>
@@ -271,7 +259,7 @@ export default function VaultsPage() {
                   className="flex-1 rounded-lg border border-border bg-background px-3 py-2 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
                   placeholder={t('vault.wd.placeholder')}
                 />
-                <button className="rounded-lg bg-secondary px-4 py-2 text-sm font-semibold text-secondary-foreground hover:opacity-90">{t('vault.wd.btn')}</button>
+                <button className="rounded-lg bg-sBIOMEndary px-4 py-2 text-sm font-semibold text-sBIOMEndary-foreground hover:opacity-90">{t('vault.wd.btn')}</button>
               </div>
             </div>
           </div>
@@ -280,3 +268,6 @@ export default function VaultsPage() {
     </div>
   );
 }
+
+
+

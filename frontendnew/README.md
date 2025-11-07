@@ -1,18 +1,12 @@
-# Mutiraon Frontend - OGUSD Environmental Stablecoin
+# Amaz-One Dollar Frontend - ONEDOLLAR Environmental Stablecoin
 
-A modern DeFi frontend for the OGUSD stablecoin system, backed by environmental tokens. This project allows users to mint and manage positions using collateral from verified environmental conservation projects.
+A modern DeFi frontend for the ONEDOLLAR stablecoin system, backed by environmental tokens. This project allows users to mint and manage positions using collateral from verified environmental conservation projects.
 
 ## 🌱 Environmental Impact
 
-OGUSD supports 7 environmental tokens representing different conservation efforts:
+ONEDOLLAR supports a single environmental collateral:
 
-- **AMZN** - Amazon Rainforest Token (Rainforest Conservation)
-- **BIO** - Biodiversity Protection Token (Species Protection)
-- **REN** - Renewable Energy Token (Clean Energy Projects)
-- **AGRI** - Sustainable Agriculture Token (Sustainable Farming)
-- **AQUA** - Water Conservation Token (Water Protection)
-- **NIL** - Nitrogen Offset Token (Soil Conservation)
-- **ECO** - Carbon Credits Token (Carbon Offsetting)
+- **BIOME** - Biome Credit (Biome Conservation)
 
 ## 🚀 Live Demo
 
@@ -114,7 +108,7 @@ src/
 The frontend interacts with the following deployed contracts on Ethereum Sepolia:
 
 - **Vat**: Core CDP engine
-- **StableCoin**: OGUSD token contract
+- **StableCoin**: ONEDOLLAR token contract
 - **Spot**: Price feed system
 - **Pot**: Savings rate mechanism
 - **Dog**: Liquidation engine
@@ -141,7 +135,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 🌍 Environmental Impact
 
-By using OGUSD, you're supporting real environmental conservation efforts. Each token represents verified environmental projects that contribute to:
+By using ONEDOLLAR, you're supporting real environmental conservation efforts. Each token represents verified environmental projects that contribute to:
 
 - Amazon rainforest protection
 - Biodiversity conservation
@@ -154,3 +148,4 @@ By using OGUSD, you're supporting real environmental conservation efforts. Each 
 ---
 
 **Built with ❤️ for environmental conservation**
+

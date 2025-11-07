@@ -9,7 +9,7 @@ import RiskDisclaimer from "@/components/sections/risk-disclaimer";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Mutiraon: Stablecoin de Impacto do Brasil",
+    title: "Amaz-One Dollar: Stablecoin de Impacto do Brasil",
     description: "Stablecoin descentralizada lastreada por tokens de impacto ambiental",
   };
 }
@@ -34,7 +34,7 @@ export default function RootLayout({
             data-include-search-params="true"
             data-only-in-iframe="true"
             data-debug="true"
-            data-custom-data='{"appName": "Mutiraon", "version": "1.0.0", "greeting": "Welcome to Mutiraon"}'
+            data-custom-data='{"appName": "Amaz-One Dollar", "version": "1.0.0", "greeting": "Welcome to Amaz-One Dollar"}'
           />
           <div className="pt-5 px-4">
             <Navigation />
@@ -81,7 +81,7 @@ export default function RootLayout({
           <footer className="border-t border-black/10 bg-[#f3f1f7]">
             <div className="container mx-auto px-4 pt-6"><RiskDisclaimer /></div>
             <div className="container mx-auto px-4 py-8 text-sm text-muted-foreground flex flex-col sm:flex-row items-center justify-between gap-3">
-              <span>©Mutiraon - All rights reserved.</span>
+              <span>©Amaz-One Dollar - All rights reserved.</span>
               <nav className="flex gap-4">
                 <a href="/docs" className="hover:text-foreground transition-colors">Docs</a>
                 <a href="https://github.com/TerexitariusStomp/Mutiraon/" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Github</a>

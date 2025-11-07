@@ -30,7 +30,7 @@ const InnerNav = () => {
           <Link href="/" className="flex shrink-0 items-center gap-x-2">
             <TreePine className="h-8 w-8 text-primary" />
             <div className="flex flex-col">
-              <span className="font-logo text-foreground">Mutiraon</span>
+              <span className="font-logo text-foreground">Amaz-One Dollar</span>
               <span className="text-xs text-muted-foreground -mt-1">{t('nav.tagline')}</span>
             </div>
           </Link>

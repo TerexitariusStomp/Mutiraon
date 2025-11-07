@@ -8,7 +8,7 @@ import { useI18n } from "@/i18n/I18nContext";
 import { useChainId } from 'wagmi';
 
 interface CollateralSelectionProps {
-  initialCollateral?: 'AMZN' | 'BIO' | 'REN' | 'AGRI' | 'AQUA' | 'NIL' | 'ECO'
+  initialCollateral?: 'BIOME'
 }
 
 const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) => {
@@ -18,7 +18,7 @@ const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) =>
   const addresses = CONTRACT_ADDRESSES.sepolia;
 
   const [selectedCollateral, setSelectedCollateral] = useState<keyof typeof ENVIRONMENTAL_TOKENS>(
-    initialCollateral ?? 'AMZN'
+    initialCollateral ?? 'BIOME'
   );
 
   // Ensure selection follows initialCollateral even if it becomes available after first render
@@ -390,9 +390,9 @@ const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) =>
             <p className="text-xs text-green-600">Available to lock</p>
           </div>
           <div className="bg-white/40 p-4 rounded-lg">
-            <p className="text-sm text-gray-600">Mutiraon Balance</p>
+            <p className="text-sm text-gray-600">Amaz-One Dollar Balance</p>
             <p className="text-lg font-semibold">
-              {mutiraonLoading ? 'Loading...' : formatBalance(mutiraonBalance as bigint | undefined, 18)} Mutiraon
+              {mutiraonLoading ? 'Loading...' : formatBalance(mutiraonBalance as bigint | undefined, 18)} Amaz-One Dollar
             </p>
             {mutiraonError && <p className="text-xs text-red-600">Error: {mutiraonError.message}</p>}
           </div>
@@ -418,7 +418,7 @@ const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) =>
                   {(() => {
                     const v = BigInt((urnRaw as any)?.[1]?.toString() ?? '0');
                     return formatBalance(v, 18);
-                  })()} Mutiraon
+                  })()} Amaz-One Dollar
                 </p>
               </div>
               <div className="bg-white/60 p-3 rounded-lg">
@@ -431,7 +431,7 @@ const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) =>
               <div className="bg-white/60 p-3 rounded-lg">
                 <p className="text-gray-600 mb-1">Max Safe Mint</p>
                 <p className="font-bold text-lg text-orange-700">
-                  {calculateMaxSafeMint()} Mutiraon
+                  {calculateMaxSafeMint()} Amaz-One Dollar
                 </p>
                 <p className="text-xs text-gray-500">⚠️ Contract enforces strict limits</p>
               </div>

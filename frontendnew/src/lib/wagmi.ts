@@ -2,7 +2,7 @@ import { getDefaultConfig } from '@rainbow-me/rainbowkit'
 import { sepolia } from 'viem/chains'
 
 export const config = getDefaultConfig({
-  appName: 'Mutiraon Stablecoin',
+  appName: 'Amaz-One Dollar Stablecoin',
   projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || 'demo-project-id',
   chains: [sepolia],
   ssr: true,

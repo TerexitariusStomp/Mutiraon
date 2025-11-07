@@ -7,13 +7,7 @@ import CollateralSelection from '@/components/sections/collateral-selection';
 import { ENVIRONMENTAL_TOKENS } from '@/lib/contracts';
 
 const SUPPORTED = {
-  AMZN: ENVIRONMENTAL_TOKENS.AMZN,
-  BIO: ENVIRONMENTAL_TOKENS.BIO,
-  REN: ENVIRONMENTAL_TOKENS.REN,
-  AGRI: ENVIRONMENTAL_TOKENS.AGRI,
-  AQUA: ENVIRONMENTAL_TOKENS.AQUA,
-  NIL: ENVIRONMENTAL_TOKENS.NIL,
-  ECO: ENVIRONMENTAL_TOKENS.ECO,
+  BIOME: ENVIRONMENTAL_TOKENS.BIOME,
 } as const;
 
 type CollateralKey = keyof typeof SUPPORTED;
@@ -29,7 +23,7 @@ export default function OpenVaultPage() {
 function OpenVaultInner() {
   const searchParams = useSearchParams();
 
-  const ticker = (searchParams?.get('collateral') || "AMZN").toUpperCase() as CollateralKey;
+  const ticker = (searchParams?.get('collateral') || "BIOME").toUpperCase() as CollateralKey;
   const selected = SUPPORTED[ticker];
 
   if (!selected) {

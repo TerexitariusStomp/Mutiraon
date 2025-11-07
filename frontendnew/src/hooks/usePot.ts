@@ -64,7 +64,7 @@ export function usePot() {
     functionName: "Pie",
   });
 
-  // Read user's wallet OGUSD balance
+  // Read user's wallet ONEDOLLAR balance
   const { data: walletBalance, refetch: refetchWalletBalance } =
     useReadContract({
       address: addresses.stablecoin as `0x${string}`,
@@ -161,11 +161,11 @@ export function usePot() {
     });
   };
 
-  // Deposit OGUSD to savings (join)
+  // Deposit ONEDOLLAR to savings (join)
   const depositSavings = async (amount: string) => {
     if (!address) return Promise.reject("No address");
 
-    console.log("💰 Starting deposit process for:", amount, "OGUSD");
+    console.log("💰 Starting deposit process for:", amount, "ONEDOLLAR");
 
     const wad = parseEther(amount);
 
@@ -253,11 +253,11 @@ export function usePot() {
     return result;
   };
 
-  // Withdraw OGUSD from savings (exit)
+  // Withdraw ONEDOLLAR from savings (exit)
   const withdrawSavings = async (amount: string) => {
     if (!address) return Promise.reject("No address");
 
-    console.log("💸 Starting withdrawal process for:", amount, "OGUSD");
+    console.log("💸 Starting withdrawal process for:", amount, "ONEDOLLAR");
 
     const wad = parseEther(amount);
 
@@ -280,7 +280,7 @@ export function usePot() {
     const tolerance = 0.000001;
     if (requestedAmount > availableBalance + tolerance) {
       throw new Error(
-        `Insufficient balance. Available: ${availableBalance.toFixed(4)} OGUSD, Requested: ${amount} OGUSD`,
+        `Insufficient balance. Available: ${availableBalance.toFixed(4)} ONEDOLLAR, Requested: ${amount} ONEDOLLAR`,
       );
     }
 
@@ -358,7 +358,7 @@ export function usePot() {
     userBalance, // Savings balance (pie * chi)
     walletBalance: walletBalance
       ? formatEther(BigInt(walletBalance.toString()))
-      : "0", // Wallet OGUSD balance
+      : "0", // Wallet ONEDOLLAR balance
     savingsRate,
     totalPie: totalPie ? formatEther(BigInt(totalPie.toString())) : "0",
     // Individual step functions
@@ -382,3 +382,4 @@ export function usePot() {
     },
   };
 }
+
