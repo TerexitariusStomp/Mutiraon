@@ -72,7 +72,7 @@ export default function Page() {
 
     <main className="min-h-screen">
 
-      <Header onEnterApp={() => setShowApp(true)} />
+      <Header onEnterApp={() => window.location.href = '/app'} />
 
       <Hero />
 
