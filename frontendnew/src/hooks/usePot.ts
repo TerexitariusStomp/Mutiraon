@@ -321,7 +321,7 @@ export function usePot() {
   // Helper function to call drip before operations
   const ensureDrip = async (): Promise<`0x${string}`> => {
     console.log("💧 Calling drip to update interest accrual...");
-    await writeContractAsync({
+    const txHash = await writeContractAsync({
       address: addresses.pot as `0x${string}`,
       abi: POT_ABI,
       functionName: "drip",
@@ -330,6 +330,7 @@ export function usePot() {
     console.log("✅ Drip completed");
     // Small delay to ensure transaction is processed
     await new Promise((resolve) => setTimeout(resolve, 2000));
+    return txHash as `0x${string}`;
   };
 
   // Drip function to update interest accrual

@@ -12,6 +12,8 @@ const nextConfig: NextConfig = {
   trailingSlash: true,
   // Base path for GitHub Pages deployment at /Mutiraon/
   basePath: isProd ? '/Mutiraon' : '',
+  // Ensure static asset URLs resolve correctly under basePath on static hosts
+  assetPrefix: isProd ? '/Mutiraon/' : undefined,
 
   images: {
     // next/image optimization is not available on static export
@@ -41,6 +43,15 @@ const nextConfig: NextConfig = {
     // Avoid optional deps causing SSR/import errors during build/runtime.
     // These are pulled by wallet SDKs but not needed in web build.
     config.resolve = config.resolve || {};
+    // Explicitly alias optional, non-web modules to false so webpack ignores them
+    config.resolve.alias = {
+      ...(config.resolve.alias || {}),
+      'unstorage': false,
+      '@solana/kit': false,
+      '@solana-program/system': false,
+      '@coinbase/cdp-sdk': false,
+      '@base-org/account': false,
+    };
     config.resolve.fallback = {
       ...(config.resolve.fallback || {}),
       "pino-pretty": false,

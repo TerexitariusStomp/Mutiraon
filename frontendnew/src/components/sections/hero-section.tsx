@@ -28,7 +28,6 @@ const StatInfo = ({
   </div>
 );
 
-const APP_PATH = process.env.NEXT_PUBLIC_MAIN_APP_PATH || "/mutiraon/";
 
 const HeroSection = () => {
   const { t } = useI18n();
@@ -67,7 +66,7 @@ const HeroSection = () => {
               <span className="text-[#2f855a]">{t('hero.title.2')}</span>
               <span className="text-[#14532d]">{t('hero.title.3')}</span>
             </h1>
-            <Link href={APP_PATH} className="relative flex cursor-pointer items-center gap-2">
+            <Link href="/" className="relative flex cursor-pointer items-center gap-2">
               <h1 className="bg-gradient-to-r from-[#166534] via-[#15803d] to-[#3f6212] bg-clip-text text-4xl font-extrabold leading-none tracking-tight text-transparent md:text-5xl">
                 {t('hero.cta')}
               </h1>

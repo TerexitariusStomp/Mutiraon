@@ -198,7 +198,7 @@ export function useStablecoin(selectedCollateral: 'CBiomaH' = 'CBiomaH') {
 
   // Lock collateral in CDP
   const lockCollateral = async (amount: string, ilk: string): Promise<`0x${string}`> => {
-    if (!address) return;
+    if (!address) return Promise.reject('No address');
     
     const result = await writeContractAsync({
       address: addresses.vat as `0x${string}`,
@@ -226,7 +226,7 @@ export function useStablecoin(selectedCollateral: 'CBiomaH' = 'CBiomaH') {
 
   // Generate (mint) ONEDOLLAR - ONLY mints debt in Vat (no auto-withdrawal)
   const generateStablecoin = async (amount: string, ilk: string): Promise<`0x${string}`> => {
-    if (!address) return;
+    if (!address) return Promise.reject('No address');
     
     console.log('🏦 Minting ONEDOLLAR debt in Vat...');
     console.log('📊 Amount:', amount, 'ONEDOLLAR');
@@ -259,7 +259,7 @@ export function useStablecoin(selectedCollateral: 'CBiomaH' = 'CBiomaH') {
   // Generate and immediately send ONEDOLLAR to a recipient (e.g. minter wallet)
   // This performs: frob (mint internal) -> bounded wait -> ensure hope -> DaiJoin.exit(recipient)
   const generateAndSendStablecoin = async (amount: string, ilk: string, recipient: string): Promise<`0x${string}`> => {
-    if (!address) return;
+    if (!address) return Promise.reject('No address');
 
     const amountWad = parseEther(amount);
 
@@ -341,7 +341,7 @@ export function useStablecoin(selectedCollateral: 'CBiomaH' = 'CBiomaH') {
 
   // Withdraw ONEDOLLAR
   const withdrawStablecoin = async (amount: string): Promise<`0x${string}`> => {
-    if (!address) return;
+    if (!address) return Promise.reject('No address');
 
     const amountWad = parseEther(amount);
     const RAD_BI = BigInt(10) ** BigInt(27);
