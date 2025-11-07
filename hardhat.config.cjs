@@ -56,6 +56,7 @@ module.exports = {
       type: "http",
       url: process.env.ETH_SEPOLIA_RPC_URL || "https://sepolia.infura.io/v3/9aa3d95b3b440d8892e67c5a5e4d9a5c",
       chainId: 11155111,
+      gasPrice: process.env.GAS_PRICE_GWEI ? parseInt(process.env.GAS_PRICE_GWEI) * 1000000000 : 20000000000,
       accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     }
   },

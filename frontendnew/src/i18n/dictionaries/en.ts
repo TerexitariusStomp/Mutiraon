@@ -31,8 +31,8 @@ export const en = {
   "vaults.title": "Select Environmental Collateral",
   "vaults.subtitle": "Choose a collateral type to manage your vault and mint ONEDOLLAR.",
   "vaults.header": "{name} ({code})",
-  "coll.BIOME.name": "Biome Credit",
-  "coll.BIOME.desc": "Backed by biome conservation credits",
+  "coll.CBiomaH.name": "BiomeH Credit",
+  "coll.CBiomaH.desc": "Backed by biome H conservation credits",
   // Vaults page - balances & status
   "vault.bal.wallet": "{code} Wallet",
   "vault.bal.deposited": "Deposited {code}",

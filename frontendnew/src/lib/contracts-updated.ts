@@ -943,19 +943,19 @@ export const CONTRACT_ADDRESSES = {
     daiJoin: "0xd8D7Ab4762e0d70DdCDEF22f757c5662E1488dB8",
     
     // Environmental Token Addresses
-    biomeToken: "0x0000000000000000000000000000000000000000",
+    cbiomehToken: "0x9589B102eF9D61108B05F411e4d9F3c417F4c001",
     
     // Collateral Join Contracts
-    biomeJoin: "0x0000000000000000000000000000000000000000",
+    cbiomehJoin: "0x35aa94781FAcf8cAB70CBc7Fac6FccB4ECF346b5",
     
     // Auction Mechanisms
-    biomeClipper: "0x0000000000000000000000000000000000000000",
+    cbiomehClipper: "0x1F440fB7dab4D3b27617f8e5b4855B476FDd95a2",
   },
 };
 
 // Collateral types for Brazilian Environmental Tokens
 export const COLLATERAL_TYPES = {
-  BIOME: ethers.encodeBytes32String("BIOME-A"),
+  CBiomaH: ethers.encodeBytes32String("CBiomaH-A"),
 };
 
 // Constants
@@ -967,15 +967,17 @@ export const RAD = ethers.parseUnits("1", 45);
 export const CONTRACTS = CONTRACT_ADDRESSES.sepolia;
 
 // Export ILK constants for environmental tokens
-export const ILK_BIOME = COLLATERAL_TYPES.BIOME;
+export const ILK_CBiomaH = COLLATERAL_TYPES.CBiomaH;
 
 // Environmental token information
 export const ENVIRONMENTAL_TOKENS = {
-  BIOME: {
-    name: "Biome Credit",
-    symbol: "BIOME",
-    description: "Backed by biome conservation credits",
-    address: CONTRACT_ADDRESSES.sepolia.biomeToken, joinAddress: CONTRACT_ADDRESSES.sepolia.biomeJoin, clipperAddress: CONTRACT_ADDRESSES.sepolia.biomeClipper,
+  CBiomaH: {
+    name: "BiomeH Credit",
+    symbol: "CBiomaH",
+    description: "Backed by biome H conservation credits",
+    address: CONTRACT_ADDRESSES.sepolia.cbiomehToken,
+    joinAddress: CONTRACT_ADDRESSES.sepolia.cbiomehJoin,
+    clipperAddress: CONTRACT_ADDRESSES.sepolia.cbiomehClipper,
   },
 };
 

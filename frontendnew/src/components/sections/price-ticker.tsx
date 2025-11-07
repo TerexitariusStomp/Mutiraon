@@ -4,7 +4,7 @@ import React from 'react';
 
 const tickers = [
   { name: 'ONEDOLLAR', price: '$1.00' },
-  { name: 'BIOME', price: '$2.50' },
+  { name: 'CBiomaH', price: '$2.50' },
 ];
 
 const PriceTicker = () => {

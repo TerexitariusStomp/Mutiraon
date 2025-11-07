@@ -1043,20 +1043,20 @@ export const CONTRACT_ADDRESSES = {
     vow: "0x171949B94fE913a21BCD1Fb97dC1F08359C3b8Bc",
     daiJoin: "0xd8D7Ab4762e0d70DdCDEF22f757c5662E1488dB8",
     
-    // Environmental Token Addresses (BIOME only)
-    biomeToken: "0x0000000000000000000000000000000000000000",
+    // Environmental Token Addresses (CBiomaH only)
+    cbiomehToken: "0x0000000000000000000000000000000000000000",
     
-    // Collateral Join Contracts (BIOME only)
-    biomeJoin: "0x0000000000000000000000000000000000000000",
+    // Collateral Join Contracts (CBiomaH only)
+    cbiomehJoin: "0x0000000000000000000000000000000000000000",
     
-    // Auction Mechanisms (BIOME only)
-    biomeClipper: "0x0000000000000000000000000000000000000000",
+    // Auction Mechanisms (CBiomaH only)
+    cbiomehClipper: "0x0000000000000000000000000000000000000000",
   },
 };
 
 // Collateral types for Brazilian Environmental Tokens
 export const COLLATERAL_TYPES = {
-  BIOME: ethers.encodeBytes32String("BIOME-A"),
+  CBiomaH: ethers.encodeBytes32String("CBiomaH-A"),
 };
 
 // Constants
@@ -1068,17 +1068,17 @@ export const RAD = ethers.parseUnits("1", 45);
 export const CONTRACTS = CONTRACT_ADDRESSES.sepolia;
 
 // Export ILK constants for environmental tokens
-export const ILK_BIOME = COLLATERAL_TYPES.BIOME;
+export const ILK_CBiomaH = COLLATERAL_TYPES.CBiomaH;
 
 // Environmental token information
 export const ENVIRONMENTAL_TOKENS = {
-  BIOME: {
-    name: "Biome Credit",
-    symbol: "BIOME",
-    description: "Backed by biome conservation credits",
-    address: CONTRACT_ADDRESSES.sepolia.biomeToken,
-    joinAddress: CONTRACT_ADDRESSES.sepolia.biomeJoin,
-    clipperAddress: CONTRACT_ADDRESSES.sepolia.biomeClipper,
+  CBiomaH: {
+    name: "BiomeH Credit",
+    symbol: "CBiomaH",
+    description: "Backed by biome H conservation credits",
+    address: CONTRACT_ADDRESSES.sepolia.cbiomehToken,
+    joinAddress: CONTRACT_ADDRESSES.sepolia.cbiomehJoin,
+    clipperAddress: CONTRACT_ADDRESSES.sepolia.cbiomehClipper,
   },
 };
 

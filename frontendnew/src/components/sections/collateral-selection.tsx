@@ -3,12 +3,12 @@
 import { useState, useEffect } from 'react';
 import { useAccount, useReadContract } from 'wagmi';
 import { ethers } from 'ethers';
-import { CONTRACT_ADDRESSES, ENVIRONMENTAL_TOKENS, COLLATERAL_TYPES } from '@/lib/contracts';
+import { CONTRACT_ADDRESSES, ENVIRONMENTAL_TOKENS, COLLATERAL_TYPES } from '@/lib/contracts-updated';
 import { useI18n } from "@/i18n/I18nContext";
 import { useChainId } from 'wagmi';
 
 interface CollateralSelectionProps {
-  initialCollateral?: 'BIOME'
+  initialCollateral?: 'CBiomaH'
 }
 
 const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) => {
@@ -18,7 +18,7 @@ const CollateralSelection = ({ initialCollateral }: CollateralSelectionProps) =>
   const addresses = CONTRACT_ADDRESSES.sepolia;
 
   const [selectedCollateral, setSelectedCollateral] = useState<keyof typeof ENVIRONMENTAL_TOKENS>(
-    initialCollateral ?? 'BIOME'
+    initialCollateral ?? 'CBiomaH'
   );
 
   // Ensure selection follows initialCollateral even if it becomes available after first render

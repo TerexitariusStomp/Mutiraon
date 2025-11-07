@@ -147,3 +147,9 @@ contract ECOJoin is GemJoin {
     constructor(address vat_, address eco_)
         GemJoin(vat_, bytes32("ECO-A"), eco_) {}
 }
+
+// CBiomaHJoin - Specialized GemJoin for BiomeH Conservation Credit Token
+contract CBiomaHJoin is GemJoin {
+    constructor(address vat_, address cbiomeh_)
+        GemJoin(vat_, bytes32("CBiomaH-A"), cbiomeh_) {}
+}

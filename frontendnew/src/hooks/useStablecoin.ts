@@ -1,11 +1,11 @@
 import { useAccount, useWriteContract, useReadContract, useWaitForTransactionReceipt } from 'wagmi';
 import { parseEther, formatEther } from 'viem';
-import { CONTRACT_ADDRESSES, ILK_BIOME, VAT_ABI, STABLECOIN_ABI } from '@/lib/contracts';
+import { CONTRACT_ADDRESSES, ILK_CBiomaH, VAT_ABI, STABLECOIN_ABI } from '@/lib/contracts-updated';
 import { useState } from 'react';
 import { useChainId } from 'wagmi';
 import { ethers } from 'ethers';
 
-export function useStablecoin(selectedCollateral: 'BIOME' = 'BIOME') {
+export function useStablecoin(selectedCollateral: 'CBiomaH' = 'CBiomaH') {
   const { address } = useAccount();
   const chainId = useChainId();
   const addresses = CONTRACT_ADDRESSES.sepolia;
@@ -20,13 +20,13 @@ export function useStablecoin(selectedCollateral: 'BIOME' = 'BIOME') {
 
   // Get collateral configuration
   const getCollateralConfig = (collateralType: string) => {
-    if (collateralType !== 'BIOME') {
+    if (collateralType !== 'CBiomaH') {
       throw new Error(`Unsupported collateral type: ${collateralType}`);
     }
     return {
-      ilk: ILK_BIOME,
-      tokenAddress: addresses.biomeToken,
-      joinAddress: addresses.biomeJoin,
+      ilk: ILK_CBiomaH,
+      tokenAddress: addresses.cbiomehToken,
+      joinAddress: addresses.cbiomehJoin,
       decimals: 18,
     };
   };
@@ -108,7 +108,7 @@ export function useStablecoin(selectedCollateral: 'BIOME' = 'BIOME') {
   }
 
   // Deposit collateral - returns a promise to handle approval then deposit
-  const depositCollateral = (amount: string, collateralType: 'BIOME') => {
+  const depositCollateral = (amount: string, collateralType: 'CBiomaH') => {
     if (!address) return Promise.reject('No address');
     
     const config = getCollateralConfig(collateralType);
@@ -142,7 +142,7 @@ export function useStablecoin(selectedCollateral: 'BIOME' = 'BIOME') {
   };
 
   // Approve token for spending (exact amount only)
-  const approveToken = (amount: string, collateralType: 'BIOME') => {
+  const approveToken = (amount: string, collateralType: 'CBiomaH') => {
     if (!address) return Promise.reject('No address');
     
     const config = getCollateralConfig(collateralType);
@@ -550,7 +550,7 @@ export function useStablecoin(selectedCollateral: 'BIOME' = 'BIOME') {
   };
 
   // Withdraw collateral - use join exit to get tokens back to wallet
-  const withdrawCollateral = (amount: string, collateralType: 'BIOME') => {
+  const withdrawCollateral = (amount: string, collateralType: 'CBiomaH') => {
     if (!address) return Promise.reject('No address');
     
     const config = getCollateralConfig(collateralType);
@@ -645,7 +645,7 @@ export function useStablecoin(selectedCollateral: 'BIOME' = 'BIOME') {
   };
 
   // Close vault (repay all debt and withdraw all collateral)
-  const closeVault = async (ilk: string, collateralType: 'BIOME') => {
+  const closeVault = async (ilk: string, collateralType: 'CBiomaH') => {
     // This would combine repay and withdraw - simplified
     await repayStablecoin(art, ilk);
     await withdrawCollateral(ink, collateralType);

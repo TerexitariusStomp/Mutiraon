@@ -5,14 +5,14 @@ import { useI18n } from "@/i18n/I18nContext";
 
 export default function VaultsPage() {
   const { t } = useI18n();
-  const [selectedCollateral, setSelectedCollateral] = useState("BIOME");
+  const [selectedCollateral, setSelectedCollateral] = useState("CBiomaH");
 
   const icons: Record<string, string> = {
-    BIOME: "dYO3",
+    CBiomaH: "dYO3",
   };
 
   const collaterals = [
-    { code: "BIOME" },
+    { code: "CBiomaH" },
   ];
 
   return (
