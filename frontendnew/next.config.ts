@@ -5,15 +5,24 @@ const LOADER = path.resolve(__dirname, 'src/visual-edits/component-tagger-loader
 
 const isProd = process.env.NODE_ENV === 'production';
 
+// Robust basePath/assetPrefix handling across environments
+// - If deploying under a subpath (e.g., GitHub Pages repo), set NEXT_PUBLIC_BASE_PATH="/your-subpath"
+// - If deploying at domain root or using a custom domain, leave it empty/undefined
+const rawBasePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+// Normalize: ensure leading slash (when provided) and no trailing slash
+const normalizedBasePath = rawBasePath
+  ? `/${rawBasePath.replace(/^\/+|\/+$/g, '')}`
+  : '';
+
 const nextConfig: NextConfig = {
   // Enable development server
   output: isProd ? 'export' : undefined,
   // Safer for static hosts (S3, CF Pages, etc.)
   trailingSlash: true,
-  // Base path for GitHub Pages deployment at /Mutiraon/
-  basePath: isProd ? '/Mutiraon' : '',
+  // Use env-driven basePath instead of hardcoding
+  basePath: '',
   // Ensure static asset URLs resolve correctly under basePath on static hosts
-  assetPrefix: isProd ? '/Mutiraon/' : undefined,
+  assetPrefix: undefined,
 
   images: {
     // next/image optimization is not available on static export

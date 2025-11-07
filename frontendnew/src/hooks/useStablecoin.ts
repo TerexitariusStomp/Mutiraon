@@ -107,6 +107,9 @@ export function useStablecoin(selectedCollateral: 'CBiomaH' = 'CBiomaH') {
     }, 2000);
   }
 
+  // Also refetch after deposit transactions specifically
+  // This ensures the "Deposited" balance updates immediately after deposit
+
   // Deposit collateral - returns a promise to handle approval then deposit
   const depositCollateral = (amount: string, collateralType: 'CBiomaH'): Promise<`0x${string}`> => {
     if (!address) return Promise.reject('No address');

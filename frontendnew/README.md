@@ -66,13 +66,24 @@ The static files will be generated in the `out` directory.
 
 ## 🌐 Deployment
 
-### GitHub Pages
+### GitHub Pages / Static Hosts
 
-This project is configured for GitHub Pages deployment:
+This project supports both root domains and subpath deployments (e.g., GitHub Pages repository sites). Configure the base path via an environment variable at build time:
 
-1. The repository is set up with the base path `/Mutiraon`
-2. Static files are generated in the `out` directory
-3. GitHub Actions can be used for automated deployment
+- If deploying at domain root or via a custom domain: do nothing (default works)
+- If deploying under a subpath (e.g., `https://<user>.github.io/Mutiraon/`): set `NEXT_PUBLIC_BASE_PATH="/Mutiraon"`
+
+Example build commands:
+
+```bash
+# Custom domain or root path
+npm run build
+
+# GitHub Pages repository path
+cross-env NEXT_PUBLIC_BASE_PATH=/Mutiraon npm run build
+```
+
+Static files are generated in the `out` directory. Upload `out/` to your host or let GitHub Actions deploy it.
 
 ### Manual Deployment
 

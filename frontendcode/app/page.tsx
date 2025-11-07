@@ -1,3 +1,5 @@
+"use client";
+
 import { Hero } from "@/components/hero";
 import { MarketOpportunity } from "@/components/market-opportunity";
 import { Header } from "@/components/header";

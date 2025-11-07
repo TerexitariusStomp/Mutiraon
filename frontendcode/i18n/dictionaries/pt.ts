@@ -1,6 +1,7 @@
 export const pt = {
   // Header
   "header.enter": "Entrar no App",
+  "header.home": "Início",
   "header.toggle": "PT",
 
   // Hero

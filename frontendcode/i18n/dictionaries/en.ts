@@ -1,6 +1,7 @@
 export const en = {
   // Header
   "header.enter": "Enter App",
+  "header.home": "Home",
   "header.toggle": "EN",
 
   // Hero
