@@ -114,6 +114,16 @@ export default function StakePage() {
   return (
     <main className="min-h-[60vh] bg-[#f3f1f7]">
       <div className="container mx-auto px-4 py-16">
+        <div className="mx-auto max-w-4xl mb-4 rounded-md border border-amber-300 bg-amber-50 p-3 text-sm text-amber-900">
+          {lang === 'pt'
+            ? 'As confirmações on‑chain podem levar algum tempo. Se os saldos não atualizarem imediatamente após uma transação, clique no botão atualizar.'
+            : 'On‑chain confirmations can take time. If balances do not update immediately after a transaction, click the refresh button.'}
+          <div className="mt-2">
+            <Button size="sm" variant="outline" onClick={() => refetchData()} disabled={isPending}>
+              {lang === 'pt' ? 'Atualizar' : 'Refresh'}
+            </Button>
+          </div>
+        </div>
         <div className="mx-auto max-w-4xl">
           {/* Header */}
           <div className="mb-8 text-center">

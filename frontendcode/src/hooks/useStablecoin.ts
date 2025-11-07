@@ -33,6 +33,16 @@ export function useStablecoin(selectedCollateral: 'CBiomaH' = 'CBiomaH') {
 
   // Read current CDP position for the selected collateral
   const currentIlk = getCollateralConfig(selectedCollateral).ilk;
+  // Detect actual ERC20 decimals for the selected collateral token (prevents overflow on join)
+  const tokenCfg = getCollateralConfig(selectedCollateral);
+  const { data: tokenDecimalsData } = useReadContract({
+    address: tokenCfg.tokenAddress as `0x${string}`,
+    abi: [
+      { name: 'decimals', type: 'function', stateMutability: 'view', inputs: [], outputs: [{ name: '', type: 'uint8' }] },
+    ],
+    functionName: 'decimals',
+  });
+  const tokenDecimals: number = typeof tokenDecimalsData === 'number' ? tokenDecimalsData : 18;
   const { data: urnData, refetch: refetchUrn } = useReadContract({
     address: addresses.vat as `0x${string}`,
     abi: [
@@ -144,7 +154,7 @@ export function useStablecoin(selectedCollateral: 'CBiomaH' = 'CBiomaH') {
     console.log('💰 Amount:', amount);
     
     // Use exact decimals for each token
-    const exactAmount = ethers.parseUnits(amount, config.decimals);
+    const exactAmount = ethers.parseUnits(amount, tokenDecimals);
     
     console.log('📊 Deposit amount in token units:', exactAmount.toString());
     console.log('🔍 Using decimals:', config.decimals);
@@ -177,7 +187,7 @@ export function useStablecoin(selectedCollateral: 'CBiomaH' = 'CBiomaH') {
     console.log('📋 Spender (join):', config.joinAddress);
     
     // Use exact decimals for each token - approve exact amount requested
-    const exactAmount = ethers.parseUnits(amount, config.decimals);
+    const exactAmount = ethers.parseUnits(amount, tokenDecimals);
     
     console.log('💰 Approving exactly:', amount, collateralType);
     console.log('📊 In wei:', exactAmount.toString());
@@ -613,7 +623,7 @@ export function useStablecoin(selectedCollateral: 'CBiomaH' = 'CBiomaH') {
     console.log('Join address:', config.joinAddress);
     
     // Use exact decimals for each token - same as approval and deposit functions
-    const exactAmount = ethers.parseUnits(amount, config.decimals);
+    const exactAmount = ethers.parseUnits(amount, tokenDecimals);
     
     console.log('📊 Withdraw amount in token units:', exactAmount.toString());
     console.log('🔍 Using decimals:', config.decimals);

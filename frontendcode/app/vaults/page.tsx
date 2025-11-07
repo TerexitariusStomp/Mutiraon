@@ -136,6 +136,16 @@ export default function VaultsPage() {
   return (
     <main className="min-h-[60vh] bg-[#f3f1f7]">
       <div className="container mx-auto px-4 py-10 space-y-8">
+        <div className="rounded-md border border-amber-300 bg-amber-50 p-3 text-sm text-amber-900">
+          {lang === 'pt'
+            ? 'As confirmações on‑chain podem levar algum tempo. Se os saldos não atualizarem imediatamente após uma transação, use o botão de atualizar abaixo.'
+            : 'On‑chain confirmations can take time. If balances do not update immediately after a transaction, use the refresh button below.'}
+          <div className="mt-2">
+            <Button size="sm" variant="outline" onClick={() => refetchData()} disabled={isPending}>
+              {lang === 'pt' ? 'Atualizar' : 'Refresh'}
+            </Button>
+          </div>
+        </div>
         <header className="text-center">
           <h1 className="text-3xl font-bold text-foreground">{t("vaults.title")}</h1>
           <p className="text-muted-foreground">{t("vaults.header")}</p>
@@ -217,9 +227,13 @@ export default function VaultsPage() {
           <h3 className="text-lg font-semibold">{t('vault.status.title')}</h3>
           <p className="text-sm text-muted-foreground mb-2">{t('vault.status.strict')}</p>
           <Button onClick={doAuthorizeVat} disabled={isPending}>{t('stake.steps.auth.title')}</Button>
+          <p className="mt-2 text-xs text-muted-foreground">
+            {lang === 'pt'
+              ? 'Se ocorrer erro de underflow/overflow ao travar, verifique o valor disponível para travar e tente um valor menor. Há limites estritos de segurança.'
+              : 'If an underflow/overflow error occurs when locking, check the available amount to lock and try a lower value. Strict safety limits apply.'}
+          </p>
         </section>
       </div>
     </main>
   );
 }
-

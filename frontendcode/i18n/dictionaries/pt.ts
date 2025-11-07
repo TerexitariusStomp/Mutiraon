@@ -181,6 +181,7 @@ export const pt = {
   "vault.wd.only": "Quantidade para saque",
   "vault.wd.placeholder": "ex.: 25,00",
   "vault.wd.btn": "Sacar",
+  "vault.withdrawStable.submit": "Sacar Stablecoin",
 
   // Aviso de Risco
   "risk.title": "Protocolo Experimental de Alto Risco",
