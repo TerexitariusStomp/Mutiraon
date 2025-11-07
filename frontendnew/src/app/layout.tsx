@@ -13,6 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: "Amaz-One Dollar: Stablecoin de Impacto do Brasil",
     description: "Stablecoin descentralizada lastreada por tokens de impacto ambiental",
+    charset: 'utf-8',
   };
 }
 
@@ -24,6 +25,9 @@ export default function RootLayout({
   // Client-only hook usage guard
   return (
     <html lang="pt">
+      <head>
+        <meta charSet="utf-8" />
+      </head>
       <body className="antialiased min-h-screen flex flex-col eco-background">
         <Providers>
           <Toaster />

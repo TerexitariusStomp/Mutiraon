@@ -57,7 +57,7 @@ export const pt = {
   "vault.bal.deposited": "Depositado {code}",
   "vault.bal.available": "Disponível para travar",
   "vault.bal.mut": "Saldo de Amaz-One Dollar",
-  "vault.status.title": "Status do Cofre",
+  "vault.status.title": "🏛️ Status do Cofre",
   "vault.status.locked": "Colateral Travado",
   "vault.status.debt": "Dívida em Aberto",
   "vault.status.avail": "Colateral Disponível",

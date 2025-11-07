@@ -38,7 +38,7 @@ export const en = {
   "vault.bal.deposited": "Deposited {code}",
   "vault.bal.available": "Available to lock",
   "vault.bal.mut": "Amaz-One Dollar Balance",
-  "vault.status.title": "Vault Status",
+  "vault.status.title": "🏛️ Vault Status",
   "vault.status.locked": "Locked Collateral",
   "vault.status.debt": "Outstanding Debt",
   "vault.status.avail": "Available Collateral",

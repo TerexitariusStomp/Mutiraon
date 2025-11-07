@@ -7,6 +7,8 @@ import { useAccount } from "wagmi";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from 'sonner'
+import { waitForTxConfirmation } from "@/lib/utils";
+import { ILK_CBiomaH } from "@/lib/contracts-updated";
 
 export default function VaultsPage() {
   const { t, lang } = useI18n();
@@ -58,9 +60,11 @@ export default function VaultsPage() {
 
     try {
       console.log("Calling approveToken...");
-      await approveToken(depositAmount, selectedCollateral as 'CBiomaH');
-      console.log("Approve completed successfully");
-      toast.success(`Approve ${selectedCollateral}: OK`);
+      const hash = await approveToken(depositAmount, selectedCollateral as 'CBiomaH');
+      toast.message(lang === 'pt' ? 'Transação enviada' : 'Transaction submitted', { description: hash as string });
+      await waitForTxConfirmation(hash as string);
+      console.log("Approve confirmed on-chain");
+      toast.success(`Approve ${selectedCollateral}: ${lang === 'pt' ? 'Confirmado em blockchain' : 'Confirmed on-chain'}`);
     } catch (error) {
       console.error("Approve failed:", error);
       const errorMessage = error instanceof Error ? error.message : String(error);
@@ -80,9 +84,11 @@ export default function VaultsPage() {
 
     try {
       console.log("Calling depositCollateral...");
-      await depositCollateral(depositAmount, selectedCollateral as 'CBiomaH');
-      console.log("Deposit completed successfully");
-      toast.success(`Deposit ${selectedCollateral}: OK`);
+      const hash = await depositCollateral(depositAmount, selectedCollateral as 'CBiomaH');
+      toast.message(lang === 'pt' ? 'Transação enviada' : 'Transaction submitted', { description: hash as string });
+      await waitForTxConfirmation(hash as string);
+      console.log("Deposit confirmed on-chain");
+      toast.success(`Deposit ${selectedCollateral}: ${lang === 'pt' ? 'Confirmado em blockchain' : 'Confirmed on-chain'}`);
       setDepositAmount("");
     } catch (error) {
       console.error("Deposit failed:", error);
@@ -103,9 +109,11 @@ export default function VaultsPage() {
 
     try {
       console.log("Calling lockCollateral...");
-      await lockCollateral(lockAmount, '0x4342696f6d614800000000000000000000000000000000000000000000000000');
-      console.log("Lock completed successfully");
-      toast.success(`Lock ${selectedCollateral}: OK`);
+      const hash = await lockCollateral(lockAmount, ILK_CBiomaH) as any;
+      toast.message(lang === 'pt' ? 'Transação enviada' : 'Transaction submitted', { description: hash as string });
+      await waitForTxConfirmation(hash as string);
+      console.log("Lock confirmed on-chain");
+      toast.success(`Lock ${selectedCollateral}: ${lang === 'pt' ? 'Confirmado em blockchain' : 'Confirmed on-chain'}`);
       setLockAmount("");
     } catch (error) {
       console.error("Lock failed:", error);
@@ -126,9 +134,11 @@ export default function VaultsPage() {
 
     try {
       console.log("Calling unlockCollateral...");
-      await unlockCollateral(unlockAmount, '0x4342696f6d614800000000000000000000000000000000000000000000000000');
-      console.log("Unlock completed successfully");
-      toast.success(`Unlock ${selectedCollateral}: OK`);
+      const hash = await unlockCollateral(unlockAmount, ILK_CBiomaH) as any;
+      toast.message(lang === 'pt' ? 'Transação enviada' : 'Transaction submitted', { description: hash as string });
+      await waitForTxConfirmation(hash as string);
+      console.log("Unlock confirmed on-chain");
+      toast.success(`Unlock ${selectedCollateral}: ${lang === 'pt' ? 'Confirmado em blockchain' : 'Confirmed on-chain'}`);
       setUnlockAmount("");
     } catch (error) {
       console.error("Unlock failed:", error);
@@ -149,9 +159,11 @@ export default function VaultsPage() {
 
     try {
       console.log("Calling generateAndSendStablecoin...");
-      await generateAndSendStablecoin(mintAmount, '0x4342696f6d614800000000000000000000000000000000000000000000000000', address);
-      console.log("Mint completed successfully");
-      toast.success(`Mint ONEDOLLAR: OK`);
+      const hash = await generateAndSendStablecoin(mintAmount, ILK_CBiomaH, address) as any;
+      toast.message(lang === 'pt' ? 'Transação enviada' : 'Transaction submitted', { description: hash as string });
+      await waitForTxConfirmation(hash as string);
+      console.log("Mint confirmed on-chain");
+      toast.success(`Mint ONEDOLLAR: ${lang === 'pt' ? 'Confirmado em blockchain' : 'Confirmed on-chain'}`);
       setMintAmount("");
     } catch (error) {
       console.error("Mint failed:", error);
@@ -172,9 +184,11 @@ export default function VaultsPage() {
 
     try {
       console.log("Calling repayStablecoin...");
-      await repayStablecoin(repayAmount, '0x4342696f6d614800000000000000000000000000000000000000000000000000');
-      console.log("Repay completed successfully");
-      toast.success(`Repay ONEDOLLAR: OK`);
+      const hash = await repayStablecoin(repayAmount, ILK_CBiomaH) as any;
+      toast.message(lang === 'pt' ? 'Transação enviada' : 'Transaction submitted', { description: hash as string });
+      await waitForTxConfirmation(hash as string);
+      console.log("Repay confirmed on-chain");
+      toast.success(`Repay ONEDOLLAR: ${lang === 'pt' ? 'Confirmado em blockchain' : 'Confirmed on-chain'}`);
       setRepayAmount("");
     } catch (error) {
       console.error("Repay failed:", error);
@@ -195,9 +209,11 @@ export default function VaultsPage() {
 
     try {
       console.log("Calling withdrawCollateral...");
-      await withdrawCollateral(withdrawAmount, selectedCollateral as 'CBiomaH');
-      console.log("Withdraw completed successfully");
-      toast.success(`Withdraw ${selectedCollateral}: OK`);
+      const hash = await withdrawCollateral(withdrawAmount, selectedCollateral as 'CBiomaH');
+      toast.message(lang === 'pt' ? 'Transação enviada' : 'Transaction submitted', { description: hash as string });
+      await waitForTxConfirmation(hash as string);
+      console.log("Withdraw confirmed on-chain");
+      toast.success(`Withdraw ${selectedCollateral}: ${lang === 'pt' ? 'Confirmado em blockchain' : 'Confirmed on-chain'}`);
       setWithdrawAmount("");
     } catch (error) {
       console.error("Withdraw failed:", error);
@@ -471,6 +487,5 @@ export default function VaultsPage() {
     </div>
   );
 }
-
 
 
