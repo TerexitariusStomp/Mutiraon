@@ -42,14 +42,6 @@ export function Header({ onEnterApp }: { onEnterApp?: () => void }) {
       >
         {labelLang}
       </button>
-      {showButton && (
-        <button
-          onClick={handleButtonClick}
-          className="rounded-md bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow hover:bg-emerald-700"
-        >
-          {buttonText}
-        </button>
-      )}
     </div>
   );
 }
