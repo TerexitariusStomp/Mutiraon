@@ -36,10 +36,11 @@ jobs:
         working-directory: ./frontendcode
         env:
           NODE_ENV: production
+          GITHUB_PAGES: 'true'
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./frontendcode/out
+          publish_dir: ./frontendcode/out/Mutiraon
           force_orphan: true

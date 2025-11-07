@@ -1,4 +1,7 @@
 /** @type {import('next').NextConfig} */
+const isGithubPages = process.env.GITHUB_PAGES === 'true'
+const repoName = 'Mutiraon'
+
 const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
@@ -8,8 +11,8 @@ const nextConfig = {
   },
   output: 'export',
   trailingSlash: true,
-  basePath: '',
-  assetPrefix: undefined,
+  basePath: isGithubPages ? `/${repoName}` : '',
+  assetPrefix: isGithubPages ? `/${repoName}/` : undefined,
 }
 
 export default nextConfig

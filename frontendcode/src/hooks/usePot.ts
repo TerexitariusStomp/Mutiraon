@@ -12,7 +12,7 @@ import {
   DAI_JOIN_ABI,
   VAT_ABI,
   MULTICALL_ABI,
-} from "@/lib/contracts";
+} from "@/src/lib/contracts";
 import { useState } from "react";
 import { useChainId } from "wagmi";
 

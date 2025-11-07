@@ -2,7 +2,7 @@
 
 import { useAccount, useChainId, useReadContract, useWriteContract, useWaitForTransactionReceipt } from "wagmi";
 import { formatEther } from "viem";
-import { CONTRACT_ADDRESSES, ETH_FAUCET_ABI } from "@/lib/contracts-updated";
+import { CONTRACT_ADDRESSES, ETH_FAUCET_ABI } from "@/src/lib/contracts-updated";
 
 export default function EthFaucetClaim() {
   const { isConnected, address } = useAccount();
