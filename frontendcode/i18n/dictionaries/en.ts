@@ -4,6 +4,19 @@ export const en = {
   "header.home": "Home",
   "header.toggle": "EN",
 
+  // Navigation
+  "nav.tagline": "Impact-backed stablecoin for Brazil",
+  "nav.get": "Get Started",
+  "nav.lang": "Language",
+  "nav.lang.pt": "Portuguese",
+  "nav.lang.en": "English",
+  "nav.more": "More",
+  "nav.docs": "Docs",
+  "nav.github": "GitHub",
+  "nav.telegram": "Telegram",
+  "nav.app": "Open App",
+  "nav.disconnect": "Disconnect",
+
   // Hero
   "hero.title.1": "Amaz-One Dollar:",
   "hero.title.2": "Impact-Backed",
@@ -75,6 +88,43 @@ export const en = {
   "impact.join.subtitle": "We're building partnerships to create a sustainable financial future for Brazil's solidarity economy.",
   "impact.join.cta1": "Partner With Us",
   "impact.join.cta2": "Learn More",
+
+  // Risk Disclaimer
+  "risk.title": "High-Risk Experimental Protocol",
+  "risk.env": "Testnet only. Contracts unaudited.",
+  "risk.line1": "Use at your own risk. Funds may be lost.",
+  "risk.brand": "Amaz-One Dollar",
+  "risk.features": "Known Risks",
+  "risk.features.1": "Smart contracts unaudited and may contain bugs",
+  "risk.features.2": "Oracles and price feeds can fail or be delayed",
+  "risk.features.3": "Collateral volatility may trigger liquidations",
+  "risk.features.4": "Integration dependencies may break without notice",
+  "risk.getting": "Before You Start",
+  "risk.getting.hint": "Basic steps to interact on testnet:",
+  "risk.getting.1": "Connect a wallet on Sepolia",
+  "risk.getting.2": "Get test ETH (faucet)",
+  "risk.getting.3": "Claim test impact token",
+  "risk.getting.4": "Proceed with vault or savings actions",
+  "risk.disclaimer": "This interface is provided AS IS for testing purposes only.",
+
+  // Faucet and banners
+  "faucet.banner.title": "Test assets available via faucet",
+  "faucet.banner.subtitle": "Claim test impact tokens and gas ETH to try the app.",
+  "faucet.title": "Testing Faucet",
+  "faucet.subtitle": "Claim free test tokens to explore the protocol.",
+  "faucet.token.title": "Impact Token",
+  "faucet.amount": "Amount",
+  "faucet.cooldown": "Cooldown",
+  "faucet.disabled": "(disabled)",
+  "faucet.next": "Next claim in {h}h {m}m",
+  "faucet.eth.title": "ETH for Gas",
+  "faucet.eth.cooldownActive": "You recently claimed ETH. Please wait.",
+  "faucet.claim": "Claim",
+  "faucet.claiming": "Claiming...",
+  "faucet.claimed": "Claimed!",
+  "faucet.success.both": "Success: token and ETH claimed.",
+  "faucet.success.token": "Success: token claimed.",
+  "faucet.success.eth": "Success: ETH claimed.",
 
   // Footer
   "footer.mission": "Building sustainable financial infrastructure for Brazil's solidarity economy through USD-pegged, impact-backed stablecoins.",
