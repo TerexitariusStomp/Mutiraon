@@ -101,7 +101,7 @@ export default function FaucetBanner() {
     }
   };
 
-  const disabled = !isConnected || (!canClaimToken && !canClaimEth) || (pToken && pEth) || (mToken && mEth);
+  const disabled = !isConnected || (!canClaimToken && !canClaimEth) ;
   const canClaimAny = canClaimToken || canClaimEth;
   const isClaiming = pToken || pEth || mToken || mEth;
 

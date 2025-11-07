@@ -158,6 +158,27 @@ export const en = {
   "stake.bullets.0.2": "Just click to confirm",
   "stake.bullets.0.3": "This happens automatically behind the scenes",
   "stake.bullets.1.1": "Gives the savings program permission to move your ONEDOLLAR",
+  
+  // Faucets
+  "faucet.title": "Faucets",
+  "faucet.subtitle": "Claim both CBiomaH and Sepolia ETH in one click.",
+  "faucet.amount": "Amount",
+  "faucet.cooldown": "Cooldown",
+  "faucet.disabled": "(disabled)",
+  "faucet.next": "Next claim in ~{h}h {m}m",
+  "faucet.token.title": "CBiomaH Faucet",
+  "faucet.eth.title": "ETH Faucet",
+  "faucet.eth.cooldownActive": "Cooldown active",
+  "faucet.claimBoth": "Claim Both",
+  "faucet.claiming": "Claiming...",
+  "faucet.success.both": "Both claims successful.",
+  "faucet.success.token": "CBiomaH claim successful.",
+  "faucet.success.eth": "ETH claim successful.",
+
+  // Faucet banner
+  "faucet.banner.title": "Testnet Faucets Available",
+  "faucet.banner.subtitle": "Claim CBiomaH tokens and Sepolia ETH to start interacting with the app",
+  "faucet.banner.cooldown": "Cooldown active - check back later",
   "stake.bullets.1.2": "Similar to authorizing a payment app to use your bank account",
   "stake.bullets.1.3": "You only need to do this once per session",
   "stake.bullets.1.4": "Click to confirm",
