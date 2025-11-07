@@ -6,6 +6,7 @@ export const pt = {
   "nav.docs": "Documentação",
   "nav.github": "Github",
   "nav.telegram": "Telegram",
+  "nav.app": "Ir para o App",
   "nav.disconnect": "Desconectar",
   "nav.tagline": "Stablecoin de Impacto do Brasil",
   "nav.lang": "Idioma",
@@ -214,4 +215,3 @@ export const pt = {
   "faucet.banner.subtitle": "Reivindique CBiomaH e ETH de Sepolia para começar a usar o app",
   "faucet.banner.cooldown": "Intervalo ativo — volte mais tarde",
 };
-

@@ -6,6 +6,7 @@ export const en = {
   "nav.docs": "Docs",
   "nav.github": "Github",
   "nav.telegram": "Telegram",
+  "nav.app": "Go to App",
   "nav.disconnect": "Disconnect",
   "nav.tagline": "Brazil's Impact Backed Stablecoin",
   "nav.lang": "Language",

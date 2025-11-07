@@ -14,9 +14,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
+const APP_PATH = process.env.NEXT_PUBLIC_MAIN_APP_PATH || "/mutiraon/";
+
 const navLinks = [
-  { key: "nav.get", href: "/vaults", active: true },
-  { key: "nav.stake", href: "/stake", active: false },
+  { key: "nav.get", href: APP_PATH, active: true },
 ];
 
 const InnerNav = () => {
@@ -83,6 +84,9 @@ const InnerNav = () => {
               <DropdownMenuItem asChild>
                 <Link href="https://t.me/mutiraon" target="_blank" rel="noopener noreferrer">{t('nav.telegram')}</Link>
               </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link href={APP_PATH}>{t('nav.app')}</Link>
+              </DropdownMenuItem>
               {/* Mobile nav items */}
               <div className="lg:hidden">
                 {navLinks.map((link) => (
@@ -93,6 +97,13 @@ const InnerNav = () => {
               </div>
             </DropdownMenuContent>
           </DropdownMenu>
+
+          {/* Primary CTA: Go to App */}
+          <Link href={APP_PATH} className="hidden sm:inline-block">
+            <Button className="rounded-full px-4 py-2 font-button">
+              {t('nav.app')}
+            </Button>
+          </Link>
 
           {isConnected && (
             <Button

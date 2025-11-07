@@ -55,11 +55,13 @@ export default function StakePage() {
     try {
       console.log("Calling withdrawSavings...");
       const hash = await withdrawSavings(withdrawAmount);
-      toast.message(lang === 'pt' ? 'Transação enviada' : 'Transaction submitted', { description: hash as string });
-      await waitForTxConfirmation(hash as string);
-      console.log("Withdraw confirmed on-chain");
-      toast.success(`${t('stake.withdraw')}: ${lang === 'pt' ? 'Confirmado em blockchain' : 'Confirmed on-chain'}`);
-      setWithdrawAmount("");
+      if (hash) {
+        toast.message(lang === 'pt' ? 'Transação enviada' : 'Transaction submitted', { description: hash });
+        await waitForTxConfirmation(hash);
+        console.log("Withdraw confirmed on-chain");
+        toast.success(`${t('stake.withdraw')}: ${lang === 'pt' ? 'Confirmado em blockchain' : 'Confirmed on-chain'}`);
+        setWithdrawAmount("");
+      }
     } catch (error) {
       console.error("Withdraw failed:", error);
       const errorMessage = error instanceof Error ? error.message : String(error);

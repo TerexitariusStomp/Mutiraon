@@ -29,7 +29,8 @@ const nextConfig: NextConfig = {
   },
 
   // Hint workspace root for monorepo to silence root inference warnings
-  outputFileTracingRoot: __dirname,
+  // Point to the repository root (one level up from the app dir)
+  outputFileTracingRoot: path.join(__dirname, ".."),
 
   // Turbopack configuration (replacement for deprecated experimental.turbo)
   turbopack: {
