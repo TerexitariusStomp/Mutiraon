@@ -7,7 +7,7 @@ import { useI18n } from "@/i18n/I18nContext";
 const APP_PATH = process.env.NEXT_PUBLIC_MAIN_APP_PATH || "/app/";
 const HOME_PATH = process.env.NEXT_PUBLIC_HOME_PATH || "/";
 
-export function Header() {
+export function Header({ onEnterApp }: { onEnterApp?: () => void }) {
   const { lang, setLang, t } = useI18n();
 
   const toggleLang = () => {
@@ -23,6 +23,13 @@ export function Header() {
   const buttonHref = isOnApp ? HOME_PATH : APP_PATH;
   const buttonText = isOnApp ? t("header.home") : labelEnter;
 
+  const handleButtonClick = (e: React.MouseEvent) => {
+    if (!isOnApp && onEnterApp) {
+      e.preventDefault();
+      onEnterApp();
+    }
+  };
+
   return (
     <div className="fixed right-4 top-4 z-50 flex items-center gap-2">
       <button
@@ -32,12 +39,21 @@ export function Header() {
       >
         {labelLang}
       </button>
-      <Link
-        href={buttonHref}
-        className="rounded-md bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow hover:bg-emerald-700"
-      >
-        {buttonText}
-      </Link>
+      {isOnApp ? (
+        <Link
+          href={buttonHref}
+          className="rounded-md bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow hover:bg-emerald-700"
+        >
+          {buttonText}
+        </Link>
+      ) : (
+        <button
+          onClick={handleButtonClick}
+          className="rounded-md bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow hover:bg-emerald-700"
+        >
+          {buttonText}
+        </button>
+      )}
     </div>
   );
 }
