@@ -21,6 +21,7 @@ export const en = {
   "nav.disconnect": "Disconnect",
   "wallet.connect": "Connect Wallet",
   "wallet.switchNetwork": "Switch Network",
+  "common.max": "Max",
 
   // Hero
   "hero.title.1": "Amaz-One Dollar:",
@@ -179,6 +180,8 @@ export const en = {
   "vault.wd.withdraw.li3": "Check your balance",
   "vault.wd.think": "Withdrawals are on‑chain transactions.",
   "vault.wd.available": "Available: {amt} {code}",
+  "vault.withdrawStable.max": "Max Stable",
+  "vault.withdrawCollateral.max": "Max Collat",
   "vault.wd.only": "Withdraw amount",
   "vault.wd.placeholder": "e.g. 25.00",
   "vault.wd.btn": "Withdraw",

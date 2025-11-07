@@ -16,6 +16,7 @@ export const pt = {
   "nav.disconnect": "Desconectar",
   "wallet.connect": "Conectar Carteira",
   "wallet.switchNetwork": "Trocar Rede",
+  "common.max": "Max",
   // Header
   "header.enter": "Entrar no App",
   "header.home": "Início",
@@ -254,6 +255,10 @@ export const pt = {
   "stake.withdraw.placeholder": "ex.: 10,00",
   "stake.withdraw.submit": "Sacar",
   "stake.withdraw": "Sacar",
+
+  // Extras
+  "vault.withdrawStable.max": "Max Stable",
+  "vault.withdrawCollateral.max": "Max Colateral",
 
   // Rodapé
   "footer.mission": "Construindo infraestrutura financeira sustentável para a economia solidária do Brasil com stablecoins lastreadas em impacto.",

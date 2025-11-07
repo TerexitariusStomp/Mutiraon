@@ -180,7 +180,12 @@ export default function VaultsPage() {
           <div className="rounded-2xl border border-border bg-card p-6 space-y-3">
             <h3 className="text-lg font-semibold">{t('vault.dep.title').replace('{code}', selectedCollateral)}</h3>
             <label className="text-sm text-muted-foreground">{t('vault.dep.amount').replace('{code}', selectedCollateral)}</label>
-            <Input value={depositAmount} onChange={(e) => setDepositAmount(e.target.value)} placeholder="0.00" />
+            <div className="flex gap-2">
+              <Input value={depositAmount} onChange={(e) => setDepositAmount(e.target.value)} placeholder="0.00" />
+              <Button size="sm" variant="outline" onClick={() => setDepositAmount((Number(walletTokenBalance) || 0).toFixed(4))} disabled={isPending}>
+                {t('common.max') || 'Max'}
+              </Button>
+            </div>
             <div className="flex gap-2">
               <Button onClick={doApprove} disabled={isPending || !depositAmount}>{t('vault.dep.approve')}</Button>
               <Button onClick={doDeposit} disabled={isPending || !depositAmount} variant="secondary">{t('vault.dep.deposit')}</Button>
@@ -193,11 +198,17 @@ export default function VaultsPage() {
             <label className="text-sm text-muted-foreground">{t('vault.lock.label')}</label>
             <div className="flex gap-2">
               <Input value={lockAmount} onChange={(e) => setLockAmount(e.target.value)} placeholder={t('vault.lock.placeholder')} />
+              <Button size="sm" variant="outline" onClick={() => setLockAmount((Number(gem) || 0).toFixed(4))} disabled={isPending}>
+                {t('common.max') || 'Max'}
+              </Button>
               <Button onClick={doLock} disabled={isPending || !lockAmount}>{t('vault.lock.btn')}</Button>
             </div>
             <label className="text-sm text-muted-foreground">{t('vault.unlock.label')}</label>
             <div className="flex gap-2">
               <Input value={unlockAmount} onChange={(e) => setUnlockAmount(e.target.value)} placeholder={t('vault.unlock.placeholder')} />
+              <Button size="sm" variant="outline" onClick={() => setUnlockAmount((Number(ink) || 0).toFixed(4))} disabled={isPending}>
+                {t('common.max') || 'Max'}
+              </Button>
               <Button onClick={doUnlock} disabled={isPending || !unlockAmount} variant="outline">{t('vault.unlock.btn')}</Button>
             </div>
           </div>
@@ -206,13 +217,20 @@ export default function VaultsPage() {
           <div className="rounded-2xl border border-border bg-card p-6 space-y-3">
             <h3 className="text-lg font-semibold">{t('vault.mut.title')}</h3>
             <label className="text-sm text-muted-foreground">{t('vault.mut.mint.label')}</label>
-            <div className="flex gap-2">
+            <div className="flex gap-2 items-center">
               <Input value={mintAmount} onChange={(e) => setMintAmount(e.target.value)} placeholder={t('vault.mut.mint.placeholder')} />
+              <Button size="sm" variant="outline" onClick={() => setMintAmount((Number(safeMaxMint) || 0).toFixed(4))} disabled={isPending}>
+                {t('common.max') || 'Max'}
+              </Button>
               <Button onClick={doMint} disabled={isPending || !mintAmount}>{t('vault.mut.mint.btn')}</Button>
             </div>
+            <p className="text-xs text-muted-foreground">{t('vault.mut.mint.maxsafe') || 'Max safe'}: {parseFloat(safeMaxMint).toFixed(4)}</p>
             <label className="text-sm text-muted-foreground">{t('vault.mut.repay.label')}</label>
             <div className="flex gap-2">
               <Input value={repayAmount} onChange={(e) => setRepayAmount(e.target.value)} placeholder={t('vault.mut.repay.placeholder')} />
+              <Button size="sm" variant="outline" onClick={() => setRepayAmount((Number(art) || 0).toFixed(4))} disabled={isPending}>
+                {t('common.max') || 'Max'}
+              </Button>
               <Button onClick={doRepay} disabled={isPending || !repayAmount} variant="outline">{t('vault.mut.repay.btn')}</Button>
             </div>
           </div>
@@ -221,11 +239,18 @@ export default function VaultsPage() {
           <div className="rounded-2xl border border-border bg-card p-6 space-y-3">
             <h3 className="text-lg font-semibold">{t('vault.wd.title')}</h3>
             <label className="text-sm text-muted-foreground">{t('vault.wd.only')}</label>
-            <div className="flex gap-2">
+            <div className="flex gap-2 flex-wrap items-center">
               <Input value={withdrawAmount} onChange={(e) => setWithdrawAmount(e.target.value)} placeholder={t('vault.wd.placeholder')} />
+              <Button size="sm" variant="outline" onClick={() => setWithdrawAmount((Number(stableAvailable) || 0).toFixed(4))} disabled={isPending}>
+                {t('vault.withdrawStable.max') || 'Max Stable'}
+              </Button>
+              <Button size="sm" variant="outline" onClick={() => setWithdrawAmount((Number(gem) || 0).toFixed(4))} disabled={isPending}>
+                {t('vault.withdrawCollateral.max') || 'Max Collat'}
+              </Button>
               <Button onClick={doWithdrawStable} disabled={isPending || !withdrawAmount} variant="secondary">{t('vault.withdrawStable.submit') || 'Withdraw Stable'}</Button>
               <Button onClick={doWithdrawCollateral} disabled={isPending || !withdrawAmount} variant="outline">{t('vault.wd.btn')}</Button>
             </div>
+            <p className="text-xs text-muted-foreground">{t('vault.wd.available') || 'Available'}: {parseFloat(stableAvailable).toFixed(4)} Amaz-One Dollar / {parseFloat(gem).toFixed(4)} {selectedCollateral}</p>
           </div>
         </section>
 

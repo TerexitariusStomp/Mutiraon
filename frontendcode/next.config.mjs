@@ -10,6 +10,7 @@ const nextConfig = {
   trailingSlash: true,
   basePath: '',
   assetPrefix: undefined,
+  outputFileTracingRoot: process.cwd(),
   webpack: (config) => {
     config.resolve = config.resolve || {};
     config.resolve.alias = {
