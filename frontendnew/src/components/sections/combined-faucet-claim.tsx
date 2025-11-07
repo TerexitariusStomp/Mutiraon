@@ -1,0 +1,139 @@
+"use client";
+
+import { useMemo } from "react";
+import { useAccount, useReadContract, useWriteContract, useWaitForTransactionReceipt } from "wagmi";
+import { formatEther, formatUnits } from "viem";
+import { CONTRACT_ADDRESSES, FAUCET_ABI, ETH_FAUCET_ABI } from "@/lib/contracts-updated";
+
+export default function CombinedFaucetClaim() {
+  const { isConnected, address } = useAccount();
+  const addresses = CONTRACT_ADDRESSES.sepolia;
+
+  const tokenFaucet = addresses.cbiomehFaucet as `0x${string}`;
+  const ethFaucet = addresses.ethFaucet as `0x${string}`;
+
+  const hasTokenFaucet = tokenFaucet && tokenFaucet !== ("0x0000000000000000000000000000000000000000" as `0x${string}`);
+  const hasEthFaucet = ethFaucet && ethFaucet !== ("0x0000000000000000000000000000000000000000" as `0x${string}`);
+
+  // --- Token faucet reads ---
+  const { data: tClaimAmount } = useReadContract({
+    address: hasTokenFaucet ? tokenFaucet : undefined,
+    abi: FAUCET_ABI as any,
+    functionName: "claimAmount",
+    query: { refetchInterval: 10000 },
+  });
+  const { data: tCooldown } = useReadContract({
+    address: hasTokenFaucet ? tokenFaucet : undefined,
+    abi: FAUCET_ABI as any,
+    functionName: "cooldown",
+    query: { refetchInterval: 10000 },
+  });
+  const { data: tEnabled } = useReadContract({
+    address: hasTokenFaucet ? tokenFaucet : undefined,
+    abi: FAUCET_ABI as any,
+    functionName: "enabled",
+    query: { refetchInterval: 10000 },
+  });
+  const { data: tLastClaim } = useReadContract({
+    address: hasTokenFaucet ? tokenFaucet : undefined,
+    abi: FAUCET_ABI as any,
+    functionName: "lastClaim",
+    args: address ? [address as `0x${string}`] : undefined,
+    query: { refetchInterval: 5000 },
+  });
+
+  const tokenSecondsLeft = useMemo(() => {
+    if (!tLastClaim || !tCooldown) return 0;
+    const last = BigInt(tLastClaim as bigint);
+    const cd = BigInt(tCooldown as bigint);
+    const now = BigInt(Math.floor(Date.now() / 1000));
+    const next = last + cd;
+    return next > now ? Number(next - now) : 0;
+  }, [tLastClaim, tCooldown]);
+
+  const canClaimToken = Boolean(tEnabled) && tokenSecondsLeft === 0;
+
+  // --- ETH faucet reads ---
+  const { data: eClaimAmount } = useReadContract({
+    address: hasEthFaucet ? ethFaucet : undefined,
+    abi: ETH_FAUCET_ABI as any,
+    functionName: "CLAIM_AMOUNT",
+    query: { refetchInterval: 10000 },
+  });
+  const { data: eCooldown } = useReadContract({
+    address: hasEthFaucet ? ethFaucet : undefined,
+    abi: ETH_FAUCET_ABI as any,
+    functionName: "COOLDOWN",
+    query: { refetchInterval: 10000 },
+  });
+  const { data: eEnabled } = useReadContract({
+    address: hasEthFaucet ? ethFaucet : undefined,
+    abi: ETH_FAUCET_ABI as any,
+    functionName: "enabled",
+    query: { refetchInterval: 10000 },
+  });
+  const { data: eCanClaim } = useReadContract({
+    address: hasEthFaucet ? ethFaucet : undefined,
+    abi: ETH_FAUCET_ABI as any,
+    functionName: "canClaim",
+    args: address ? [address as `0x${string}`] : undefined,
+    query: { refetchInterval: 5000 },
+  });
+
+  const canClaimEth = Boolean(eEnabled) && Boolean(eCanClaim);
+
+  // --- Writes (separate states for both claims) ---
+  const { writeContract: writeToken, data: txToken, isPending: pToken } = useWriteContract();
+  const { writeContract: writeEth, data: txEth, isPending: pEth } = useWriteContract();
+
+  const { isPending: mToken, isSuccess: sToken } = useWaitForTransactionReceipt({ hash: txToken });
+  const { isPending: mEth, isSuccess: sEth } = useWaitForTransactionReceipt({ hash: txEth });
+
+  const claimBoth = () => {
+    if (!isConnected) return;
+    if (hasTokenFaucet && canClaimToken) {
+      writeToken({ address: tokenFaucet, abi: FAUCET_ABI as any, functionName: "claim", args: [] });
+    }
+    if (hasEthFaucet && canClaimEth) {
+      writeEth({ address: ethFaucet, abi: ETH_FAUCET_ABI as any, functionName: "claim", args: [] });
+    }
+  };
+
+  const disabled = !isConnected || (!canClaimToken && !canClaimEth) || pToken || pEth || mToken || mEth;
+
+  return (
+    <div className="mt-6 rounded-xl border border-black/10 bg-white/70 p-4 shadow-sm">
+      <h3 className="text-lg font-semibold text-gray-800">Faucets</h3>
+      <p className="mt-1 text-sm text-gray-600">Claim both CBiomaH and Sepolia ETH in one click.</p>
+
+      <div className="mt-3 grid gap-3 text-sm text-gray-700 md:grid-cols-2">
+        <div>
+          <div className="font-medium">CBiomaH Faucet</div>
+          <div>Amount: {tClaimAmount ? `${formatUnits(tClaimAmount as bigint, 18)} CBiomaH` : "…"}</div>
+          <div>Cooldown: {tCooldown ? `${Number(tCooldown) / 3600}h` : "…"} {tEnabled ? "" : "(disabled)"}</div>
+          {tokenSecondsLeft > 0 && <div className="text-gray-500">Next claim in ~{Math.floor(tokenSecondsLeft/3600)}h {Math.floor((tokenSecondsLeft%3600)/60)}m</div>}
+        </div>
+        <div>
+          <div className="font-medium">ETH Faucet</div>
+          <div>Amount: {eClaimAmount ? `${formatEther(eClaimAmount as bigint)} ETH` : "…"}</div>
+          <div>Cooldown: {eCooldown ? `${Number(eCooldown) / 3600}h` : "…"} {eEnabled ? "" : "(disabled)"}</div>
+          {eCanClaim === false && <div className="text-gray-500">Cooldown active</div>}
+        </div>
+      </div>
+
+      <button
+        onClick={claimBoth}
+        disabled={disabled}
+        className="mt-4 rounded-md bg-emerald-600 px-4 py-2 text-white disabled:opacity-50"
+      >
+        {pToken || pEth || mToken || mEth ? "Claiming…" : "Claim Both"}
+      </button>
+
+      {(sToken || sEth) && (
+        <div className="mt-2 text-sm text-emerald-700">
+          {sToken && sEth ? "Both claims successful." : sToken ? "CBiomaH claim successful." : "ETH claim successful."}
+        </div>
+      )}
+    </div>
+  );
+}

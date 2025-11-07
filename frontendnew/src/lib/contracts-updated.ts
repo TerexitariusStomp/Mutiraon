@@ -953,6 +953,8 @@ export const CONTRACT_ADDRESSES = {
     
     // Faucet
     cbiomehFaucet: "0xc6a75D90B155C151D4ab564587972D4AA608f7e7",
+    // ETH Faucet (Sepolia ETH drip)
+    ethFaucet: "0xDc8E20701103C5B1Ef9134B1BBd85F4Ba0Cfc77B",
   },
 };
 
@@ -994,5 +996,19 @@ export const FAUCET_ABI = [
   { inputs: [{ name: "who", type: "address" }], name: "lastClaim", outputs: [{ type: "uint256" }], stateMutability: "view", type: "function" },
   { inputs: [], name: "owner", outputs: [{ type: "address" }], stateMutability: "view", type: "function" },
   { inputs: [], name: "token", outputs: [{ type: "address" }], stateMutability: "view", type: "function" },
+];
+
+// ETH Faucet ABI
+export const ETH_FAUCET_ABI = [
+  { inputs: [], stateMutability: "nonpayable", type: "constructor" },
+  { inputs: [], name: "claim", outputs: [], stateMutability: "nonpayable", type: "function" },
+  { inputs: [{ name: "user", type: "address" }], name: "canClaim", outputs: [{ type: "bool" }], stateMutability: "view", type: "function" },
+  { inputs: [{ name: "user", type: "address" }], name: "getClaimTimeRemaining", outputs: [{ type: "uint256" }], stateMutability: "view", type: "function" },
+  { inputs: [], name: "enabled", outputs: [{ type: "bool" }], stateMutability: "view", type: "function" },
+  { inputs: [], name: "CLAIM_AMOUNT", outputs: [{ type: "uint256" }], stateMutability: "view", type: "function" },
+  { inputs: [], name: "COOLDOWN", outputs: [{ type: "uint256" }], stateMutability: "view", type: "function" },
+  { inputs: [], name: "owner", outputs: [{ type: "address" }], stateMutability: "view", type: "function" },
+  { inputs: [{ name: "_enabled", type: "bool" }], name: "setEnabled", outputs: [], stateMutability: "nonpayable", type: "function" },
+  { inputs: [{ name: "to", type: "address" }, { name: "amount", type: "uint256" }], name: "withdraw", outputs: [], stateMutability: "nonpayable", type: "function" },
 ];
 
