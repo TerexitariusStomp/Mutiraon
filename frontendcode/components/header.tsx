@@ -23,6 +23,9 @@ export function Header({ onEnterApp }: { onEnterApp?: () => void }) {
   const buttonHref = isOnApp ? HOME_PATH : APP_PATH;
   const buttonText = isOnApp ? t("header.home") : labelEnter;
 
+  // Only show the button if we're not on the app page (to avoid duplicate "Enter App" buttons)
+  const showButton = !isOnApp;
+
   const handleButtonClick = (e: React.MouseEvent) => {
     if (!isOnApp && onEnterApp) {
       e.preventDefault();
@@ -39,14 +42,7 @@ export function Header({ onEnterApp }: { onEnterApp?: () => void }) {
       >
         {labelLang}
       </button>
-      {isOnApp ? (
-        <Link
-          href={buttonHref}
-          className="rounded-md bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow hover:bg-emerald-700"
-        >
-          {buttonText}
-        </Link>
-      ) : (
+      {showButton && (
         <button
           onClick={handleButtonClick}
           className="rounded-md bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow hover:bg-emerald-700"
