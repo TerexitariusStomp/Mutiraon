@@ -33,9 +33,7 @@ export const en = {
   "vaults.header": "{name} ({code})",
   "coll.BIOME.name": "Biome Credit",
   "coll.BIOME.desc": "Backed by biome conservation credits",
-  "coll.BIOME.name": "Biome Credit",
-  "coll.BIOME.desc": "Backed by biome conservation credits",
-  "coll.BIOME.name": "Biome Credit",\r\n  "coll.BIOME.desc": "Backed by biome conservation credits",\r\n// Vaults page - balances & status
+  // Vaults page - balances & status
   "vault.bal.wallet": "{code} Wallet",
   "vault.bal.deposited": "Deposited {code}",
   "vault.bal.available": "Available to lock",
