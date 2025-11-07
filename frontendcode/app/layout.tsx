@@ -30,6 +30,20 @@ export const metadata: Metadata = {
   },
 }
 
+export async function generateMetadata({ params }: { params: { slug?: string[] } }) {
+  // Check if we're on the app route
+  const isAppRoute = params.slug && params.slug[0] === 'app';
+
+  if (isAppRoute) {
+    return {
+      title: 'Amaz-One Dollar App',
+      description: 'Interface completa da stablecoin Amaz-One Dollar',
+    };
+  }
+
+  return metadata;
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
