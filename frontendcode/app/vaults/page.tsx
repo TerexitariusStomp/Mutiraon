@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { waitForTxConfirmation } from "@src/lib/utils";
 import { ILK_CBiomaH } from "@src/lib/contracts-updated";
+import CombinedFaucetClaim from "@/components/sections/combined-faucet-claim";
 
 export default function VaultsPage() {
   const { t, lang } = useI18n();
@@ -65,6 +66,7 @@ export default function VaultsPage() {
     await waitForTxConfirmation(hash);
     toast.success("Deposit OK");
     setDepositAmount("");
+    refetchData();
     setTimeout(refetchData, 1500);
   };
 
@@ -83,6 +85,7 @@ export default function VaultsPage() {
     await waitForTxConfirmation(hash);
     toast.success("Lock OK");
     setLockAmount("");
+    refetchData();
     setTimeout(refetchData, 1500);
   };
 
@@ -93,6 +96,7 @@ export default function VaultsPage() {
     await waitForTxConfirmation(hash);
     toast.success("Unlock OK");
     setUnlockAmount("");
+    refetchData();
     setTimeout(refetchData, 1500);
   };
 
@@ -103,6 +107,7 @@ export default function VaultsPage() {
     await waitForTxConfirmation(hash);
     toast.success("Mint OK");
     setMintAmount("");
+    refetchData();
     setTimeout(refetchData, 1500);
   };
 
@@ -113,6 +118,7 @@ export default function VaultsPage() {
     await waitForTxConfirmation(hash);
     toast.success("Repay OK");
     setRepayAmount("");
+    refetchData();
     setTimeout(refetchData, 1500);
   };
 
@@ -123,6 +129,7 @@ export default function VaultsPage() {
     await waitForTxConfirmation(hash as string);
     toast.success("Withdraw stable OK");
     setWithdrawAmount("");
+    refetchData();
     setTimeout(refetchData, 1500);
   };
 
@@ -133,6 +140,7 @@ export default function VaultsPage() {
     await waitForTxConfirmation(hash as string);
     toast.success("Withdraw collateral OK");
     setWithdrawAmount("");
+    refetchData();
     setTimeout(refetchData, 1500);
   };
 
@@ -252,6 +260,17 @@ export default function VaultsPage() {
             </div>
             <p className="text-xs text-muted-foreground">{t('vault.wd.available') || 'Available'}: {parseFloat(stableAvailable).toFixed(4)} Amaz-One Dollar / {parseFloat(gem).toFixed(4)} {selectedCollateral}</p>
           </div>
+        </section>
+
+        {/* Faucet Claim */}
+        <section className="rounded-2xl border border-border bg-card p-6">
+          <h3 className="text-lg font-semibold mb-4">💧 Testnet Faucet</h3>
+          <p className="text-sm text-muted-foreground mb-4">
+            {lang === 'pt'
+              ? 'Obtenha tokens de teste para experimentar o protocolo.'
+              : 'Get test tokens to try out the protocol.'}
+          </p>
+          <CombinedFaucetClaim />
         </section>
 
         {/* Authorize */}
