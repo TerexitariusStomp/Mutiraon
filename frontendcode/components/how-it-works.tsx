@@ -18,6 +18,23 @@ export function HowItWorks() {
             {t("how.subtitle")}
           </p>
 
+          {/* YouTube Video Embed */}
+          <div className="mb-16 max-w-4xl mx-auto">
+            <div className="aspect-video w-full">
+              <iframe
+                width="560"
+                height="315"
+                src="https://www.youtube.com/embed/GfdzDh1bfbM?si=TddFRurX4vSGJuI-"
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+                className="w-full h-full rounded-lg shadow-lg"
+              ></iframe>
+            </div>
+          </div>
+
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {steps.map((step, index) => (
               <div key={index} className="relative">
