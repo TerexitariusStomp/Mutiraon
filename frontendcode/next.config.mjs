@@ -8,6 +8,8 @@ const nextConfig = {
   },
   output: 'export',
   trailingSlash: true,
+  basePath: '',
+  assetPrefix: undefined,
 }
 
 export default nextConfig
