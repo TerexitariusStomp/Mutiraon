@@ -2,6 +2,27 @@
 
 A comprehensive stablecoin system using environmental impact tokens (e.g., **AMZN**, **BIO**, **REN**, **AGRI**, **AQUA**, **NIL**, **ECO**) as collateral. Built on the battle-tested MakerDAO/Sky Ecosystem architecture.
 
+## 📁 Project Structure
+
+This repository contains a full-stack DeFi application with smart contracts and a modern React frontend.
+
+### Backend (Smart Contracts)
+- **contracts/**: Solidity smart contracts implementing the stablecoin system
+  - Core contracts: `Vat.sol`, `StableCoin.sol`, `Spot.sol`, `Dog.sol`, etc.
+  - Token contracts: Environmental impact tokens (ECO, BIO, AMZN, etc.)
+  - Utilities: `Multicall.sol`, `PriceFeed.sol`, `Faucet.sol`
+
+### Frontend
+- **frontendnew/**: Next.js React application with TypeScript
+  - Modern UI with Tailwind CSS and Radix UI components
+  - Web3 integration using Wagmi and RainbowKit
+  - Internationalization support (English/Portuguese)
+  - Pages: Vaults, Staking, Documentation
+
+### Scripts & Tools
+- **scripts/**: Deployment and configuration scripts for Sepolia testnet
+- **tools/**: Development utilities (Doxygen for documentation)
+
 ## 🌟 Features
 
 - **Multi-Collateral Support**: Accept multiple environmental tokens as collateral
@@ -54,47 +75,78 @@ graph TD
 
 ### Prerequisites
 
+- Node.js 18+
+- npm or yarn
+- Git
+
+### Installation
+
 ```bash
-npm install -g hardhat
+# Clone the repository
+git clone https://github.com/TerexitariusStomp/Mutiraon.git
+cd mutiraon-stablecoin
+
+# Install root dependencies
 npm install
+
+# Install frontend dependencies
+cd frontendnew
+npm install
+cd ..
 ```
 
-### Deploy to BSC
+### Smart Contract Development
 
 ```bash
-# Setup environment
-cp .env.example .env
-# Edit .env with your private key
+# Compile contracts
+npm run compile
 
-# Deploy to BSC Testnet
-npm run deploy:bsc-testnet
+# Deploy to Sepolia testnet
+npm run deploy:biome:sepolia
 
-# Deploy to BSC Mainnet
-npm run deploy:bsc
-```
-
-### Deploy to Local Network
-
-```bash
-# Start local hardhat network
+# Start local Hardhat network
 npx hardhat node
-
-# Deploy contracts (in another terminal)
-npx hardhat run scripts/deploy.js --network localhost
 ```
 
-### Run Tests
+### Frontend Development
 
 ```bash
-npx hardhat test
+# Start the frontend development server
+npm run dev
+
+# The app will be available at http://localhost:3000
+```
+
+### Environment Setup
+
+```bash
+# Copy environment template
+cp .env.example .env
+
+# Edit .env with your configuration:
+# - PRIVATE_KEY: Your Ethereum private key
+# - SEPOLIA_RPC_URL: Sepolia testnet RPC URL
+# - ETHERSCAN_API_KEY: For contract verification
 ```
 
 ## 📖 Usage Guide
 
-### 1. Creating a Collateralized Debt Position (CDP)
+### Frontend Application
+
+The React frontend provides a user-friendly interface for interacting with the stablecoin system:
+
+1. **Connect Wallet**: Use MetaMask or other Web3 wallets
+2. **Claim Test Tokens**: Use the faucet to get test environmental tokens
+3. **Open Vault**: Create a CDP by depositing collateral and minting stablecoins
+4. **Stake**: Earn yield by depositing stablecoins in the savings rate
+5. **Monitor**: View system statistics and your positions
+
+### Smart Contract Interaction
+
+#### 1. Creating a Collateralized Debt Position (CDP)
 
 ```javascript
-// Example: Use 1000 ECO to mint 50 OGUSD stablecoins
+// Example: Use 1000 ECO to mint 50 Mutiraon stablecoins
 
 // 1. Approve ECO transfer
 await ecoToken.approve(ecoJoinAddress, parseEther("1000"));
@@ -116,7 +168,7 @@ await vat.frob(
 await daiJoin.exit(userAddress, parseEther("50"));
 ```
 
-### 2. Using Multicall for Batch Operations
+#### 2. Using Multicall for Batch Operations
 
 ```javascript
 // Create a CDP in a single transaction
@@ -133,7 +185,7 @@ const calls = await multicall.createCDPBatch(
 await multicall.aggregate(calls);
 ```
 
-### 3. Earning with Savings Rate
+#### 3. Earning with Savings Rate
 
 ```javascript
 // Join the savings pot to earn yield
@@ -144,7 +196,7 @@ await pot.join(parseEther("100")); // Deposit 100 Mutiraon
 await pot.exit(parseEther("100"));
 ```
 
-### 4. Liquidation Process
+#### 4. Liquidation Process
 
 ```javascript
 // Liquidate an unsafe position
@@ -341,7 +393,7 @@ The system is designed for modularity. Individual components can be upgraded:
 
 ## 📄 License
 
-This project is licensed under AGPL-3.0-or-later.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## ⚠️ Disclaimer
 
