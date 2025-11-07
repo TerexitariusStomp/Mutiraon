@@ -17,6 +17,8 @@ export default function VaultsPage() {
   const {
     ink,
     art,
+    gem,
+    walletTokenBalance,
     depositCollateral,
     approveToken,
     authorizeVat,
@@ -90,6 +92,7 @@ export default function VaultsPage() {
       console.log("Deposit confirmed on-chain");
       toast.success(`Deposit ${selectedCollateral}: ${lang === 'pt' ? 'Confirmado em blockchain' : 'Confirmed on-chain'}`);
       setDepositAmount("");
+      setTimeout(refetchData, 1500);
     } catch (error) {
       console.error("Deposit failed:", error);
       const errorMessage = error instanceof Error ? error.message : String(error);
@@ -115,6 +118,7 @@ export default function VaultsPage() {
       console.log("Lock confirmed on-chain");
       toast.success(`Lock ${selectedCollateral}: ${lang === 'pt' ? 'Confirmado em blockchain' : 'Confirmed on-chain'}`);
       setLockAmount("");
+      setTimeout(refetchData, 1500);
     } catch (error) {
       console.error("Lock failed:", error);
       const errorMessage = error instanceof Error ? error.message : String(error);
@@ -140,6 +144,7 @@ export default function VaultsPage() {
       console.log("Unlock confirmed on-chain");
       toast.success(`Unlock ${selectedCollateral}: ${lang === 'pt' ? 'Confirmado em blockchain' : 'Confirmed on-chain'}`);
       setUnlockAmount("");
+      setTimeout(refetchData, 1500);
     } catch (error) {
       console.error("Unlock failed:", error);
       const errorMessage = error instanceof Error ? error.message : String(error);
@@ -165,6 +170,7 @@ export default function VaultsPage() {
       console.log("Mint confirmed on-chain");
       toast.success(`Mint ONEDOLLAR: ${lang === 'pt' ? 'Confirmado em blockchain' : 'Confirmed on-chain'}`);
       setMintAmount("");
+      setTimeout(refetchData, 1500);
     } catch (error) {
       console.error("Mint failed:", error);
       const errorMessage = error instanceof Error ? error.message : String(error);
@@ -190,6 +196,7 @@ export default function VaultsPage() {
       console.log("Repay confirmed on-chain");
       toast.success(`Repay ONEDOLLAR: ${lang === 'pt' ? 'Confirmado em blockchain' : 'Confirmed on-chain'}`);
       setRepayAmount("");
+      setTimeout(refetchData, 1500);
     } catch (error) {
       console.error("Repay failed:", error);
       const errorMessage = error instanceof Error ? error.message : String(error);
@@ -215,6 +222,7 @@ export default function VaultsPage() {
       console.log("Withdraw confirmed on-chain");
       toast.success(`Withdraw ${selectedCollateral}: ${lang === 'pt' ? 'Confirmado em blockchain' : 'Confirmed on-chain'}`);
       setWithdrawAmount("");
+      setTimeout(refetchData, 1500);
     } catch (error) {
       console.error("Withdraw failed:", error);
       const errorMessage = error instanceof Error ? error.message : String(error);
@@ -274,15 +282,15 @@ export default function VaultsPage() {
           <div className="grid gap-4 md:grid-cols-2">
             <div className="rounded-xl border border-border bg-card p-4">
               <h3 className="font-semibold text-foreground mb-2">{t('vault.bal.wallet').replace('{code}', selectedCollateral)}</h3>
-              <p className="text-2xl font-bold text-foreground">0.00 {selectedCollateral}</p>
+              <p className="text-2xl font-bold text-foreground">{parseFloat(walletTokenBalance).toFixed(4)} {selectedCollateral}</p>
             </div>
             <div className="rounded-xl border border-border bg-card p-4">
               <h3 className="font-semibold text-foreground mb-2">{t('vault.bal.deposited').replace('{code}', selectedCollateral)}</h3>
-              <p className="text-2xl font-bold text-foreground">{parseFloat(ink).toFixed(4)} {selectedCollateral}</p>
+              <p className="text-2xl font-bold text-foreground">{parseFloat(gem).toFixed(4)} {selectedCollateral}</p>
             </div>
             <div className="rounded-xl border border-border bg-card p-4">
               <h3 className="font-semibold text-foreground mb-2">{t('vault.bal.available')}</h3>
-              <p className="text-2xl font-bold text-foreground">0.00 {selectedCollateral}</p>
+              <p className="text-2xl font-bold text-foreground">{parseFloat(gem).toFixed(4)} {selectedCollateral}</p>
             </div>
             <div className="rounded-xl border border-border bg-card p-4">
               <h3 className="font-semibold text-foreground mb-2">{t('vault.bal.mut')}</h3>

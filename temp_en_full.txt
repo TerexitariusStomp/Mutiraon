@@ -1,4 +1,4 @@
-export const en = {`n  "common.max": "Max",
+export const en = {
   // Navigation
   "nav.get": "GET ONEDOLLAR",
   "nav.stake": "STAKE",
@@ -45,7 +45,7 @@ export const en = {`n  "common.max": "Max",
   "vault.status.avail": "Available Collateral",
   "vault.status.ready": "Ready to lock",
   "vault.status.maxsafe": "Max Safe Mint",
-  "vault.status.strict": "Contract enforces strict limits",
+  "vault.status.strict": "⚠️ Contract enforces strict limits",
 
   // Vaults page - sections
   "vault.dep.title": "Deposit {code}",
@@ -230,4 +230,3 @@ export const en = {`n  "common.max": "Max",
 
 
 
-  "vault.withdrawStable.submit": "Withdraw Stable",

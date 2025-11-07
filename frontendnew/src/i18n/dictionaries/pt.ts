@@ -1,4 +1,4 @@
-export const pt = {
+export const pt = {`n  "common.max": "Max",
   // Navigation
   "nav.get": "OBTER ONEDOLLAR",
   "nav.stake": "POUPAR",
@@ -64,7 +64,7 @@ export const pt = {
   "vault.status.avail": "Colateral Disponível",
   "vault.status.ready": "Pronto para travar",
   "vault.status.maxsafe": "Emissão Segura Máxima",
-  "vault.status.strict": "⚠️ O contrato aplica limites rigorosos",
+  "vault.status.strict": "O contrato aplica limites rigorosos",
 
   // Vaults page - seções
   "vault.dep.title": "Depositar {code}",
@@ -215,3 +215,5 @@ export const pt = {
   "faucet.banner.subtitle": "Reivindique CBiomaH e ETH de Sepolia para começar a usar o app",
   "faucet.banner.cooldown": "Intervalo ativo — volte mais tarde",
 };
+
+  "vault.withdrawStable.submit": "Sacar Stablecoin",

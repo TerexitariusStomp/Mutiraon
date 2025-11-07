@@ -25,15 +25,15 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-          cache-dependency-path: 'frontendnew/package-lock.json'
+          cache-dependency-path: 'frontendcode/package-lock.json'
 
       - name: Install frontend dependencies
         run: npm ci --legacy-peer-deps
-        working-directory: ./frontendnew
+        working-directory: ./frontendcode
 
       - name: Build Next.js application
         run: npm run build
-        working-directory: ./frontendnew
+        working-directory: ./frontendcode
         env:
           NODE_ENV: production
 
@@ -41,5 +41,5 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./frontendnew/out
+          publish_dir: ./frontendcode/out
           force_orphan: true
