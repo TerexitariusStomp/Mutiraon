@@ -41,6 +41,8 @@ export default function Page() {
 
       <div className="min-h-screen bg-[#f3f1f7]">
 
+        <Header onEnterApp={() => setShowApp(false)} />
+
         <HeroSection />
 
         <div className="container mx-auto px-4 py-8">

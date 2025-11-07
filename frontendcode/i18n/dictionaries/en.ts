@@ -89,6 +89,95 @@ export const en = {
   "impact.join.cta1": "Partner With Us",
   "impact.join.cta2": "Learn More",
 
+  // Vaults
+  "vaults.title": "Vaults",
+  "vaults.subtitle": "Open, lock collateral, mint and repay Amaz-One Dollar.",
+  "vaults.header": "Choose your collateral and follow the guided steps.",
+
+  // Collateral metadata
+  "coll.CBiomaH.name": "CBiomaH",
+  "coll.CBiomaH.desc": "Community biodiversity impact token used as collateral.",
+
+  // Vault balances
+  "vault.bal.wallet": "Wallet balance ({code})",
+  "vault.bal.deposited": "Deposited in protocol ({code})",
+  "vault.bal.available": "Available to lock",
+  "vault.bal.mut": "Amaz-One Dollar balance",
+
+  // Vault status
+  "vault.status.title": "Vault Status",
+  "vault.status.locked": "Locked collateral",
+  "vault.status.debt": "Outstanding debt",
+  "vault.status.avail": "Collateral available to withdraw",
+  "vault.status.ready": "Ready to mint",
+  "vault.status.maxsafe": "Max safe mint",
+  "vault.status.strict": "Contract enforces strict limits",
+
+  // Deposit collateral
+  "vault.dep.title": "Deposit {code}",
+  "vault.dep.step": "Step 1: Approve and deposit {code}",
+  "vault.dep.what": "Approve token spending, then deposit to the protocol.",
+  "vault.dep.li1": "Approve the Join adapter to spend your {code}",
+  "vault.dep.li2": "Deposit tokens to make them available in the Vat",
+  "vault.dep.li3": "Deposited balance can be locked as collateral",
+  "vault.dep.li4": "You can withdraw deposited tokens at any time",
+  "vault.dep.think": "Approving is an on‑chain transaction. Fees apply.",
+  "vault.dep.amount": "Amount ({code})",
+  "vault.dep.approve": "Approve",
+  "vault.dep.deposit": "Deposit",
+
+  // Lock/unlock
+  "vault.lock.title": "Lock / Unlock",
+  "vault.lock.step": "Step 2: Lock collateral",
+  "vault.lock.what": "Lock deposited tokens to enable minting.",
+  "vault.lock.li1": "Locked tokens secure your debt",
+  "vault.lock.li2": "Maintain safe collateralization",
+  "vault.lock.li3": "Unlock when debt is repaid",
+  "vault.lock.li4": "Unlocked tokens can be withdrawn",
+  "vault.lock.think": "Lock/unlock are on‑chain operations.",
+  "vault.lock.label": "Lock amount",
+  "vault.lock.placeholder": "e.g. 100.00",
+  "vault.lock.btn": "Lock",
+  "vault.unlock.label": "Unlock amount",
+  "vault.unlock.placeholder": "e.g. 50.00",
+  "vault.unlock.btn": "Unlock",
+
+  // Mint/Repay
+  "vault.mut.title": "Mint / Repay Amaz-One Dollar",
+  "vault.mut.step": "Step 3: Mint or repay",
+  "vault.mut.what": "Generate stablecoin against your locked collateral or repay debt.",
+  "vault.mut.li1": "Mint within safe limits",
+  "vault.mut.li2": "Send minted tokens to your wallet",
+  "vault.mut.li3": "Repay to free collateral",
+  "vault.mut.li4": "Stability fees may apply",
+  "vault.mut.important": "Important: never exceed safe debt levels for {code}.",
+  "vault.mut.think": "Always keep a buffer to avoid liquidations.",
+  "vault.mut.mint.label": "Mint amount",
+  "vault.mut.mint.placeholder": "e.g. 50.00",
+  "vault.mut.mint.maxsafe": "Estimated max safe: {amt}",
+  "vault.mut.mint.btn": "Mint",
+  "vault.mut.repay.label": "Repay amount",
+  "vault.mut.repay.placeholder": "e.g. 10.00",
+  "vault.mut.repay.btn": "Repay",
+
+  // Withdraw
+  "vault.wd.title": "Withdraw Collateral",
+  "vault.wd.step": "Step 4: Withdraw",
+  "vault.wd.what": "Unlock, then withdraw your {code} back to wallet.",
+  "vault.wd.unlock.title": "First unlock",
+  "vault.wd.unlock.li1": "Ensure debt is low enough",
+  "vault.wd.unlock.li2": "Unlock desired collateral",
+  "vault.wd.unlock.li3": "Wait for confirmation",
+  "vault.wd.withdraw.title": "Then withdraw",
+  "vault.wd.withdraw.li1": "Withdraw to your wallet",
+  "vault.wd.withdraw.li2": "Network fees apply",
+  "vault.wd.withdraw.li3": "Check your balance",
+  "vault.wd.think": "Withdrawals are on‑chain transactions.",
+  "vault.wd.available": "Available: {amt} {code}",
+  "vault.wd.only": "Withdraw amount",
+  "vault.wd.placeholder": "e.g. 25.00",
+  "vault.wd.btn": "Withdraw",
+
   // Risk Disclaimer
   "risk.title": "High-Risk Experimental Protocol",
   "risk.env": "Testnet only. Contracts unaudited.",

@@ -88,6 +88,95 @@ export const pt = {
   "impact.join.cta1": "Seja Parceiro",
   "impact.join.cta2": "Saiba Mais",
 
+  // Cofres
+  "vaults.title": "Cofres",
+  "vaults.subtitle": "Abrir, travar colateral, cunhar e quitar Amaz-One Dollar.",
+  "vaults.header": "Escolha o colateral e siga os passos guiados.",
+
+  // Metadados do colateral
+  "coll.CBiomaH.name": "CBiomaH",
+  "coll.CBiomaH.desc": "Token de impacto em biodiversidade, usado como colateral.",
+
+  // Saldos
+  "vault.bal.wallet": "Saldo em carteira ({code})",
+  "vault.bal.deposited": "Depositado no protocolo ({code})",
+  "vault.bal.available": "Disponível para travar",
+  "vault.bal.mut": "Saldo Amaz-One Dollar",
+
+  // Status do cofre
+  "vault.status.title": "Status do Cofre",
+  "vault.status.locked": "Colateral travado",
+  "vault.status.debt": "Dívida em aberto",
+  "vault.status.avail": "Colateral disponível para saque",
+  "vault.status.ready": "Pronto para cunhar",
+  "vault.status.maxsafe": "Máximo seguro",
+  "vault.status.strict": "O contrato impõe limites estritos",
+
+  // Depósito de colateral
+  "vault.dep.title": "Depositar {code}",
+  "vault.dep.step": "Passo 1: Aprovar e depositar {code}",
+  "vault.dep.what": "Aprove o gasto do token e deposite no protocolo.",
+  "vault.dep.li1": "Aprove o adaptador Join para gastar seu {code}",
+  "vault.dep.li2": "Deposite para disponibilizar no Vat",
+  "vault.dep.li3": "O depositado pode ser travado como colateral",
+  "vault.dep.li4": "Você pode sacar tokens depositados a qualquer momento",
+  "vault.dep.think": "Aprovação é uma transação on‑chain. Há taxas.",
+  "vault.dep.amount": "Quantidade ({code})",
+  "vault.dep.approve": "Aprovar",
+  "vault.dep.deposit": "Depositar",
+
+  // Travar/Destravar
+  "vault.lock.title": "Travar / Destravar",
+  "vault.lock.step": "Passo 2: Travar colateral",
+  "vault.lock.what": "Trave tokens depositados para habilitar a cunhagem.",
+  "vault.lock.li1": "Tokens travados asseguram sua dívida",
+  "vault.lock.li2": "Mantenha colateralização segura",
+  "vault.lock.li3": "Destrave após quitar a dívida",
+  "vault.lock.li4": "Tokens destravados podem ser sacados",
+  "vault.lock.think": "Travar/destravar são operações on‑chain.",
+  "vault.lock.label": "Quantidade para travar",
+  "vault.lock.placeholder": "ex.: 100,00",
+  "vault.lock.btn": "Travar",
+  "vault.unlock.label": "Quantidade para destravar",
+  "vault.unlock.placeholder": "ex.: 50,00",
+  "vault.unlock.btn": "Destravar",
+
+  // Cunhar/Quitar
+  "vault.mut.title": "Cunhar / Quitar Amaz-One Dollar",
+  "vault.mut.step": "Passo 3: Cunhar ou quitar",
+  "vault.mut.what": "Gere stablecoin contra colateral travado ou quite a dívida.",
+  "vault.mut.li1": "Cunhe dentro de limites seguros",
+  "vault.mut.li2": "Receba os tokens na sua carteira",
+  "vault.mut.li3": "Quitar libera colateral",
+  "vault.mut.li4": "Podem existir taxas de estabilidade",
+  "vault.mut.important": "Importante: nunca ultrapasse níveis seguros para {code}.",
+  "vault.mut.think": "Mantenha folga para evitar liquidações.",
+  "vault.mut.mint.label": "Quantidade para cunhar",
+  "vault.mut.mint.placeholder": "ex.: 50,00",
+  "vault.mut.mint.maxsafe": "Estimativa de máximo seguro: {amt}",
+  "vault.mut.mint.btn": "Cunhar",
+  "vault.mut.repay.label": "Quantidade para quitar",
+  "vault.mut.repay.placeholder": "ex.: 10,00",
+  "vault.mut.repay.btn": "Quitar",
+
+  // Saque
+  "vault.wd.title": "Sacar Colateral",
+  "vault.wd.step": "Passo 4: Saque",
+  "vault.wd.what": "Destrave e saque seu {code} de volta para a carteira.",
+  "vault.wd.unlock.title": "Primeiro destrave",
+  "vault.wd.unlock.li1": "Garanta dívida baixa o suficiente",
+  "vault.wd.unlock.li2": "Destrave o colateral desejado",
+  "vault.wd.unlock.li3": "Aguarde confirmação",
+  "vault.wd.withdraw.title": "Depois saque",
+  "vault.wd.withdraw.li1": "Saque para sua carteira",
+  "vault.wd.withdraw.li2": "Taxas de rede se aplicam",
+  "vault.wd.withdraw.li3": "Confira seu saldo",
+  "vault.wd.think": "Saques são transações on‑chain.",
+  "vault.wd.available": "Disponível: {amt} {code}",
+  "vault.wd.only": "Quantidade para saque",
+  "vault.wd.placeholder": "ex.: 25,00",
+  "vault.wd.btn": "Sacar",
+
   // Aviso de Risco
   "risk.title": "Protocolo Experimental de Alto Risco",
   "risk.env": "Somente testnet. Contratos não auditados.",
