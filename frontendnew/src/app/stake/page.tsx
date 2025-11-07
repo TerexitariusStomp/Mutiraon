@@ -55,7 +55,7 @@ export default function StakePage() {
       console.log("Calling withdrawSavings...");
       await withdrawSavings(withdrawAmount);
       console.log("Withdraw completed successfully");
-      toast.success(${t('stake.withdraw')}: OK);
+      toast.success(`${t('stake.withdraw')}: OK`);
       setWithdrawAmount("");
     } catch (error) {
       console.error("Withdraw failed:", error);
@@ -214,7 +214,7 @@ export default function StakePage() {
                       ? t('stake.steps.join.desc.some').replace('{amount}', depositAmount)
                       : t('stake.steps.join.desc.none'),
                     function: () => joinStablecoinToVat(depositAmount || "0"),
-                    icon: "??",
+                    icon: "ğŸ¦",
                   },
                   {
                     title: t('stake.steps.auth.title'),
@@ -240,7 +240,7 @@ export default function StakePage() {
                         <div
                           className={`text-xl ${completedSteps.has(index) ? "text-green-500" : currentStep === index ? "text-blue-500 animate-pulse" : "text-gray-400"}`}
                         >
-                          {completedSteps.has(index) ? "?" : step.icon}
+                          {completedSteps.has(index) ? "âœ…" : step.icon}
                         </div>
                         <div>
                           <h4 className="font-medium text-sm">{t('stake.step')} {index + 1}: {step.title}</h4>
@@ -276,39 +276,39 @@ export default function StakePage() {
                         }`}>
                           {index === 0 && (
                             <>
-                              <li>• {t('stake.bullets.0.1')}</li>
-                              <li>• {t('stake.bullets.0.2')}</li>
-                              <li>• {t('stake.bullets.0.3')}</li>
+                              <li>ï¿½ {t('stake.bullets.0.1')}</li>
+                              <li>ï¿½ {t('stake.bullets.0.2')}</li>
+                              <li>ï¿½ {t('stake.bullets.0.3')}</li>
                             </>
                           )}
                           {index === 1 && (
                             <>
-                              <li>• {t('stake.bullets.1.1')}</li>
-                              <li>• {t('stake.bullets.1.2')}</li>
-                              <li>• {t('stake.bullets.1.3')}</li>
-                              <li>• {t('stake.bullets.1.4')}</li>
+                              <li>ï¿½ {t('stake.bullets.1.1')}</li>
+                              <li>ï¿½ {t('stake.bullets.1.2')}</li>
+                              <li>ï¿½ {t('stake.bullets.1.3')}</li>
+                              <li>ï¿½ {t('stake.bullets.1.4')}</li>
                             </>
                           )}
                           {index === 2 && (
                             <>
-                              <li>• {t('stake.bullets.2.1')}</li>
-                              <li>• {t('stake.bullets.2.2')}</li>
-                              <li>• {t('stake.bullets.2.3')}</li>
-                              <li>• {t('stake.bullets.2.4')}</li>
+                              <li>ï¿½ {t('stake.bullets.2.1')}</li>
+                              <li>ï¿½ {t('stake.bullets.2.2')}</li>
+                              <li>ï¿½ {t('stake.bullets.2.3')}</li>
+                              <li>ï¿½ {t('stake.bullets.2.4')}</li>
                             </>
                           )}
                           {index === 3 && (
                             <>
-                              <li>• {t('stake.bullets.3.1')}</li>
-                              <li>• {t('stake.bullets.3.2')}</li>
-                              <li>• {t('stake.bullets.3.3')}</li>
+                              <li>ï¿½ {t('stake.bullets.3.1')}</li>
+                              <li>ï¿½ {t('stake.bullets.3.2')}</li>
+                              <li>ï¿½ {t('stake.bullets.3.3')}</li>
                             </>
                           )}
                           {index === 4 && (
                             <>
-                              <li>• {t('stake.bullets.4.1')}</li>
-                              <li>• {t('stake.bullets.4.2')}</li>
-                              <li>• {t('stake.bullets.4.3')}</li>
+                              <li>ï¿½ {t('stake.bullets.4.1')}</li>
+                              <li>ï¿½ {t('stake.bullets.4.2')}</li>
+                              <li>ï¿½ {t('stake.bullets.4.3')}</li>
                             </>
                           )}
                         </ul>
@@ -319,11 +319,11 @@ export default function StakePage() {
                           index === 3 ? "text-orange-700" :
                           "text-red-700"
                         }`}>
-                          {index === 0 && (lang === 'pt' ? "Pense assim: Preparar sua conta para um depósito." : "Think of it like: Preparing your account for a deposit.")}
-                          {index === 1 && (lang === 'pt' ? "Pense assim: Dar permissão para uma transferência automática." : "Think of it like: Giving permission for an automatic transfer.")}
-                          {index === 2 && (lang === 'pt' ? "Pense assim: Converter dinheiro para um formato especial de poupança." : "Think of it like: Converting cash to a special savings format.")}
-                          {index === 3 && (lang === 'pt' ? "Pense assim: Assinar um contrato para manter seu dinheiro em segurança." : "Think of it like: Signing a contract to hold your money safely.")}
-                          {index === 4 && (lang === 'pt' ? "Pense assim: Finalmente depositar dinheiro na sua conta poupança." : "Think of it like: Finally depositing money into your savings account.")}
+                          {index === 0 && (lang === 'pt' ? "Pense assim: Preparar sua conta para um depï¿½sito." : "Think of it like: Preparing your account for a deposit.")}
+                          {index === 1 && (lang === 'pt' ? "Pense assim: Dar permissï¿½o para uma transferï¿½ncia automï¿½tica." : "Think of it like: Giving permission for an automatic transfer.")}
+                          {index === 2 && (lang === 'pt' ? "Pense assim: Converter dinheiro para um formato especial de poupanï¿½a." : "Think of it like: Converting cash to a special savings format.")}
+                          {index === 3 && (lang === 'pt' ? "Pense assim: Assinar um contrato para manter seu dinheiro em seguranï¿½a." : "Think of it like: Signing a contract to hold your money safely.")}
+                          {index === 4 && (lang === 'pt' ? "Pense assim: Finalmente depositar dinheiro na sua conta poupanï¿½a." : "Think of it like: Finally depositing money into your savings account.")}
                         </p>
                       </div>
                       <Button
@@ -338,7 +338,7 @@ export default function StakePage() {
                         className="w-full"
                       >
                         {completedSteps.has(index)
-                          ? (lang === 'pt' ? "Concluído" : "Completed")
+                          ? (lang === 'pt' ? "Concluï¿½do" : "Completed")
                           : currentStep === index
                             ? (lang === 'pt' ? "Processando..." : "Processing...")
                             : !depositAmount
@@ -353,7 +353,7 @@ export default function StakePage() {
                 <p className="text-sm text-muted-foreground">
                   {lang === 'pt' ? (
                     <>
-                      <strong>Observação:</strong> Execute cada passo na ordem para depositar seus ONEDOLLAR com segurança no contrato de poupança.
+                      <strong>Observaï¿½ï¿½o:</strong> Execute cada passo na ordem para depositar seus ONEDOLLAR com seguranï¿½a no contrato de poupanï¿½a.
                     </>
                   ) : (
                     <>
