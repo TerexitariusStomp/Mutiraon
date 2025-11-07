@@ -24,20 +24,7 @@ export function Hero() {
         <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
           {t("hero.subtitle")}
         </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <button
-            onClick={() => window.location.href = '/app'}
-            className="px-8 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-700 transition-colors"
-          >
-            {t("hero.cta")}
-          </button>
-          <button
-            onClick={() => window.location.href = '/stake'}
-            className="px-8 py-3 border border-emerald-600 text-emerald-600 rounded-lg font-semibold hover:bg-emerald-50 transition-colors"
-          >
-            Stake
-          </button>
-        </div>
+        {/* CTA buttons removed; use header navigation */}
       </div>
 
       {/* Scroll Indicator */}
@@ -49,4 +36,3 @@ export function Hero() {
     </section>
   );
 }
-
