@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { TreePine, ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useAccount, useDisconnect } from 'wagmi';
 import { useI18n } from "@/i18n/I18nContext";
@@ -29,7 +29,18 @@ const InnerNav = () => {
       <div className="flex h-16 items-center justify-between">
         <div className="flex items-center gap-x-8">
           <Link href="/" className="flex shrink-0 items-center gap-x-2">
-            <TreePine className="h-8 w-8 text-primary" />
+            <img
+              src="/amazone-logo.png"
+              alt="Amaz-One Dollar logo"
+              className="h-8 w-8 object-contain"
+              loading="eager"
+              onError={(e) => {
+                const target = e.currentTarget as HTMLImageElement;
+                if (target.src.endsWith('/amazone-logo.png')) {
+                  target.src = '/placeholder-logo.png';
+                }
+              }}
+            />
             <div className="flex flex-col">
               <span className="font-logo text-foreground">Amaz-One Dollar</span>
               <span className="text-xs text-muted-foreground -mt-1">{t('nav.tagline')}</span>
